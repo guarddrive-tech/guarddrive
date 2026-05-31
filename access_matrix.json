@@ -1,0 +1,14 @@
+{
+  "advanced_landing": [
+    "ti",
+    "comercial"
+  ],
+  "allowed_segments": [
+    "locadora",
+    "seguradora",
+    "concessionaria",
+    "frotista",
+    "financeira"
+  ],
+  "nda_version": "v2.1"
+}

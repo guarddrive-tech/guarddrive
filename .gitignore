@@ -1,0 +1,20 @@
+# Node.js
+node_modules/
+dist/
+.env
+
+# Python
+__pycache__/
+*.pyc
+venv/
+.venv/
+
+# Database / Logs
+*.db
+logs/
+*.log
+
+# Editor Settings
+.vscode/
+.idea/
+.DS_Store

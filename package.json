@@ -1,0 +1,17 @@
+{
+  "name": "guarddrive-advanced-landing",
+  "version": "1.0.0",
+  "description": "GuardDrive™ Advanced Landing Page — Sovereign Mobility Infrastructure",
+  "type": "module",
+  "scripts": {
+    "dev": "vite --port 5173",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "gsap": "^3.12.5"
+  },
+  "devDependencies": {
+    "vite": "^5.4.0"
+  }
+}
