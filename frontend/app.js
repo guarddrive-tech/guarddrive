@@ -201,6 +201,8 @@ function initAnimations() {
           gsap.to(entry.target, { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out' });
         } else if (entry.target.classList.contains('pain-card')) {
           gsap.to(entry.target, { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out' });
+        } else if (entry.target.classList.contains('comparison-card')) {
+          gsap.to(entry.target, { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out' });
         } else if (entry.target.classList.contains('arch-layer')) {
           gsap.to(entry.target, { opacity: 1, x: 0, duration: 0.8, ease: 'power3.out' });
         } else {
@@ -213,7 +215,7 @@ function initAnimations() {
   }, observerOptions);
 
   // Register targets
-  document.querySelectorAll('.sol-card, .pain-card, .arch-layer, .section-label, .section-title').forEach(el => {
+  document.querySelectorAll('.sol-card, .pain-card, .comparison-card, .arch-layer, .section-label, .section-title').forEach(el => {
     scrollObserver.observe(el);
   });
 }

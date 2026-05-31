@@ -436,13 +436,81 @@ textarea { resize: vertical; }
 }
 @keyframes fadeInUp { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:translateY(0); } }
 
-/* ── 17. REDUCED MOTION ────────────────────────────── */
+/* ── 17. COMPARISON TABLE ───────────────────────────── */
+.comparison-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-md);
+  margin-top: var(--space-md);
+}
+@media (max-width: 768px) {
+  .comparison-grid {
+    grid-template-columns: 1fr;
+  }
+}
+.comparison-card {
+  background: var(--clr-surface);
+  border: 1px solid var(--clr-border);
+  border-radius: var(--radius-lg);
+  padding: 2.5rem;
+  backdrop-filter: blur(16px);
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s var(--ease-out-expo);
+  opacity: 0;
+  transform: translateY(30px);
+}
+.comparison-card.highlight {
+  border-color: rgba(0, 240, 255, 0.4);
+  background: rgba(0, 240, 255, 0.02);
+  box-shadow: 0 0 40px rgba(0, 240, 255, 0.05);
+}
+.comparison-card.highlight .card-glow {
+  position: absolute;
+  top: 0; left: 0; right: 0; height: 3px;
+  background: var(--grad-brand);
+}
+.comparison-card h3 {
+  font-size: 1.5rem;
+  font-weight: 800;
+  margin-bottom: 0.5rem;
+}
+.comparison-subtitle {
+  font-size: 0.9rem;
+  color: var(--clr-muted);
+  margin-bottom: var(--space-md);
+}
+.comparison-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+.comparison-list li {
+  font-size: 0.95rem;
+  line-height: 1.5;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.8rem;
+}
+.comparison-list li span {
+  font-weight: 800;
+  font-size: 1.1rem;
+}
+.comparison-list li span:first-child {
+  color: var(--clr-muted);
+}
+.comparison-card.highlight .comparison-list li span {
+  color: var(--clr-cyan);
+}
+
+/* ── 18. REDUCED MOTION ────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
   .marquee-track { animation: none; }
 }
 
-/* ── 18. SCROLLBAR ─────────────────────────────────── */
+/* ── 19. SCROLLBAR ─────────────────────────────────── */
 ::-webkit-scrollbar { width: 6px; }
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb { background: rgba(123,47,255,0.3); border-radius: 3px; }
