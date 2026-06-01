@@ -2,11 +2,15 @@
 
 Este documento formaliza e detalha a integração profunda entre o **Universal Event Attestation Protocol (UEAP)** e o **Magistrado Themis™** (o árbitro inteligente/forense do ecossistema GuardDrive™).
 
+> [!IMPORTANT]
+> **Divisão de Propriedade Intelectual (IP):**
+> O **Universal Event Attestation Protocol (UEAP)** e o **Magistrado Themis™** são ativos proprietários de **Symbeon Labs (P&D Core)**. O **GuardDrive™** é a camada de produto comercial B2B (Go-to-Market) que licencia essa infraestrutura científica para habilitar a liquidação e conformidade forense de frotas.
+
 ---
 
 ## 🏛️ 1. O Papel das Duas Entidades
 
-Para que uma disputa de telemetria automotiva tenha validade jurídica e liquidação automática de fundos on-chain, o GuardDrive™ separa a **infraestrutura de registro** da **lógica de julgamento**:
+Para que uma disputa de telemetria automotiva tenha validade jurídica e liquidação automática de fundos on-chain, a arquitetura da Symbeon Labs separa a **infraestrutura de registro** da **lógica de julgamento**, integrada ao Escrow comercial do GuardDrive™:
 
 ```
 +---------------------------------------------------------------------------------+

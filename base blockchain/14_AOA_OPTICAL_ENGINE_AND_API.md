@@ -1,6 +1,10 @@
 # Especificação do Motor AOA: Execução Mobile & API para Câmeras Públicas
 
-Este documento define a arquitetura técnica, os modelos de computação visual e as integrações de API para a **Assinatura Óptica Atômica (AOA)™**, a tecnologia proprietária do ecossistema GuardTag™/GuardDrive™ de proteção contra cópias, adulterações e clonagem de frotas.
+Este documento define a arquitetura técnica, os modelos de computação visual e as integrações de API para a **Assinatura Óptica Atômica (AOA)™**, a tecnologia de proteção contra cópias, adulterações e clonagem de frotas.
+
+> [!IMPORTANT]
+> **Divisão de Propriedade Intelectual (PI) e Licenciamento:**
+> A **Assinatura Óptica Atômica (AOA)™** e o motor de análise micro-geométrica são ativos proprietários exclusivos da **Symbeon Labs (Core P&D)**. O **GuardDrive™** e o selo comercial **GuardTag™** são licenciados pela Symbeon Labs para a comercialização B2B e industrial das tags e integrações de seguros.
 
 ---
 

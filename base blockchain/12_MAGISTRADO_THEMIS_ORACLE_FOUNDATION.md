@@ -1,6 +1,10 @@
 # Fundação do Oráculo: Magistrado Themis™ Blockchain-Native
 
-Este documento especifica a arquitetura criptográfica, econômica e de software para **fundacionar o Magistrado Themis™ na blockchain**, consolidando-o como o **Ativo Supremo** de inteligência forense descentralizada do ecossistema GuardDrive™.
+Este documento especifica a arquitetura criptográfica, econômica e de software para **fundacionar o Magistrado Themis™ na blockchain**, consolidando-o como o **Ativo Supremo** de inteligência forense descentralizada do ecossistema.
+
+> [!IMPORTANT]
+> **Custódia de Propriedade Intelectual (PI):**
+> O **Magistrado Themis™** é propriedade intelectual exclusiva da **Symbeon Labs (Core P&D)**. Este oráculo e sua lógica de auditoria são licenciados para o **GuardDrive™** para viabilizar conformidade e liquidação financeira descentralizada no setor logístico comercial.
 
 ---
 
