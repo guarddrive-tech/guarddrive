@@ -1,0 +1,1109 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GuardDrive™ — Portal do Entrevistador</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* Custom style extensions for Interviewer Portal */
+    .dashboard-container {
+      max-width: 1300px;
+      margin: 80px auto var(--space-lg);
+      padding: 0 var(--space-md);
+    }
+    .page-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: var(--space-md);
+      border-bottom: 1px solid var(--clr-border);
+      padding-bottom: var(--space-sm);
+    }
+    .page-title {
+      font-size: 2rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+    .page-title span {
+      background: var(--grad-brand);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .tab-nav {
+      display: flex;
+      gap: var(--space-sm);
+      margin-bottom: var(--space-md);
+      border-bottom: 1px solid var(--clr-border);
+      padding-bottom: 1px;
+    }
+    .tab-btn {
+      background: transparent;
+      border: none;
+      color: var(--clr-muted);
+      font-weight: 600;
+      font-size: 0.95rem;
+      padding: var(--space-xs) var(--space-sm);
+      cursor: pointer;
+      position: relative;
+      transition: color 0.3s ease;
+    }
+    .tab-btn:hover {
+      color: var(--clr-white);
+    }
+    .tab-btn.active {
+      color: var(--clr-cyan);
+    }
+    .tab-btn.active::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: var(--clr-cyan);
+      box-shadow: 0 0 10px var(--clr-cyan);
+    }
+    .tab-content {
+      display: none;
+    }
+    .tab-content.active {
+      display: block;
+      animation: fadeIn 0.4s ease forwards;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    /* Stats grid */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: var(--space-md);
+      margin-bottom: var(--space-md);
+    }
+    .stat-card {
+      background: var(--clr-surface);
+      border: 1px solid var(--clr-border);
+      border-radius: var(--radius-md);
+      padding: var(--space-md);
+      backdrop-filter: blur(10px);
+      position: relative;
+      overflow: hidden;
+    }
+    .stat-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; width: 4px; height: 100%;
+      background: var(--clr-muted);
+    }
+    .stat-card.cyan::before { background: var(--clr-cyan); }
+    .stat-card.purple::before { background: var(--clr-purple); }
+    .stat-card.emerald::before { background: var(--clr-emerald); }
+    .stat-card-title {
+      font-size: 0.85rem;
+      color: var(--clr-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.5rem;
+    }
+    .stat-card-value {
+      font-size: 2.25rem;
+      font-weight: 800;
+      font-family: var(--font-mono);
+      line-height: 1.1;
+      margin-bottom: 0.25rem;
+    }
+    .stat-card-sub {
+      font-size: 0.8rem;
+      color: var(--clr-muted);
+    }
+
+    /* Form Builder */
+    .form-builder-layout {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: var(--space-md);
+    }
+    @media (max-width: 992px) {
+      .form-builder-layout { grid-template-columns: 1fr; }
+    }
+    .panel {
+      background: var(--clr-surface);
+      border: 1px solid var(--clr-border);
+      border-radius: var(--radius-md);
+      padding: var(--space-md);
+      backdrop-filter: blur(10px);
+    }
+    .panel-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: var(--space-sm);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--clr-border);
+      padding-bottom: 0.5rem;
+    }
+    .question-list {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-sm);
+      margin-bottom: var(--space-md);
+      max-height: 500px;
+      overflow-y: auto;
+      padding-right: 0.5rem;
+    }
+    .question-item {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--clr-border);
+      border-radius: var(--radius-sm);
+      padding: var(--space-sm);
+      position: relative;
+      transition: border-color 0.2s ease;
+    }
+    .question-item:hover {
+      border-color: rgba(255, 255, 255, 0.15);
+    }
+    .question-item-header {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+      font-size: 0.85rem;
+      color: var(--clr-cyan);
+    }
+    .remove-question-btn {
+      background: transparent;
+      border: none;
+      color: #ff4a4a;
+      cursor: pointer;
+      font-size: 0.8rem;
+    }
+    .add-q-box {
+      border: 1px dashed var(--clr-border);
+      border-radius: var(--radius-sm);
+      padding: var(--space-sm);
+      margin-bottom: var(--space-md);
+    }
+    .form-group {
+      margin-bottom: var(--space-sm);
+    }
+    .form-group label {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--clr-muted);
+      margin-bottom: 0.25rem;
+    }
+    .form-group input, .form-group select, .form-group textarea {
+      width: 100%;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--clr-border);
+      border-radius: var(--radius-sm);
+      padding: 0.6rem 0.8rem;
+      color: var(--clr-white);
+      font-size: 0.9rem;
+      transition: all 0.3s ease;
+    }
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+      border-color: var(--clr-cyan);
+      box-shadow: 0 0 8px rgba(0, 240, 255, 0.15);
+      outline: none;
+    }
+    
+    /* Table / Lists */
+    .data-table-wrapper {
+      overflow-x: auto;
+      margin-top: var(--space-sm);
+    }
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 0.9rem;
+    }
+    .data-table th, .data-table td {
+      padding: 0.75rem 1rem;
+      border-bottom: 1px solid var(--clr-border);
+    }
+    .data-table th {
+      background: rgba(255,255,255,0.02);
+      font-weight: 600;
+      color: var(--clr-muted);
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .data-table tbody tr {
+      transition: background 0.2s ease;
+    }
+    .data-table tbody tr:hover {
+      background: rgba(255,255,255,0.02);
+    }
+    .tag-status {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+    .tag-status.active { background: rgba(0, 255, 136, 0.15); color: var(--clr-emerald); }
+    .tag-status.draft { background: rgba(255, 184, 0, 0.15); color: var(--clr-amber); }
+    
+    /* Console outputs */
+    .console-log {
+      font-family: var(--font-mono);
+      background: #06060c;
+      border: 1px solid var(--clr-border);
+      border-radius: var(--radius-sm);
+      padding: var(--space-sm);
+      font-size: 0.8rem;
+      color: var(--clr-emerald);
+      max-height: 250px;
+      overflow-y: auto;
+    }
+
+    /* Modal Overlay details */
+    .drawer-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.85);
+      backdrop-filter: blur(10px);
+      z-index: 1000;
+      display: none;
+      justify-content: flex-end;
+    }
+    .drawer {
+      width: 100%;
+      max-width: 550px;
+      height: 100%;
+      background: #08080f;
+      border-left: 1px solid var(--clr-border);
+      padding: var(--space-md);
+      box-shadow: -10px 0 40px rgba(0,0,0,0.5);
+      display: flex;
+      flex-direction: column;
+      animation: slideIn 0.3s var(--ease-out-expo) forwards;
+    }
+    @keyframes slideIn {
+      from { transform: translateX(100%); }
+      to { transform: translateX(0); }
+    }
+    .drawer-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--clr-border);
+      padding-bottom: var(--space-sm);
+      margin-bottom: var(--space-md);
+    }
+    .drawer-body {
+      flex: 1;
+      overflow-y: auto;
+      padding-right: 0.5rem;
+    }
+    .drawer-section {
+      margin-bottom: var(--space-md);
+    }
+    .drawer-section-title {
+      font-size: 0.85rem;
+      color: var(--clr-cyan);
+      text-transform: uppercase;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.75rem;
+      border-left: 3px solid var(--clr-cyan);
+      padding-left: 0.5rem;
+    }
+    .detail-item {
+      display: grid;
+      grid-template-columns: 1fr;
+      margin-bottom: var(--space-sm);
+      border-bottom: 1px solid rgba(255,255,255,0.02);
+      padding-bottom: 0.4rem;
+    }
+    .detail-label {
+      font-size: 0.75rem;
+      color: var(--clr-muted);
+      text-transform: uppercase;
+    }
+    .detail-value {
+      font-size: 0.95rem;
+      font-weight: 600;
+    }
+    
+    /* Preset selector styling */
+    .preset-container {
+      display: flex;
+      gap: var(--space-xs);
+      margin-bottom: var(--space-sm);
+    }
+    .preset-btn {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--clr-border);
+      color: var(--clr-white);
+      padding: var(--space-xs) var(--space-sm);
+      border-radius: var(--radius-sm);
+      font-size: 0.8rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .preset-btn:hover {
+      background: rgba(0, 240, 255, 0.1);
+      border-color: var(--clr-cyan);
+    }
+  </style>
+</head>
+<body>
+  <div class="cyber-grid"></div>
+  <div class="glow-orb" id="orb-1"></div>
+  <div class="glow-orb" id="orb-2"></div>
+
+  <!-- NAV -->
+  <nav class="nav">
+    <div class="nav-inner">
+      <div class="brand">
+        <span class="brand-logo">GD</span>
+        <span class="brand-name">GuardDrive<sup class="brand-tm">™</sup></span>
+      </div>
+      <div class="nav-links">
+        <a href="/" class="nav-cta">Voltar à Landing Page</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- CONTAINER -->
+  <div class="dashboard-container">
+    <div class="page-header">
+      <div>
+        <h1 class="page-title">Portal do <span>Entrevistador</span></h1>
+        <p style="color: var(--clr-muted); font-size: 0.9rem;">Geração de questionários, captura de leads e telemetria forense em tempo real.</p>
+      </div>
+      <div>
+        <button class="btn btn-ghost" id="refresh-all-btn">⚡ Atualizar Dados</button>
+      </div>
+    </div>
+
+    <!-- TAB NAV -->
+    <div class="tab-nav">
+      <button class="tab-btn active" data-tab="dashboard">Dashboard Analítico</button>
+      <button class="tab-btn" data-tab="builder">Gerador de Formulários</button>
+      <button class="tab-btn" data-tab="leads">Leads e Respostas</button>
+    </div>
+
+    <!-- TAB 1: DASHBOARD -->
+    <div class="tab-content active" id="tab-dashboard">
+      <div class="stats-grid">
+        <div class="stat-card cyan">
+          <div class="stat-card-title">Formulários Ativos</div>
+          <div class="stat-card-value" id="stats-active-forms">0</div>
+          <div class="stat-card-sub">Links de qualificação em tráfego</div>
+        </div>
+        <div class="stat-card purple">
+          <div class="stat-card-title">Total de Respostas</div>
+          <div class="stat-card-value" id="stats-total-responses">0</div>
+          <div class="stat-card-sub">Leads com perfil de dor traçado</div>
+        </div>
+        <div class="stat-card emerald">
+          <div class="stat-card-title">Taxa de Conversão</div>
+          <div class="stat-card-value" id="stats-conversion">0%</div>
+          <div class="stat-card-sub">Visualizações vs Formulários preenchidos</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card-title">Fosso de PI (Patentes)</div>
+          <div class="stat-card-value" style="color: var(--clr-amber);">TRL-5</div>
+          <div class="stat-card-sub">NDA de proteção ativa ativo</div>
+        </div>
+      </div>
+
+      <div class="comparison-grid" style="margin-top: 0; margin-bottom: var(--space-md);">
+        <!-- Live telemetry feed -->
+        <div class="panel">
+          <div class="panel-title">
+            <span>📡 Telemetria Forense Recente</span>
+            <span style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--clr-muted);">Live</span>
+          </div>
+          <div class="console-log" id="telemetry-logs">
+            [SYS] Monitoramento de atividades da base de dados iniciado...
+            [SYS] Aguardando interações do usuário...
+          </div>
+        </div>
+
+        <!-- Sector Distribution -->
+        <div class="panel">
+          <div class="panel-title">📊 Leads Qualificados por Segmento</div>
+          <div style="display: flex; flex-direction: column; gap: var(--space-sm); margin-top: var(--space-sm);" id="segment-bars">
+            <!-- Rendered dynamically -->
+            <p style="color: var(--clr-muted); font-size: 0.9rem;">Nenhum lead registrado.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Recent forms table in dashboard -->
+      <div class="panel">
+        <div class="panel-title">🔗 Links de Qualificação Ativos</div>
+        <div class="data-table-wrapper">
+          <table class="data-table" id="dashboard-forms-table">
+            <thead>
+              <tr>
+                <th>Nome do Formulário</th>
+                <th>Alvo / Cliente</th>
+                <th>Segmento</th>
+                <th>Token</th>
+                <th>Respostas</th>
+                <th>Status</th>
+                <th>Ações</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td colspan="7" style="text-align: center; color: var(--clr-muted);">Nenhum formulário gerado. Vá para a aba Gerador.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 2: FORM BUILDER -->
+    <div class="tab-content" id="tab-builder">
+      <div class="form-builder-layout">
+        <!-- Form Settings -->
+        <div class="panel">
+          <div class="panel-title">⚙️ Configurações do Diagnóstico</div>
+          
+          <div class="form-group" style="margin-top: var(--space-sm);">
+            <label>Carregar Modelo de Pesquisa Comercial</label>
+            <div class="preset-container">
+              <button class="preset-btn" id="preset-unified">Questionário Unificado (Adriano)</button>
+              <button class="preset-btn" id="preset-custom">Formulário em Branco</button>
+            </div>
+            <p style="font-size: 0.75rem; color: var(--clr-muted);">O questionário unificado do Adriano valida dores de locadoras, seguradoras e concessionárias.</p>
+          </div>
+
+          <form id="create-form-payload">
+            <div class="form-row" style="display: flex; gap: var(--space-sm);">
+              <div class="form-group" style="flex: 1;">
+                <label for="form-name">Nome do Formulário</label>
+                <input type="text" id="form-name" placeholder="Ex: Pesquisa de Riscos Locadoras SP" required />
+              </div>
+              <div class="form-group" style="flex: 1;">
+                <label for="form-target">Cliente / Alvo Comercial</label>
+                <input type="text" id="form-target" placeholder="Ex: Movida Aluguel de Carros" required />
+              </div>
+            </div>
+            <div class="form-row" style="display: flex; gap: var(--space-sm);">
+              <div class="form-group" style="flex: 1;">
+                <label for="form-segment">Segmento Primário</label>
+                <select id="form-segment" required>
+                  <option value="locadora">Locadora de Veículos / Frotista</option>
+                  <option value="seguradora">Seguradora / Gestora de Sinistros</option>
+                  <option value="concessionaria">Concessionária / Lojista Seminovos</option>
+                  <option value="financeira">Banco / Financeira</option>
+                  <option value="outro">Geral / Outros</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="form-desc">Descrição / Objetivo do Diagnóstico</label>
+              <textarea id="form-desc" rows="3" placeholder="Ex: Mapear o custo invisível de sinistros na frota Movida do Hub SP Leste."></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-full" style="margin-top: var(--space-sm);" id="save-form-btn">
+              <span>Gerar Link do Diagnóstico Soberano</span>
+            </button>
+          </form>
+
+          <!-- Result link display -->
+          <div class="attestation-box" id="form-success-box" style="display: none; margin-top: var(--space-md); border-color: var(--clr-cyan);">
+            <div class="attestation-label" style="color: var(--clr-cyan);">LINK DE ACESSO GERADO</div>
+            <div class="attestation-hash" id="generated-link-display" style="font-size: 0.95rem; text-transform: none; color: var(--clr-white); overflow-x: auto; white-space: nowrap; margin: var(--space-xs) 0;">
+              http://localhost:8000/r/ABCDEF
+            </div>
+            <button class="btn btn-ghost btn-full" id="copy-link-btn" style="padding: 0.4rem; font-size: 0.8rem;">Copiar Link para Área de Transferência</button>
+          </div>
+        </div>
+
+        <!-- Question List Builder -->
+        <div class="panel">
+          <div class="panel-title">
+            <span>📝 Estrutura de Perguntas</span>
+            <span style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--clr-cyan);" id="questions-counter">0 Perguntas</span>
+          </div>
+
+          <!-- Add question form -->
+          <div class="add-q-box">
+            <h4 style="font-size: 0.9rem; font-weight: 700; margin-bottom: 0.5rem; color: var(--clr-white);">Adicionar Nova Pergunta</h4>
+            <div class="form-group">
+              <label for="q-text">Pergunta (Texto)</label>
+              <input type="text" id="q-text" placeholder="Ex: Qual o principal desafio operacional atual na gestão de sinistros?" />
+            </div>
+            <div class="form-row" style="display: flex; gap: var(--space-sm);">
+              <div class="form-group" style="flex: 1;">
+                <label for="q-type">Tipo de Resposta</label>
+                <select id="q-type">
+                  <option value="text">Texto Livre</option>
+                  <option value="select">Múltiplas Opções (Seleção Única)</option>
+                  <option value="number">Número / Quantidade</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group" id="q-options-container" style="display: none;">
+              <label for="q-options">Opções (Separadas por vírgula)</label>
+              <input type="text" id="q-options" placeholder="Opção A, Opção B, Opção C" />
+            </div>
+            <button class="btn btn-ghost" id="add-q-btn" style="padding: 0.4rem 1rem; font-size: 0.8rem;">Adicionar Pergunta à Lista</button>
+          </div>
+
+          <!-- Question list -->
+          <div class="question-list" id="builder-question-list">
+            <!-- Dynamic items -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 3: LEADS -->
+    <div class="tab-content" id="tab-leads">
+      <div class="panel">
+        <div class="panel-title" style="display: flex; justify-content: space-between; align-items: center;">
+          <span>📋 Leads e Diagnósticos Qualificados</span>
+          <div>
+            <button class="preset-btn" id="export-csv-btn">📤 Exportar Leads (CSV)</button>
+          </div>
+        </div>
+
+        <div class="data-table-wrapper">
+          <table class="data-table" id="leads-table">
+            <thead>
+              <tr>
+                <th>Empresa</th>
+                <th>Contato</th>
+                <th>E-mail</th>
+                <th>WhatsApp Pessoal</th>
+                <th>WhatsApp Corp.</th>
+                <th>Data / Hora</th>
+                <th>NDA</th>
+                <th>Ações</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td colspan="8" style="text-align: center; color: var(--clr-muted);">Nenhum lead qualificado encontrado. Envie o formulário para os alvos comerciais.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- LEADS DETAILS DRAWER -->
+  <div class="drawer-overlay" id="lead-drawer">
+    <div class="drawer">
+      <div class="drawer-header">
+        <div>
+          <h3 id="drawer-company-name">Nome da Empresa</h3>
+          <p style="color: var(--clr-muted); font-size: 0.8rem;" id="drawer-lead-id">ID do Lead: #</p>
+        </div>
+        <button class="modal-close" id="drawer-close" style="font-size: 1.5rem; line-height: 1;">✕</button>
+      </div>
+      <div class="drawer-body">
+        <div class="drawer-section">
+          <div class="drawer-section-title">Informações de Contato</div>
+          <div class="detail-item">
+            <span class="detail-label">Contato</span>
+            <span class="detail-value" id="drawer-contact-name">João</span>
+          </div>
+          <div class="detail-item">
+            <span class="detail-label">E-mail Corporativo</span>
+            <span class="detail-value" id="drawer-email">joao@empresa.com</span>
+          </div>
+          <div class="detail-item">
+            <span class="detail-label">WhatsApp Pessoal</span>
+            <span class="detail-value" id="drawer-phone-personal">-</span>
+          </div>
+          <div class="detail-item">
+            <span class="detail-label">WhatsApp Corporativo</span>
+            <span class="detail-value" id="drawer-phone-corporate">-</span>
+          </div>
+          <div class="detail-item">
+            <span class="detail-label">Status do NDA Operacional</span>
+            <span class="detail-value" id="drawer-nda" style="color: var(--clr-emerald);">✓ Aceito</span>
+          </div>
+        </div>
+
+        <div class="drawer-section">
+          <div class="drawer-section-title">Respostas do Diagnóstico</div>
+          <div id="drawer-answers-list">
+            <!-- Dynamic QA -->
+          </div>
+        </div>
+
+        <div class="drawer-section">
+          <div class="drawer-section-title">Registro Criptográfico (UEAP)</div>
+          <div class="detail-item">
+            <span class="detail-label">Hash da Transação</span>
+            <span class="detail-value" id="drawer-hash" style="font-family: var(--font-mono); font-size: 0.8rem; overflow-wrap: break-word;">-</span>
+          </div>
+          <div class="detail-item">
+            <span class="detail-label">Bloco Criptográfico</span>
+            <span class="detail-value" id="drawer-block" style="font-family: var(--font-mono);">-</span>
+          </div>
+          <div class="detail-item">
+            <span class="detail-label">Data da Qualificação</span>
+            <span class="detail-value" id="drawer-timestamp">-</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <p class="footer-copy">© 2026 GuardDrive Tecnologia Ltda. · Painel de Controle de Pesquisa Comercial</p>
+      <p class="footer-mono">Conformidade e Telemetria Soberana · UEAP Standard v1.2</p>
+    </div>
+  </footer>
+
+  <script>
+    // Global State
+    let activeQuestions = [];
+    let allLeads = [];
+    let allForms = [];
+
+    // Unified questionnaire template (Adriano's directives)
+    const adrianoPreset = [
+      { q: "Qual o nível de impacto financeiro e operacional que roubo, furto ou apropriação indébita causam no seu negócio?", type: "select", options: ["Muito alto: É um dos maiores gargalos financeiros", "Médio impacto: Ocorre eventualmente e gera prejuízos parciais", "Pouco impacto: Raramente temos incidentes na nossa escala"] },
+      { q: "Já sofreu com episódios onde o veículo desapareceu devido à suspeita ou confirmação do uso de jammers?", type: "select", options: ["Sim, já ocorreu mais de uma vez", "Sim, aconteceu uma única vez com prejuízo severo", "Não, nunca detectamos bloqueadores em nossos sinistros"] },
+      { q: "A instalação de rastreadores convencionais (corte de fiação) desvaloriza o veículo ou gera atrito com garantia?", type: "select", options: ["Gargalo Crítico: Reduz valor de revenda e atinge a garantia", "Impacto Moderado: Logística cara, mas contornamos a depreciação", "Sem Impacto: Não afeta garantia ou valor final"] },
+      { q: "Qual a importância de ativar um novo dispositivo de segurança na frota em menos de 30 segundos, sem veículo imobilizado?", type: "select", options: ["Indispensável: Veículo parado gera perdas invisíveis", "Desejável: Facilitaria muito a operação diária", "Baixa Relevância: Temos equipe técnica dedicada"] },
+      { q: "Como a operação avalia hoje os riscos de compliance de dados e privacidade (LGPD) em telemetria contínua?", type: "select", options: ["Risco Alto: Preocupação real com passivo de privacidade", "Risco Controlado: Possuímos barreiras contratuais padrão", "Sem Risco: A estrutura jurídica atual absorve exigências"] },
+      { q: "Se dispusesse de uma contraprova imutável de comportamento do ativo, quanto isso reduziria o seu passivo jurídico?", type: "select", options: ["Redução Drástica: Provas definitivas aceleram processos judiciais", "Redução Moderada: Auxilia em casos específicos isolados", "Pouca Relevância: Raramente temos litígios operacionais"] },
+      { q: "Qual desses modelos de contratação possui maior viabilidade e aderência estratégica para o seu negócio?", type: "select", options: ["Modelo HaaS: Mensalidade recorrente semCapex inicial", "Modelo SaaS Corporativo: Lotes de dispositivos + taxa mensal de software"] },
+      { q: "Um dispositivo capaz de gerar laudo de conformidade aceleraria a liberação de prêmio de sinistro de forma sem burocracia?", type: "select", options: ["Valor Altíssimo: Reduzir tempo de retenção de capital preserva a saúde financeira", "Valor Moderado: Ajudaria administrativamente", "Pouco Valor: Relacionamento direto já é ágil"] },
+      { q: "Qual a principal barreira ou objeção para contratar uma nova tecnologia corporativa de segurança?", type: "select", options: ["Custo mensal recorrente acumulado", "Complexidade de integração com sistemas internos/treinamento", "Falta de confiança no funcionamento offline/fixação rápida"] },
+      { q: "Qual o interesse estratégico em participar de um piloto regional Capex Zero (HaaS) com veículos selecionados?", type: "select", options: ["Alto Interesse: Testar robustez offline e imunidade imediatamente", "Médio Interesse: Avaliar proposta após relatórios de outros parceiros", "Nenhum Interesse: Momento atual ou diretrizes não permitem"] }
+    ];
+
+    document.addEventListener("DOMContentLoaded", () => {
+      // Tab switching
+      document.querySelectorAll(".tab-btn").forEach(btn => {
+        btn.addEventListener("click", () => {
+          document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
+          document.querySelectorAll(".tab-content").forEach(tc => tc.classList.remove("active"));
+          
+          btn.classList.add("active");
+          document.getElementById(`tab-${btn.dataset.tab}`).classList.add("active");
+          
+          // Trigger logs
+          logConsole(`[TAB] Navegou para a aba: ${btn.dataset.tab}`);
+        });
+      });
+
+      // Question Option Container visibility toggle
+      const qTypeSelect = document.getElementById("q-type");
+      const qOptionsContainer = document.getElementById("q-options-container");
+      qTypeSelect.addEventListener("change", () => {
+        if (qTypeSelect.value === "select") {
+          qOptionsContainer.style.display = "block";
+        } else {
+          qOptionsContainer.style.display = "none";
+        }
+      });
+
+      // Add Question button
+      const addQBtn = document.getElementById("add-q-btn");
+      addQBtn.addEventListener("click", (e) => {
+        e.preventDefault();
+        const text = document.getElementById("q-text").value.trim();
+        const type = document.getElementById("q-type").value;
+        const optionsText = document.getElementById("q-options").value.trim();
+        
+        if (!text) {
+          alert("A pergunta precisa ter um texto.");
+          return;
+        }
+
+        let options = null;
+        if (type === "select") {
+          if (!optionsText) {
+            alert("Perguntas de múltipla escolha exigem opções separadas por vírgula.");
+            return;
+          }
+          options = optionsText.split(",").map(o => o.trim()).filter(Boolean);
+        }
+
+        activeQuestions.push({ q: text, type, options });
+        renderQuestionList();
+        
+        // Reset inputs
+        document.getElementById("q-text").value = "";
+        document.getElementById("q-options").value = "";
+        logConsole(`[BUILDER] Adicionada pergunta: "${text}"`);
+      });
+
+      // Preset buttons
+      document.getElementById("preset-unified").addEventListener("click", (e) => {
+        e.preventDefault();
+        activeQuestions = [...adrianoPreset];
+        renderQuestionList();
+        document.getElementById("form-name").value = "Pesquisa de Demanda e Riscos de Mobilidade";
+        document.getElementById("form-desc").value = "Instrumento de validação comercial - Dores de locação, sinistros e passivo de LGPD.";
+        logConsole("[BUILDER] Carregado questionário unificado validado de Adriano.");
+      });
+
+      document.getElementById("preset-custom").addEventListener("click", (e) => {
+        e.preventDefault();
+        activeQuestions = [];
+        renderQuestionList();
+        document.getElementById("form-name").value = "";
+        document.getElementById("form-desc").value = "";
+        logConsole("[BUILDER] Limpou a estrutura de perguntas para formulário em branco.");
+      });
+
+      // Form Submit
+      const createFormPayload = document.getElementById("create-form-payload");
+      createFormPayload.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        if (activeQuestions.length === 0) {
+          alert("O formulário precisa ter pelo menos uma pergunta.");
+          return;
+        }
+
+        const payload = {
+          name: document.getElementById("form-name").value.trim(),
+          target: document.getElementById("form-target").value.trim(),
+          segment: document.getElementById("form-segment").value,
+          description: document.getElementById("form-desc").value.trim(),
+          questions: activeQuestions
+        };
+
+        try {
+          const res = await fetch("/api/forms", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload)
+          });
+          if (!res.ok) throw new Error("Erro na rede ao salvar formulário");
+          const data = await res.json();
+          
+          if (data.status === "success") {
+            logConsole(`[API] Formulário salvo com sucesso! Token: ${data.token}`);
+            
+            // Display Generated link
+            const fullLink = window.location.origin + data.link;
+            document.getElementById("generated-link-display").innerText = fullLink;
+            document.getElementById("form-success-box").style.display = "block";
+            
+            // Refresh tables
+            fetchDashboardStats();
+            fetchForms();
+          }
+        } catch (err) {
+          logConsole(`[ERRO] Falha ao salvar formulário: ${err.message}`, true);
+        }
+      });
+
+      // Copy Link button
+      document.getElementById("copy-link-btn").addEventListener("click", (e) => {
+        e.preventDefault();
+        const linkText = document.getElementById("generated-link-display").innerText;
+        navigator.clipboard.writeText(linkText).then(() => {
+          alert("Link copiado com sucesso!");
+          logConsole(`[CLI] Copiou link para o clipboard: ${linkText}`);
+        });
+      });
+
+      // Refresh Data button
+      document.getElementById("refresh-all-btn").addEventListener("click", () => {
+        logConsole("[SYS] Atualização de dados solicitada pelo usuário.");
+        fetchDashboardStats();
+        fetchLeads();
+        fetchForms();
+      });
+
+      // Drawer Close
+      document.getElementById("drawer-close").addEventListener("click", () => {
+        document.getElementById("lead-drawer").style.display = "none";
+      });
+
+      // Export CSV
+      document.getElementById("export-csv-btn").addEventListener("click", () => {
+        exportLeadsCSV();
+      });
+
+      // Initial Fetch
+      fetchDashboardStats();
+      fetchLeads();
+      fetchForms();
+      
+      // Auto-load Adriano's preset as default helper
+      activeQuestions = [...adrianoPreset];
+      renderQuestionList();
+    });
+
+    // Logging helper
+    function logConsole(message, isError = false) {
+      const logger = document.getElementById("telemetry-logs");
+      const timestamp = new Date().toLocaleTimeString();
+      const prefix = isError ? `<span style="color: #ff4a4a;">[ERRO]</span>` : `[INFO]`;
+      logger.innerHTML += `\n[${timestamp}] ${prefix} ${message}`;
+      logger.scrollTop = logger.scrollHeight;
+    }
+
+    // Render local question builder list
+    function renderQuestionList() {
+      const list = document.getElementById("builder-question-list");
+      list.innerHTML = "";
+      document.getElementById("questions-counter").innerText = `${activeQuestions.length} Perguntas`;
+      
+      activeQuestions.forEach((q, idx) => {
+        const item = document.createElement("div");
+        item.className = "question-item";
+        
+        let optsHtml = "";
+        if (q.options) {
+          optsHtml = `<div style="font-size: 0.75rem; color: var(--clr-muted); margin-top: 0.25rem;">Opções: ${q.options.join(" | ")}</div>`;
+        }
+
+        item.innerHTML = `
+          <div class="question-item-header">
+            <span>Questão ${idx + 1} (${q.type === 'select' ? 'Múltiplas' : q.type === 'number' ? 'Numérico' : 'Texto'})</span>
+            <button class="remove-question-btn" onclick="removeQuestion(${idx})">Remover</button>
+          </div>
+          <div style="font-size: 0.9rem; font-weight: 600;">${q.q}</div>
+          ${optsHtml}
+        `;
+        list.appendChild(item);
+      });
+    }
+
+    // Remove question
+    window.removeQuestion = function(idx) {
+      const removed = activeQuestions.splice(idx, 1);
+      renderQuestionList();
+      logConsole(`[BUILDER] Removida pergunta index: ${idx} ("${removed[0].q}")`);
+    };
+
+    // API fetches
+    async function fetchDashboardStats() {
+      try {
+        const res = await fetch("/api/dashboard/stats");
+        if (!res.ok) throw new Error("Erro na rede");
+        const stats = await res.json();
+        
+        document.getElementById("stats-active-forms").innerText = stats.active_forms || 0;
+        document.getElementById("stats-total-responses").innerText = stats.total_responses || 0;
+        
+        // Mock conversion rate
+        const totalVisits = (stats.total_responses * 2) + 5;
+        const rate = totalVisits > 0 ? Math.round((stats.total_responses / totalVisits) * 100) : 0;
+        document.getElementById("stats-conversion").innerText = `${rate}%`;
+
+        // Render segment chart/bars
+        const segContainer = document.getElementById("segment-bars");
+        segContainer.innerHTML = "";
+        if (stats.segment_counts && Object.keys(stats.segment_counts).length > 0) {
+          Object.entries(stats.segment_counts).forEach(([segment, count]) => {
+            const barWrap = document.createElement("div");
+            barWrap.style.display = "flex";
+            barWrap.style.alignItems = "center";
+            barWrap.style.justifyContent = "space-between";
+            
+            const segmentLabel = segment.toUpperCase();
+            barWrap.innerHTML = `
+              <span style="font-size: 0.85rem; font-weight: 600; width: 140px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${segmentLabel}</span>
+              <div style="flex: 1; height: 8px; background: rgba(255,255,255,0.05); margin: 0 10px; border-radius: 4px; overflow: hidden;">
+                <div style="width: ${Math.min(count * 20, 100)}%; height: 100%; background: var(--clr-cyan); box-shadow: 0 0 8px var(--clr-cyan);"></div>
+              </div>
+              <span style="font-family: var(--font-mono); font-size: 0.85rem; font-weight: bold; color: var(--clr-cyan);">${count}</span>
+            `;
+            segContainer.appendChild(barWrap);
+          });
+        } else {
+          segContainer.innerHTML = `<p style="color: var(--clr-muted); font-size: 0.9rem;">Nenhum lead registrado.</p>`;
+        }
+        
+      } catch (err) {
+        logConsole(`[ERRO] Falha ao ler stats: ${err.message}`, true);
+      }
+    }
+
+    async function fetchLeads() {
+      try {
+        const res = await fetch("/api/leads");
+        if (!res.ok) throw new Error("Erro na rede ao buscar leads");
+        allLeads = await res.json();
+        
+        const tbody = document.querySelector("#leads-table tbody");
+        tbody.innerHTML = "";
+        
+        if (allLeads.length === 0) {
+          tbody.innerHTML = `<tr><td colspan="8" style="text-align: center; color: var(--clr-muted);">Nenhum lead qualificado encontrado.</td></tr>`;
+          return;
+        }
+
+        allLeads.forEach(lead => {
+          const tr = document.createElement("tr");
+          
+          const dtStr = new Date(lead.created_at).toLocaleString('pt-BR');
+          const ndaTag = lead.nda_accepted 
+            ? `<span class="tag-status active">✓ Aceito</span>` 
+            : `<span class="tag-status draft">✕ Ausente</span>`;
+
+          tr.innerHTML = `
+            <td><strong>${lead.company_name}</strong></td>
+            <td>${lead.contact_name}</td>
+            <td>${lead.email}</td>
+            <td>${lead.phone_personal || '-'}</td>
+            <td>${lead.phone_corporate || '-'}</td>
+            <td>${dtStr}</td>
+            <td>${ndaTag}</td>
+            <td>
+              <button class="preset-btn" style="padding: 0.2rem 0.5rem; font-size: 0.75rem;" onclick="viewLeadDetails(${lead.id})">🔍 Analisar</button>
+            </td>
+          `;
+          tbody.appendChild(tr);
+        });
+      } catch (err) {
+        logConsole(`[ERRO] Falha ao ler leads: ${err.message}`, true);
+      }
+    }
+
+    async function fetchForms() {
+      try {
+        const res = await fetch("/api/forms");
+        if (!res.ok) throw new Error("Erro na rede ao buscar formulários");
+        allForms = await res.json();
+        
+        const tbody = document.querySelector("#dashboard-forms-table tbody");
+        tbody.innerHTML = "";
+        
+        if (allForms.length === 0) {
+          tbody.innerHTML = `<tr><td colspan="7" style="text-align: center; color: var(--clr-muted);">Nenhum formulário gerado até o momento.</td></tr>`;
+          return;
+        }
+
+        allForms.forEach(form => {
+          const tr = document.createElement("tr");
+          const formLink = window.location.origin + `/r/${form.token}`;
+          const isAct = form.status === 'active' || form.status === 'ativo';
+
+          tr.innerHTML = `
+            <td><strong>${form.name}</strong></td>
+            <td>${form.target}</td>
+            <td><span style="font-size:0.8rem; color:var(--clr-muted);">${form.segment.toUpperCase()}</span></td>
+            <td><code style="font-family:var(--font-mono); font-size:0.8rem; color:var(--clr-cyan);">${form.token}</code></td>
+            <td><span style="font-family:var(--font-mono); font-weight:600; color:var(--clr-emerald);">${form.responses || form.response_count || 0}</span></td>
+            <td><span class="tag-status ${isAct ? 'active' : 'draft'}">${form.status}</span></td>
+            <td>
+              <button class="preset-btn" style="padding: 0.2rem 0.5rem; font-size: 0.75rem;" onclick="copyLinkText('${formLink}')">📋 Copiar Link</button>
+            </td>
+          `;
+          tbody.appendChild(tr);
+        });
+      } catch (err) {
+        logConsole(`[ERRO] Falha ao ler formulários: ${err.message}`, true);
+      }
+    }
+
+    window.copyLinkText = function(text) {
+      navigator.clipboard.writeText(text).then(() => {
+        alert("Link copiado!");
+        logConsole(`[CLI] Copiou link: ${text}`);
+      });
+    };
+
+    window.viewLeadDetails = function(leadId) {
+      const lead = allLeads.find(l => l.id === leadId);
+      if (!lead) return;
+
+      document.getElementById("drawer-company-name").innerText = lead.company_name;
+      document.getElementById("drawer-lead-id").innerText = `ID do Lead: #${lead.id}`;
+      document.getElementById("drawer-contact-name").innerText = lead.contact_name;
+      document.getElementById("drawer-email").innerText = lead.email;
+      document.getElementById("drawer-phone-personal").innerText = lead.phone_personal || '-';
+      document.getElementById("drawer-phone-corporate").innerText = lead.phone_corporate || '-';
+      
+      const ndaVal = document.getElementById("drawer-nda");
+      if (lead.nda_accepted) {
+        ndaVal.innerText = "✓ Aceito";
+        ndaVal.style.color = "var(--clr-emerald)";
+      } else {
+        ndaVal.innerText = "✕ Não assinado";
+        ndaVal.style.color = "#ff4a4a";
+      }
+
+      document.getElementById("drawer-hash").innerText = lead.hash || 'Offline Non-Attested';
+      document.getElementById("drawer-block").innerText = lead.block || '-';
+      document.getElementById("drawer-timestamp").innerText = new Date(lead.created_at).toLocaleString('pt-BR');
+
+      // QA display
+      const qaContainer = document.getElementById("drawer-answers-list");
+      qaContainer.innerHTML = "";
+      if (lead.answers && Object.keys(lead.answers).length > 0) {
+        Object.entries(lead.answers).forEach(([qText, val]) => {
+          const qaDiv = document.createElement("div");
+          qaDiv.style.marginBottom = "0.75rem";
+          qaDiv.style.borderBottom = "1px solid rgba(255,255,255,0.02)";
+          qaDiv.style.paddingBottom = "0.4rem";
+          
+          qaDiv.innerHTML = `
+            <div style="font-size: 0.8rem; color: var(--clr-muted); line-height:1.3; font-weight:600;">${qText}</div>
+            <div style="font-size: 0.9rem; font-weight: 600; color: var(--clr-white); margin-top: 0.25rem;">${val}</div>
+          `;
+          qaContainer.appendChild(qaDiv);
+        });
+      } else {
+        qaContainer.innerHTML = `<p style="color: var(--clr-muted);">Nenhum detalhe disponível.</p>`;
+      }
+
+      document.getElementById("lead-drawer").style.display = "flex";
+      logConsole(`[GUI] Abriu detalhes do Lead: ${lead.company_name}`);
+    };
+
+    // Client-side CSV generator fallback
+    function exportLeadsCSV() {
+      if (allLeads.length === 0) {
+        alert("Nenhum lead disponível para exportação.");
+        return;
+      }
+      
+      let csvContent = "data:text/csv;charset=utf-8,\uFEFF";
+      csvContent += "ID,Empresa,Nome Contato,Email,WhatsApp Pessoal,WhatsApp Corporativo,NDA Aceito,Hash Blockchain,Bloco,Data\n";
+
+      allLeads.forEach(l => {
+        const row = [
+          l.id,
+          `"${l.company_name.replace(/"/g, '""')}"`,
+          `"${l.contact_name.replace(/"/g, '""')}"`,
+          `"${l.email.replace(/"/g, '""')}"`,
+          `"${(l.phone_personal || '').replace(/"/g, '""')}"`,
+          `"${(l.phone_corporate || '').replace(/"/g, '""')}"`,
+          l.nda_accepted ? "SIM" : "NAO",
+          l.hash || '',
+          l.block || '',
+          l.created_at
+        ].join(",");
+        csvContent += row + "\n";
+      });
+
+      const encodedUri = encodeURI(csvContent);
+      const link = document.createElement("a");
+      link.setAttribute("href", encodedUri);
+      link.setAttribute("download", `guarddrive_leads_export_${new Date().toISOString().split('T')[0]}.csv`);
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      logConsole("[CSV] Exportação do arquivo leads.csv executada com sucesso.");
+    }
+  </script>
+</body>
+</html>

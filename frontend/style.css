@@ -514,3 +514,95 @@ textarea { resize: vertical; }
 ::-webkit-scrollbar { width: 6px; }
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb { background: rgba(123,47,255,0.3); border-radius: 3px; }
+
+/* ── 20. DYNAMIC DIAGNOSTIC PORTAL ─────────────────── */
+.diagnostic-portal-wrapper {
+  background: var(--clr-surface);
+  border: 1px solid var(--clr-border);
+  border-radius: var(--radius-lg);
+  padding: 3rem;
+  backdrop-filter: blur(20px);
+  margin-top: 40px;
+  position: relative;
+  overflow: hidden;
+}
+.diagnostic-portal-wrapper::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; height: 4px;
+  background: var(--grad-brand);
+}
+.option-card-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-sm);
+  margin-top: var(--space-xs);
+}
+.option-card {
+  background: rgba(255,255,255,0.02);
+  border: 1px solid var(--clr-border);
+  border-radius: var(--radius-md);
+  padding: 1.15rem 1.4rem;
+  cursor: pointer;
+  transition: all 0.3s var(--ease-out-expo);
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.option-card:hover {
+  border-color: var(--clr-border-h);
+  background: rgba(0, 240, 255, 0.02);
+}
+.option-card.selected {
+  border-color: var(--clr-cyan);
+  background: rgba(0, 240, 255, 0.05);
+  box-shadow: 0 0 15px rgba(0, 240, 255, 0.1);
+}
+.option-card-radio {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 2px solid var(--clr-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  flex-shrink: 0;
+}
+.option-card.selected .option-card-radio {
+  border-color: var(--clr-cyan);
+}
+.option-card.selected .option-card-radio::after {
+  content: '';
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--clr-cyan);
+}
+.wizard-progress {
+  height: 4px;
+  background: rgba(255,255,255,0.05);
+  border-radius: var(--radius-pill);
+  margin-bottom: var(--space-md);
+  overflow: hidden;
+}
+.wizard-progress-bar {
+  height: 100%;
+  background: var(--grad-brand);
+  width: 0%;
+  transition: width 0.3s ease;
+  box-shadow: 0 0 8px var(--clr-cyan);
+}
+.card-indicator {
+  display: inline-block;
+  padding: 0.2rem 0.5rem;
+  font-size: 0.75rem;
+  border-radius: 4px;
+  font-weight: 600;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+}
+.card-indicator.high { background: rgba(255, 74, 74, 0.15); color: #ff4a4a; }
+.card-indicator.medium { background: rgba(255, 184, 0, 0.15); color: var(--clr-amber); }
+.card-indicator.low { background: rgba(0, 255, 136, 0.15); color: var(--clr-emerald); }
+

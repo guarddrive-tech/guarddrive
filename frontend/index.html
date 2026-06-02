@@ -17,6 +17,150 @@
   <div class="glow-orb" id="orb-2"></div>
   <div class="glow-orb" id="orb-3"></div>
 
+  <!-- DYNAMIC DIAGNOSTIC PORTAL -->
+  <div id="dynamic-diagnostic-portal" style="display: none; max-width: 800px; margin: 0 auto; padding: 100px var(--space-md) var(--space-lg);">
+    <!-- Portal Header -->
+    <div style="text-align: center; margin-bottom: var(--space-md);">
+      <div class="hero-badge" id="portal-badge" style="margin: 0 auto 1rem; width: fit-content; opacity: 1; transform: none;">
+        DIAGNÓSTICO SOBERANO
+      </div>
+      <h1 style="font-size: 2.2rem; font-weight: 900; margin-bottom: 0.5rem;" id="portal-title">GuardDrive™</h1>
+      <p id="portal-subtitle" style="color: var(--clr-muted); font-size: 1rem; max-width: 600px; margin: 0 auto;">Diagnóstico de conformidade e mitigação de dores patrimoniais.</p>
+    </div>
+
+    <!-- Wizard Progress -->
+    <div class="wizard-progress">
+      <div class="wizard-progress-bar" id="portal-progress"></div>
+    </div>
+
+    <!-- Portal Content Panel -->
+    <div class="diagnostic-portal-wrapper">
+      
+      <!-- Phase 1: NDA Gate -->
+      <div id="portal-phase-nda">
+        <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: var(--space-sm); display: flex; align-items: center; gap: 0.5rem;">
+          <span>🔐</span> Acordo de Confidencialidade (NDA)
+        </h3>
+        <div class="nda-scroll" style="height: 250px; background: rgba(0,0,0,0.2); padding: 1rem; border-radius: var(--radius-sm); border: 1px solid var(--clr-border);">
+          <p><strong>TERMO DE CONFIDENCIALIDADE OPERACIONAL v2.2 (UEAP & LGPD COMPLIANT)</strong></p>
+          <p>Este Termo de Confidencialidade ("Termo") é estabelecido com a GuardDrive Tecnologia Ltda. e Symbeon Labs para a proteção de segredos comerciais e ativos informacionais durante a fase de validação de mercado (TRL-5).</p>
+          <p>1. <strong>Confidencialidade das Informações:</strong> O Respondente compromete-se a manter sob estrito sigilo todas as informações técnicas, de produto e modelos de negócio transmitidos durante o preenchimento deste formulário.</p>
+          <p>2. <strong>Limitação de Divulgação:</strong> A propriedade intelectual do ecossistema de hardware GuardTag™ e do motor Magistrado Themis™ é protegida por patente e não pode ser clonada, imitada ou discutida publicamente sem consentimento escrito.</p>
+          <p>3. <strong>Tratamento de Dados Pessoais (LGPD):</strong> Os dados de contato (WhatsApp pessoal/corporativo e e-mail) serão utilizados unicamente para validação comercial e elaboração do laudo de conformidade, sendo criptografados on-chain de acordo com o Protocolo UEAP.</p>
+          <p>4. <strong>Imutabilidade Judicial:</strong> As respostas fornecidas serão assinadas criptograficamente gerando uma atestação na base de dados, servindo de base legal e técnica.</p>
+        </div>
+        <label class="nda-check-label" style="margin-top: 1rem;">
+          <input type="checkbox" id="portal-nda-checkbox" />
+          <span>Li e aceito os termos do NDA Operacional GuardDrive™</span>
+        </label>
+        <button class="btn btn-primary btn-full" id="portal-nda-btn" disabled style="margin-top: var(--space-sm);">Aceitar e Iniciar Diagnóstico</button>
+      </div>
+
+      <!-- Phase 2: Contact Info -->
+      <div id="portal-phase-contact" style="display: none;">
+        <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: var(--space-sm);">📋 Identificação Operacional</h3>
+        <p style="color: var(--clr-muted); font-size: 0.85rem; margin-bottom: var(--space-sm);">Forneça as informações para contato corporativo e geração de atestação criptográfica.</p>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Nome do Respondente</label>
+            <input type="text" id="portal-nome" placeholder="Seu nome completo" required />
+          </div>
+          <div class="form-group">
+            <label>Empresa</label>
+            <input type="text" id="portal-empresa" placeholder="Nome da sua empresa" required />
+          </div>
+        </div>
+        <div class="form-group">
+          <label>E-mail Corporativo</label>
+          <input type="email" id="portal-email" placeholder="nome@empresa.com.br" required />
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>WhatsApp Pessoal (Para recebimento do Laudo)</label>
+            <input type="tel" id="portal-phone-personal" placeholder="(11) 99999-9999" required />
+          </div>
+          <div class="form-group">
+            <label>WhatsApp Corporativo (Para Demonstração Técnica)</label>
+            <input type="tel" id="portal-phone-corporate" placeholder="(11) 99999-9999" required />
+          </div>
+        </div>
+        <button class="btn btn-primary btn-full" id="portal-contact-btn" style="margin-top: var(--space-sm);">Prosseguir para Perguntas</button>
+      </div>
+
+      <!-- Phase 3: Diagnostic Questions Wizard -->
+      <div id="portal-phase-questions" style="display: none;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+          <h3 id="portal-question-number" style="font-size: 1rem; font-weight: 700; color: var(--clr-cyan);">Pergunta 1 de 10</h3>
+          <span style="font-size: 0.8rem; color: var(--clr-muted);" id="portal-question-segment">Locadoras</span>
+        </div>
+        <div id="portal-question-title" style="font-size: 1.15rem; font-weight: 600; margin-bottom: 1.5rem; line-height: 1.4;">Carregando pergunta...</div>
+        
+        <!-- Options wrapper -->
+        <div id="portal-options-container">
+          <!-- Rendered dynamically as option-cards -->
+        </div>
+
+        <!-- Text input wrapper -->
+        <div id="portal-text-input-container" style="display: none;" class="form-group">
+          <textarea id="portal-text-answer" rows="4" placeholder="Escreva sua resposta de forma detalhada..."></textarea>
+        </div>
+
+        <div style="display: flex; justify-content: space-between; gap: var(--space-sm); margin-top: var(--space-md);">
+          <button class="btn btn-ghost" id="portal-prev-btn" style="flex: 1;">Anterior</button>
+          <button class="btn btn-primary" id="portal-next-btn" style="flex: 2;">Avançar</button>
+        </div>
+      </div>
+
+      <!-- Phase 4: Attesting Load -->
+      <div id="portal-phase-attesting" style="display: none; text-align: center; padding: 2rem 0;">
+        <div class="success-icon" style="border-color: rgba(0, 240, 255, 0.25); color: var(--clr-cyan); animation: pulseDot 1.5s infinite;">
+          🔒
+        </div>
+        <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 0.5rem;">Assinando Termo & Criptografando Dados</h3>
+        <p style="color: var(--clr-muted); font-size: 0.85rem; max-width: 450px; margin: 0 auto 1.5rem;">A IA Magistrado Themis™ está calculando a classificação de risco e gerando o laudo forense.</p>
+        
+        <div class="console-log" id="attesting-console" style="text-align: left; height: 180px;">
+          [SEC] Iniciando cifragem de dados de contato via SHA-3...
+        </div>
+      </div>
+
+      <!-- Phase 5: Success & Recommendation Engine Result -->
+      <div id="portal-phase-success" style="display: none; text-align: center;">
+        <div class="success-icon">✓</div>
+        <h3 style="font-size: 1.5rem; font-weight: 800; margin-bottom: var(--space-xs);">Diagnóstico Concluído!</h3>
+        <p style="color: var(--clr-muted); margin-bottom: var(--space-md);">Sua assinatura e respostas foram ancoradas com sucesso na rede descentralizada.</p>
+        
+        <div class="attestation-box" style="margin-bottom: var(--space-md); text-align: left;">
+          <div class="attestation-label">ASSINATURA DIGITAL IMUTÁVEL (UEAP)</div>
+          <div class="attestation-hash" id="portal-res-hash">0x...</div>
+          <div class="attestation-meta" id="portal-res-meta">Bloco...</div>
+        </div>
+
+        <!-- Risk recommendation card -->
+        <div class="panel" style="text-align: left; border-color: rgba(255, 74, 74, 0.3); background: rgba(255,74,74,0.01); margin-bottom: var(--space-md);">
+          <div class="panel-title" style="border-bottom: none; margin-bottom: 0.5rem; padding-bottom: 0;">
+            <span>⚠️ Análise de Vulnerabilidade</span>
+            <span class="card-indicator high" id="portal-risk-indicator">CRÍTICO</span>
+          </div>
+          <p id="portal-risk-description" style="font-size: 0.9rem; color: rgba(255,255,255,0.85); line-height: 1.5; margin-bottom: var(--space-sm);">
+            Sua operação apresenta gargalos severos de rastreabilidade física de ativos. O uso de bloqueadores de sinal (jammers) e dores contratuais geram perdas de até 15% ao ano sobre o valor residual da frota.
+          </p>
+          <div style="background: rgba(255,255,255,0.03); padding: var(--space-sm); border-radius: var(--radius-sm); font-size: 0.85rem; border: 1px solid var(--clr-border);">
+            <strong>Diretriz Técnica Recomendada:</strong>
+            <ul style="margin-left: 1.25rem; margin-top: 0.25rem; color: var(--clr-muted); display: flex; flex-direction: column; gap: 0.2rem;">
+              <li>Instalação imediata do hardware GuardTag™ (Root of Trust físico Capex Zero).</li>
+              <li>Habilitação do protocolo anti-jamming na borda ativa (L1).</li>
+              <li>Laudos forenses Magistrado Themis™ para aceleração de sinistros junto à seguradora parceira.</li>
+            </ul>
+          </div>
+        </div>
+
+        <button class="btn btn-ghost" id="portal-done-btn">Finalizar e Voltar</button>
+      </div>
+
+    </div>
+  </div>
+
   <!-- NAV -->
   <nav class="nav" id="nav">
     <div class="nav-inner">

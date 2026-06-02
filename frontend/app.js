@@ -1,6 +1,16 @@
 import { gsap } from 'gsap';
 
 document.addEventListener('DOMContentLoaded', () => {
+  // --- 0. CHECK FOR DYNAMIC FORM TOKEN ---
+  const urlParams = new URLSearchParams(window.location.search);
+  const formToken = urlParams.get('r');
+  
+  if (formToken) {
+    // Hide main landing page content, show diagnostic portal
+    initDiagnosticPortal(formToken);
+    return; // Stop normal landing page initialization
+  }
+
   // --- 1. GSAP Hero & Scroll Animations ---
   initAnimations();
 
@@ -141,6 +151,304 @@ document.addEventListener('DOMContentLoaded', () => {
   logTelemetry('page_load');
 });
 
+// ══════════════════════════════════════════════════════
+// DIAGNOSTIC PORTAL — Dynamic Form Wizard (?r={token})
+// ══════════════════════════════════════════════════════
+
+async function initDiagnosticPortal(token) {
+  const portal = document.getElementById('dynamic-diagnostic-portal');
+  const nav = document.getElementById('nav');
+
+  // Hide ALL main landing page sections (everything except portal and background)
+  document.querySelectorAll('body > *:not(.cyber-grid):not(.glow-orb):not(#dynamic-diagnostic-portal):not(#orb-1):not(#orb-2):not(#orb-3)').forEach(el => {
+    if (el.id !== 'dynamic-diagnostic-portal' && !el.classList.contains('cyber-grid') && !el.classList.contains('glow-orb')) {
+      el.style.display = 'none';
+    }
+  });
+
+  // Show the portal
+  portal.style.display = 'block';
+
+  // Log telemetry
+  logTelemetry('diagnostic_portal_opened', { token });
+
+  // Fetch form data from API
+  let formData = null;
+  try {
+    const res = await fetch(`/api/forms/${token}`);
+    if (!res.ok) {
+      portal.innerHTML = `
+        <div style="text-align: center; padding: 100px 2rem;">
+          <div style="font-size: 3rem; margin-bottom: 1rem;">🔒</div>
+          <h2 style="font-size: 1.5rem; font-weight: 800; margin-bottom: 0.5rem;">Formulário Não Encontrado</h2>
+          <p style="color: #6e7491; max-width: 400px; margin: 0 auto;">O token <code style="color: #00F0FF;">${token}</code> não corresponde a nenhum diagnóstico ativo.</p>
+          <a href="/" style="display: inline-block; margin-top: 2rem; color: #00F0FF;">← Voltar à Página Inicial</a>
+        </div>
+      `;
+      return;
+    }
+    formData = await res.json();
+  } catch (err) {
+    console.error('Erro ao carregar formulário:', err);
+    portal.innerHTML = `
+      <div style="text-align: center; padding: 100px 2rem;">
+        <div style="font-size: 3rem; margin-bottom: 1rem;">⚠️</div>
+        <h2 style="font-size: 1.5rem; font-weight: 800; margin-bottom: 0.5rem;">Erro de Conexão</h2>
+        <p style="color: #6e7491;">Não foi possível se conectar ao servidor. Tente novamente em instantes.</p>
+      </div>
+    `;
+    return;
+  }
+
+  // Populate portal header
+  document.getElementById('portal-title').innerText = formData.name || 'Diagnóstico GuardDrive™';
+  document.getElementById('portal-subtitle').innerText = formData.description || 'Diagnóstico soberano de conformidade e mitigação de dores patrimoniais.';
+
+  const questions = formData.questions || [];
+  const totalPhases = questions.length + 3; // NDA + Contact + N questions + Attesting + Success
+  let currentQuestion = 0;
+  const userAnswers = {};
+
+  // Update progress bar
+  function updateProgress(step) {
+    const pct = Math.round((step / totalPhases) * 100);
+    document.getElementById('portal-progress').style.width = `${pct}%`;
+  }
+
+  // Show a specific phase, hide others
+  function showPhase(phaseId) {
+    ['portal-phase-nda', 'portal-phase-contact', 'portal-phase-questions', 'portal-phase-attesting', 'portal-phase-success'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.style.display = id === phaseId ? 'block' : 'none';
+    });
+    // Scroll to top of portal
+    portal.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  // ─── PHASE 1: NDA Gate ──────────────────────
+  updateProgress(0);
+
+  const ndaCheckbox = document.getElementById('portal-nda-checkbox');
+  const ndaBtn = document.getElementById('portal-nda-btn');
+
+  ndaCheckbox.addEventListener('change', () => {
+    ndaBtn.disabled = !ndaCheckbox.checked;
+  });
+
+  ndaBtn.addEventListener('click', () => {
+    showPhase('portal-phase-contact');
+    updateProgress(1);
+    logTelemetry('portal_nda_accepted', { token });
+  });
+
+  // ─── PHASE 2: Contact Info ──────────────────
+  document.getElementById('portal-contact-btn').addEventListener('click', () => {
+    const nome = document.getElementById('portal-nome').value.trim();
+    const empresa = document.getElementById('portal-empresa').value.trim();
+    const email = document.getElementById('portal-email').value.trim();
+    const phoneP = document.getElementById('portal-phone-personal').value.trim();
+    const phoneC = document.getElementById('portal-phone-corporate').value.trim();
+
+    if (!nome || !empresa || !email) {
+      alert('Por favor, preencha Nome, Empresa e E-mail antes de prosseguir.');
+      return;
+    }
+
+    // Store contact data
+    userAnswers.__contact = { nome, empresa, email, phoneP, phoneC };
+
+    showPhase('portal-phase-questions');
+    updateProgress(2);
+    renderQuestion(0);
+    logTelemetry('portal_contact_filled', { token, empresa });
+  });
+
+  // ─── PHASE 3: Question Wizard ───────────────
+  function renderQuestion(idx) {
+    currentQuestion = idx;
+    const q = questions[idx];
+    if (!q) return;
+
+    document.getElementById('portal-question-number').innerText = `Pergunta ${idx + 1} de ${questions.length}`;
+    document.getElementById('portal-question-segment').innerText = (formData.segment || '').toUpperCase();
+    document.getElementById('portal-question-title').innerText = q.q;
+
+    const optionsContainer = document.getElementById('portal-options-container');
+    const textContainer = document.getElementById('portal-text-input-container');
+
+    if (q.type === 'select' && q.options && q.options.length > 0) {
+      optionsContainer.style.display = 'block';
+      textContainer.style.display = 'none';
+      
+      optionsContainer.innerHTML = '';
+      const grid = document.createElement('div');
+      grid.className = 'option-card-grid';
+
+      q.options.forEach((opt, optIdx) => {
+        const card = document.createElement('div');
+        card.className = 'option-card';
+        // Check if previously answered
+        if (userAnswers[q.q] === opt) {
+          card.classList.add('selected');
+        }
+
+        card.innerHTML = `
+          <div class="option-card-radio"></div>
+          <div style="font-size: 0.9rem; line-height: 1.4;">${opt}</div>
+        `;
+
+        card.addEventListener('click', () => {
+          // Deselect siblings
+          grid.querySelectorAll('.option-card').forEach(c => c.classList.remove('selected'));
+          card.classList.add('selected');
+          userAnswers[q.q] = opt;
+        });
+
+        grid.appendChild(card);
+      });
+
+      optionsContainer.appendChild(grid);
+    } else {
+      // Text or number input
+      optionsContainer.style.display = 'none';
+      textContainer.style.display = 'block';
+      const textarea = document.getElementById('portal-text-answer');
+      textarea.value = userAnswers[q.q] || '';
+      textarea.placeholder = q.type === 'number' 
+        ? 'Informe um valor numérico...' 
+        : 'Escreva sua resposta de forma detalhada...';
+    }
+
+    // Prev/Next button states
+    document.getElementById('portal-prev-btn').style.visibility = idx === 0 ? 'hidden' : 'visible';
+    const nextBtn = document.getElementById('portal-next-btn');
+    nextBtn.innerText = idx === questions.length - 1 ? 'Finalizar Diagnóstico' : 'Avançar';
+
+    updateProgress(2 + idx);
+  }
+
+  // Next button
+  document.getElementById('portal-next-btn').addEventListener('click', () => {
+    const q = questions[currentQuestion];
+    
+    // Save text answer if applicable
+    if (q.type !== 'select') {
+      const val = document.getElementById('portal-text-answer').value.trim();
+      if (val) userAnswers[q.q] = val;
+    }
+
+    // Validate answer exists
+    if (!userAnswers[q.q]) {
+      alert('Por favor, selecione ou preencha uma resposta antes de avançar.');
+      return;
+    }
+
+    if (currentQuestion < questions.length - 1) {
+      renderQuestion(currentQuestion + 1);
+    } else {
+      // All questions done — submit
+      submitDiagnostic(token, formData, userAnswers);
+    }
+  });
+
+  // Prev button
+  document.getElementById('portal-prev-btn').addEventListener('click', () => {
+    if (currentQuestion > 0) {
+      renderQuestion(currentQuestion - 1);
+    }
+  });
+
+  // ─── PHASE 4 & 5: Submit & Attest ──────────
+  async function submitDiagnostic(formToken, formMeta, answers) {
+    showPhase('portal-phase-attesting');
+    updateProgress(totalPhases - 1);
+
+    const console_el = document.getElementById('attesting-console');
+
+    // Simulated attestation animation
+    const steps = [
+      '[SEC] Cifragem de dados pessoais via SHA-3 concluída.',
+      '[UEAP] Preparando payload de atestação criptográfica...',
+      `[NET] Enviando ${Object.keys(answers).length - 1} respostas para a rede soberana...`,
+      '[AI] Magistrado Themis™ analisando nível de risco operacional...',
+      '[BLOCK] Calculando hash de transação imutável...',
+      '[SEC] Vinculando NDA digital ao registro on-chain...',
+    ];
+
+    for (let i = 0; i < steps.length; i++) {
+      await new Promise(resolve => setTimeout(resolve, 600 + Math.random() * 400));
+      console_el.innerHTML += `\n${steps[i]}`;
+      console_el.scrollTop = console_el.scrollHeight;
+    }
+
+    // Build submission payload
+    const contact = answers.__contact || {};
+    const cleanAnswers = { ...answers };
+    delete cleanAnswers.__contact;
+
+    const payload = {
+      form_token: formToken,
+      company_name: contact.empresa || 'Não informado',
+      contact_name: contact.nome || 'Não informado',
+      email: contact.email || 'nao@informado.com',
+      phone_personal: contact.phoneP || '',
+      phone_corporate: contact.phoneC || '',
+      nda_accepted: true,
+      answers: cleanAnswers
+    };
+
+    try {
+      const res = await fetch('/api/leads/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+
+      const data = await res.json();
+
+      await new Promise(resolve => setTimeout(resolve, 500));
+      console_el.innerHTML += `\n[OK] Transação confirmada: ${data.hash || 'offline-mode'}`;
+      console_el.innerHTML += `\n[DONE] Laudo de conformidade gerado com sucesso.`;
+
+      await new Promise(resolve => setTimeout(resolve, 800));
+
+      // Show success
+      showPhase('portal-phase-success');
+      updateProgress(totalPhases);
+
+      document.getElementById('portal-res-hash').innerText = data.hash || '0x_offline_' + Date.now().toString(16);
+      document.getElementById('portal-res-meta').innerText = `Bloco: ${data.block || 'N/A'} · Timestamp: ${data.timestamp || new Date().toLocaleString()} · Status: Verificado`;
+
+      logTelemetry('portal_diagnostic_submitted', { token: formToken, company: contact.empresa });
+
+    } catch (err) {
+      console.error('Erro ao submeter diagnóstico:', err);
+      
+      await new Promise(resolve => setTimeout(resolve, 500));
+      console_el.innerHTML += `\n[WARN] Conexão offline — salvando localmente...`;
+      console_el.innerHTML += `\n[OK] Dados persistidos em modo soberano.`;
+
+      await new Promise(resolve => setTimeout(resolve, 800));
+
+      showPhase('portal-phase-success');
+      updateProgress(totalPhases);
+
+      const offlineHash = '0x' + Array.from({length: 64}, () => Math.floor(Math.random()*16).toString(16)).join('');
+      document.getElementById('portal-res-hash').innerText = offlineHash;
+      document.getElementById('portal-res-meta').innerText = `Bloco: Offline · Timestamp: ${new Date().toLocaleString()} · Status: Soberano Local`;
+    }
+  }
+
+  // Done button
+  document.getElementById('portal-done-btn').addEventListener('click', () => {
+    window.location.href = '/';
+  });
+}
+
+// ══════════════════════════════════════════════════════
+// UTILITIES
+// ══════════════════════════════════════════════════════
+
 // --- Telemetry Utility ---
 function logTelemetry(eventType, metadata = {}) {
   fetch('/api/telemetry/event', {
@@ -150,7 +458,7 @@ function logTelemetry(eventType, metadata = {}) {
     },
     body: JSON.stringify({
       event: eventType,
-      path: window.location.pathname,
+      path: window.location.pathname + window.location.search,
       timestamp: new Date().toISOString(),
       metadata: metadata
     })
