@@ -9,6 +9,7 @@ import uvicorn
 import hashlib
 import random
 import json
+import httpx
 from datetime import datetime
 
 from database import (
@@ -236,6 +237,26 @@ async def create_lead_legacy(submission: LeadSubmission):
             tx_hash=tx_hash,
             block=block_num
         )
+        
+        # Send to Intelligence Hub
+        try:
+            intelligence_hub_url = "http://localhost:8001/api/leads/public"
+            intelligence_payload = {
+                "company_id": submission.empresa,
+                "contact_name": submission.nome,
+                "contact_email": submission.email,
+                "contact_phone": submission.telefone if hasattr(submission, 'telefone') else "",
+                "position": submission.cargo if hasattr(submission, 'cargo') else "unknown",
+                "interest_level": "medium",
+                "notes": f"Segmento: {submission.segmento}, Frota: {submission.frota}, Dor: {submission.dor}",
+                "collected_by": "landing_page",
+                "source": "landing_page"
+            }
+            
+            async with httpx.AsyncClient() as client:
+                await client.post(intelligence_hub_url, json=intelligence_payload, timeout=5.0)
+        except Exception as e:
+            print(f"[INTELLIGENCE HUB] Failed to send lead: {e}")
         
         log_page_view("lead_captured", "/api/leads", {
             "lead_id": lead_id,

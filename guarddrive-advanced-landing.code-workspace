@@ -1,0 +1,23 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "../guarddrive-ecosystem"
+		},
+		{
+			"path": "../GuardTag"
+		},
+		{
+			"path": "../GuardTag-Docs"
+		},
+		{
+			"path": "../pilot"
+		},
+		{
+			"path": "../submission-portal"
+		}
+	],
+	"settings": {}
+}
