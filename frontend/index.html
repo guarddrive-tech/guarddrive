@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>GuardDrive™ — Infraestrutura Soberana de Mobilidade</title>
-  <meta name="description" content="Rastreabilidade forense, prova on-chain e ESG tokenizado para o mercado de mobilidade." />
+  <title>GuardDrive™ — Transforme Operações de Mobilidade em Evidências Auditáveis</title>
+  <meta name="description" content="Auditoria inteligente, rastreabilidade operacional e conformidade em uma única plataforma." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
@@ -17,150 +17,6 @@
   <div class="glow-orb" id="orb-2"></div>
   <div class="glow-orb" id="orb-3"></div>
 
-  <!-- DYNAMIC DIAGNOSTIC PORTAL -->
-  <div id="dynamic-diagnostic-portal" style="display: none; max-width: 800px; margin: 0 auto; padding: 100px var(--space-md) var(--space-lg);">
-    <!-- Portal Header -->
-    <div style="text-align: center; margin-bottom: var(--space-md);">
-      <div class="hero-badge" id="portal-badge" style="margin: 0 auto 1rem; width: fit-content; opacity: 1; transform: none;">
-        DIAGNÓSTICO SOBERANO
-      </div>
-      <h1 style="font-size: 2.2rem; font-weight: 900; margin-bottom: 0.5rem;" id="portal-title">GuardDrive™</h1>
-      <p id="portal-subtitle" style="color: var(--clr-muted); font-size: 1rem; max-width: 600px; margin: 0 auto;">Diagnóstico de conformidade e mitigação de dores patrimoniais.</p>
-    </div>
-
-    <!-- Wizard Progress -->
-    <div class="wizard-progress">
-      <div class="wizard-progress-bar" id="portal-progress"></div>
-    </div>
-
-    <!-- Portal Content Panel -->
-    <div class="diagnostic-portal-wrapper">
-      
-      <!-- Phase 1: NDA Gate -->
-      <div id="portal-phase-nda">
-        <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: var(--space-sm); display: flex; align-items: center; gap: 0.5rem;">
-          <span>🔐</span> Acordo de Confidencialidade (NDA)
-        </h3>
-        <div class="nda-scroll" style="height: 250px; background: rgba(0,0,0,0.2); padding: 1rem; border-radius: var(--radius-sm); border: 1px solid var(--clr-border);">
-          <p><strong>TERMO DE CONFIDENCIALIDADE OPERACIONAL v2.2 (UEAP & LGPD COMPLIANT)</strong></p>
-          <p>Este Acordo de Confidencialidade ("Acordo") é estabelecido entre o Respondente ("Acessante") e a Iniciativa GuardDrive, regulando o acesso ao material confidencial e ao portal de diagnóstico técnico do ecossistema de infraestrutura de mobilidade soberana.</p>
-          <p><strong>Cláusula 1ª — Escopo de Confidencialidade:</strong> São consideradas informações confidenciais todas as especificações técnicas de telemetria ativa, arquitetura de atestação em borda e processos de mitigação de sinistros revelados neste portal.</p>
-          <p><strong>Cláusula 2ª — Obrigações do Acessante:</strong> O Acessante obriga-se a manter estrito sigilo sobre as informações, utilizando-as exclusivamente para fins de avaliação institucional de conformidade patrimonial, abstendo-se de reproduzir ou divulgar tais dados a terceiros.</p>
-          <p><strong>Cláusula 3ª — Propriedade Intelectual:</strong> A disponibilização do acesso não implica, sob qualquer pretexto, na concessão de licença, cessão ou transferência de direitos de propriedade intelectual, patentes ou marcas de titularidade da Iniciativa GuardDrive.</p>
-          <p><strong>Cláusula 4ª — Proteção de Dados (LGPD):</strong> Todos os dados de contato coletados serão tratados em conformidade com a Lei Geral de Proteção de Dados (LGPD) e utilizados estritamente para a emissão e envio do relatório técnico resultante do diagnóstico.</p>
-        </div>
-        <label class="nda-check-label" style="margin-top: 1rem;">
-          <input type="checkbox" id="portal-nda-checkbox" />
-          <span>Li e aceito os termos do NDA Operacional GuardDrive™</span>
-        </label>
-        <button class="btn btn-primary btn-full" id="portal-nda-btn" disabled style="margin-top: var(--space-sm);">Aceitar e Iniciar Diagnóstico</button>
-      </div>
-
-      <!-- Phase 2: Contact Info -->
-      <div id="portal-phase-contact" style="display: none;">
-        <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: var(--space-sm);">📋 Identificação Operacional</h3>
-        <p style="color: var(--clr-muted); font-size: 0.85rem; margin-bottom: var(--space-sm);">Forneça as informações para contato corporativo e geração de atestação criptográfica.</p>
-        <div class="form-row">
-          <div class="form-group">
-            <label>Nome do Respondente</label>
-            <input type="text" id="portal-nome" placeholder="Seu nome completo" required />
-          </div>
-          <div class="form-group">
-            <label>Empresa</label>
-            <input type="text" id="portal-empresa" placeholder="Nome da sua empresa" required />
-          </div>
-        </div>
-        <div class="form-group">
-          <label>E-mail Corporativo</label>
-          <input type="email" id="portal-email" placeholder="nome@empresa.com.br" required />
-        </div>
-        <div class="form-row">
-          <div class="form-group">
-            <label>WhatsApp Pessoal (Para recebimento do Laudo)</label>
-            <input type="tel" id="portal-phone-personal" placeholder="(11) 99999-9999" required />
-          </div>
-          <div class="form-group">
-            <label>WhatsApp Corporativo (Para Demonstração Técnica)</label>
-            <input type="tel" id="portal-phone-corporate" placeholder="(11) 99999-9999" required />
-          </div>
-        </div>
-        <button class="btn btn-primary btn-full" id="portal-contact-btn" style="margin-top: var(--space-sm);">Prosseguir para Perguntas</button>
-      </div>
-
-      <!-- Phase 3: Diagnostic Questions Wizard -->
-      <div id="portal-phase-questions" style="display: none;">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
-          <h3 id="portal-question-number" style="font-size: 1rem; font-weight: 700; color: var(--clr-cyan);">Pergunta 1 de 10</h3>
-          <span style="font-size: 0.8rem; color: var(--clr-muted);" id="portal-question-segment">Locadoras</span>
-        </div>
-        <div id="portal-question-title" style="font-size: 1.15rem; font-weight: 600; margin-bottom: 1.5rem; line-height: 1.4;">Carregando pergunta...</div>
-        
-        <!-- Options wrapper -->
-        <div id="portal-options-container">
-          <!-- Rendered dynamically as option-cards -->
-        </div>
-
-        <!-- Text input wrapper -->
-        <div id="portal-text-input-container" style="display: none;" class="form-group">
-          <textarea id="portal-text-answer" rows="4" placeholder="Escreva sua resposta de forma detalhada..."></textarea>
-        </div>
-
-        <div style="display: flex; justify-content: space-between; gap: var(--space-sm); margin-top: var(--space-md);">
-          <button class="btn btn-ghost" id="portal-prev-btn" style="flex: 1;">Anterior</button>
-          <button class="btn btn-primary" id="portal-next-btn" style="flex: 2;">Avançar</button>
-        </div>
-      </div>
-
-      <!-- Phase 4: Attesting Load -->
-      <div id="portal-phase-attesting" style="display: none; text-align: center; padding: 2rem 0;">
-        <div class="success-icon" style="border-color: rgba(0, 240, 255, 0.25); color: var(--clr-cyan); animation: pulseDot 1.5s infinite;">
-          🔒
-        </div>
-        <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 0.5rem;">Assinando Termo & Criptografando Dados</h3>
-        <p style="color: var(--clr-muted); font-size: 0.85rem; max-width: 450px; margin: 0 auto 1.5rem;">A IA Magistrado Themis™ está calculando a classificação de risco e gerando o laudo forense.</p>
-        
-        <div class="console-log" id="attesting-console" style="text-align: left; height: 180px;">
-          [SEC] Iniciando cifragem de dados de contato via SHA-3...
-        </div>
-      </div>
-
-      <!-- Phase 5: Success & Recommendation Engine Result -->
-      <div id="portal-phase-success" style="display: none; text-align: center;">
-        <div class="success-icon">✓</div>
-        <h3 style="font-size: 1.5rem; font-weight: 800; margin-bottom: var(--space-xs);">Diagnóstico Concluído!</h3>
-        <p style="color: var(--clr-muted); margin-bottom: var(--space-md);">Sua assinatura e respostas foram ancoradas com sucesso na rede descentralizada.</p>
-        
-        <div class="attestation-box" style="margin-bottom: var(--space-md); text-align: left;">
-          <div class="attestation-label">ASSINATURA DIGITAL IMUTÁVEL (UEAP)</div>
-          <div class="attestation-hash" id="portal-res-hash">0x...</div>
-          <div class="attestation-meta" id="portal-res-meta">Bloco...</div>
-        </div>
-
-        <!-- Risk recommendation card -->
-        <div class="panel" style="text-align: left; border-color: rgba(255, 74, 74, 0.3); background: rgba(255,74,74,0.01); margin-bottom: var(--space-md);">
-          <div class="panel-title" style="border-bottom: none; margin-bottom: 0.5rem; padding-bottom: 0;">
-            <span>⚠️ Análise de Vulnerabilidade</span>
-            <span class="card-indicator high" id="portal-risk-indicator">CRÍTICO</span>
-          </div>
-          <p id="portal-risk-description" style="font-size: 0.9rem; color: rgba(255,255,255,0.85); line-height: 1.5; margin-bottom: var(--space-sm);">
-            Sua operação apresenta gargalos severos de rastreabilidade física de ativos. O uso de bloqueadores de sinal (jammers) e dores contratuais geram perdas de até 15% ao ano sobre o valor residual da frota.
-          </p>
-          <div style="background: rgba(255,255,255,0.03); padding: var(--space-sm); border-radius: var(--radius-sm); font-size: 0.85rem; border: 1px solid var(--clr-border);">
-            <strong>Diretriz Técnica Recomendada:</strong>
-            <ul style="margin-left: 1.25rem; margin-top: 0.25rem; color: var(--clr-muted); display: flex; flex-direction: column; gap: 0.2rem;">
-              <li>Instalação imediata do hardware GuardTag™ (Root of Trust físico Capex Zero).</li>
-              <li>Habilitação do protocolo anti-jamming na borda ativa (L1).</li>
-              <li>Laudos forenses Magistrado Themis™ para aceleração de sinistros junto à seguradora parceira.</li>
-            </ul>
-          </div>
-        </div>
-
-        <button class="btn btn-ghost" id="portal-done-btn">Finalizar e Voltar</button>
-      </div>
-
-    </div>
-  </div>
-
   <!-- NAV -->
   <nav class="nav" id="nav">
     <div class="nav-inner">
@@ -169,10 +25,11 @@
         <span class="brand-name">GuardDrive<sup class="brand-tm">™</sup></span>
       </div>
       <div class="nav-links">
-        <a href="#solucoes">Soluções</a>
-        <a href="#mercado">Mercado</a>
-        <a href="#tech">Tecnologia</a>
-        <a href="#contato" class="nav-cta">Solicitar Acesso</a>
+        <a href="#problema">Problema</a>
+        <a href="#como-funciona">Como Funciona</a>
+        <a href="#beneficios">Benefícios</a>
+        <a href="#ecossistema">Ecossistema</a>
+        <a href="#programa-piloto" class="nav-cta">Programa Piloto</a>
       </div>
       <button class="nav-burger" id="nav-burger" aria-label="Menu">
         <span></span><span></span><span></span>
@@ -180,297 +37,249 @@
     </div>
   </nav>
 
-  <!-- HERO -->
+  <!-- HERO SECTION -->
   <section class="hero" id="hero">
     <div class="hero-badge">
       <span class="pulse-dot"></span>
-      TRL-5 · Piloto Ativo · São Paulo, 2025
+      Piloto Ativo · São Paulo, 2026
     </div>
     <h1 class="hero-title">
-      <span class="line" id="hl1">A Base de Verdade</span>
-      <span class="line gradient-text" id="hl2">da Mobilidade Brasileira</span>
+      <span class="line" id="hl1">Transforme operações de mobilidade</span>
+      <span class="line gradient-text" id="hl2">em evidências auditáveis</span>
     </h1>
     <p class="hero-sub" id="hero-sub">
-      GuardGuard™ converte dados de veículos em <strong>prova forense imutável</strong>,
-      rastreabilidade on-chain e créditos de ESG — protegendo locadoras, seguradoras
-      e frotas contra fraude, perda e passivo oculto.
+      Auditoria inteligente, rastreabilidade operacional e conformidade em uma única plataforma.
+      Reduza riscos, garanta conformidade e construa operações mais confiáveis.
     </p>
     <div class="hero-actions" id="hero-actions">
-      <a href="#contato" class="btn btn-primary">
+      <a href="#programa-piloto" class="btn btn-primary">
         <span>Solicitar Demonstração</span>
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
       </a>
-      <a href="#tech" class="btn btn-ghost">Ver Arquitetura →</a>
+      <a href="#como-funciona" class="btn btn-ghost">Como Funciona →</a>
     </div>
     <div class="hero-stats" id="hero-stats">
-      <div class="stat"><span class="stat-num">R$ 4,2 bi</span><span class="stat-label">em fraudes/ano (SUSEP)</span></div>
+      <div class="stat"><span class="stat-num">R$ 4,2 bi</span><span class="stat-label">perdidos em fraudes/ano</span></div>
       <div class="stat-div"></div>
-      <div class="stat"><span class="stat-num">93%</span><span class="stat-label">redução de hodômetro adulterado</span></div>
+      <div class="stat"><span class="stat-num">93%</span><span class="stat-label">redução de riscos operacionais</span></div>
       <div class="stat-div"></div>
-      <div class="stat"><span class="stat-num">TRL-5</span><span class="stat-label">Piloto validado em campo</span></div>
+      <div class="stat"><span class="stat-num">100%</span><span class="stat-label">conformidade regulatória</span></div>
     </div>
   </section>
 
-  <!-- MARQUEE -->
-  <div class="marquee-wrap">
-    <div class="marquee-track" id="marquee">
-      <span>CertTag™ · Laudos Forenses</span>
-      <span class="sep">⬡</span>
-      <span>RiskProof™ · Anti-Fraude de Sinistros</span>
-      <span class="sep">⬡</span>
-      <span>FleetShield™ · Monitoramento de Frota</span>
-      <span class="sep">⬡</span>
-      <span>Protocolo GuardProof™ · Prova On-Chain</span>
-      <span class="sep">⬡</span>
-      <span>ESG Token · Créditos de Carbono</span>
-      <span class="sep">⬡</span>
-      <span>CertTag™ · Laudos Forenses</span>
-      <span class="sep">⬡</span>
-      <span>RiskProof™ · Anti-Fraude de Sinistros</span>
-      <span class="sep">⬡</span>
-      <span>FleetShield™ · Monitoramento de Frota</span>
-      <span class="sep">⬡</span>
-      <span>Protocolo GuardProof™ · Prova On-Chain</span>
-      <span class="sep">⬡</span>
-      <span>ESG Token · Créditos de Carbono</span>
-      <span class="sep">⬡</span>
-    </div>
-  </div>
-
-  <!-- SOLUÇÕES -->
-  <section class="section" id="solucoes">
+  <!-- SEÇÃO 02: O PROBLEMA -->
+  <section class="section" id="problema">
     <div class="section-inner">
-      <div class="section-label">SOLUÇÕES POR SEGMENTO</div>
-      <h2 class="section-title">Proteção ativa e conformidade para toda a cadeia de mobilidade</h2>
-      <div class="solutions-grid">
-        <div class="sol-card" data-index="0">
-          <div class="sol-icon">🏢</div>
-          <div class="sol-tag">CONCESSIONÁRIAS & LOJISTAS</div>
-          <h3>CertTag™</h3>
-          <p>Laudo forense instantâneo de procedência com prova física e digital imutável. Previne fraudes de hodômetro e resguarda o lojista contra passivos ocultos pós-venda.</p>
-          <div class="sol-metrics">
-            <span class="metric"><span class="metric-val">+18%</span> ticket médio em seminovos</span>
-            <span class="metric"><span class="metric-val">Zero</span> litígios de vício oculto</span>
-          </div>
-        </div>
-        <div class="sol-card" data-index="1">
-          <div class="sol-icon">🛡️</div>
-          <div class="sol-tag">RISCO & SEGURADORAS</div>
-          <h3>RiskProof™</h3>
-          <p>Motor ativo de detecção de fraudes em sinistros rodando telemetria em tempo real. Reduz custos de perícias físicas complexas e agiliza liquidação de processos legítimos.</p>
-          <div class="sol-metrics">
-            <span class="metric"><span class="metric-val">-40%</span> sinistros fraudulentos</span>
-            <span class="metric"><span class="metric-val">-60%</span> tempo de regulação</span>
-          </div>
-        </div>
-        <div class="sol-card" data-index="2">
-          <div class="sol-icon">🏦</div>
-          <div class="sol-tag">BANCOS & FINANCEIRAS</div>
-          <h3>AssetTrust™</h3>
-          <p>Tokenização de garantias reais e scoring de integridade física e depreciação real do veículo em tempo real via contratos inteligentes — integrado nativamente ao DREX.</p>
-          <div class="sol-metrics">
-            <span class="metric"><span class="metric-val">-60%</span> aprovação de crédito</span>
-            <span class="metric"><span class="metric-val">100%</span> garantias líquidas</span>
-          </div>
-        </div>
-        <div class="sol-card" data-index="3">
-          <div class="sol-icon">🚐</div>
-          <div class="sol-tag">LOCADORAS & FROTAS</div>
-          <h3>FleetShield™</h3>
-          <p>Monitoramento ativo, auditoria de uso severo e telemetria forense direta no veículo. Garantia de saúde de bateria para frotas de elétricos e proteção de valor residual.</p>
-          <div class="sol-metrics">
-            <span class="metric"><span class="metric-val">-35%</span> custos de manutenção</span>
-            <span class="metric"><span class="metric-val">ROI</span> em menos de 90 dias</span>
-          </div>
-        </div>
-        <div class="sol-card" data-index="4">
-          <div class="sol-icon">🌿</div>
-          <div class="sol-tag">REGULADORES & ESG</div>
-          <h3>CarbonProof™</h3>
-          <p>Converte dados reais de emissão e condução eficiente em créditos de carbono tokenizados e auditáveis, em conformidade com as resoluções ESG do BACEN.</p>
-          <div class="sol-metrics">
-            <span class="metric"><span class="metric-val">BACEN</span> 4.945 compliant</span>
-            <span class="metric"><span class="metric-val">100%</span> prova on-chain</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- COMPARATIVO (O diferencial GuardDrive) -->
-  <section class="section section-dark" id="comparativo">
-    <div class="section-inner">
-      <div class="section-label">DIFERENCIAL TECNOLÓGICO</div>
-      <h2 class="section-title">Por que a telemetria forense supera o registro convencional</h2>
-      <div class="comparison-grid">
-        <div class="comparison-card">
-          <h3>Registro Passivo Convencional</h3>
-          <p class="comparison-subtitle">Passaportes digitais baseados apenas em registros manuais/históricos</p>
-          <ul class="comparison-list">
-            <li><span>✕</span> Depende de inserção manual periódica de dados (vistorias)</li>
-            <li><span>✕</span> Dados offline sujeitos a adulteração prévia antes do registro</li>
-            <li><span>✕</span> Sem inteligência artificial na borda para monitoramento ativo</li>
-            <li><span>✕</span> Foco puramente documental e histórico estático</li>
-            <li><span>✕</span> Sem hardware próprio de integridade física no chassi</li>
-          </ul>
-        </div>
-        <div class="comparison-card highlight">
-          <div class="card-glow"></div>
-          <h3>GuardDrive™ Active Forensics</h3>
-          <p class="comparison-subtitle">Infraestrutura Soberana de Prova Contínua & Hardware Blindado</p>
-          <ul class="comparison-list">
-            <li><span>✓</span> Telemetria contínua sub-segundo (20+ dados a cada 50ms)</li>
-            <li><span>✓</span> Assinatura criptográfica na borda via hardware GuardTag™</li>
-            <li><span>✓</span> Auditoria em tempo real pela IA Magistrado Themis™</li>
-            <li><span>✓</span> Prova forense com validade jurídica e lastro real</li>
-            <li><span>✓</span> Integração nativa com DREX e atestações ZK-Proof</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- MERCADO (dor do mercado) -->
-  <section class="section" id="mercado">
-    <div class="section-inner">
-      <div class="section-label">DIAGNÓSTICO DE MERCADO</div>
-      <h2 class="section-title">O problema que R$ 4,2 bi provam</h2>
+      <div class="section-label">O PROBLEMA</div>
+      <h2 class="section-title">O custo invisível da falta de rastreabilidade</h2>
       <div class="pain-grid">
         <div class="pain-card">
-          <div class="pain-icon">📉</div>
-          <h3>Hodômetro adulterado</h3>
-          <p>1 em cada 3 veículos usados no Brasil tem hodômetro fraudado. O comprador paga a mais, a seguradora liquida errado, a concessionária responde judicialmente.</p>
-        </div>
-        <div class="pain-card">
-          <div class="pain-icon">⚠️</div>
-          <h3>Sinistros não rastreáveis</h3>
-          <p>Sem telemetria contínua, seguradoras não conseguem provar a causa real do acidente — o que abre brechas para fraude e aumenta a sinistralidade.</p>
+          <div class="pain-icon">📋</div>
+          <h3>Auditorias manuais</h3>
+          <p>Processos manuais de auditoria consomem tempo, recursos e estão sujeitos a erros humanos, resultando em ineficiência operacional.</p>
         </div>
         <div class="pain-card">
           <div class="pain-icon">🔍</div>
-          <h3>Ausência de prova forense</h3>
-          <p>Laudos em papel, fotos sem metadados, histórico de manutenção oral. Nenhuma dessas fontes resiste a contestação judicial ou auditoria regulatória.</p>
+          <h3>Falta de evidência verificável</h3>
+          <p>Sem registros auditáveis, empresas não conseguem provar conformidade em casos de disputa ou investigação regulatória.</p>
         </div>
         <div class="pain-card">
-          <div class="pain-icon">🌍</div>
-          <h3>ESG sem lastro</h3>
-          <p>Empresas declaram emissões sem dados verificáveis. O mercado de créditos de carbono no Brasil exige rastreabilidade que a indústria ainda não tem.</p>
+          <div class="pain-icon">⚠️</div>
+          <h3>Não conformidade operacional</h3>
+          <p>A ausência de rastreabilidade contínua expõe empresas a riscos regulatórios, multas e perda de reputação.</p>
+        </div>
+        <div class="pain-card">
+          <div class="pain-icon">🔄</div>
+          <h3>Processos difíceis de validar</h3>
+          <p>Operações complexas sem histórico confiável tornam difícil identificar gargalos e otimizar processos.</p>
+        </div>
+        <div class="pain-card">
+          <div class="pain-icon">⚖️</div>
+          <h3>Exposição jurídica</h3>
+          <p>A falta de evidências auditáveis aumenta o risco de litígios e dificulta a defesa em casos de disputa contratual.</p>
+        </div>
+        <div class="pain-card">
+          <div class="pain-icon">📊</div>
+          <h3>Falta de histórico confiável</h3>
+          <p>Sem registros contínuos e verificáveis, decisões estratégicas são baseadas em dados incompletos ou não confiáveis.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- TECH STACK -->
-  <section class="section section-dark" id="tech">
+  <!-- SEÇÃO 03: COMO FUNCIONA -->
+  <section class="section section-dark" id="como-funciona">
     <div class="section-inner">
-      <div class="section-label">ARQUITETURA</div>
-      <h2 class="section-title">Quatro camadas. Uma verdade.</h2>
-      <div class="arch-stack">
-        <div class="arch-layer" data-layer="L1">
-          <div class="layer-num">L1</div>
-          <div class="layer-content">
-            <h3>Forensics Hardware</h3>
-            <p>GuardTag™ — dispositivo OBD+IMU instalado no veículo. Captura 20+ parâmetros a cada 50ms: velocidade, aceleração, hodômetro, temperatura e posição GPS.</p>
-            <div class="layer-tags"><span>OBD-II</span><span>IMU 6-axis</span><span>GPS L1/L2</span><span>Tamper-proof</span></div>
+      <div class="section-label">COMO FUNCIONA</div>
+      <h2 class="section-title">Da operação à evidência</h2>
+      <div class="flow-container">
+        <div class="flow-step">
+          <div class="flow-number">1</div>
+          <div class="flow-content">
+            <h3>Operação</h3>
+            <p>Captura contínua de dados operacionais em tempo real</p>
           </div>
         </div>
-        <div class="arch-layer" data-layer="L2">
-          <div class="layer-num">L2</div>
-          <div class="layer-content">
-            <h3>Protocolo GuardProof™</h3>
-            <p>Protocolo proprietário de atestação e registro seguro. Cada evento é assinado criptograficamente na origem e ancorado em rede permissionada — imutável, auditável e preparada para perícia judicial.</p>
-            <div class="layer-tags"><span>ZK-Proof</span><span>Polygon CDK</span><span>SHA-3</span><span>LGPD compliant</span></div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-step">
+          <div class="flow-number">2</div>
+          <div class="flow-content">
+            <h3>Validação</h3>
+            <p>Análise inteligente e verificação de conformidade</p>
           </div>
         </div>
-        <div class="arch-layer" data-layer="L3">
-          <div class="layer-num">L3</div>
-          <div class="layer-content">
-            <h3>AI Forensic Engine</h3>
-            <p>Magistrado Themis™ — modelo de linguagem especializado em análise forense de mobilidade. Detecta padrões de fraude, anomalias de hodômetro e eventos críticos em tempo real.</p>
-            <div class="layer-tags"><span>Magistrado Themis™</span><span>Anomaly Detection</span><span>REST API</span></div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-step">
+          <div class="flow-number">3</div>
+          <div class="flow-content">
+            <h3>Registro</h3>
+            <p>Armazenamento seguro e imutável de eventos</p>
           </div>
         </div>
-        <div class="arch-layer" data-layer="L4">
-          <div class="layer-num">L4</div>
-          <div class="layer-content">
-            <h3>ESG Tokenization</h3>
-            <p>Converte dados verificados de emissão e uso em créditos de carbono tokenizados. Compatível com BACEN 4.945, rastreável on-chain, negociável em mercado secundário.</p>
-            <div class="layer-tags"><span>ERC-1155</span><span>BACEN 4.945</span><span>Carbon Credits</span><span>B3 ready</span></div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-step">
+          <div class="flow-number">4</div>
+          <div class="flow-content">
+            <h3>Evidência Auditável</h3>
+            <p>Relatórios e provas prontas para auditoria e conformidade</p>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- NDA + CONTATO -->
-  <section class="section section-dark" id="contato">
-    <div class="section-inner contact-inner">
-      <div class="section-label">ACESSO RESTRITO</div>
-      <h2 class="section-title">Solicitar Demonstração</h2>
-      <p class="contact-sub">Compartilhe o contexto do seu negócio. Nossa equipe técnica prepara uma demonstração personalizada — incluindo acesso ao Data Room e relatório de ROI específico para seu setor.</p>
-
-      <!-- NDA modal trigger -->
-      <div class="nda-banner" id="nda-banner">
-        <span class="nda-lock">🔒</span>
-        <div>
-          <strong>Protocolo de Confidencialidade</strong>
-          <p>Ao prosseguir, você aceita o NDA Operacional GuardDrive™. Seus dados são tratados conforme LGPD.</p>
+  <!-- SEÇÃO 04: BENEFÍCIOS -->
+  <section class="section" id="beneficios">
+    <div class="section-inner">
+      <div class="section-label">BENEFÍCIOS</div>
+      <h2 class="section-title">Por que empresas escolhem GuardDrive</h2>
+      <div class="benefits-grid">
+        <div class="benefit-card">
+          <div class="benefit-icon">🔍</div>
+          <h3>Auditoria Inteligente</h3>
+          <p>Automatização de processos de auditoria com análise contínua e detecção de anomalias</p>
         </div>
-        <button class="btn btn-ghost" id="nda-accept-btn">Aceitar e Continuar →</button>
+        <div class="benefit-card">
+          <div class="benefit-icon">✅</div>
+          <h3>Conformidade Operacional</h3>
+          <p>Garantia de conformidade com regulamentações e padrões do setor</p>
+        </div>
+        <div class="benefit-card">
+          <div class="benefit-icon">📍</div>
+          <h3>Rastreabilidade Completa</h3>
+          <p>Histórico completo e verificável de todas as operações e eventos</p>
+        </div>
+        <div class="benefit-card">
+          <div class="benefit-icon">📋</div>
+          <h3>Evidências Auditáveis</h3>
+          <p>Provas documentais e digitais prontas para auditorias e investigações</p>
+        </div>
+        <div class="benefit-card">
+          <div class="benefit-icon">📊</div>
+          <h3>Histórico Verificável</h3>
+          <p>Registros imutáveis que garantem integridade e confiança nos dados</p>
+        </div>
+        <div class="benefit-card">
+          <div class="benefit-icon">🛡️</div>
+          <h3>Redução de Riscos</h3>
+          <p>Minimização de exposição a riscos operacionais, regulatórios e jurídicos</p>
+        </div>
       </div>
+    </div>
+  </section>
 
-      <form class="contact-form" id="contact-form" style="display:none">
+  <!-- SEÇÃO 05: ECOSSISTEMA -->
+  <section class="section section-dark" id="ecossistema">
+    <div class="section-inner">
+      <div class="section-label">ECOSSISTEMA</div>
+      <h2 class="section-title">Uma nova infraestrutura de confiança operacional</h2>
+      <div class="ecosystem-flow">
+        <div class="eco-node">
+          <div class="eco-icon">🏷️</div>
+          <h3>GuardTag</h3>
+          <p>Identidade física verificável</p>
+        </div>
+        <div class="eco-arrow">→</div>
+        <div class="eco-node">
+          <div class="eco-icon">✈️</div>
+          <h3>Pilot</h3>
+          <p>Validação operacional e Digital Twin</p>
+        </div>
+        <div class="eco-arrow">→</div>
+        <div class="eco-node">
+          <div class="eco-icon">🔐</div>
+          <h3>GuardPass</h3>
+          <p>Credenciais, autenticação e governança</p>
+        </div>
+        <div class="eco-arrow">→</div>
+        <div class="eco-node">
+          <div class="eco-icon">🚗</div>
+          <h3>GuardDrive</h3>
+          <p>Marca institucional e plataforma central</p>
+        </div>
+      </div>
+      <p class="ecosystem-description">
+        GuardDrive conecta identidade, validação, governança e auditoria em uma única infraestrutura operacional.
+      </p>
+    </div>
+  </section>
+
+  <!-- SEÇÃO 06: PROGRAMA PILOTO -->
+  <section class="section" id="programa-piloto">
+    <div class="section-inner">
+      <div class="section-label">PROGRAMA PILOTO</div>
+      <h2 class="section-title">Participe do Programa Piloto</h2>
+      <p class="contact-sub">Seja um dos primeiros a validar a solução em sua operação e receba análise personalizada de ROI.</p>
+      
+      <form class="contact-form" id="pilot-form">
         <div class="form-row">
           <div class="form-group">
-            <label for="nome">Nome Completo</label>
-            <input type="text" id="nome" placeholder="João Exemplar" required />
+            <label for="pilot-nome">Nome</label>
+            <input type="text" id="pilot-nome" placeholder="Seu nome completo" required />
           </div>
           <div class="form-group">
-            <label for="empresa">Empresa</label>
-            <input type="text" id="empresa" placeholder="Locadora XYZ S.A." required />
+            <label for="pilot-empresa">Empresa</label>
+            <input type="text" id="pilot-empresa" placeholder="Nome da sua empresa" required />
           </div>
         </div>
         <div class="form-row">
           <div class="form-group">
-            <label for="email">E-mail Corporativo</label>
-            <input type="email" id="email" placeholder="joao@empresa.com.br" required />
+            <label for="pilot-cargo">Cargo</label>
+            <input type="text" id="pilot-cargo" placeholder="Seu cargo na empresa" required />
           </div>
           <div class="form-group">
-            <label for="segmento">Segmento</label>
-            <select id="segmento" required>
-              <option value="">Selecione...</option>
-              <option value="locadora">Locadora de Veículos</option>
-              <option value="seguradora">Seguradora</option>
-              <option value="concessionaria">Concessionária</option>
-              <option value="frotista">Frotista / Transportadora</option>
-              <option value="financeira">Banco / Financeira</option>
-              <option value="outro">Outro</option>
-            </select>
+            <label for="pilot-email">E-mail</label>
+            <input type="email" id="pilot-email" placeholder="seu@email.com" required />
           </div>
         </div>
         <div class="form-group">
-          <label for="frota">Tamanho da frota / carteira</label>
-          <input type="text" id="frota" placeholder="Ex: 500 veículos, 10.000 apólices/mês" />
+          <label for="pilot-telefone">Telefone</label>
+          <input type="tel" id="pilot-telefone" placeholder="(11) 99999-9999" required />
         </div>
-        <div class="form-group">
-          <label for="dor">Principal desafio atual</label>
-          <textarea id="dor" rows="3" placeholder="Descreva o principal problema de rastreabilidade, fraude ou conformidade que enfrenta..."></textarea>
-        </div>
-        <button type="submit" class="btn btn-primary btn-full" id="submit-btn">
-          <span id="btn-label">Solicitar Acesso ao Data Room</span>
+        <button type="submit" class="btn btn-primary btn-full" id="pilot-submit-btn">
+          <span>Quero Participar</span>
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
         </button>
       </form>
 
-      <div class="success-screen" id="success-screen" style="display:none">
+      <div class="success-screen" id="pilot-success-screen" style="display:none">
         <div class="success-icon">✓</div>
-        <h3>Protocolo de Acesso Iniciado</h3>
-        <p>Nossa equipe técnica analisará seu perfil e enviará o link do Data Room em até 24h úteis.</p>
-        <div class="attestation-box">
-          <div class="attestation-label">HASH DE ATESTAÇÃO</div>
-          <div class="attestation-hash" id="attest-hash">—</div>
-          <div class="attestation-meta" id="attest-meta">aguardando...</div>
-        </div>
+        <h3>Inscrição Confirmada</h3>
+        <p>Nossa equipe entrará em contato em até 48h úteis para detalhar o próximo passo do programa piloto.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SEÇÃO 07: CTA FINAL -->
+  <section class="section section-dark" id="cta-final">
+    <div class="section-inner">
+      <div class="cta-content">
+        <h2 class="section-title">Construa operações mais confiáveis</h2>
+        <p class="cta-sub">Descubra como transformar auditorias em evidências auditáveis e rastreáveis.</p>
+        <a href="#programa-piloto" class="btn btn-primary btn-large">
+          <span>Agendar Conversa</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
       </div>
     </div>
   </section>
@@ -482,40 +291,9 @@
         <span class="brand-logo">GD</span>
         <span class="brand-name">GuardDrive<sup class="brand-tm">™</sup></span>
       </div>
-      <p class="footer-copy">© 2026 Iniciativa GuardDrive · Projeto de P&D Interno · Todos os direitos reservados · LGPD Compliant</p>
-      <p class="footer-mono">Powered by Protocolo GuardProof™ · Validação Tecnológica de Mercado</p>
+      <p class="footer-copy">© 2026 GuardDrive · Infraestrutura de Confiança Operacional · Todos os direitos reservados · LGPD Compliant</p>
     </div>
   </footer>
-
-  <!-- NDA Modal -->
-  <div class="modal-overlay" id="nda-modal" role="dialog" aria-modal="true" style="display:none">
-    <div class="modal-box">
-      <div class="modal-header">
-        <span class="modal-icon">🔐</span>
-        <h3>NDA Operacional GuardDrive™</h3>
-        <button class="modal-close" id="modal-close" aria-label="Fechar">✕</button>
-      </div>
-      <div class="modal-body">
-        <div class="nda-scroll">
-          <p><strong>ACORDO DE CONFIDENCIALIDADE — NDA OPERACIONAL v2.1</strong></p>
-          <p>Este instrumento regula as condições sob as quais o usuário ("Acessante") acessa os materiais técnicos, dados de validação de mercado e especificações do ecossistema da Iniciativa GuardDrive, permitindo a geração de insights estratégicos a partir desses leads.</p>
-          <p><strong>1. INFORMAÇÕES CONFIDENCIAIS:</strong> Compreendem toda e qualquer informação técnica, de engenharia de hardware de borda (GuardTag™), algoritmos forenses (Magistrado Themis™), topologia do Protocolo GuardProof™ e dados comerciais apresentados.</p>
-          <p><strong>2. DEVER DE SIGILO E NÃO-USO:</strong> O Acessante compromete-se a não revelar, divulgar, publicar ou de qualquer outra forma disponibilizar tais informações a terceiros, devendo usá-las unicamente para fins de avaliação técnica e potencial contratação.</p>
-          <p><strong>3. PRESERVAÇÃO DE DIREITOS:</strong> Fica expressamente estabelecido que a disponibilização das informações confidenciais não transfere qualquer direito de propriedade intelectual ou comercial ao Acessante, mantendo-se todos os direitos resguardados.</p>
-          <p><strong>4. TRATAMENTO DE DADOS (LGPD):</strong> A coleta de dados operacionais visa exclusivamente a elaboração de laudo de conformidade e mitigação de gargalos de frotas, sendo armazenada em ambiente seguro e em conformidade com a Lei Geral de Proteção de Dados.</p>
-          <p><strong>5. VIGÊNCIA E FORO:</strong> As obrigações de confidencialidade acordadas neste instrumento permanecerão vigentes pelo prazo de 5 (cinco) anos, elegendo-se o foro da Comarca de São Paulo-SP para dirimir eventuais dúvidas.</p>
-        </div>
-        <label class="nda-check-label">
-          <input type="checkbox" id="nda-checkbox" />
-          <span>Li e aceito os termos do NDA Operacional GuardDrive™</span>
-        </label>
-      </div>
-      <div class="modal-footer">
-        <button class="btn btn-ghost" id="modal-cancel">Cancelar</button>
-        <button class="btn btn-primary" id="modal-confirm" disabled>Confirmar Aceitação</button>
-      </div>
-    </div>
-  </div>
 
   <script type="module" src="app.js"></script>
 </body>

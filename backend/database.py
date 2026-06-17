@@ -70,7 +70,7 @@ def init_db():
         phone_personal {text_type},
         phone_corporate {text_type},
         nda_accepted INTEGER DEFAULT 0,
-        answers {text_type} NOT NULL, -- JSON string of {question: answer}
+        answers {text_type} NOT NULL, -- JSON string of question-answer pairs
         hash {text_type},
         block INTEGER,
         created_at {timestamp_default}

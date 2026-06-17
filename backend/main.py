@@ -1,4 +1,5 @@
-from fastapi import FastAPI, HTTPException, Request, RedirectResponse
+from fastapi import FastAPI, HTTPException, Request
+from fastapi.responses import RedirectResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
@@ -16,7 +17,14 @@ from database import (
     db_save_response, db_list_responses, db_get_dashboard_stats
 )
 from routes.insights import router as insights_router
-from telemetry.monitor_advanced import log_page_view
+
+# Import telemetry with fallback
+try:
+    from telemetry.monitor_advanced import log_page_view
+except ImportError:
+    # Fallback if telemetry module not available
+    def log_page_view(event, path, metadata=None):
+        print(f"[TELEMETRY FALLBACK] {event} at {path}")
 
 app = FastAPI(title="GuardDrive™ Advanced Landing API", version="2.5")
 

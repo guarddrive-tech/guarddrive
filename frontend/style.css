@@ -276,7 +276,118 @@ textarea { resize: vertical; }
 .pain-card h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 0.5rem; }
 .pain-card p { color: var(--clr-muted); font-size: 0.88rem; line-height: 1.65; }
 
-/* ── 11. ARCH STACK ────────────────────────────────── */
+/* ── 11. FLOW CONTAINER (Como Funciona) ─────────────── */
+.flow-container {
+  display: flex; flex-direction: column; align-items: center; gap: var(--space-md);
+  max-width: 900px; margin: 0 auto;
+}
+.flow-step {
+  display: flex; align-items: center; gap: var(--space-md);
+  background: var(--clr-surface);
+  border: 1px solid var(--clr-border);
+  border-radius: var(--radius-md);
+  padding: 1.5rem 2rem;
+  backdrop-filter: blur(16px);
+  transition: all 0.3s var(--ease-out-expo);
+  opacity: 0; transform: translateX(-30px);
+  width: 100%;
+}
+.flow-step:hover {
+  border-color: var(--clr-border-h);
+  transform: translateX(-10px);
+}
+.flow-number {
+  font-family: var(--font-mono); font-size: 1.2rem; font-weight: 800;
+  color: var(--clr-cyan);
+  background: rgba(0,240,255,0.1);
+  border: 1px solid rgba(0,240,255,0.2);
+  width: 50px; height: 50px;
+  display: flex; align-items: center; justify-content: center;
+  border-radius: var(--radius-md);
+  flex-shrink: 0;
+}
+.flow-content h3 { font-size: 1.2rem; font-weight: 700; margin-bottom: 0.3rem; }
+.flow-content p { color: var(--clr-muted); font-size: 0.9rem; line-height: 1.5; }
+.flow-arrow {
+  font-size: 2rem; color: var(--clr-cyan);
+  opacity: 0.6; margin: -0.5rem 0;
+}
+
+/* ── 12. BENEFITS GRID ─────────────────────────────── */
+.benefits-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--space-md);
+}
+.benefit-card {
+  background: var(--clr-surface);
+  border: 1px solid var(--clr-border);
+  border-radius: var(--radius-lg);
+  padding: 2rem;
+  backdrop-filter: blur(16px);
+  transition: all 0.4s var(--ease-out-expo);
+  opacity: 0; transform: translateY(30px);
+}
+.benefit-card:hover {
+  border-color: var(--clr-border-h);
+  transform: translateY(-6px);
+  box-shadow: 0 20px 50px rgba(0,240,255,0.08);
+}
+.benefit-icon { font-size: 2rem; margin-bottom: var(--space-sm); }
+.benefit-card h3 { font-size: 1.2rem; font-weight: 700; margin-bottom: var(--space-xs); }
+.benefit-card p { color: var(--clr-muted); font-size: 0.9rem; line-height: 1.6; }
+
+/* ── 13. ECOSYSTEM FLOW ────────────────────────────── */
+.ecosystem-flow {
+  display: flex; align-items: center; justify-content: center;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+  max-width: 1000px; margin: 0 auto var(--space-md);
+}
+.eco-node {
+  background: var(--clr-surface);
+  border: 1px solid var(--clr-border);
+  border-radius: var(--radius-lg);
+  padding: 2rem;
+  text-align: center;
+  min-width: 200px;
+  backdrop-filter: blur(16px);
+  transition: all 0.3s var(--ease-out-expo);
+  opacity: 0; transform: scale(0.9);
+}
+.eco-node:hover {
+  border-color: var(--clr-border-h);
+  transform: scale(1.05);
+}
+.eco-icon { font-size: 2.5rem; margin-bottom: var(--space-sm); }
+.eco-node h3 { font-size: 1.2rem; font-weight: 700; margin-bottom: var(--space-xs); }
+.eco-node p { color: var(--clr-muted); font-size: 0.85rem; line-height: 1.5; }
+.eco-arrow {
+  font-size: 2rem; color: var(--clr-cyan);
+  opacity: 0.6;
+}
+.ecosystem-description {
+  text-align: center; color: var(--clr-muted);
+  font-size: 1rem; line-height: 1.6;
+  max-width: 600px; margin: 0 auto;
+  opacity: 0; transform: translateY(20px);
+}
+
+/* ── 14. CTA CONTENT ───────────────────────────────── */
+.cta-content {
+  text-align: center;
+  max-width: 700px; margin: 0 auto;
+}
+.cta-sub {
+  color: var(--clr-muted); font-size: 1.1rem; line-height: 1.7;
+  margin-bottom: var(--space-md);
+  opacity: 0; transform: translateY(20px);
+}
+.btn-large {
+  padding: 1rem 2.5rem; font-size: 1.1rem;
+  opacity: 0; transform: translateY(20px);
+}
+
+/* ── 15. ARCH STACK (Legacy) ───────────────────────── */
 .arch-stack { display: flex; flex-direction: column; gap: var(--space-sm); }
 .arch-layer {
   display: flex; align-items: flex-start; gap: var(--space-md);

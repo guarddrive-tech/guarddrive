@@ -147,7 +147,52 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // --- 5. Telemetry Ping on Page Load ---
+  // --- 5. Pilot Program Form ---
+  const pilotForm = document.getElementById('pilot-form');
+  const pilotSuccessScreen = document.getElementById('pilot-success-screen');
+  const pilotSubmitBtn = document.getElementById('pilot-submit-btn');
+
+  if (pilotForm) {
+    pilotForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      
+      const formData = {
+        nome: document.getElementById('pilot-nome').value,
+        empresa: document.getElementById('pilot-empresa').value,
+        cargo: document.getElementById('pilot-cargo').value,
+        email: document.getElementById('pilot-email').value,
+        telefone: document.getElementById('pilot-telefone').value,
+        segmento: 'programa_piloto',
+        timestamp: new Date().toISOString()
+      };
+
+      try {
+        // Send lead data to backend
+        const response = await fetch('/api/leads', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(formData)
+        });
+
+        const data = await response.json();
+        
+        pilotForm.style.display = 'none';
+        pilotSuccessScreen.style.display = 'block';
+
+        logTelemetry('pilot_form_submitted', { empresa: formData.empresa });
+
+      } catch (err) {
+        console.error('Erro ao enviar lead do programa piloto:', err);
+        // Direct fallback UI for dev-mode convenience
+        pilotForm.style.display = 'none';
+        pilotSuccessScreen.style.display = 'block';
+      }
+    });
+  }
+
+  // --- 6. Telemetry Ping on Page Load ---
   logTelemetry('page_load');
 });
 
