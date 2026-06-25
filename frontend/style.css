@@ -240,7 +240,6 @@ textarea { resize: vertical; }
   padding: 2rem;
   backdrop-filter: blur(16px);
   transition: all 0.4s var(--ease-out-expo);
-  opacity: 0; transform: translateY(30px);
 }
 .sol-card:hover {
   border-color: var(--clr-border-h);
@@ -268,11 +267,25 @@ textarea { resize: vertical; }
   border: 1px solid var(--clr-border);
   border-radius: var(--radius-md);
   padding: 1.75rem;
-  opacity: 0; transform: translateY(25px);
   transition: border-color 0.3s;
 }
 .pain-card:hover { border-color: rgba(255,184,0,0.3); }
-.pain-icon { font-size: 1.8rem; margin-bottom: var(--space-sm); }
+.pain-icon {
+  width: 48px; height: 48px;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(0,240,255,0.06);
+  border: 1px solid rgba(0,240,255,0.14);
+  border-radius: var(--radius-md);
+  margin-bottom: var(--space-sm);
+  color: var(--clr-cyan);
+  transition: background 0.3s, border-color 0.3s;
+  flex-shrink: 0;
+}
+.pain-icon svg { width: 22px; height: 22px; }
+.pain-card:hover .pain-icon {
+  background: rgba(0,240,255,0.10);
+  border-color: rgba(0,240,255,0.28);
+}
 .pain-card h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 0.5rem; }
 .pain-card p { color: var(--clr-muted); font-size: 0.88rem; line-height: 1.65; }
 
@@ -289,7 +302,6 @@ textarea { resize: vertical; }
   padding: 1.5rem 2rem;
   backdrop-filter: blur(16px);
   transition: all 0.3s var(--ease-out-expo);
-  opacity: 0; transform: translateX(-30px);
   width: 100%;
 }
 .flow-step:hover {
@@ -325,14 +337,27 @@ textarea { resize: vertical; }
   padding: 2rem;
   backdrop-filter: blur(16px);
   transition: all 0.4s var(--ease-out-expo);
-  opacity: 0; transform: translateY(30px);
 }
 .benefit-card:hover {
   border-color: var(--clr-border-h);
   transform: translateY(-6px);
   box-shadow: 0 20px 50px rgba(0,240,255,0.08);
 }
-.benefit-icon { font-size: 2rem; margin-bottom: var(--space-sm); }
+.benefit-icon {
+  width: 52px; height: 52px;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(0,240,255,0.06);
+  border: 1px solid rgba(0,240,255,0.14);
+  border-radius: var(--radius-md);
+  margin-bottom: var(--space-sm);
+  color: var(--clr-cyan);
+  transition: background 0.3s, border-color 0.3s;
+}
+.benefit-icon svg { width: 24px; height: 24px; }
+.benefit-card:hover .benefit-icon {
+  background: rgba(0,240,255,0.10);
+  border-color: rgba(0,240,255,0.28);
+}
 .benefit-card h3 { font-size: 1.2rem; font-weight: 700; margin-bottom: var(--space-xs); }
 .benefit-card p { color: var(--clr-muted); font-size: 0.9rem; line-height: 1.6; }
 
@@ -352,13 +377,26 @@ textarea { resize: vertical; }
   min-width: 200px;
   backdrop-filter: blur(16px);
   transition: all 0.3s var(--ease-out-expo);
-  opacity: 0; transform: scale(0.9);
 }
 .eco-node:hover {
   border-color: var(--clr-border-h);
   transform: scale(1.05);
 }
-.eco-icon { font-size: 2.5rem; margin-bottom: var(--space-sm); }
+.eco-icon {
+  width: 60px; height: 60px;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(0,240,255,0.07);
+  border: 1px solid rgba(0,240,255,0.18);
+  border-radius: var(--radius-md);
+  margin: 0 auto var(--space-sm);
+  color: var(--clr-cyan);
+  transition: background 0.3s, border-color 0.3s;
+}
+.eco-icon svg { width: 28px; height: 28px; }
+.eco-node:hover .eco-icon {
+  background: rgba(0,240,255,0.12);
+  border-color: rgba(0,240,255,0.35);
+}
 .eco-node h3 { font-size: 1.2rem; font-weight: 700; margin-bottom: var(--space-xs); }
 .eco-node p { color: var(--clr-muted); font-size: 0.85rem; line-height: 1.5; }
 .eco-arrow {
@@ -369,7 +407,6 @@ textarea { resize: vertical; }
   text-align: center; color: var(--clr-muted);
   font-size: 1rem; line-height: 1.6;
   max-width: 600px; margin: 0 auto;
-  opacity: 0; transform: translateY(20px);
 }
 
 /* ── 14. CTA CONTENT ───────────────────────────────── */
@@ -380,11 +417,9 @@ textarea { resize: vertical; }
 .cta-sub {
   color: var(--clr-muted); font-size: 1.1rem; line-height: 1.7;
   margin-bottom: var(--space-md);
-  opacity: 0; transform: translateY(20px);
 }
 .btn-large {
   padding: 1rem 2.5rem; font-size: 1.1rem;
-  opacity: 0; transform: translateY(20px);
 }
 
 /* ── 15. ARCH STACK (Legacy) ───────────────────────── */
@@ -435,7 +470,16 @@ textarea { resize: vertical; }
   border-radius: var(--radius-md); padding: 1.25rem 1.5rem;
   margin-bottom: var(--space-md);
 }
-.nda-lock { font-size: 1.5rem; }
+.nda-lock {
+  display: flex; align-items: center; justify-content: center;
+  width: 44px; height: 44px;
+  background: rgba(123,47,255,0.12);
+  border: 1px solid rgba(123,47,255,0.28);
+  border-radius: var(--radius-md);
+  color: var(--clr-purple);
+  flex-shrink: 0;
+}
+.nda-lock svg { width: 22px; height: 22px; }
 .nda-banner strong { display: block; margin-bottom: 0.2rem; }
 .nda-banner p { color: var(--clr-muted); font-size: 0.85rem; }
 .contact-form { display: flex; flex-direction: column; gap: var(--space-sm); }
@@ -503,7 +547,15 @@ textarea { resize: vertical; }
   display: flex; align-items: center; gap: var(--space-sm);
   padding: 1.5rem 1.75rem; border-bottom: 1px solid var(--clr-border);
 }
-.modal-icon { font-size: 1.5rem; }
+.modal-icon {
+  display: flex; align-items: center; justify-content: center;
+  width: 40px; height: 40px;
+  background: rgba(123,47,255,0.12);
+  border: 1px solid rgba(123,47,255,0.25);
+  border-radius: var(--radius-sm);
+  color: var(--clr-purple);
+  flex-shrink: 0;
+}
 .modal-header h3 { font-size: 1.1rem; font-weight: 700; flex: 1; }
 .modal-close {
   background: none; border: none; color: var(--clr-muted); cursor: pointer;
@@ -540,12 +592,93 @@ textarea { resize: vertical; }
 .footer-copy { color: var(--clr-muted); font-size: 0.85rem; }
 .footer-mono { font-family: var(--font-mono); font-size: 0.7rem; color: rgba(110,116,145,0.5); letter-spacing: 0.08em; }
 
+/* ── 16. HERO IMAGE ─────────────────────────────────── */
+.hero-image-wrap {
+  position: relative;
+  margin-top: var(--space-lg);
+  width: 100%;
+  max-width: 1100px;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  border: 1px solid var(--clr-border);
+  opacity: 0;
+  transform: translateY(40px);
+  animation: heroImageIn 1.4s var(--ease-out-expo) 1.2s forwards;
+}
+@keyframes heroImageIn {
+  to { opacity: 1; transform: translateY(0); }
+}
+.hero-image {
+  width: 100%;
+  display: block;
+  border-radius: var(--radius-lg);
+  object-fit: cover;
+}
+.hero-image-glow {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, var(--clr-void) 0%, transparent 40%);
+  pointer-events: none;
+}
+
+/* ── 17. SECTION VISUALS ─────────────────────────────── */
+.section-visual {
+  margin-top: var(--space-lg);
+  text-align: center;
+}
+.section-img {
+  display: inline-block;
+  max-width: 860px;
+  width: 100%;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--clr-border);
+  opacity: 0.9;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+.section-img:hover {
+  opacity: 1;
+  transform: scale(1.01);
+}
+
 /* ── 16. ANIMATIONS ────────────────────────────────── */
 @keyframes pulseDot {
   0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(0,240,255,0.4); }
   50%       { opacity: 0.6; box-shadow: 0 0 0 6px rgba(0,240,255,0); }
 }
 @keyframes fadeInUp { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:translateY(0); } }
+
+/* ── 16b. REVEAL ON SCROLL ────────────────────────── */
+.reveal-on-scroll {
+  opacity: 0;
+  will-change: opacity, transform;
+  transition: opacity 0.8s var(--ease-out-expo), transform 0.8s var(--ease-out-expo);
+}
+.reveal-on-scroll.revealed {
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+.flow-step.reveal-on-scroll {
+  transform: translateX(-30px);
+}
+.benefit-card.reveal-on-scroll {
+  transform: translateY(30px);
+}
+.eco-node.reveal-on-scroll {
+  transform: scale(0.95) translateY(10px);
+}
+.sol-card.reveal-on-scroll,
+.pain-card.reveal-on-scroll,
+.comparison-card.reveal-on-scroll {
+  transform: translateY(30px);
+}
+.section-title.reveal-on-scroll,
+.section-label.reveal-on-scroll,
+.ecosystem-description.reveal-on-scroll,
+.cta-sub.reveal-on-scroll,
+.btn-large.reveal-on-scroll {
+  transform: translateY(20px);
+}
 
 /* ── 17. COMPARISON TABLE ───────────────────────────── */
 .comparison-grid {
@@ -568,8 +701,6 @@ textarea { resize: vertical; }
   position: relative;
   overflow: hidden;
   transition: all 0.3s var(--ease-out-expo);
-  opacity: 0;
-  transform: translateY(30px);
 }
 .comparison-card.highlight {
   border-color: rgba(0, 240, 255, 0.4);

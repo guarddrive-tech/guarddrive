@@ -537,38 +537,24 @@ function initAnimations() {
     .to('#hl1', { opacity: 1, y: 0 }, '-=0.6')
     .to('#hl2', { opacity: 1, y: 0 }, '-=1.0')
     .to('#hero-sub', { opacity: 1, y: 0 }, '-=1.0')
-    .to('#hero-actions', { opacity: 1, y: 0 }, '-=1.0')
-    .to('#hero-stats', { opacity: 1, y: 0 }, '-=0.8');
+    .to('#hero-actions', { opacity: 1, y: 0 }, '-=1.0');
 
-  // Fade-in sections/cards on scroll
-  const observerOptions = {
-    root: null,
-    rootMargin: '0px',
-    threshold: 0.1
-  };
-
+  // Fade-in sections/cards on scroll using classes
   const scrollObserver = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
-        if (entry.target.classList.contains('sol-card')) {
-          gsap.to(entry.target, { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out' });
-        } else if (entry.target.classList.contains('pain-card')) {
-          gsap.to(entry.target, { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out' });
-        } else if (entry.target.classList.contains('comparison-card')) {
-          gsap.to(entry.target, { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out' });
-        } else if (entry.target.classList.contains('arch-layer')) {
-          gsap.to(entry.target, { opacity: 1, x: 0, duration: 0.8, ease: 'power3.out' });
-        } else {
-          // General reveals
-          gsap.to(entry.target, { opacity: 1, y: 0, duration: 1 });
-        }
+        entry.target.classList.add('revealed');
         scrollObserver.unobserve(entry.target);
       }
     });
-  }, observerOptions);
+  }, {
+    root: null,
+    rootMargin: '0px',
+    threshold: 0.05
+  });
 
   // Register targets
-  document.querySelectorAll('.sol-card, .pain-card, .comparison-card, .arch-layer, .section-label, .section-title').forEach(el => {
+  document.querySelectorAll('.reveal-on-scroll').forEach(el => {
     scrollObserver.observe(el);
   });
 }
