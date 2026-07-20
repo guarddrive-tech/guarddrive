@@ -264,6 +264,14 @@
           <p>Demonstre conformidade forense para negociar melhores termos e prêmios de seguro reduzidos para a frota.</p>
         </div>
 
+        <div class="benefit-card reveal-on-scroll">
+          <div class="benefit-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m16 10-4 4-2-2"/></svg>
+          </div>
+          <h3>Score de Integridade Real-Time</h3>
+          <p>Cada verificação gera uma pontuação de 0 a 100% que quantifica a confiabilidade e saúde do ativo para seguradoras.</p>
+        </div>
+
       </div>
     </div>
   </section>
@@ -320,6 +328,83 @@
       <div class="section-visual reveal-on-scroll" style="margin-top: 3.5rem;">
         <img src="assets/ecosystem_diagram.png" alt="GuardDrive™ — Arquitetura do Ecossistema de Confiança Operacional" class="section-img" loading="lazy" />
         <p style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--clr-muted); text-align: center; margin-top: 0.8rem;">Arquitetura. Fluxo de Dados e Atestação entre GuardDrive™, GuardTag™ e Intelligence Hub</p>
+      </div>
+
+      <!-- Compatibility Badges -->
+      <div class="compatibility-badges reveal-on-scroll" style="margin-top: 2.5rem; display: flex; justify-content: center; gap: var(--space-sm); flex-wrap: wrap;">
+        <span class="badge" style="font-family: var(--font-mono); font-size: 0.75rem; font-weight: 700; color: var(--clr-cyan); border: 1px solid rgba(0,240,255,0.25); padding: 0.4rem 1rem; border-radius: var(--radius-pill); background: rgba(0,240,255,0.04); letter-spacing: 0.05em;">DREX COMPATIBLE</span>
+        <span class="badge" style="font-family: var(--font-mono); font-size: 0.75rem; font-weight: 700; color: var(--clr-cyan); border: 1px solid rgba(0,240,255,0.25); padding: 0.4rem 1rem; border-radius: var(--radius-pill); background: rgba(0,240,255,0.04); letter-spacing: 0.05em;">MOBI VID v2.0</span>
+        <span class="badge" style="font-family: var(--font-mono); font-size: 0.75rem; font-weight: 700; color: var(--clr-cyan); border: 1px solid rgba(0,240,255,0.25); padding: 0.4rem 1rem; border-radius: var(--radius-pill); background: rgba(0,240,255,0.04); letter-spacing: 0.05em;">LGPD COMPLIANT</span>
+        <span class="badge" style="font-family: var(--font-mono); font-size: 0.75rem; font-weight: 700; color: var(--clr-cyan); border: 1px solid rgba(0,240,255,0.25); padding: 0.4rem 1rem; border-radius: var(--radius-pill); background: rgba(0,240,255,0.04); letter-spacing: 0.05em;">ISO 27001</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── SEÇÃO 05.5: PLANOS E PREÇOS ───────────────── -->
+  <section class="section section-dark" id="planos">
+    <div class="section-inner">
+      <div class="section-label reveal-on-scroll">MODELO DE OPERAÇÃO</div>
+      <h2 class="section-title reveal-on-scroll">Planos e Tiers de Implementação</h2>
+      
+      <div class="pricing-grid reveal-on-scroll" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: var(--space-md); margin-top: var(--space-lg);">
+        
+        <!-- Standard -->
+        <div class="pricing-card" style="background: rgba(12, 12, 18, 0.55); border: 1px solid var(--clr-border); padding: var(--space-md); border-radius: var(--radius-md); text-align: left; display: flex; flex-direction: column; justify-content: space-between; transition: all 0.3s var(--ease-out-expo);">
+          <div>
+            <h3 style="font-size: 1.3rem; margin-bottom: 0.5rem; color: var(--clr-white);">Standard</h3>
+            <p style="color: var(--clr-muted); font-size: 0.85rem; margin-bottom: var(--space-md); line-height: 1.5;">Selo Soberano™ NFC V1 Passivo. Ideal para auditoria rápida e vistorias frequentes sem custos de infraestrutura OBD.</p>
+            <div style="margin-bottom: var(--space-md);">
+              <span style="font-size: 2rem; font-weight: 800; color: var(--clr-cyan);">R$ 9,90</span>
+              <span style="color: var(--clr-muted); font-size: 0.85rem;">/veículo/mês</span>
+            </div>
+            <ul style="list-style: none; padding: 0; margin-bottom: var(--space-md); font-size: 0.85rem; color: #cbd5e1; line-height: 1.8;">
+              <li style="margin-bottom: 0.4rem; display: flex; align-items: center; gap: 8px;">✓ Tag Passiva NTAG 215</li>
+              <li style="margin-bottom: 0.4rem; display: flex; align-items: center; gap: 8px;">✓ Score de Confiança ~95%</li>
+              <li style="margin-bottom: 0.4rem; display: flex; align-items: center; gap: 8px;">✓ Aplicativo de Borda GuardTag</li>
+              <li style="margin-bottom: 0.4rem; display: flex; align-items: center; gap: 8px;">✓ Relatórios de Integridade Básicos</li>
+            </ul>
+          </div>
+          <a href="#contato" class="btn btn-ghost" style="width: 100%; justify-content: center; font-size: 0.85rem; padding: 0.6rem var(--space-md);">Solicitar Standard</a>
+        </div>
+
+        <!-- Premium -->
+        <div class="pricing-card" style="background: rgba(18, 18, 28, 0.75); border: 1px solid var(--clr-cyan); padding: var(--space-md); border-radius: var(--radius-md); text-align: left; display: flex; flex-direction: column; justify-content: space-between; position: relative; box-shadow: 0 10px 30px rgba(0,240,255,0.06);">
+          <span style="position: absolute; top: -12px; right: 20px; background: var(--clr-cyan); color: #000; font-size: 0.65rem; font-weight: 800; font-family: var(--font-mono); padding: 0.2rem 0.8rem; border-radius: var(--radius-pill); letter-spacing: 0.05em;">MAIS POPULAR</span>
+          <div>
+            <h3 style="font-size: 1.3rem; margin-bottom: 0.5rem; color: var(--clr-white);">Premium</h3>
+            <p style="color: var(--clr-muted); font-size: 0.85rem; margin-bottom: var(--space-md); line-height: 1.5;">Selo Soberano™ NFC V2 Criptográfico. Integridade reforçada por criptografia militar e cadeia de custódia.</p>
+            <div style="margin-bottom: var(--space-md);">
+              <span style="font-size: 2rem; font-weight: 800; color: var(--clr-cyan);">R$ 25,00</span>
+              <span style="color: var(--clr-muted); font-size: 0.85rem;">/veículo/mês</span>
+            </div>
+            <ul style="list-style: none; padding: 0; margin-bottom: var(--space-md); font-size: 0.85rem; color: #cbd5e1; line-height: 1.8;">
+              <li style="margin-bottom: 0.4rem; display: flex; align-items: center; gap: 8px;">✓ Chip Criptográfico NTAG 424 DNA</li>
+              <li style="margin-bottom: 0.4rem; display: flex; align-items: center; gap: 8px;">✓ Validação de Assinatura CMAC AES-128</li>
+              <li style="margin-bottom: 0.4rem; display: flex; align-items: center; gap: 8px;">✓ Score de Confiança 100%</li>
+              <li style="margin-bottom: 0.4rem; display: flex; align-items: center; gap: 8px;">✓ Emissão de Laudo Técnico-Jurídico</li>
+            </ul>
+          </div>
+          <a href="#contato" class="btn btn-primary" style="width: 100%; justify-content: center; font-size: 0.85rem; padding: 0.6rem var(--space-md); color: #000;">Solicitar Premium</a>
+        </div>
+
+        <!-- Enterprise -->
+        <div class="pricing-card" style="background: rgba(12, 12, 18, 0.55); border: 1px solid var(--clr-border); padding: var(--space-md); border-radius: var(--radius-md); text-align: left; display: flex; flex-direction: column; justify-content: space-between; transition: all 0.3s var(--ease-out-expo);">
+          <div>
+            <h3 style="font-size: 1.3rem; margin-bottom: 0.5rem; color: var(--clr-white);">Enterprise</h3>
+            <p style="color: var(--clr-muted); font-size: 0.85rem; margin-bottom: var(--space-md); line-height: 1.5;">Dispositivo Ativo OBD+IMU. Telemetria e telemetria contínua a 50ms para frotas e operações críticas.</p>
+            <div style="margin-bottom: var(--space-md);">
+              <span style="font-size: 1.8rem; font-weight: 800; color: var(--clr-white);">Sob Consulta</span>
+            </div>
+            <ul style="list-style: none; padding: 0; margin-bottom: var(--space-md); font-size: 0.85rem; color: #cbd5e1; line-height: 1.8;">
+              <li style="margin-bottom: 0.4rem; display: flex; align-items: center; gap: 8px;">✓ Hardware Ativo OBD-II + IMU 6-Eixos</li>
+              <li style="margin-bottom: 0.4rem; display: flex; align-items: center; gap: 8px;">✓ Telemetria em Tempo Real (50ms)</li>
+              <li style="margin-bottom: 0.4rem; display: flex; align-items: center; gap: 8px;">✓ Análise de Impacto Avançada (G-Force)</li>
+              <li style="margin-bottom: 0.4rem; display: flex; align-items: center; gap: 8px;">✓ API Dedicada de Insights de Risco</li>
+            </ul>
+          </div>
+          <a href="#contato" class="btn btn-ghost" style="width: 100%; justify-content: center; font-size: 0.85rem; padding: 0.6rem var(--space-md);">Falar com Especialista</a>
+        </div>
+
       </div>
     </div>
   </section>
