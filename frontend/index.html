@@ -58,10 +58,109 @@
         </a>
         <a href="#como-funciona" class="btn btn-ghost" id="hero-how-btn">Ver Fluxo Forense ↓</a>
       </div>
-      <!-- Hero Image -->
+      <!-- Hero Animation: Intelligence Hub Live Panel -->
       <div class="hero-image-wrap" id="hero-image-wrap">
-        <img src="assets/hero_dashboard.png" alt="Inspetor escaneando Selo Soberano™ NFC no para-brisa de veículo com app GuardDrive™ — verificação de integridade em tempo real" class="hero-image" loading="eager" />
-        <div class="hero-image-glow"></div>
+        <div class="ha-container" id="hero-anim">
+
+          <!-- Top bar -->
+          <div class="ha-topbar">
+            <div class="ha-topbar-brand">
+              <span class="ha-topbar-logo">GD</span>
+              <span>GuardDrive™ Intelligence Hub</span>
+              <span class="ha-topbar-ver">v1.2.4</span>
+            </div>
+            <div class="ha-topbar-right">
+              <span class="ha-live-badge"><span class="ha-live-dot"></span>AO VIVO</span>
+              <span class="ha-topbar-time" id="ha-clock">--:--:--</span>
+            </div>
+          </div>
+
+          <!-- Main grid -->
+          <div class="ha-grid">
+
+            <!-- Col 1: Score + Stats -->
+            <div class="ha-col-stats">
+              <div class="ha-label">SCORE GERAL DE FROTA</div>
+              <div class="ha-score-wrap">
+                <svg class="ha-gauge" viewBox="0 0 100 100">
+                  <circle class="ha-gauge-bg" cx="50" cy="50" r="40" />
+                  <circle class="ha-gauge-fill" cx="50" cy="50" r="40"
+                    stroke-dasharray="234 251"
+                    stroke-dashoffset="62"
+                    id="ha-gauge-arc" />
+                </svg>
+                <div class="ha-score-inner">
+                  <span class="ha-score-num" id="ha-score">98.4</span>
+                  <span class="ha-score-pct">%</span>
+                </div>
+              </div>
+
+              <div class="ha-kpis">
+                <div class="ha-kpi">
+                  <span class="ha-kpi-val cyan" id="ha-vehicles">0</span>
+                  <span class="ha-kpi-key">Veículos Ativos</span>
+                </div>
+                <div class="ha-kpi">
+                  <span class="ha-kpi-val emerald" id="ha-attested">0</span>
+                  <span class="ha-kpi-key">Atestados Hoje</span>
+                </div>
+                <div class="ha-kpi">
+                  <span class="ha-kpi-val amber">0</span>
+                  <span class="ha-kpi-key">Alertas</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Col 2: NFC Signal Visualizer -->
+            <div class="ha-col-nfc">
+              <div class="ha-nfc-scene">
+                <div class="ha-nfc-ring ha-ring-3"></div>
+                <div class="ha-nfc-ring ha-ring-2"></div>
+                <div class="ha-nfc-ring ha-ring-1"></div>
+                <div class="ha-nfc-core">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="28" height="28">
+                    <path d="M6 8.5A5.5 5.5 0 0 1 12 3v0a5.5 5.5 0 0 1 5.5 5.5v7a5.5 5.5 0 0 1-5.5 5.5v0A5.5 5.5 0 0 1 6 15.5v-7z"/>
+                    <path d="M10 8h4M10 12h4M10 16h4"/>
+                  </svg>
+                </div>
+              </div>
+              <div class="ha-nfc-label">Leitura NFC Ativa</div>
+              <div class="ha-nfc-chip">NTAG 424 DNA · AES-128 CMAC</div>
+
+              <!-- Attestation progress bar -->
+              <div class="ha-attest-wrap">
+                <div class="ha-attest-label">
+                  <span>Magistrado Themis™</span>
+                  <span class="cyan" id="ha-attest-pct">100%</span>
+                </div>
+                <div class="ha-attest-bar">
+                  <div class="ha-attest-fill" id="ha-attest-fill"></div>
+                </div>
+                <div class="ha-attest-status emerald" id="ha-attest-status">✓ Laudo Assinado · Ed25519</div>
+              </div>
+            </div>
+
+            <!-- Col 3: Event Log -->
+            <div class="ha-col-events">
+              <div class="ha-events-header">
+                <span class="ha-label">EVENTOS FORENSES</span>
+                <span class="ha-events-count cyan" id="ha-events-count">0 eventos</span>
+              </div>
+              <div class="ha-events-list" id="ha-events-list">
+                <!-- JS injected -->
+              </div>
+            </div>
+
+          </div><!-- /ha-grid -->
+
+          <!-- Bottom status bar -->
+          <div class="ha-statusbar">
+            <span>🔐 LGPD · Privacy-by-Design</span>
+            <span>Protocolo GuardProof™ v1.2</span>
+            <span class="emerald">● Sistema Operacional</span>
+          </div>
+
+        </div><!-- /ha-container -->
       </div>
     </div>
   </section>

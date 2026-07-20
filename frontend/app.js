@@ -14,6 +14,9 @@ document.addEventListener('DOMContentLoaded', () => {
   // --- 1. GSAP Hero & Scroll Animations ---
   initAnimations();
 
+  // --- 1b. Hero Intelligence Hub Animation ---
+  initHeroAnimation();
+
   // --- 2. Navigation Scroll Effect ---
   const nav = document.getElementById('nav');
   window.addEventListener('scroll', () => {
@@ -619,4 +622,135 @@ function initAnimations() {
   document.querySelectorAll('.reveal-on-scroll').forEach(el => {
     scrollObserver.observe(el);
   });
+}
+
+// ══════════════════════════════════════════════════════
+// HERO ANIMATION — Intelligence Hub Live Panel
+// ══════════════════════════════════════════════════════
+function initHeroAnimation() {
+  const anim = document.getElementById('hero-anim');
+  if (!anim) return;
+
+  // Inject SVG gradient for gauge
+  const svgNS = 'http://www.w3.org/2000/svg';
+  const existingGauge = anim.querySelector('.ha-gauge');
+  if (existingGauge) {
+    const defs = document.createElementNS(svgNS, 'defs');
+    const grad = document.createElementNS(svgNS, 'linearGradient');
+    grad.setAttribute('id', 'gaugeGrad');
+    grad.setAttribute('x1', '0%'); grad.setAttribute('y1', '0%');
+    grad.setAttribute('x2', '100%'); grad.setAttribute('y2', '0%');
+    const s1 = document.createElementNS(svgNS, 'stop');
+    s1.setAttribute('offset', '0%'); s1.setAttribute('stop-color', '#00F0FF');
+    const s2 = document.createElementNS(svgNS, 'stop');
+    s2.setAttribute('offset', '100%'); s2.setAttribute('stop-color', '#7B2FFF');
+    grad.appendChild(s1); grad.appendChild(s2);
+    defs.appendChild(grad);
+    existingGauge.prepend(defs);
+  }
+
+  // Real-time clock
+  const clockEl = document.getElementById('ha-clock');
+  function updateClock() {
+    if (!clockEl) return;
+    const now = new Date();
+    const hh = String(now.getHours()).padStart(2, '0');
+    const mm = String(now.getMinutes()).padStart(2, '0');
+    const ss = String(now.getSeconds()).padStart(2, '0');
+    clockEl.textContent = `${hh}:${mm}:${ss}`;
+  }
+  updateClock();
+  setInterval(updateClock, 1000);
+
+  // Animated counters (GSAP)
+  const vehiclesEl = document.getElementById('ha-vehicles');
+  const attestedEl = document.getElementById('ha-attested');
+
+  if (vehiclesEl) {
+    gsap.to({ val: 0 }, {
+      val: 847,
+      duration: 2.5,
+      delay: 1.5,
+      ease: 'power2.out',
+      onUpdate: function() {
+        vehiclesEl.textContent = Math.round(this.targets()[0].val).toLocaleString('pt-BR');
+      }
+    });
+  }
+  if (attestedEl) {
+    gsap.to({ val: 0 }, {
+      val: 1204,
+      duration: 2.8,
+      delay: 1.7,
+      ease: 'power2.out',
+      onUpdate: function() {
+        attestedEl.textContent = Math.round(this.targets()[0].val).toLocaleString('pt-BR');
+      }
+    });
+  }
+
+  // Event log data pool
+  const eventPool = [
+    { plate: 'BRA2E19', type: 'Atestação NFC', time: null },
+    { plate: 'ABC1D23', type: 'Verificação Lacre', time: null },
+    { plate: 'XYZ4F56', type: 'Integridade OK', time: null },
+    { plate: 'GHI7K89', type: 'Atestação NFC', time: null },
+    { plate: 'JKL3M01', type: 'Score Validado', time: null },
+    { plate: 'MNO5P67', type: 'Verificação Lacre', time: null },
+    { plate: 'PQR2T34', type: 'Atestação NFC', time: null },
+    { plate: 'STU8V12', type: 'Integridade OK', time: null },
+    { plate: 'VWX6Y90', type: 'Score Validado', time: null },
+  ];
+
+  const eventsList = document.getElementById('ha-events-list');
+  const eventsCount = document.getElementById('ha-events-count');
+  let eventIndex = 0;
+  let totalEvents = 0;
+  const MAX_VISIBLE = 6;
+
+  function addEvent() {
+    if (!eventsList) return;
+    const ev = eventPool[eventIndex % eventPool.length];
+    eventIndex++;
+    totalEvents++;
+
+    const now = new Date();
+    const timeStr = `${String(now.getHours()).padStart(2,'0')}:${String(now.getMinutes()).padStart(2,'0')}:${String(now.getSeconds()).padStart(2,'0')}`;
+
+    const row = document.createElement('div');
+    row.className = 'ha-event-row';
+    row.style.animationDelay = '0ms';
+    row.innerHTML = `
+      <span class="ha-event-plate">${ev.plate}</span>
+      <span class="ha-event-type">${ev.type}</span>
+      <span class="ha-event-badge ok">✓ OK</span>
+    `;
+
+    // Prepend new events at top
+    if (eventsList.firstChild) {
+      eventsList.insertBefore(row, eventsList.firstChild);
+    } else {
+      eventsList.appendChild(row);
+    }
+
+    // Keep max visible rows
+    while (eventsList.children.length > MAX_VISIBLE) {
+      eventsList.removeChild(eventsList.lastChild);
+    }
+
+    if (eventsCount) {
+      eventsCount.textContent = `${totalEvents.toLocaleString('pt-BR')} eventos`;
+    }
+  }
+
+  // Seed initial events with staggered delays
+  const initialCount = 5;
+  for (let i = 0; i < initialCount; i++) {
+    setTimeout(() => addEvent(), 1800 + i * 320);
+  }
+
+  // Continue adding events every 3s
+  setTimeout(() => {
+    setInterval(addEvent, 3000);
+  }, 1800 + initialCount * 320 + 500);
 }
