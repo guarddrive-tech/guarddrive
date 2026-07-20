@@ -70,7 +70,7 @@
               <span class="ha-topbar-ver">v1.2.4</span>
             </div>
             <div class="ha-topbar-right">
-              <span class="ha-live-badge"><span class="ha-live-dot"></span>AO VIVO</span>
+              <span class="ha-live-badge" style="color: var(--clr-cyan);"><span class="ha-live-dot" style="background: var(--clr-cyan); box-shadow: 0 0 8px var(--clr-cyan);"></span>SANDBOX DE TESTES</span>
               <span class="ha-topbar-time" id="ha-clock">--:--:--</span>
             </div>
           </div>
@@ -98,15 +98,15 @@
               <div class="ha-kpis">
                 <div class="ha-kpi">
                   <span class="ha-kpi-val cyan" id="ha-vehicles">0</span>
-                  <span class="ha-kpi-key">Veículos Ativos</span>
+                  <span class="ha-kpi-key">Veículos no Piloto</span>
                 </div>
                 <div class="ha-kpi">
                   <span class="ha-kpi-val emerald" id="ha-attested">0</span>
-                  <span class="ha-kpi-key">Atestados Hoje</span>
+                  <span class="ha-kpi-key">Atestações Realizadas</span>
                 </div>
                 <div class="ha-kpi">
-                  <span class="ha-kpi-val amber">0</span>
-                  <span class="ha-kpi-key">Alertas</span>
+                  <span class="ha-kpi-val amber" id="ha-alerts">0</span>
+                  <span class="ha-kpi-key">Alertas Detectados</span>
                 </div>
               </div>
             </div>
@@ -143,8 +143,8 @@
             <!-- Col 3: Event Log -->
             <div class="ha-col-events">
               <div class="ha-events-header">
-                <span class="ha-label">EVENTOS FORENSES</span>
-                <span class="ha-events-count cyan" id="ha-events-count">0 eventos</span>
+                <span class="ha-label">SIMULAÇÃO DE EVENTOS</span>
+                <span class="ha-events-count cyan" id="ha-events-count">0 atestações</span>
               </div>
               <div class="ha-events-list" id="ha-events-list">
                 <!-- JS injected -->
@@ -157,7 +157,7 @@
           <div class="ha-statusbar">
             <span>🔐 LGPD · Privacy-by-Design</span>
             <span>Protocolo GuardProof™ v1.2</span>
-            <span class="emerald">● Sistema Operacional</span>
+            <span class="cyan">● Modo Sandbox (Homologação)</span>
           </div>
 
         </div><!-- /ha-container -->

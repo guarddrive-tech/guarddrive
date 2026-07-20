@@ -682,26 +682,38 @@ function initHeroAnimation() {
   // Animated counters (GSAP)
   const vehiclesEl = document.getElementById('ha-vehicles');
   const attestedEl = document.getElementById('ha-attested');
+  const alertsEl = document.getElementById('ha-alerts');
 
   if (vehiclesEl) {
     gsap.to({ val: 0 }, {
-      val: 847,
-      duration: 2.5,
+      val: 8,
+      duration: 2.0,
       delay: 1.5,
       ease: 'power2.out',
       onUpdate: function() {
-        vehiclesEl.textContent = Math.round(this.targets()[0].val).toLocaleString('pt-BR');
+        vehiclesEl.textContent = Math.round(this.targets()[0].val);
       }
     });
   }
   if (attestedEl) {
     gsap.to({ val: 0 }, {
-      val: 1204,
-      duration: 2.8,
+      val: 17,
+      duration: 2.2,
       delay: 1.7,
       ease: 'power2.out',
       onUpdate: function() {
-        attestedEl.textContent = Math.round(this.targets()[0].val).toLocaleString('pt-BR');
+        attestedEl.textContent = Math.round(this.targets()[0].val);
+      }
+    });
+  }
+  if (alertsEl) {
+    gsap.to({ val: 0 }, {
+      val: 1,
+      duration: 1.5,
+      delay: 1.9,
+      ease: 'power2.out',
+      onUpdate: function() {
+        alertsEl.textContent = Math.round(this.targets()[0].val);
       }
     });
   }
@@ -756,7 +768,7 @@ function initHeroAnimation() {
     }
 
     if (eventsCount) {
-      eventsCount.textContent = `${totalEvents.toLocaleString('pt-BR')} eventos`;
+      eventsCount.textContent = `${totalEvents} atestações`;
     }
   }
 
