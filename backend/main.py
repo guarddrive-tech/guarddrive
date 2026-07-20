@@ -18,6 +18,7 @@ from database import (
     db_save_response, db_list_responses, db_get_dashboard_stats
 )
 from routes.insights import router as insights_router
+from routes.provision import router as provision_router  # Sprint 1 · Selo Soberano™
 
 # Import telemetry with fallback
 try:
@@ -27,7 +28,13 @@ except ImportError:
     def log_page_view(event, path, metadata=None):
         print(f"[TELEMETRY FALLBACK] {event} at {path}")
 
-app = FastAPI(title="GuardDrive™ Advanced Landing API", version="2.5")
+app = FastAPI(
+    title="GuardDrive™ API",
+    version="2.5",
+    description="API Comercial da GuardDrive Tech. Auditoria Forense Automatizada para Frotas e Ativos.",
+    docs_url="/api/docs",
+    redoc_url="/api/redoc",
+)
 
 # CORS config
 app.add_middleware(
@@ -41,10 +48,12 @@ app.add_middleware(
 @app.on_event("startup")
 def startup():
     init_db()
-    print("Database initialized successfully.")
+    print("[GuardDrive API] Database inicializado.")
+    print("[GuardDrive API] Selo Soberano™ endpoints: /api/v1/selos")
 
-# Include insights router
+# Include routers
 app.include_router(insights_router)
+app.include_router(provision_router)   # Sprint 1: POST /api/v1/selos/provision, POST /api/v1/selos/validate
 
 # ─── PYDANTIC MODELS ─────────────────────────────────────────────────────────
 
