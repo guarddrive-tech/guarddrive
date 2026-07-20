@@ -960,7 +960,6 @@ textarea { resize: vertical; }
 
 /* SVG gradient definition (inject inline) */
 .ha-container svg defs { display: none; }
-}
 
 /* ── 17. SECTION VISUALS ─────────────────────────────── */
 .section-visual {
