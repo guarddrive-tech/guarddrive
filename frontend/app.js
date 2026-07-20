@@ -497,8 +497,8 @@ async function initDiagnosticPortal(token) {
       '[SEC] Cifragem de dados pessoais via SHA-3 concluída.',
       '[UEAP] Preparando payload de atestação criptográfica...',
       `[NET] Enviando ${Object.keys(answers).length - 1} respostas para a rede soberana...`,
-      '[THEMIS API] Solicitando auditoria forense ao Magistrado Themis™ (Symbeon Labs)...',
-      '[THEMIS API] Laudo forense independente assinado digitalmente com Ed25519.',
+      '[API] Solicitando auditoria ao motor forense de IA...',
+      '[API] Laudo de conformidade forense gerado e assinado digitalmente com Ed25519.',
       '[BLOCK] Gravando hashes de atestação na blockchain...',
     ];
 
