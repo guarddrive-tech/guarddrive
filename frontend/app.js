@@ -197,8 +197,25 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   }
+  // --- 6. FAQ Accordion ---
+  document.querySelectorAll('.faq-acc-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const item = btn.closest('.faq-acc-item');
+      const isOpen = item.classList.contains('open');
+      // Close all
+      document.querySelectorAll('.faq-acc-item.open').forEach(el => {
+        el.classList.remove('open');
+        el.querySelector('.faq-acc-btn').setAttribute('aria-expanded', 'false');
+      });
+      // Open clicked (if was closed)
+      if (!isOpen) {
+        item.classList.add('open');
+        btn.setAttribute('aria-expanded', 'true');
+      }
+    });
+  });
 
-  // --- 6. Real-time form validation + plan pre-selection ---
+  // --- 7. Real-time form validation + plan pre-selection ---
 
   // Validate inputs on blur/input
   function setupValidation(inputId, wrapperId, validFn) {

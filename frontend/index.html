@@ -686,40 +686,73 @@
   <!-- ── SEÇÃO 06.5: FAQ ───────────────────────────── -->
   <section class="section" id="faq">
     <div class="section-inner">
-      <div class="section-label reveal-on-scroll">DÚVIDAS FREQUENTES</div>
-      <h2 class="section-title reveal-on-scroll">Perguntas Frequentes</h2>
-      
-      <div class="faq-grid reveal-on-scroll" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: var(--space-md); margin-top: var(--space-lg); text-align: left;">
-        
-        <div class="faq-item" style="background: rgba(12, 12, 18, 0.55); border: 1px solid var(--clr-border); padding: var(--space-md); border-radius: var(--radius-md);">
-          <h3 style="font-size: 1.05rem; color: var(--clr-white); margin-bottom: 0.5rem; display: flex; align-items: center; gap: 8px;">
-            <span style="color: var(--clr-cyan);">Q.</span> O Selo Soberano™ exige instalação física complexa?
-          </h3>
-          <p style="color: var(--clr-muted); font-size: 0.85rem; line-height: 1.6;">Não. O Selo Soberano™ é uma etiqueta adesiva NFC passiva e de alta resistência. Sua instalação consiste em colar o selo no para-brisa ou no chassi do veículo. Não há fiação, conexões mecânicas ou risco de perda da garantia de fábrica.</p>
+      <div class="section-label reveal-on-scroll">DÚVIDAS ESTRATÉGICAS</div>
+      <h2 class="section-title reveal-on-scroll">Perguntas que todo gestor de frota faz</h2>
+      <p class="contact-sub reveal-on-scroll" style="margin-top: 0.5rem; margin-bottom: var(--space-lg);">Respostas diretas, sem jargão técnico.</p>
+
+      <div class="faq-accordion reveal-on-scroll" id="faq-accordion">
+
+        <div class="faq-acc-item">
+          <button class="faq-acc-btn" aria-expanded="false">
+            <span>Os dados gerados têm validade jurídica em caso de sinistro?</span>
+            <span class="faq-acc-icon">+</span>
+          </button>
+          <div class="faq-acc-panel">
+            <p>Sim. Cada evento registrado pelo GuardDrive™ gera um laudo técnico com assinatura digital rastreável, carimbo de tempo e cadeia de custódia documentada. Esse material é aceito como evidência técnica em processos administrativos, arbitragens e ações judiciais — eliminando a necessidade de perícia presencial após o fato.</p>
+          </div>
         </div>
 
-        <div class="faq-item" style="background: rgba(12, 12, 18, 0.55); border: 1px solid var(--clr-border); padding: var(--space-md); border-radius: var(--radius-md);">
-          <h3 style="font-size: 1.05rem; color: var(--clr-white); margin-bottom: 0.5rem; display: flex; align-items: center; gap: 8px;">
-            <span style="color: var(--clr-cyan);">Q.</span> Como a solução evita a clonagem do selo?
-          </h3>
-          <p style="color: var(--clr-muted); font-size: 0.85rem; line-height: 1.6;">No plano Premium, usamos chips NTAG 424 DNA com chaves AES-128 nativas que geram um hash CMAC dinâmico e contadores monotônicos impossíveis de resetar ou copiar. Leituras duplicadas ou hashes inválidos geram alerta de clonagem imediato.</p>
+        <div class="faq-acc-item">
+          <button class="faq-acc-btn" aria-expanded="false">
+            <span>Em quanto tempo minha frota começa a operar com GuardDrive™?</span>
+            <span class="faq-acc-icon">+</span>
+          </button>
+          <div class="faq-acc-panel">
+            <p>O onboarding de frotas no plano Standard ou Premium é concluído em poucas horas, sem instalação de hardware, sem visita técnica e sem paralisação da operação. Para o plano Enterprise com telemetria embarcada, o cronograma é alinhado individualmente durante a fase de piloto.</p>
+          </div>
         </div>
 
-        <div class="faq-item" style="background: rgba(12, 12, 18, 0.55); border: 1px solid var(--clr-border); padding: var(--space-md); border-radius: var(--radius-md);">
-          <h3 style="font-size: 1.05rem; color: var(--clr-white); margin-bottom: 0.5rem; display: flex; align-items: center; gap: 8px;">
-            <span style="color: var(--clr-cyan);">Q.</span> O sistema está em conformidade com a LGPD?
-          </h3>
-          <p style="color: var(--clr-muted); font-size: 0.85rem; line-height: 1.6;">Sim. Desenvolvido sob o princípio de <em>Privacy-by-Design</em>, os registros gravados on-chain contêm apenas atestações criptográficas e hashes matemáticos (SHA-256). Dados pessoais dos operadores e motoristas nunca são expostos publicamente.</p>
+        <div class="faq-acc-item">
+          <button class="faq-acc-btn" aria-expanded="false">
+            <span>Como o GuardDrive™ impacta o custo das apólices de seguro?</span>
+            <span class="faq-acc-icon">+</span>
+          </button>
+          <div class="faq-acc-panel">
+            <p>Operações com rastreabilidade forense comprovada apresentam menor índice de sinistros fraudulentos e maior velocidade de liquidação. Seguradoras parceiras utilizam os dados do GuardDrive™ para calibrar prêmios com base no histórico real de integridade da frota — reduzindo o risco atuarial e, consequentemente, o custo da apólice.</p>
+          </div>
         </div>
 
-        <div class="faq-item" style="background: rgba(12, 12, 18, 0.55); border: 1px solid var(--clr-border); padding: var(--space-md); border-radius: var(--radius-md);">
-          <h3 style="font-size: 1.05rem; color: var(--clr-white); margin-bottom: 0.5rem; display: flex; align-items: center; gap: 8px;">
-            <span style="color: var(--clr-cyan);">Q.</span> Qual o tempo necessário para setup?
-          </h3>
-          <p style="color: var(--clr-muted); font-size: 0.85rem; line-height: 1.6;">A implantação de uma frota baseada em Selos NFC é imediata. Cada veículo é etiquetado e cadastrado no app em menos de 1 minuto. Em poucas horas, toda a operação da frota passa a gerar evidências rastreáveis e seguras.</p>
+        <div class="faq-acc-item">
+          <button class="faq-acc-btn" aria-expanded="false">
+            <span>O sistema se integra com ERPs e plataformas que já uso?</span>
+            <span class="faq-acc-icon">+</span>
+          </button>
+          <div class="faq-acc-panel">
+            <p>Sim. O GuardDrive™ disponibiliza API REST documentada para integração com sistemas de gestão de frotas, TMS e ERPs corporativos. Clientes Enterprise contam com suporte de integração dedicado e SLAs customizados. Entre em contato para avaliarmos sua stack atual.</p>
+          </div>
         </div>
 
-      </div>
+        <div class="faq-acc-item">
+          <button class="faq-acc-btn" aria-expanded="false">
+            <span>Quem tem acesso aos dados da minha frota?</span>
+            <span class="faq-acc-icon">+</span>
+          </button>
+          <div class="faq-acc-panel">
+            <p>Somente sua organização e os perfis por ela autorizados. O GuardDrive™ opera com isolamento de dados por tenant, sem compartilhamento entre clientes. O acesso de terceiros (seguradoras, auditores) só ocorre mediante autorização explícita do gestor da conta, em conformidade com a LGPD.</p>
+          </div>
+        </div>
+
+        <div class="faq-acc-item">
+          <button class="faq-acc-btn" aria-expanded="false">
+            <span>Qual o ROI esperado para uma frota de médio porte?</span>
+            <span class="faq-acc-icon">+</span>
+          </button>
+          <div class="faq-acc-panel">
+            <p>Para frotas entre 50 e 300 veículos, o retorno médio observado no piloto inclui: redução de 30–60% no tempo de liquidação de sinistros, eliminação de litígios por ausência de prova e redução do custo operacional de vistoria. A análise de ROI personalizada para seu volume está disponível gratuitamente — basta solicitar uma demonstração.</p>
+          </div>
+        </div>
+
+      </div><!-- /faq-accordion -->
     </div>
   </section>
 
