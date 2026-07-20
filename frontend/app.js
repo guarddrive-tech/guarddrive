@@ -101,10 +101,13 @@ document.addEventListener('DOMContentLoaded', () => {
         nome: document.getElementById('nome').value,
         empresa: document.getElementById('empresa').value,
         email: document.getElementById('email').value,
+        telefone: document.getElementById('telefone')?.value || '',
+        plano: document.querySelector('input[name="plano"]:checked')?.value || 'não_selecionado',
         segmento: document.getElementById('segmento').value,
-        frota: document.getElementById('frota').value,
-        dor: document.getElementById('dor').value,
-        timestamp: new Date().toISOString()
+        frota: document.getElementById('frota')?.value || '',
+        dor: document.getElementById('dor')?.value || '',
+        timestamp: new Date().toISOString(),
+        source: 'landing_contato'
       };
 
       try {
@@ -192,7 +195,66 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // --- 6. Telemetry Ping on Page Load ---
+  // --- 6. Real-time form validation + plan pre-selection ---
+
+  // Validate inputs on blur/input
+  function setupValidation(inputId, wrapperId, validFn) {
+    const el = document.getElementById(inputId);
+    const wrapper = document.getElementById(wrapperId)?.parentElement || el?.parentElement;
+    if (!el) return;
+    const validate = () => {
+      const isValid = validFn(el.value);
+      const wrapperEl = el.closest('.input-wrapper');
+      if (wrapperEl) wrapperEl.classList.toggle('valid', isValid);
+    };
+    el.addEventListener('input', validate);
+    el.addEventListener('blur', validate);
+    el.addEventListener('change', validate);
+  }
+
+  setupValidation('nome', 'check-nome', v => v.trim().length >= 3);
+  setupValidation('empresa', 'check-empresa', v => v.trim().length >= 2);
+  setupValidation('email', 'check-email', v => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim()));
+  setupValidation('telefone', 'check-telefone', v => v.replace(/\D/g,'').length >= 10);
+  setupValidation('segmento', 'check-segmento', v => v !== '');
+
+  // Phone auto-formatting
+  const telefoneInput = document.getElementById('telefone');
+  if (telefoneInput) {
+    telefoneInput.addEventListener('input', (e) => {
+      let digits = e.target.value.replace(/\D/g, '').slice(0, 11);
+      if (digits.length > 10) {
+        digits = digits.replace(/(\d{2})(\d{5})(\d{4})/, '($1) $2-$3');
+      } else if (digits.length > 6) {
+        digits = digits.replace(/(\d{2})(\d{4})(\d+)/, '($1) $2-$3');
+      } else if (digits.length > 2) {
+        digits = digits.replace(/(\d{2})(\d+)/, '($1) $2');
+      }
+      e.target.value = digits;
+    });
+  }
+
+  // Plan card CTA pre-selection
+  document.querySelectorAll('a[href="#contato"].btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const text = btn.textContent.toLowerCase();
+      let planValue = null;
+      if (text.includes('standard')) planValue = 'standard';
+      else if (text.includes('premium')) planValue = 'premium';
+      else if (text.includes('especialista') || text.includes('enterprise')) planValue = 'enterprise';
+      if (planValue) {
+        setTimeout(() => {
+          const radio = document.getElementById(`plan-${planValue}`);
+          if (radio) {
+            radio.checked = true;
+            radio.dispatchEvent(new Event('change'));
+          }
+        }, 400);
+      }
+    });
+  });
+
+  // --- 7. Telemetry Ping on Page Load ---
   logTelemetry('page_load');
 });
 

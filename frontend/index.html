@@ -354,7 +354,7 @@
             <h3 style="font-size: 1.3rem; margin-bottom: 0.5rem; color: var(--clr-white);">Standard</h3>
             <p style="color: var(--clr-muted); font-size: 0.85rem; margin-bottom: var(--space-md); line-height: 1.5;">Selo Soberano™ NFC V1 Passivo. Ideal para auditoria rápida e vistorias frequentes sem custos de infraestrutura OBD.</p>
             <div style="margin-bottom: var(--space-md);">
-              <span style="font-size: 2rem; font-weight: 800; color: var(--clr-cyan);">R$ 9,90</span>
+              <span style="font-size: 2rem; font-weight: 800; color: var(--clr-cyan);">R$ 14,90</span>
               <span style="color: var(--clr-muted); font-size: 0.85rem;">/veículo/mês</span>
             </div>
             <ul style="list-style: none; padding: 0; margin-bottom: var(--space-md); font-size: 0.85rem; color: #cbd5e1; line-height: 1.8;">
@@ -374,7 +374,7 @@
             <h3 style="font-size: 1.3rem; margin-bottom: 0.5rem; color: var(--clr-white);">Premium</h3>
             <p style="color: var(--clr-muted); font-size: 0.85rem; margin-bottom: var(--space-md); line-height: 1.5;">Selo Soberano™ NFC V2 Criptográfico. Integridade reforçada por criptografia militar e cadeia de custódia.</p>
             <div style="margin-bottom: var(--space-md);">
-              <span style="font-size: 2rem; font-weight: 800; color: var(--clr-cyan);">R$ 25,00</span>
+              <span style="font-size: 2rem; font-weight: 800; color: var(--clr-cyan);">R$ 29,90</span>
               <span style="color: var(--clr-muted); font-size: 0.85rem;">/veículo/mês</span>
             </div>
             <ul style="list-style: none; padding: 0; margin-bottom: var(--space-md); font-size: 0.85rem; color: #cbd5e1; line-height: 1.8;">
@@ -393,7 +393,9 @@
             <h3 style="font-size: 1.3rem; margin-bottom: 0.5rem; color: var(--clr-white);">Enterprise</h3>
             <p style="color: var(--clr-muted); font-size: 0.85rem; margin-bottom: var(--space-md); line-height: 1.5;">Dispositivo Ativo OBD+IMU. Telemetria e telemetria contínua a 50ms para frotas e operações críticas.</p>
             <div style="margin-bottom: var(--space-md);">
-              <span style="font-size: 1.8rem; font-weight: 800; color: var(--clr-white);">Sob Consulta</span>
+              <span style="font-size: 1.1rem; font-weight: 600; color: var(--clr-muted); font-family: var(--font-mono); display: block; margin-bottom: 0.25rem;">A partir de</span>
+              <span style="font-size: 2rem; font-weight: 800; color: var(--clr-white);">R$ 80,00</span>
+              <span style="color: var(--clr-muted); font-size: 0.85rem;">/veículo/mês</span>
             </div>
             <ul style="list-style: none; padding: 0; margin-bottom: var(--space-md); font-size: 0.85rem; color: #cbd5e1; line-height: 1.8;">
               <li style="margin-bottom: 0.4rem; display: flex; align-items: center; gap: 8px;">✓ Hardware Ativo OBD-II + IMU 6-Eixos</li>
@@ -436,41 +438,135 @@
 
       <!-- Contact Form (hidden until NDA accepted) -->
       <form class="contact-form" id="contact-form" style="display: none;" novalidate>
-        <div class="form-row">
-          <div class="form-group">
-            <label for="nome">Nome Completo</label>
-            <input type="text" id="nome" placeholder="Seu nome completo" required autocomplete="name" />
-          </div>
-          <div class="form-group">
-            <label for="empresa">Empresa</label>
-            <input type="text" id="empresa" placeholder="Nome da empresa / operação" required autocomplete="organization" />
-          </div>
-        </div>
-        <div class="form-row">
-          <div class="form-group">
-            <label for="email">E-mail Corporativo</label>
-            <input type="email" id="email" placeholder="seu@empresa.com.br" required autocomplete="email" />
-          </div>
-          <div class="form-group">
-            <label for="segmento">Segmento</label>
-            <select id="segmento" required>
-              <option value="">Selecione seu segmento</option>
-              <option value="frotista">Locadora de Veículos / Frotista</option>
-              <option value="seguradora">Seguradora / Gestora de Sinistros</option>
-              <option value="outro">Outro</option>
-            </select>
-          </div>
-        </div>
-        <div class="form-row">
-          <div class="form-group">
-            <label for="frota">Tamanho da Frota (estimado)</label>
-            <input type="text" id="frota" placeholder="Ex: 50-200 veículos" />
-          </div>
-          <div class="form-group">
-            <label for="dor">Principal desafio operacional</label>
-            <input type="text" id="dor" placeholder="Ex: Rastreamento pós-sinistro, jammers..." />
+
+        <!-- Plan Selector -->
+        <div style="margin-bottom: var(--space-md);">
+          <label style="display: block; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.08em; color: var(--clr-muted); text-transform: uppercase; margin-bottom: 0.75rem;">Plano de Interesse</label>
+          <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.5rem;">
+            <label class="plan-radio-label" for="plan-standard">
+              <input type="radio" id="plan-standard" name="plano" value="standard" />
+              <span class="plan-radio-box">
+                <strong>Standard</strong>
+                <small>R$ 14,90 /mês</small>
+              </span>
+            </label>
+            <label class="plan-radio-label" for="plan-premium">
+              <input type="radio" id="plan-premium" name="plano" value="premium" />
+              <span class="plan-radio-box">
+                <span style="position: absolute; top: -8px; right: 8px; background: var(--clr-cyan); color: #000; font-size: 0.55rem; font-weight: 800; padding: 0.1rem 0.5rem; border-radius: 99px;">POPULAR</span>
+                <strong>Premium</strong>
+                <small>R$ 29,90 /mês</small>
+              </span>
+            </label>
+            <label class="plan-radio-label" for="plan-enterprise">
+              <input type="radio" id="plan-enterprise" name="plano" value="enterprise" />
+              <span class="plan-radio-box">
+                <strong>Enterprise</strong>
+                <small>A partir R$ 80</small>
+              </span>
+            </label>
           </div>
         </div>
+
+        <!-- Row 1: Name + Company -->
+        <div class="form-row">
+          <div class="form-group">
+            <label for="nome">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right:5px; opacity:0.6;"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+              Nome Completo <span style="color: var(--clr-cyan);">*</span>
+            </label>
+            <div class="input-wrapper">
+              <input type="text" id="nome" placeholder="Seu nome completo" required autocomplete="name" />
+              <span class="input-check" id="check-nome">✓</span>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="empresa">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right:5px; opacity:0.6;"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+              Empresa <span style="color: var(--clr-cyan);">*</span>
+            </label>
+            <div class="input-wrapper">
+              <input type="text" id="empresa" placeholder="Nome da empresa / operação" required autocomplete="organization" />
+              <span class="input-check" id="check-empresa">✓</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Row 2: Email + Phone -->
+        <div class="form-row">
+          <div class="form-group">
+            <label for="email">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right:5px; opacity:0.6;"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              E-mail Corporativo <span style="color: var(--clr-cyan);">*</span>
+            </label>
+            <div class="input-wrapper">
+              <input type="email" id="email" placeholder="seu@empresa.com.br" required autocomplete="email" />
+              <span class="input-check" id="check-email">✓</span>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="telefone">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right:5px; opacity:0.6;"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.65 3.5 2 2 0 0 1 3.62 1.5h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9a16 16 0 0 0 6 6l.86-.86a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.5 16.92z"/></svg>
+              WhatsApp / Telefone <span style="color: var(--clr-cyan);">*</span>
+            </label>
+            <div class="input-wrapper">
+              <input type="tel" id="telefone" placeholder="(11) 99999-9999" required autocomplete="tel" />
+              <span class="input-check" id="check-telefone">✓</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Row 3: Segment + Fleet size -->
+        <div class="form-row">
+          <div class="form-group">
+            <label for="segmento">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right:5px; opacity:0.6;"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+              Segmento <span style="color: var(--clr-cyan);">*</span>
+            </label>
+            <div class="input-wrapper">
+              <select id="segmento" required>
+                <option value="">Selecione seu segmento</option>
+                <option value="frotista">Locadora / Frotista</option>
+                <option value="seguradora">Seguradora / Sinistros</option>
+                <option value="logistica">Logística / Transportadora</option>
+                <option value="municipio">Município / Governo</option>
+                <option value="outro">Outro</option>
+              </select>
+              <span class="input-check" id="check-segmento">✓</span>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="frota">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right:5px; opacity:0.6;"><rect x="1" y="3" width="15" height="13" rx="2"/><path d="M16 8h4l3 5v3h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+              Tamanho da Frota
+            </label>
+            <div class="input-wrapper">
+              <select id="frota">
+                <option value="">Tamanho estimado</option>
+                <option value="1-20">1 – 20 veículos</option>
+                <option value="21-100">21 – 100 veículos</option>
+                <option value="101-500">101 – 500 veículos</option>
+                <option value="500+">Mais de 500 veículos</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- Row 4: Main challenge -->
+        <div class="form-group" style="margin-bottom: var(--space-md);">
+          <label for="dor">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right:5px; opacity:0.6;"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            Principal desafio operacional
+          </label>
+          <textarea id="dor" rows="2" placeholder="Ex: Fraudes em sinistros, jammers de rastreador, auditoria de condutores..." style="width: 100%; background: rgba(255,255,255,0.03); border: 1px solid var(--clr-border); border-radius: var(--radius-sm); padding: 0.75rem 1rem; color: var(--clr-white); font-size: 0.9rem; font-family: var(--font-sans); resize: vertical; transition: border-color 0.3s; outline: none; box-sizing: border-box;"></textarea>
+        </div>
+
+        <!-- LGPD Notice -->
+        <p style="font-size: 0.72rem; color: var(--clr-muted); text-align: center; margin-bottom: var(--space-sm); line-height: 1.5;">
+          🔒 Seus dados são tratados conforme a <strong>LGPD</strong> e utilizados exclusivamente para qualificação comercial.
+          Consulte nossa Política de Privacidade.
+        </p>
+
         <button type="submit" class="btn btn-primary btn-full" id="submit-btn">
           <span>Solicitar Demonstração Personalizada</span>
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>

@@ -848,3 +848,179 @@ textarea { resize: vertical; }
 .card-indicator.medium { background: rgba(255, 184, 0, 0.15); color: var(--clr-amber); }
 .card-indicator.low { background: rgba(0, 255, 136, 0.15); color: var(--clr-emerald); }
 
+/* ── FORM PREMIUM COMPONENTS ───────────────────────── */
+
+/* Contact / Pilot Forms base */
+.contact-form, #contact-form, #pilot-form {
+  background: rgba(10, 10, 18, 0.75);
+  border: 1px solid var(--clr-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-md);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-sm);
+}
+@media (max-width: 640px) {
+  .form-row { grid-template-columns: 1fr; }
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.form-group label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.5);
+  display: flex;
+  align-items: center;
+}
+
+/* Input / Select base */
+.form-group input,
+.form-group select,
+.form-group textarea {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid var(--clr-border);
+  border-radius: var(--radius-sm);
+  padding: 0.75rem 1rem;
+  color: var(--clr-white);
+  font-size: 0.9rem;
+  font-family: var(--font-sans);
+  outline: none;
+  width: 100%;
+  transition: border-color 0.25s, box-shadow 0.25s, background 0.25s;
+}
+.form-group select {
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%236e7491' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.9rem center;
+  padding-right: 2.5rem;
+}
+.form-group select option {
+  background: #0e0e1a;
+  color: var(--clr-white);
+}
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  border-color: var(--clr-cyan);
+  background: rgba(0, 240, 255, 0.04);
+  box-shadow: 0 0 0 3px rgba(0, 240, 255, 0.08);
+}
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+  color: rgba(255,255,255,0.2);
+}
+
+/* Input wrapper with validation check */
+.input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+.input-wrapper input,
+.input-wrapper select {
+  padding-right: 2.5rem;
+}
+.input-check {
+  position: absolute;
+  right: 0.75rem;
+  font-size: 0.8rem;
+  color: var(--clr-emerald);
+  opacity: 0;
+  transition: opacity 0.3s;
+  pointer-events: none;
+  font-weight: 700;
+}
+.input-wrapper.valid .input-check { opacity: 1; }
+.input-wrapper.valid input,
+.input-wrapper.valid select {
+  border-color: rgba(0, 255, 136, 0.35);
+}
+
+/* Plan Radio Selector */
+.plan-radio-label {
+  cursor: pointer;
+  display: block;
+}
+.plan-radio-label input[type="radio"] {
+  display: none;
+}
+.plan-radio-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2rem;
+  padding: 0.75rem 0.5rem;
+  border: 1px solid var(--clr-border);
+  border-radius: var(--radius-sm);
+  background: rgba(255,255,255,0.02);
+  text-align: center;
+  position: relative;
+  transition: all 0.25s var(--ease-out-expo);
+  cursor: pointer;
+}
+.plan-radio-box strong {
+  font-size: 0.8rem;
+  color: var(--clr-white);
+  font-weight: 700;
+  display: block;
+}
+.plan-radio-box small {
+  font-size: 0.7rem;
+  color: var(--clr-muted);
+  font-family: var(--font-mono);
+}
+.plan-radio-label:hover .plan-radio-box {
+  border-color: rgba(0,240,255,0.25);
+  background: rgba(0,240,255,0.04);
+}
+.plan-radio-label input[type="radio"]:checked + .plan-radio-box {
+  border-color: var(--clr-cyan);
+  background: rgba(0, 240, 255, 0.08);
+  box-shadow: 0 0 0 2px rgba(0,240,255,0.15), inset 0 0 20px rgba(0,240,255,0.04);
+}
+.plan-radio-label input[type="radio"]:checked + .plan-radio-box strong {
+  color: var(--clr-cyan);
+}
+
+/* Textarea in forms */
+.form-group textarea {
+  resize: vertical;
+  min-height: 70px;
+}
+
+/* Success screen improvements */
+.success-screen {
+  text-align: center;
+  padding: var(--space-md);
+}
+.success-icon {
+  width: 60px;
+  height: 60px;
+  background: rgba(0, 255, 136, 0.1);
+  border: 1px solid rgba(0, 255, 136, 0.35);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  color: var(--clr-emerald);
+  margin: 0 auto var(--space-sm);
+}
+
