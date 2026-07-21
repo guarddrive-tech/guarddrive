@@ -1,6 +1,6 @@
 import type { Config } from '@netlify/functions';
-import { getDb } from '../../db/client';
-import { telemetry } from '../../db/schema';
+import { db } from '../../db/index.js';
+import { telemetry } from '../../db/schema.js';
 
 export default async (req: Request) => {
   if (req.method !== 'POST') {
@@ -20,7 +20,6 @@ export default async (req: Request) => {
     return Response.json({ status: 'error', detail: 'event e path são obrigatórios.' }, { status: 422 });
   }
 
-  const db = getDb();
   await db.insert(telemetry).values({
     eventType: event,
     path,

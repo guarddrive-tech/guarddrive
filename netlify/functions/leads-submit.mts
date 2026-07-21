@@ -1,8 +1,8 @@
 import type { Config } from '@netlify/functions';
 import { createHash } from 'node:crypto';
 import { eq } from 'drizzle-orm';
-import { getDb } from '../../db/client';
-import { responses, forms, leads } from '../../db/schema';
+import { db } from '../../db/index.js';
+import { responses, forms, leads } from '../../db/schema.js';
 
 export default async (req: Request) => {
   if (req.method !== 'POST') {
@@ -29,7 +29,6 @@ export default async (req: Request) => {
     );
   }
 
-  const db = getDb();
 
   // Internal integrity checksum of the submitted record — a real hash of the
   // stored data, not a blockchain transaction. Surfaced to users as a demo

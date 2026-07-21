@@ -1,12 +1,11 @@
 import type { Config } from '@netlify/functions';
 import { eq } from 'drizzle-orm';
-import { getDb } from '../../db/client';
-import { leads, responses } from '../../db/schema';
+import { db } from '../../db/index.js';
+import { leads, responses } from '../../db/schema.js';
 
 // GET lists diagnostic-portal responses (used by the admin dashboard's Leads tab).
 // POST accepts a simple lead capture from the main contact form / pilot program form.
 export default async (req: Request) => {
-  const db = getDb();
 
   if (req.method === 'GET') {
     const all = await db.select().from(responses).orderBy(responses.createdAt);

@@ -1,8 +1,8 @@
 import type { Config } from '@netlify/functions';
 import { createHash } from 'node:crypto';
 import { sql } from 'drizzle-orm';
-import { getDb } from '../../db/client';
-import { forms, responses } from '../../db/schema';
+import { db } from '../../db/index.js';
+import { forms, responses } from '../../db/schema.js';
 
 function makeToken(target: string, segment: string) {
   const base = `${target}-${segment}-${new Date().toISOString()}-${Math.random()}`;
@@ -10,7 +10,6 @@ function makeToken(target: string, segment: string) {
 }
 
 export default async (req: Request) => {
-  const db = getDb();
 
   if (req.method === 'GET') {
     const rows = await db
