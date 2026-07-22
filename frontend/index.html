@@ -31,7 +31,7 @@
         <li><a href="#ecossistema" class="nav-link" id="nav-ecossistema">Ecossistema</a></li>
         <li><a href="#programa-piloto" class="nav-link" id="nav-piloto">Piloto</a></li>
       </ul>
-      <a href="#contato" class="btn btn-primary btn-sm" id="nav-cta">Solicitar Diagnóstico</a>
+      <a href="#contato" class="btn btn-primary btn-sm" id="nav-cta" data-xp-trigger="true">Solicitar Diagnóstico</a>
       <button class="nav-burger" id="nav-burger" aria-label="Menu">
         <span></span><span></span><span></span>
       </button>
@@ -53,7 +53,7 @@
         <strong>GuardDrive — The Trust Layer for Connected Mobility.</strong> Cada evento vira evidência: menos fraude, sinistros em dias.
       </p>
       <div class="hero-actions" id="hero-actions">
-        <a href="#contato" class="btn btn-primary btn-large" id="hero-demo-btn">
+        <a href="#contato" class="btn btn-primary btn-large" id="hero-demo-btn" data-xp-trigger="true">
           <span>Solicitar Diagnóstico de Risco</span>
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
         </a>
@@ -920,7 +920,7 @@
       <div class="cta-content">
         <h2 class="section-title reveal-on-scroll" style="max-width: 100%; text-align: center;">Construa a camada de confiança da sua mobilidade</h2>
         <p class="cta-sub reveal-on-scroll">Cada movimento vira evidência. Cada evidência, uma decisão mais segura.</p>
-        <a href="#contato" class="btn btn-primary btn-large reveal-on-scroll" id="cta-final-btn">
+        <a href="#contato" class="btn btn-primary btn-large reveal-on-scroll" id="cta-final-btn" data-xp-trigger="true">
           <span>Solicitar Diagnóstico</span>
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
         </a>
@@ -1096,6 +1096,187 @@
     </div>
   </div>
 
+  <!-- ── EXPERIENCE PORTAL — Operational Trust Journey™ ───── -->
+  <div class="xp-overlay" id="xp-overlay" aria-hidden="true">
+    <div class="xp-backdrop"></div>
+    <button class="xp-close" id="xp-close-btn" aria-label="Fechar experiência">✕</button>
+
+    <div class="xp-shell">
+
+      <!-- Journey Stepper -->
+      <div class="xp-stepper" id="xp-stepper">
+        <span class="xp-step" data-step="identify">IDENTIFY</span>
+        <span class="xp-step-sep">›</span>
+        <span class="xp-step" data-step="understand">UNDERSTAND</span>
+        <span class="xp-step-sep">›</span>
+        <span class="xp-step" data-step="profile">PROFILE</span>
+        <span class="xp-step-sep">›</span>
+        <span class="xp-step" data-step="assess">ASSESS</span>
+        <span class="xp-step-sep">›</span>
+        <span class="xp-step" data-step="attest">ATTEST</span>
+        <span class="xp-step-sep">›</span>
+        <span class="xp-step" data-step="recommend">RECOMMEND</span>
+        <span class="xp-step-sep">›</span>
+        <span class="xp-step" data-step="trust">TRUST</span>
+      </div>
+
+      <!-- STAGE 1 — WELCOME -->
+      <section class="xp-stage xp-stage-center" id="xp-stage-welcome">
+        <div class="xp-welcome-badge"><span class="pulse-dot"></span>OPERATIONAL TRUST JOURNEY™</div>
+        <h2 class="xp-welcome-title">Bem-vindo ao GuardDrive.</h2>
+        <p class="xp-welcome-sub">Antes de gerar um diagnóstico operacional, precisamos compreender sua operação.</p>
+        <button class="btn btn-primary btn-large" id="xp-start-btn">
+          <span>Iniciar</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </button>
+      </section>
+
+      <!-- STAGE 2 — IDENTIFY -->
+      <section class="xp-stage" id="xp-stage-identify">
+        <div class="xp-stage-label">IDENTIFY · 01</div>
+        <h2 class="xp-stage-title">Quem está do outro lado da operação?</h2>
+        <p class="xp-stage-sub">Quatro dados. Nada além disso.</p>
+        <div class="xp-identify-form">
+          <div class="form-group">
+            <label for="xp-nome">Nome</label>
+            <input type="text" id="xp-nome" placeholder="Seu nome completo" autocomplete="name" />
+          </div>
+          <div class="form-group">
+            <label for="xp-empresa">Empresa</label>
+            <input type="text" id="xp-empresa" placeholder="Nome da empresa / operação" autocomplete="organization" />
+          </div>
+          <div class="form-group">
+            <label for="xp-cargo">Cargo</label>
+            <input type="text" id="xp-cargo" placeholder="Seu cargo" autocomplete="organization-title" />
+          </div>
+          <div class="form-group">
+            <label for="xp-segmento">Segmento</label>
+            <select id="xp-segmento">
+              <option value="">Selecione seu segmento</option>
+              <option value="seguradora">Seguradora</option>
+              <option value="frotista">Locadora / Frotista</option>
+              <option value="logistica">Logística / Transportadora</option>
+              <option value="municipio">Município / Governo</option>
+              <option value="outro">Outro</option>
+            </select>
+          </div>
+        </div>
+        <p class="xp-error" id="xp-identify-error">Preencha os quatro campos para continuar.</p>
+        <button class="btn btn-primary btn-full" id="xp-identify-btn">
+          <span>Continuar</span>
+        </button>
+      </section>
+
+      <!-- STAGE 3 — PROFILE REVEAL + CALIBRATION -->
+      <section class="xp-stage xp-stage-center" id="xp-stage-profile">
+        <div class="xp-profile-scan">
+          <div class="xp-profile-ring xp-ring-1"></div>
+          <div class="xp-profile-ring xp-ring-2"></div>
+          <div class="xp-profile-check" id="xp-profile-icon">✓</div>
+        </div>
+        <div class="xp-stage-label">PROFILE · IDENTIFICADO</div>
+        <h2 class="xp-stage-title" id="xp-profile-title">Perfil identificado.</h2>
+        <p class="xp-stage-sub" id="xp-profile-sub"></p>
+
+        <div class="xp-calibrate" id="xp-calibrate">
+          <div class="xp-calibrate-block">
+            <span class="xp-calibrate-label">Ativos sob gestão</span>
+            <div class="xp-chip-row" id="xp-chips-fleet" data-field="fleet">
+              <button type="button" class="xp-chip" data-value="1-20">1–20</button>
+              <button type="button" class="xp-chip" data-value="21-100">21–100</button>
+              <button type="button" class="xp-chip" data-value="101-500">101–500</button>
+              <button type="button" class="xp-chip" data-value="500+">500+</button>
+            </div>
+          </div>
+          <div class="xp-calibrate-block">
+            <span class="xp-calibrate-label">Maior desafio operacional agora</span>
+            <div class="xp-chip-row" id="xp-chips-problem" data-field="problem"></div>
+          </div>
+        </div>
+
+        <button class="btn btn-primary btn-large" id="xp-profile-btn">
+          <span>Iniciar Diagnóstico</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </button>
+      </section>
+
+      <!-- STAGES 4–8 — INTELLIGENCE HUB (laboratory) -->
+      <section class="xp-stage" id="xp-stage-hub">
+        <div class="xp-hub-header">
+          <div class="xp-hub-brand">
+            <span class="ha-topbar-logo">GD</span>
+            <div>
+              <h2 class="xp-hub-title">GuardDrive Intelligence Hub</h2>
+              <p class="xp-hub-sub">Construindo seu Diagnóstico Operacional</p>
+            </div>
+          </div>
+          <div class="xp-hub-live"><span class="ha-live-dot" style="background:var(--clr-emerald); box-shadow:0 0 8px var(--clr-emerald);"></span>PROCESSANDO</div>
+        </div>
+
+        <div class="xp-engines" id="xp-engines"><!-- JS injected engine cards --></div>
+
+        <div class="xp-hub-grid">
+          <div class="xp-hub-col">
+            <div class="ha-label">LOG DE CONSTRUÇÃO</div>
+            <div class="xp-log" id="xp-log"></div>
+          </div>
+          <div class="xp-hub-col">
+            <div class="ha-label">MAPA DE RISCO OPERACIONAL</div>
+            <div class="xp-radar-wrap" id="xp-radar-wrap"><!-- JS injected radar svg --></div>
+            <div class="xp-heatmap" id="xp-heatmap"><!-- JS injected heatmap cells --></div>
+          </div>
+        </div>
+
+        <div class="xp-report-build">
+          <div class="ha-label">LAUDO EXECUTIVO</div>
+          <div class="xp-report-lines" id="xp-report-lines"></div>
+        </div>
+      </section>
+
+      <!-- STAGE 9 — GUARDPROOF FINAL -->
+      <section class="xp-stage xp-stage-center" id="xp-stage-final">
+        <div class="xp-final-badge"><span class="pulse-dot" style="background:var(--clr-emerald); box-shadow: 0 0 8px var(--clr-emerald);"></span>GUARDPROOF™</div>
+        <h2 class="xp-final-title">Operational Trust Report</h2>
+
+        <div class="xp-guardproof-card">
+          <div class="xp-gp-row">
+            <span class="xp-gp-key">STATUS</span>
+            <span class="xp-gp-val xp-gp-status">ATTESTED</span>
+          </div>
+          <div class="xp-gp-score-wrap">
+            <svg class="ha-gauge xp-gp-gauge" viewBox="0 0 100 100">
+              <circle class="ha-gauge-bg" cx="50" cy="50" r="40" />
+              <circle class="ha-gauge-fill" cx="50" cy="50" r="40" id="xp-gp-gauge-arc" stroke-dasharray="0 251" />
+            </svg>
+            <div class="xp-gp-score-inner">
+              <span><span class="xp-gp-score-num" id="xp-gp-score">0.0</span><span class="ha-score-pct">%</span></span>
+              <span class="xp-gp-score-label">Operational Trust Score</span>
+            </div>
+          </div>
+          <div class="xp-gp-meta-grid">
+            <div class="xp-gp-meta"><span class="xp-gp-meta-key">Risk Level</span><span class="xp-gp-meta-val" id="xp-gp-risk">—</span></div>
+            <div class="xp-gp-meta"><span class="xp-gp-meta-key">Expected ROI</span><span class="xp-gp-meta-val" id="xp-gp-roi">—</span></div>
+            <div class="xp-gp-meta"><span class="xp-gp-meta-key">Report ID</span><span class="xp-gp-meta-val xp-gp-mono" id="xp-gp-reportid">GD-------</span></div>
+          </div>
+        </div>
+
+        <div class="xp-final-actions">
+          <button class="btn btn-primary" id="xp-open-report-btn">Abrir Laudo Executivo</button>
+          <button class="btn btn-ghost" id="xp-demo-btn">Agendar Demonstração</button>
+          <button class="btn btn-ghost" id="xp-pilot-btn">Solicitar Programa Piloto</button>
+        </div>
+      </section>
+
+      <!-- Expanded Executive Report -->
+      <section class="xp-stage" id="xp-stage-report">
+        <button class="xp-report-back" id="xp-report-back-btn">← Voltar ao Diagnóstico</button>
+        <div class="xp-report-doc" id="xp-report-doc"><!-- JS injected --></div>
+      </section>
+
+    </div>
+  </div>
+
   <script type="module" src="app.js"></script>
+  <script type="module" src="experience-portal.js"></script>
 </body>
 </html>

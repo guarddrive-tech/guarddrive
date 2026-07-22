@@ -22,3 +22,6 @@ logs/
 .vercel
 *.code-workspace
 
+
+# Local Netlify folder
+.netlify
