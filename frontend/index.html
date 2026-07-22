@@ -4,10 +4,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>GuardDrive™ — Confiança Operacional e Rastreabilidade Forense para Frotas e Seguradoras</title>
-  <meta name="description" content="Transforme operações de frotas em evidências auditáveis. GuardDrive™ oferece rastreabilidade forense, conformidade regulatória e proteção contra fraudes com blockchain para frotas corporativas e seguradoras." />
-  <meta name="keywords" content="rastreabilidade veicular, conformidade operacional, frotas corporativas, seguradoras, proteção contra jammers, regulação de sinistros, evidências auditáveis, blockchain veicular, GuardDrive, GuardTag, LGPD" />
+  <meta name="description" content="Transforme operações de frotas em evidências auditáveis. GuardDrive™ oferece rastreabilidade forense, conformidade regulatória e proteção contra fraudes com registro criptograficamente verificável para frotas corporativas e seguradoras." />
+  <meta name="keywords" content="rastreabilidade veicular, conformidade operacional, frotas corporativas, seguradoras, proteção contra jammers, regulação de sinistros, evidências auditáveis, evidência criptograficamente verificável, GuardDrive, GuardTag, LGPD" />
   <meta property="og:title" content="GuardDrive™ — Confiança Operacional e Rastreabilidade Forense" />
-  <meta property="og:description" content="Transforme a telemetria de frotas em evidências forense auditáveis com blockchain para frotistas e seguradoras." />
+  <meta property="og:description" content="Transforme a telemetria de frotas em evidências forense auditáveis com registro criptograficamente verificável para frotistas e seguradoras." />
   <meta property="og:type" content="website" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -42,14 +42,14 @@
     <div class="hero-inner">
       <div class="hero-badge" id="hero-badge">
         <span class="pulse-dot"></span>
-        Auditoria Forense Avançada · Conformidade LGPD & Padrão DREX
+        Seguradoras · Logística · Frotas · Infraestrutura Crítica
       </div>
       <h1 class="hero-title" id="hero-title">
-        Evidência Forense Inviolável<br />
-        <span class="hero-accent">para Frotas Corporativas</span>
+        <span class="line" id="hl1">Operational Truth™</span>
+        <span class="line" id="hl2">para Operações Críticas</span>
       </h1>
       <p class="hero-sub" id="hero-sub">
-        Elimine fraudes de sinistros e reduza o custo de apólices com o <strong>Selo Soberano™ NFC</strong>. Atestação física de integridade com validade jurídica e rastreabilidade na blockchain.
+        Transforme eventos físicos em evidências verificáveis, reduza fraudes, acelere auditorias e fortaleça a governança operacional sem alterar o fluxo da sua operação.
       </p>
       <div class="hero-actions" id="hero-actions">
         <a href="#contato" class="btn btn-primary btn-large" id="hero-demo-btn">
@@ -173,7 +173,7 @@
       <span>CONFORMIDADE REGULATÓRIA</span><span class="sep">·</span>
       <span>PROTEÇÃO A FROTAS</span><span class="sep">·</span>
       <span>REGULAÇÃO DE SINISTROS</span><span class="sep">·</span>
-      <span>BLOCKCHAIN ATTESTATION</span><span class="sep">·</span>
+      <span>REGISTRO CRIPTOGRÁFICO VERIFICÁVEL</span><span class="sep">·</span>
       <span>PILOTO 2026</span><span class="sep">·</span>
       <span>EVIDÊNCIAS AUDITÁVEIS</span><span class="sep">·</span>
       <span>LGPD COMPLIANT</span><span class="sep">·</span>
@@ -184,7 +184,7 @@
       <span>CONFORMIDADE REGULATÓRIA</span><span class="sep">·</span>
       <span>PROTEÇÃO A FROTAS</span><span class="sep">·</span>
       <span>REGULAÇÃO DE SINISTROS</span><span class="sep">·</span>
-      <span>BLOCKCHAIN ATTESTATION</span><span class="sep">·</span>
+      <span>REGISTRO CRIPTOGRÁFICO VERIFICÁVEL</span><span class="sep">·</span>
       <span>PILOTO 2026</span><span class="sep">·</span>
       <span>EVIDÊNCIAS AUDITÁVEIS</span><span class="sep">·</span>
       <span>LGPD COMPLIANT</span><span class="sep">·</span>
@@ -397,7 +397,7 @@
           </div>
           <h3>GuardTag™</h3>
           <p style="color: var(--clr-cyan); font-weight: 700; margin-bottom: 0.3rem;">Identidade Verificável</p>
-          <p>Disponível em dois formatos: <strong>V1 Passivo</strong> — Selo Soberano™ NFC (adesivo, implantação imediata, a partir de R$ 9,90/mês); e <strong>V2 Ativo</strong> — Dongle OBD+IMU com telemetria contínua a 50ms para operações críticas.</p>
+          <p>Disponível em dois formatos: <strong>V1 Passivo</strong> — Selo Soberano™ NFC (adesivo, implantação imediata, a partir de R$ 14,90/mês no plano Standard); e <strong>V2 Ativo</strong> — Dongle OBD+IMU com telemetria contínua a 50ms para operações críticas.</p>
         </div>
         <div class="eco-arrow">→</div>
         <div class="eco-node reveal-on-scroll">
@@ -666,6 +666,8 @@
           Consulte nossa Política de Privacidade.
         </p>
 
+        <p class="form-error-message" id="form-error" style="display: none; color: #ff6b6b; font-size: 0.85rem; text-align: center; margin-bottom: var(--space-sm);"></p>
+
         <button type="submit" class="btn btn-primary btn-full" id="submit-btn">
           <span>Solicitar Demonstração Personalizada</span>
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
@@ -677,11 +679,7 @@
         <div class="success-icon">✓</div>
         <h3>Solicitação Recebida</h3>
         <p>Nossa equipe entrará em contato em até 48h úteis com análise personalizada de ROI.</p>
-        <div class="attestation-box">
-          <div class="attestation-label">REGISTRO DE CONFORMIDADE — GUARDPROOF™</div>
-          <div class="attestation-hash" id="attest-hash">0x_aguardando...</div>
-          <div class="attestation-meta" id="attest-meta">Processando atestação...</div>
-        </div>
+        <p id="success-reference" style="font-family: var(--font-mono); font-size: 0.78rem; color: var(--clr-muted); margin-top: 0.5rem;"></p>
       </div>
   <!-- ── SEÇÃO 06.5: FAQ ───────────────────────────── -->
   <section class="section" id="faq">
@@ -788,6 +786,7 @@
           <label for="pilot-telefone">Telefone / WhatsApp</label>
           <input type="tel" id="pilot-telefone" placeholder="(11) 99999-9999" required autocomplete="tel" />
         </div>
+        <p class="form-error-message" id="pilot-form-error" style="display: none; color: #ff6b6b; font-size: 0.85rem; text-align: center; margin-bottom: var(--space-sm);"></p>
         <button type="submit" class="btn btn-primary btn-full" id="pilot-submit-btn">
           <span>Quero Participar do Piloto</span>
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
@@ -954,8 +953,9 @@
       <div style="display: flex; justify-content: center; margin-bottom: var(--space-sm);">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" width="52" height="52" style="color: var(--clr-cyan);"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 010 14.14M4.93 4.93a10 10 0 000 14.14"/><path d="M22.54 1.46a15 15 0 010 21.21M1.46 1.46a15 15 0 000 21.21"/></svg>
       </div>
-      <h2 style="font-size: 1.3rem; font-weight: 800; margin-bottom: var(--space-md);">Gerando Laudo de Conformidade</h2>
-      <pre class="attestation-box" id="attesting-console" style="text-align: left; white-space: pre-wrap; font-size: 0.78rem; max-height: 280px; overflow-y: auto; color: var(--clr-emerald);">[SYS] Iniciando protocolo de atestação soberana...</pre>
+      <h2 style="font-size: 1.3rem; font-weight: 800; margin-bottom: var(--space-xs);">Gerando Laudo de Conformidade</h2>
+      <p style="font-size: 0.75rem; color: var(--clr-muted); margin-bottom: var(--space-md); text-transform: uppercase; letter-spacing: 0.05em;">Ambiente de demonstração — nenhuma escrita em blockchain real ocorre nesta simulação</p>
+      <pre class="attestation-box" id="attesting-console" style="text-align: left; white-space: pre-wrap; font-size: 0.78rem; max-height: 280px; overflow-y: auto; color: var(--clr-emerald);">[SYS] Iniciando simulação do protocolo de atestação...</pre>
     </div>
     <!-- Phase 5: Success -->
     <div id="portal-phase-success" class="diagnostic-portal-wrapper" style="display: none; max-width: 700px; margin: 0 auto; text-align: center;">
@@ -963,12 +963,21 @@
       <h2 style="font-size: 1.5rem; font-weight: 800; margin-bottom: var(--space-xs);">Diagnóstico Concluído</h2>
       <p style="color: var(--clr-muted); margin-bottom: var(--space-md);">Seu laudo de conformidade foi gerado e registrado. Nossa equipe analisará e entrará em contato em até 48h úteis.</p>
       <div class="attestation-box" style="margin-bottom: var(--space-md);">
-        <div class="attestation-label">HASH DE TRANSAÇÃO — GUARDPROOF™ ATTESTATION</div>
+        <div class="attestation-label">REGISTRO DE DEMONSTRAÇÃO — GUARDPROOF™ (SIMULAÇÃO)</div>
         <div class="attestation-hash" id="portal-res-hash">0x_processando...</div>
         <div class="attestation-meta" id="portal-res-meta">Aguardando confirmação...</div>
       </div>
       <button class="btn btn-primary" id="portal-done-btn">
         <span>Voltar à Página Inicial</span>
+      </button>
+    </div>
+    <!-- Phase 5b: Submission Error -->
+    <div id="portal-phase-error" class="diagnostic-portal-wrapper" style="display: none; max-width: 700px; margin: 0 auto; text-align: center;">
+      <div style="font-size: 2.5rem; margin-bottom: var(--space-sm);">⚠️</div>
+      <h2 style="font-size: 1.5rem; font-weight: 800; margin-bottom: var(--space-xs);">Não foi possível enviar seu diagnóstico</h2>
+      <p id="portal-error-message" style="color: var(--clr-muted); margin-bottom: var(--space-md);">Ocorreu uma falha de comunicação com o servidor. Suas respostas não foram perdidas — tente novamente.</p>
+      <button class="btn btn-primary" id="portal-retry-btn">
+        <span>Tentar Novamente</span>
       </button>
     </div>
   </div>

@@ -90,16 +90,23 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // --- 4. Form Submission & Blockchain Attestation Simulation ---
+  // --- 4. Form Submission ---
   const form = document.getElementById('contact-form');
   const successScreen = document.getElementById('success-screen');
-  const attestHash = document.getElementById('attest-hash');
-  const attestMeta = document.getElementById('attest-meta');
+  const successReference = document.getElementById('success-reference');
+  const formError = document.getElementById('form-error');
 
   if (form) {
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
-      
+
+      if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
+      }
+
+      if (formError) formError.style.display = 'none';
+
       const formData = {
         nome: document.getElementById('nome').value,
         empresa: document.getElementById('empresa').value,
@@ -109,12 +116,10 @@ document.addEventListener('DOMContentLoaded', () => {
         segmento: document.getElementById('segmento').value,
         frota: document.getElementById('frota')?.value || '',
         dor: document.getElementById('dor')?.value || '',
-        timestamp: new Date().toISOString(),
         source: 'landing_contato'
       };
 
       try {
-        // Send lead data to backend
         const response = await fetch('/api/leads', {
           method: 'POST',
           headers: {
@@ -123,32 +128,27 @@ document.addEventListener('DOMContentLoaded', () => {
           body: JSON.stringify(formData)
         });
 
+        if (!response.ok) {
+          const data = await response.json().catch(() => ({}));
+          throw new Error(data.detail || 'Não foi possível enviar sua solicitação.');
+        }
+
         const data = await response.json();
-        
+
         form.style.display = 'none';
         successScreen.style.display = 'block';
-
-        // Generate dynamic hash simulation
-        if (data.hash) {
-          attestHash.innerText = data.hash;
-          attestMeta.innerText = `Bloco: ${data.block} · Timestamp: ${data.timestamp} · Status: Verificado`;
-        } else {
-          // Fallback static-like hash
-          const mockHash = '0x' + Array.from({length: 40}, () => Math.floor(Math.random()*16).toString(16)).join('');
-          attestHash.innerText = mockHash;
-          attestMeta.innerText = `Bloco: 194852 · Timestamp: ${new Date().toLocaleString()} · Status: Local Safe`;
+        if (successReference) {
+          successReference.innerText = `Referência interna: #${data.lead_id}`;
         }
 
         logTelemetry('lead_submitted', { segmento: formData.segmento });
 
       } catch (err) {
         console.error('Erro ao enviar lead:', err);
-        // Direct fallback UI for dev-mode convenience
-        form.style.display = 'none';
-        successScreen.style.display = 'block';
-        const mockHash = '0x' + Array.from({length: 40}, () => Math.floor(Math.random()*16).toString(16)).join('');
-        attestHash.innerText = mockHash;
-        attestMeta.innerText = `Bloco: 194852 · Timestamp: ${new Date().toLocaleString()} · Status: Fallback Offline Safe`;
+        if (formError) {
+          formError.innerText = err.message || 'Não foi possível enviar sua solicitação. Tente novamente em instantes.';
+          formError.style.display = 'block';
+        }
       }
     });
   }
@@ -156,12 +156,19 @@ document.addEventListener('DOMContentLoaded', () => {
   // --- 5. Pilot Program Form ---
   const pilotForm = document.getElementById('pilot-form');
   const pilotSuccessScreen = document.getElementById('pilot-success-screen');
-  const pilotSubmitBtn = document.getElementById('pilot-submit-btn');
+  const pilotFormError = document.getElementById('pilot-form-error');
 
   if (pilotForm) {
     pilotForm.addEventListener('submit', async (e) => {
       e.preventDefault();
-      
+
+      if (!pilotForm.checkValidity()) {
+        pilotForm.reportValidity();
+        return;
+      }
+
+      if (pilotFormError) pilotFormError.style.display = 'none';
+
       const formData = {
         nome: document.getElementById('pilot-nome').value,
         empresa: document.getElementById('pilot-empresa').value,
@@ -169,11 +176,10 @@ document.addEventListener('DOMContentLoaded', () => {
         email: document.getElementById('pilot-email').value,
         telefone: document.getElementById('pilot-telefone').value,
         segmento: 'programa_piloto',
-        timestamp: new Date().toISOString()
+        source: 'programa_piloto'
       };
 
       try {
-        // Send lead data to backend
         const response = await fetch('/api/leads', {
           method: 'POST',
           headers: {
@@ -182,8 +188,11 @@ document.addEventListener('DOMContentLoaded', () => {
           body: JSON.stringify(formData)
         });
 
-        const data = await response.json();
-        
+        if (!response.ok) {
+          const data = await response.json().catch(() => ({}));
+          throw new Error(data.detail || 'Não foi possível enviar sua inscrição.');
+        }
+
         pilotForm.style.display = 'none';
         pilotSuccessScreen.style.display = 'block';
 
@@ -191,9 +200,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
       } catch (err) {
         console.error('Erro ao enviar lead do programa piloto:', err);
-        // Direct fallback UI for dev-mode convenience
-        pilotForm.style.display = 'none';
-        pilotSuccessScreen.style.display = 'block';
+        if (pilotFormError) {
+          pilotFormError.innerText = err.message || 'Não foi possível enviar sua inscrição. Tente novamente em instantes.';
+          pilotFormError.style.display = 'block';
+        }
       }
     });
   }
@@ -344,7 +354,7 @@ async function initDiagnosticPortal(token) {
 
   // Show a specific phase, hide others
   function showPhase(phaseId) {
-    ['portal-phase-nda', 'portal-phase-contact', 'portal-phase-questions', 'portal-phase-attesting', 'portal-phase-success'].forEach(id => {
+    ['portal-phase-nda', 'portal-phase-contact', 'portal-phase-questions', 'portal-phase-attesting', 'portal-phase-success', 'portal-phase-error'].forEach(id => {
       const el = document.getElementById(id);
       if (el) el.style.display = id === phaseId ? 'block' : 'none';
     });
@@ -491,15 +501,16 @@ async function initDiagnosticPortal(token) {
     updateProgress(totalPhases - 1);
 
     const console_el = document.getElementById('attesting-console');
+    console_el.innerHTML = '[SYS] Iniciando simulação do protocolo de atestação...';
 
-    // Simulated attestation animation
+    // Simulated attestation animation — illustrates the product flow for
+    // demo purposes only; no blockchain write actually happens here.
     const steps = [
-      '[SEC] Cifragem de dados pessoais via SHA-3 concluída.',
-      '[UEAP] Preparando payload de atestação criptográfica...',
-      `[NET] Enviando ${Object.keys(answers).length - 1} respostas para a rede soberana...`,
+      '[SEC] Cifragem de dados pessoais concluída.',
+      '[SIM] Preparando payload de registro (ambiente de demonstração)...',
+      `[NET] Enviando ${Object.keys(answers).length - 1} respostas para o servidor...`,
       '[API] Solicitando auditoria ao motor forense de IA...',
-      '[API] Laudo de conformidade forense gerado e assinado digitalmente com Ed25519.',
-      '[BLOCK] Gravando hashes de atestação na blockchain...',
+      '[API] Laudo de conformidade forense gerado (simulação).',
     ];
 
     for (let i = 0; i < steps.length; i++) {
@@ -531,10 +542,14 @@ async function initDiagnosticPortal(token) {
         body: JSON.stringify(payload)
       });
 
+      if (!res.ok) {
+        const errData = await res.json().catch(() => ({}));
+        throw new Error(errData.detail || 'O servidor rejeitou a submissão.');
+      }
+
       const data = await res.json();
 
-      await new Promise(resolve => setTimeout(resolve, 500));
-      console_el.innerHTML += `\n[OK] Transação confirmada: ${data.hash || 'offline-mode'}`;
+      console_el.innerHTML += `\n[OK] Registro confirmado: ${data.registration_id || 'N/A'}`;
       console_el.innerHTML += `\n[DONE] Laudo de conformidade gerado com sucesso.`;
 
       await new Promise(resolve => setTimeout(resolve, 800));
@@ -543,28 +558,34 @@ async function initDiagnosticPortal(token) {
       showPhase('portal-phase-success');
       updateProgress(totalPhases);
 
-      document.getElementById('portal-res-hash').innerText = data.hash || '0x_offline_' + Date.now().toString(16);
-      document.getElementById('portal-res-meta').innerText = `Bloco: ${data.block || 'N/A'} · Timestamp: ${data.timestamp || new Date().toLocaleString()} · Status: Verificado`;
+      document.getElementById('portal-res-hash').innerText = data.registration_id || '—';
+      document.getElementById('portal-res-meta').innerText = `Timestamp: ${data.created_at || new Date().toLocaleString()} · Status: Registrado (demonstração)`;
 
       logTelemetry('portal_diagnostic_submitted', { token: formToken, company: contact.empresa });
 
     } catch (err) {
       console.error('Erro ao submeter diagnóstico:', err);
-      
-      await new Promise(resolve => setTimeout(resolve, 500));
-      console_el.innerHTML += `\n[WARN] Conexão offline — salvando localmente...`;
-      console_el.innerHTML += `\n[OK] Dados persistidos em modo soberano.`;
 
-      await new Promise(resolve => setTimeout(resolve, 800));
+      console_el.innerHTML += `\n[ERRO] Falha ao registrar diagnóstico: ${err.message}`;
 
-      showPhase('portal-phase-success');
-      updateProgress(totalPhases);
-
-      const offlineHash = '0x' + Array.from({length: 64}, () => Math.floor(Math.random()*16).toString(16)).join('');
-      document.getElementById('portal-res-hash').innerText = offlineHash;
-      document.getElementById('portal-res-meta').innerText = `Bloco: Offline · Timestamp: ${new Date().toLocaleString()} · Status: Soberano Local`;
+      lastDiagnosticSubmission = { formToken, formMeta, answers };
+      const errorMsgEl = document.getElementById('portal-error-message');
+      if (errorMsgEl) {
+        errorMsgEl.innerText = `Ocorreu uma falha de comunicação com o servidor (${err.message}). Suas respostas não foram perdidas — tente novamente.`;
+      }
+      showPhase('portal-phase-error');
     }
   }
+
+  let lastDiagnosticSubmission = null;
+
+  // Retry button — resubmits the last answered diagnostic after a failure
+  document.getElementById('portal-retry-btn').addEventListener('click', () => {
+    if (lastDiagnosticSubmission) {
+      const { formToken, formMeta, answers } = lastDiagnosticSubmission;
+      submitDiagnostic(formToken, formMeta, answers);
+    }
+  });
 
   // Done button
   document.getElementById('portal-done-btn').addEventListener('click', () => {

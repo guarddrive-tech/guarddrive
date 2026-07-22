@@ -656,14 +656,10 @@
         </div>
 
         <div class="drawer-section">
-          <div class="drawer-section-title">Registro Criptográfico (UEAP)</div>
+          <div class="drawer-section-title">Registro de Integridade (Ambiente de Demonstração)</div>
           <div class="detail-item">
-            <span class="detail-label">Hash da Transação</span>
+            <span class="detail-label">ID de Registro</span>
             <span class="detail-value" id="drawer-hash" style="font-family: var(--font-mono); font-size: 0.8rem; overflow-wrap: break-word;">-</span>
-          </div>
-          <div class="detail-item">
-            <span class="detail-label">Bloco Criptográfico</span>
-            <span class="detail-value" id="drawer-block" style="font-family: var(--font-mono);">-</span>
           </div>
           <div class="detail-item">
             <span class="detail-label">Data da Qualificação</span>
@@ -1050,8 +1046,7 @@
         ndaVal.style.color = "#ff4a4a";
       }
 
-      document.getElementById("drawer-hash").innerText = lead.hash || 'Offline Non-Attested';
-      document.getElementById("drawer-block").innerText = lead.block || '-';
+      document.getElementById("drawer-hash").innerText = lead.registration_id || 'Não registrado';
       document.getElementById("drawer-timestamp").innerText = new Date(lead.created_at).toLocaleString('pt-BR');
 
       // QA display
@@ -1086,7 +1081,7 @@
       }
       
       let csvContent = "data:text/csv;charset=utf-8,\uFEFF";
-      csvContent += "ID,Empresa,Nome Contato,Email,WhatsApp Pessoal,WhatsApp Corporativo,NDA Aceito,Hash Blockchain,Bloco,Data\n";
+      csvContent += "ID,Empresa,Nome Contato,Email,WhatsApp Pessoal,WhatsApp Corporativo,NDA Aceito,ID de Registro (Demo),Data\n";
 
       allLeads.forEach(l => {
         const row = [
@@ -1097,8 +1092,7 @@
           `"${(l.phone_personal || '').replace(/"/g, '""')}"`,
           `"${(l.phone_corporate || '').replace(/"/g, '""')}"`,
           l.nda_accepted ? "SIM" : "NAO",
-          l.hash || '',
-          l.block || '',
+          l.registration_id || '',
           l.created_at
         ].join(",");
         csvContent += row + "\n";
