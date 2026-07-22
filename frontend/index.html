@@ -31,7 +31,7 @@
         <li><a href="#ecossistema" class="nav-link" id="nav-ecossistema">Ecossistema</a></li>
         <li><a href="#programa-piloto" class="nav-link" id="nav-piloto">Piloto</a></li>
       </ul>
-      <a href="#contato" class="btn btn-primary btn-sm" id="nav-cta" data-xp-trigger="true">Solicitar Diagnóstico</a>
+      <a href="#contato" class="btn btn-primary btn-sm" id="nav-cta" data-xp-trigger="true">Agendar Conversa</a>
       <button class="nav-burger" id="nav-burger" aria-label="Menu">
         <span></span><span></span><span></span>
       </button>
@@ -54,7 +54,7 @@
       </p>
       <div class="hero-actions" id="hero-actions">
         <a href="#contato" class="btn btn-primary btn-large" id="hero-demo-btn" data-xp-trigger="true">
-          <span>Solicitar Diagnóstico de Risco</span>
+          <span>Agendar Conversa Exploratória</span>
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
         </a>
         <a href="#como-funciona" class="btn btn-ghost" id="hero-how-btn">Ver Como Funciona ↓</a>
@@ -180,7 +180,6 @@
       <span>GOVERNANÇA DE FROTA</span><span class="sep">·</span>
       <span>LGPD COMPLIANT</span><span class="sep">·</span>
       <span>GUARDPASS™ GOVERNANCE</span><span class="sep">·</span>
-      <span>SYMBEON LABS</span><span class="sep">·</span>
       <span>GUARDDRIVE™</span><span class="sep">·</span>
       <span>OPERATIONAL TRUST FOR MOBILITY</span><span class="sep">·</span>
       <span>THE TRUST LAYER FOR CONNECTED MOBILITY</span><span class="sep">·</span>
@@ -192,7 +191,6 @@
       <span>GOVERNANÇA DE FROTA</span><span class="sep">·</span>
       <span>LGPD COMPLIANT</span><span class="sep">·</span>
       <span>GUARDPASS™ GOVERNANCE</span><span class="sep">·</span>
-      <span>SYMBEON LABS</span><span class="sep">·</span>
     </div>
   </div>
 
@@ -495,7 +493,7 @@
         Identidade física, dados e conformidade operam como uma infraestrutura única — não produtos separados.
       </p>
       <p class="ecosystem-description reveal-on-scroll" style="margin-top: 0.75rem; font-size: 0.85rem; opacity: 0.75;">
-        Uma iniciativa da <strong>Symbeon Labs</strong>.
+        GuardDrive™ — Operational Trust for Mobility.
       </p>
 
       <!-- Ecosystem architecture visual -->
@@ -566,7 +564,7 @@
               <li style="margin-bottom: 0.4rem; display: flex; align-items: center; gap: 8px;">✓ API dedicada de Insights de Risco</li>
             </ul>
           </div>
-          <a href="#contato" class="btn btn-ghost" data-plan="enterprise" style="width: 100%; justify-content: center; font-size: 0.85rem; padding: 0.6rem var(--space-md);">Falar com Especialista</a>
+          <a href="#contato" class="btn btn-ghost" data-plan="enterprise" style="width: 100%; justify-content: center; font-size: 0.85rem; padding: 0.6rem var(--space-md);">Sob Consulta (PJ)</a>
         </div>
 
       </div>
@@ -645,10 +643,10 @@
           <div class="form-group">
             <label for="empresa">
               <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right:5px; opacity:0.6;"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
-              Empresa <span style="color: var(--clr-cyan);">*</span>
+              Empresa / Organização <span style="color: var(--clr-muted); font-size: 0.75rem;">(opcional)</span>
             </label>
             <div class="input-wrapper">
-              <input type="text" id="empresa" placeholder="Nome da empresa / operação" required autocomplete="organization" />
+              <input type="text" id="empresa" placeholder="Nome da empresa / operação (opcional)" autocomplete="organization" />
               <span class="input-check" id="check-empresa">✓</span>
             </div>
           </div>
@@ -692,6 +690,7 @@
                 <option value="seguradora">Seguradora / Sinistros</option>
                 <option value="logistica">Logística / Transportadora</option>
                 <option value="municipio">Município / Governo</option>
+                <option value="pessoa_fisica">Pessoa Física / Consultoria</option>
                 <option value="outro">Outro</option>
               </select>
               <span class="input-check" id="check-segmento">✓</span>
@@ -881,8 +880,8 @@
             <input type="text" id="pilot-nome" placeholder="Seu nome completo" required autocomplete="name" />
           </div>
           <div class="form-group">
-            <label for="pilot-empresa">Empresa</label>
-            <input type="text" id="pilot-empresa" placeholder="Nome da sua empresa" required autocomplete="organization" />
+            <label for="pilot-empresa">Empresa / Organização <span style="color: var(--clr-muted); font-size: 0.75rem;">(opcional)</span></label>
+            <input type="text" id="pilot-empresa" placeholder="Nome da empresa / operação (opcional)" autocomplete="organization" />
           </div>
         </div>
         <div class="form-row">
@@ -935,8 +934,11 @@
         <span class="brand-logo">GD</span>
         <span class="brand-name">GuardDrive<sup class="brand-tm">™</sup></span>
       </div>
-      <p class="footer-copy">© 2026 GuardDrive · uma iniciativa Symbeon Labs · Operational Trust for Mobility · Todos os direitos reservados · LGPD Compliant</p>
+      <p class="footer-copy">© 2026 GuardDrive · Operational Trust for Mobility · Todos os direitos reservados · LGPD Compliant</p>
       <p class="footer-mono">GUARDPROOF™ ATTESTATION STANDARD v1.2 · OPERATIONAL TRUST FOR MOBILITY</p>
+      <p class="footer-legal" style="margin-top: 1rem; font-size: 0.7rem; color: var(--clr-muted); line-height: 1.4; max-width: 600px;">
+        Operação em fase piloto. Serviços prestados conforme limitações do faturamento anual. Para operações acima de R$81.000/ano, será necessário contrato via pessoa jurídica. Emissão de recibo de prestação de serviços (RPS) disponível.
+      </p>
     </div>
   </footer>
 
@@ -1023,8 +1025,8 @@
           <input type="text" id="portal-nome" placeholder="Seu nome" />
         </div>
         <div class="form-group">
-          <label for="portal-empresa">Empresa</label>
-          <input type="text" id="portal-empresa" placeholder="Nome da empresa" />
+          <label for="portal-empresa">Empresa / Organização <span style="color: var(--clr-muted); font-size: 0.75rem;">(opcional)</span></label>
+          <input type="text" id="portal-empresa" placeholder="Nome da empresa / operação (opcional)" />
         </div>
       </div>
       <div class="form-group" style="margin-bottom: var(--space-sm);">
@@ -1142,8 +1144,8 @@
             <input type="text" id="xp-nome" placeholder="Seu nome completo" autocomplete="name" />
           </div>
           <div class="form-group">
-            <label for="xp-empresa">Empresa</label>
-            <input type="text" id="xp-empresa" placeholder="Nome da empresa / operação" autocomplete="organization" />
+            <label for="xp-empresa">Empresa / Organização <span style="color: var(--clr-muted); font-size: 0.75rem;">(opcional)</span></label>
+            <input type="text" id="xp-empresa" placeholder="Nome da empresa / operação (opcional)" autocomplete="organization" />
           </div>
           <div class="form-group">
             <label for="xp-cargo">Cargo</label>

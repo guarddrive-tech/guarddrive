@@ -110,14 +110,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const cargo = document.getElementById('xp-cargo').value.trim();
     const segmento = document.getElementById('xp-segmento').value;
 
-    if (!nome || !empresa || !cargo || !segmento) {
+    if (!nome || !cargo || !segmento) {
       identifyError.classList.add('xp-visible');
       return;
     }
     identifyError.classList.remove('xp-visible');
 
     state.nome = nome;
-    state.empresa = empresa;
+    state.empresa = empresa || 'Não informado';
     state.cargo = cargo;
     state.segmento = segmento;
 
