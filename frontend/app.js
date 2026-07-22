@@ -265,13 +265,9 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // Plan card CTA pre-selection
-  document.querySelectorAll('a[href="#contato"].btn').forEach(btn => {
+  document.querySelectorAll('a[href="#contato"].btn[data-plan]').forEach(btn => {
     btn.addEventListener('click', () => {
-      const text = btn.textContent.toLowerCase();
-      let planValue = null;
-      if (text.includes('standard')) planValue = 'standard';
-      else if (text.includes('premium')) planValue = 'premium';
-      else if (text.includes('especialista') || text.includes('enterprise')) planValue = 'enterprise';
+      const planValue = btn.dataset.plan;
       if (planValue) {
         setTimeout(() => {
           const radio = document.getElementById(`plan-${planValue}`);
