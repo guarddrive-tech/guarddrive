@@ -741,13 +741,13 @@ function initHeroAnimation() {
 
   // Event log data pool
   const eventPool = [
-    { plate: 'BRA2E19', type: 'Atestação NFC', time: null },
+    { plate: 'BRA2E19', type: 'Identidade Verificada', time: null },
     { plate: 'ABC1D23', type: 'Verificação Lacre', time: null },
     { plate: 'XYZ4F56', type: 'Integridade OK', time: null },
-    { plate: 'GHI7K89', type: 'Atestação NFC', time: null },
+    { plate: 'GHI7K89', type: 'Identidade Verificada', time: null },
     { plate: 'JKL3M01', type: 'Score Validado', time: null },
     { plate: 'MNO5P67', type: 'Verificação Lacre', time: null },
-    { plate: 'PQR2T34', type: 'Atestação NFC', time: null },
+    { plate: 'PQR2T34', type: 'Identidade Verificada', time: null },
     { plate: 'STU8V12', type: 'Integridade OK', time: null },
     { plate: 'VWX6Y90', type: 'Score Validado', time: null },
   ];
