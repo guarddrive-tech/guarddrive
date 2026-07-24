@@ -1832,3 +1832,148 @@ textarea { resize: vertical; }
   .xp-final-actions .btn { width: 100%; justify-content: center; }
 }
 
+/* ── 21. GLOSSARY TOOLTIP ──────────────────────────── */
+.gd-term {
+  position: relative;
+  display: inline-block;
+}
+.gd-term-trigger {
+  font: inherit;
+  color: var(--clr-cyan);
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  cursor: help;
+  border-bottom: 1px dashed rgba(0, 240, 255, 0.5);
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+.gd-term-trigger:hover,
+.gd-term-trigger:focus-visible {
+  color: var(--clr-white);
+  border-bottom-color: var(--clr-white);
+}
+.gd-term-trigger:focus-visible {
+  outline: 2px solid var(--clr-cyan);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+.gd-term-bubble {
+  position: absolute;
+  left: 50%;
+  bottom: calc(100% + 10px);
+  transform: translateX(-50%) translateY(4px);
+  width: max-content;
+  max-width: 240px;
+  background: var(--clr-surface2);
+  border: 1px solid var(--clr-border-h);
+  color: var(--clr-white);
+  font-family: var(--font-sans);
+  font-size: 0.78rem;
+  font-weight: 400;
+  line-height: 1.45;
+  text-align: left;
+  white-space: normal;
+  padding: 0.55rem 0.8rem;
+  border-radius: var(--radius-sm);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.45);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  z-index: 60;
+}
+.gd-term-bubble::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 5px solid transparent;
+  border-top-color: var(--clr-border-h);
+}
+.gd-term:hover .gd-term-bubble,
+.gd-term-trigger:focus-visible + .gd-term-bubble,
+.gd-term.gd-term-open .gd-term-bubble {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
+}
+@media (max-width: 480px) {
+  .gd-term-bubble { max-width: 200px; font-size: 0.74rem; }
+}
+
+/* ── 22. PRICING TIERS — VISUAL DIFFERENTIATION ────── */
+.pricing-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: left;
+  padding: var(--space-md);
+  border-radius: var(--radius-md);
+  background: rgba(12, 12, 18, 0.55);
+  transition: transform 0.35s var(--ease-out-expo), box-shadow 0.35s var(--ease-out-expo), border-color 0.35s ease;
+}
+.pricing-card:hover {
+  transform: translateY(-6px);
+}
+.pricing-card-eyebrow { font-size: 0.8rem; font-weight: 700; margin-bottom: 0.6rem; letter-spacing: 0.03em; }
+.pricing-card-desc { color: var(--clr-muted); font-size: 0.85rem; margin-bottom: var(--space-md); line-height: 1.5; }
+.pricing-card-list { list-style: none; padding: 0; margin-bottom: var(--space-md); font-size: 0.85rem; color: #cbd5e1; line-height: 1.8; }
+.pricing-card-list li { margin-bottom: 0.4rem; display: flex; align-items: center; gap: 8px; }
+.pricing-card-badge {
+  position: absolute;
+  top: -12px;
+  right: 20px;
+  font-size: 0.65rem;
+  font-weight: 800;
+  font-family: var(--font-mono);
+  padding: 0.25rem 0.85rem;
+  border-radius: var(--radius-pill);
+  letter-spacing: 0.06em;
+}
+
+/* Foundation — essencial, tons de cinza/azul claro */
+.pricing-card--foundation {
+  border: 1px solid rgba(148, 163, 184, 0.3);
+}
+.pricing-card--foundation:hover {
+  border-color: rgba(148, 163, 184, 0.55);
+  box-shadow: 0 10px 30px rgba(148, 163, 184, 0.1);
+}
+.pricing-card--foundation .pricing-card-eyebrow { color: #94A3B8; }
+.pricing-card--foundation .pricing-card-badge {
+  background: rgba(148, 163, 184, 0.1);
+  border: 1px solid rgba(148, 163, 184, 0.4);
+  color: #CBD5E1;
+}
+
+/* Professional — mais popular, ciano vibrante com glow */
+.pricing-card--professional {
+  border: 2px solid #00E5FF;
+  box-shadow: 0 0 20px rgba(0, 229, 255, 0.3);
+}
+.pricing-card--professional:hover {
+  box-shadow: 0 0 30px rgba(0, 229, 255, 0.45);
+}
+.pricing-card--professional .pricing-card-eyebrow { color: #00E5FF; }
+.pricing-card--professional .pricing-card-badge {
+  background: linear-gradient(135deg, #00E5FF, #06B6D4);
+  color: #001318;
+}
+
+/* Enterprise — avançado, violeta com glow */
+.pricing-card--enterprise {
+  border: 2px solid #6D28D9;
+  box-shadow: 0 0 20px rgba(109, 40, 217, 0.3);
+}
+.pricing-card--enterprise:hover {
+  box-shadow: 0 0 30px rgba(109, 40, 217, 0.45);
+}
+.pricing-card--enterprise .pricing-card-eyebrow { color: #8B5CF6; }
+.pricing-card--enterprise .pricing-card-badge {
+  background: linear-gradient(135deg, #6D28D9, #7C3AED);
+  color: #FFFFFF;
+}
+
