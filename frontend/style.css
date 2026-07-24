@@ -338,6 +338,70 @@ textarea { resize: vertical; }
   opacity: 0.6; margin: -0.5rem 0;
 }
 
+/* ── 11b. FLOW GRID (A Categoria — horizontal no desktop) ──── */
+.section-compact { padding: 3.5rem var(--space-md) 4rem; }
+
+.flow-grid {
+  display: flex; flex-direction: row; align-items: stretch; justify-content: center;
+  gap: 0.75rem; max-width: 1180px; margin: 0 auto;
+}
+.flow-h-step {
+  flex: 1 1 0; min-width: 0;
+  background: var(--clr-surface);
+  border: 1px solid var(--clr-border);
+  border-radius: var(--radius-md);
+  padding: 1.4rem 1.3rem;
+  max-height: 200px;
+  backdrop-filter: blur(16px);
+  transition: border-color 0.3s var(--ease-out-expo), transform 0.3s var(--ease-out-expo);
+}
+.flow-h-step:hover {
+  border-color: var(--clr-cyan);
+  transform: scale(1.02);
+}
+.flow-h-top { display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.85rem; }
+.flow-h-number {
+  font-family: var(--font-mono); font-size: 0.9rem; font-weight: 800;
+  color: var(--clr-cyan);
+  background: rgba(0,240,255,0.1);
+  border: 1px solid rgba(0,240,255,0.25);
+  width: 34px; height: 34px;
+  display: flex; align-items: center; justify-content: center;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.flow-h-icon {
+  width: 34px; height: 34px;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(0,240,255,0.06);
+  border: 1px solid rgba(0,240,255,0.14);
+  border-radius: var(--radius-sm);
+  color: var(--clr-cyan);
+  flex-shrink: 0;
+}
+.flow-h-icon svg { width: 18px; height: 18px; }
+.flow-h-step h3 { font-size: 1rem; font-weight: 700; margin-bottom: 0.4rem; line-height: 1.25; }
+.flow-h-step p { color: var(--clr-muted); font-size: 0.82rem; line-height: 1.5; }
+.flow-h-arrow {
+  flex: 0 0 auto; align-self: center;
+  font-size: 1.4rem; color: var(--clr-cyan); opacity: 0.5;
+}
+.flow-h-step.reveal-on-scroll { transform: translateY(30px); }
+
+@media (max-width: 1024px) {
+  .flow-grid { flex-wrap: wrap; }
+  .flow-h-step { flex: 1 1 40%; max-height: none; }
+}
+@media (max-width: 768px) {
+  .flow-grid { flex-direction: column; max-width: 480px; }
+  .flow-h-step { flex: 1 1 auto; max-height: none; }
+  .flow-h-arrow { transform: rotate(90deg); }
+}
+
+/* Variante com 5 passos (Como Funciona) — sem cap de altura, um pouco mais larga */
+.flow-grid-como { max-width: 1300px; }
+.flow-grid-como .flow-h-step { max-height: none; }
+
 /* ── 12. BENEFITS GRID ─────────────────────────────── */
 .benefits-grid {
   display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
