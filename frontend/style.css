@@ -398,6 +398,10 @@ textarea { resize: vertical; }
   .flow-h-arrow { transform: rotate(90deg); }
 }
 
+/* Variante com 5 passos (Como Funciona) — sem cap de altura, um pouco mais larga */
+.flow-grid-como { max-width: 1300px; }
+.flow-grid-como .flow-h-step { max-height: none; }
+
 /* ── 12. BENEFITS GRID ─────────────────────────────── */
 .benefits-grid {
   display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
