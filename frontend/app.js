@@ -225,6 +225,23 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
+  // --- 6b. Glossary Tooltips (event-delegated so it also covers tooltips
+  // rendered later by the diagnostic portal) — tap-to-toggle for touch devices
+  document.addEventListener('click', (e) => {
+    const trigger = e.target.closest('.gd-term-trigger');
+    document.querySelectorAll('.gd-term.gd-term-open').forEach(t => {
+      if (!trigger || t !== trigger.closest('.gd-term')) t.classList.remove('gd-term-open');
+    });
+    if (trigger) {
+      trigger.closest('.gd-term').classList.toggle('gd-term-open');
+    }
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      document.querySelectorAll('.gd-term.gd-term-open').forEach(t => t.classList.remove('gd-term-open'));
+    }
+  });
+
   // --- 7. Real-time form validation + plan pre-selection ---
 
   // Validate inputs on blur/input

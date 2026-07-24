@@ -226,6 +226,41 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const RADAR_AXES = ['Identidade', 'Conformidade', 'Rastreabilidade', 'Sinistro', 'Fraude', 'ROI'];
 
+  // ── Challenge-specific recommendations for the final report ──
+  const NFC_TERM = '<span class="gd-term"><button type="button" class="gd-term-trigger" aria-describedby="gd-tt-nfc-reco">NFC</button><span class="gd-term-bubble" role="tooltip" id="gd-tt-nfc-reco">Tecnologia de Comunicação por Aproximação</span></span>';
+
+  const CHALLENGE_RECOMMENDATIONS = {
+    'Depreciação sem histórico': [
+      'Implementar GuardTag™ em 100% dos veículos para rastreamento de valor.',
+      'Gerar laudos de vistoria mensais com evidência criptográfica.',
+      'Integrar com sistema de valuation para depreciação baseada em uso real.',
+    ],
+    'Auditoria manual de devolução': [
+      'Automatizar vistorias com GuardProof™ Engine (redução de 85% no tempo).',
+      'Implementar check-in/check-out digital com biometria.',
+      'Gerar relatórios de conformidade automáticos.',
+    ],
+    'Disputas com locatários': [
+      'Ativar camada de evidência auditável em todas as entregas e devoluções.',
+      'Implementar assinatura digital com validade jurídica.',
+      'Gerar laudos técnicos automáticos para mediação de conflitos.',
+    ],
+    'Roubo e desvio de veículos': [
+      `Instalar GuardTag™ com ${NFC_TERM} destructível em todos os ativos.`,
+      'Ativar alertas de remoção não autorizada em tempo real.',
+      'Integrar com sistemas de rastreamento e segurança.',
+    ],
+  };
+
+  function getRecommendations(problem) {
+    if (CHALLENGE_RECOMMENDATIONS[problem]) return CHALLENGE_RECOMMENDATIONS[problem];
+    return [
+      'Ativar camada de evidência auditável para os vetores de maior exposição.',
+      `Priorizar o desafio "${escapeHtml(problem || 'operação')}" no primeiro ciclo de implantação.`,
+      'Validar o programa piloto antes da expansão total da frota.',
+    ];
+  }
+
   function generateDiagnostic(s) {
     const seed = hashSeed(`${s.nome}|${s.empresa}|${s.cargo}|${s.segmento}|${s.fleet}|${s.problem}`);
     const rand = mulberry32(seed);
@@ -468,9 +503,7 @@ document.addEventListener('DOMContentLoaded', () => {
       <div class="xp-report-section">
         <h4>Recomendações</h4>
         <ul>
-          <li>Ativar camada de evidência auditável para os vetores de maior exposição.</li>
-          <li>Priorizar o desafio "${escapeHtml(state.problem || 'operação')}" no primeiro ciclo de implantação.</li>
-          <li>Validar o programa piloto antes da expansão total da frota.</li>
+          ${getRecommendations(state.problem).map((line) => `<li>${line}</li>`).join('')}
         </ul>
       </div>
       <div class="xp-report-section">

@@ -522,46 +522,48 @@
       <div class="pricing-grid reveal-on-scroll" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: var(--space-md); margin-top: var(--space-lg);">
 
         <!-- Foundation -->
-        <div class="pricing-card" style="background: rgba(12, 12, 18, 0.55); border: 1px solid var(--clr-border); padding: var(--space-md); border-radius: var(--radius-md); text-align: left; display: flex; flex-direction: column; justify-content: space-between; transition: all 0.3s var(--ease-out-expo);">
+        <div class="pricing-card pricing-card--foundation">
+          <span class="pricing-card-badge">ESSENCIAL</span>
           <div>
             <h3 style="font-size: 1.3rem; margin-bottom: 0.5rem; color: var(--clr-white);">Foundation</h3>
-            <p style="color: var(--clr-cyan); font-size: 0.8rem; font-weight: 700; margin-bottom: 0.6rem; letter-spacing: 0.03em;">CONFIANÇA VERIFICADA</p>
-            <p style="color: var(--clr-muted); font-size: 0.85rem; margin-bottom: var(--space-md); line-height: 1.5;">Identidade física verificável, auditoria contínua, sem infraestrutura adicional.</p>
-            <ul style="list-style: none; padding: 0; margin-bottom: var(--space-md); font-size: 0.85rem; color: #cbd5e1; line-height: 1.8;">
-              <li style="margin-bottom: 0.4rem; display: flex; align-items: center; gap: 8px;">✓ Identidade Física Verificada por veículo</li>
-              <li style="margin-bottom: 0.4rem; display: flex; align-items: center; gap: 8px;">✓ Score de Confiança ~95%</li>
-              <li style="margin-bottom: 0.4rem; display: flex; align-items: center; gap: 8px;">✓ Atestação em campo via App GuardTag</li>
+            <p class="pricing-card-eyebrow">CONFIANÇA VERIFICADA</p>
+            <p class="pricing-card-desc">Identidade física verificável, auditoria contínua, sem infraestrutura adicional.</p>
+            <ul class="pricing-card-list">
+              <li>✓ Identidade Física Verificada por veículo</li>
+              <li>✓ Score de Confiança ~95%</li>
+              <li>✓ Atestação em campo via App GuardTag</li>
             </ul>
           </div>
           <a href="#contato" class="btn btn-ghost" data-plan="foundation" style="width: 100%; justify-content: center; font-size: 0.85rem; padding: 0.6rem var(--space-md);">Avaliar no Diagnóstico</a>
         </div>
 
         <!-- Professional -->
-        <div class="pricing-card" style="background: rgba(18, 18, 28, 0.75); border: 1px solid var(--clr-cyan); padding: var(--space-md); border-radius: var(--radius-md); text-align: left; display: flex; flex-direction: column; justify-content: space-between; position: relative; box-shadow: 0 10px 30px rgba(0,240,255,0.06);">
-          <span style="position: absolute; top: -12px; right: 20px; background: var(--clr-cyan); color: #000; font-size: 0.65rem; font-weight: 800; font-family: var(--font-mono); padding: 0.2rem 0.8rem; border-radius: var(--radius-pill); letter-spacing: 0.05em;">MAIS ADOTADO</span>
+        <div class="pricing-card pricing-card--professional">
+          <span class="pricing-card-badge">MAIS POPULAR</span>
           <div>
             <h3 style="font-size: 1.3rem; margin-bottom: 0.5rem; color: var(--clr-white);">Professional</h3>
-            <p style="color: var(--clr-cyan); font-size: 0.8rem; font-weight: 700; margin-bottom: 0.6rem; letter-spacing: 0.03em;">CONFIANÇA COM VALIDADE JURÍDICA</p>
-            <p style="color: var(--clr-muted); font-size: 0.85rem; margin-bottom: var(--space-md); line-height: 1.5;">Evidência criptográfica à prova de violação, com laudo para qualquer disputa.</p>
-            <ul style="list-style: none; padding: 0; margin-bottom: var(--space-md); font-size: 0.85rem; color: #cbd5e1; line-height: 1.8;">
-              <li style="margin-bottom: 0.4rem; display: flex; align-items: center; gap: 8px;">✓ Tamper-resistant Authentication criptográfica</li>
-              <li style="margin-bottom: 0.4rem; display: flex; align-items: center; gap: 8px;">✓ Score de Confiança 100%</li>
-              <li style="margin-bottom: 0.4rem; display: flex; align-items: center; gap: 8px;">✓ Laudo com validade técnico-jurídica</li>
+            <p class="pricing-card-eyebrow">CONFIANÇA COM VALIDADE JURÍDICA</p>
+            <p class="pricing-card-desc">Evidência criptográfica à prova de violação, com laudo para qualquer disputa.</p>
+            <ul class="pricing-card-list">
+              <li>✓ Tamper-resistant Authentication criptográfica</li>
+              <li>✓ Score de Confiança 100%</li>
+              <li>✓ Laudo com validade técnico-jurídica</li>
             </ul>
           </div>
           <a href="#contato" class="btn btn-primary" data-plan="professional" style="width: 100%; justify-content: center; font-size: 0.85rem; padding: 0.6rem var(--space-md); color: #000;">Avaliar no Diagnóstico</a>
         </div>
 
         <!-- Enterprise -->
-        <div class="pricing-card" style="background: rgba(12, 12, 18, 0.55); border: 1px solid var(--clr-border); padding: var(--space-md); border-radius: var(--radius-md); text-align: left; display: flex; flex-direction: column; justify-content: space-between; transition: all 0.3s var(--ease-out-expo);">
+        <div class="pricing-card pricing-card--enterprise">
+          <span class="pricing-card-badge">ENTERPRISE</span>
           <div>
             <h3 style="font-size: 1.3rem; margin-bottom: 0.5rem; color: var(--clr-white);">Enterprise</h3>
-            <p style="color: var(--clr-cyan); font-size: 0.8rem; font-weight: 700; margin-bottom: 0.6rem; letter-spacing: 0.03em;">CONFIANÇA EM TEMPO REAL</p>
-            <p style="color: var(--clr-muted); font-size: 0.85rem; margin-bottom: var(--space-md); line-height: 1.5;">Inteligência contínua e decisões em milissegundos para frotas críticas.</p>
-            <ul style="list-style: none; padding: 0; margin-bottom: var(--space-md); font-size: 0.85rem; color: #cbd5e1; line-height: 1.8;">
-              <li style="margin-bottom: 0.4rem; display: flex; align-items: center; gap: 8px;">✓ Decisões operacionais em tempo real (50ms)</li>
-              <li style="margin-bottom: 0.4rem; display: flex; align-items: center; gap: 8px;">✓ Detecção avançada de eventos críticos</li>
-              <li style="margin-bottom: 0.4rem; display: flex; align-items: center; gap: 8px;">✓ API dedicada de Insights de Risco</li>
+            <p class="pricing-card-eyebrow">CONFIANÇA EM TEMPO REAL</p>
+            <p class="pricing-card-desc">Inteligência contínua e decisões em milissegundos para frotas críticas.</p>
+            <ul class="pricing-card-list">
+              <li>✓ Decisões operacionais em tempo real (50ms)</li>
+              <li>✓ Detecção avançada de eventos críticos</li>
+              <li>✓ API dedicada de Insights de Risco</li>
             </ul>
           </div>
           <a href="#contato" class="btn btn-ghost" data-plan="enterprise" style="width: 100%; justify-content: center; font-size: 0.85rem; padding: 0.6rem var(--space-md);">Sob Consulta (PJ)</a>
@@ -788,7 +790,7 @@
             <span class="faq-acc-icon">+</span>
           </button>
           <div class="faq-acc-panel">
-            <p>Sim, via API REST para TMS e ERPs. Enterprise conta com suporte dedicado e SLAs customizados.</p>
+            <p>Sim, via <span class="gd-term"><button type="button" class="gd-term-trigger" aria-describedby="gd-tt-apirest">API REST</button><span class="gd-term-bubble" role="tooltip" id="gd-tt-apirest">Interface de Integração de Sistemas</span></span> para <span class="gd-term"><button type="button" class="gd-term-trigger" aria-describedby="gd-tt-tms">TMS</button><span class="gd-term-bubble" role="tooltip" id="gd-tt-tms">Sistema de Gestão de Transporte</span></span> e <span class="gd-term"><button type="button" class="gd-term-trigger" aria-describedby="gd-tt-erp">ERPs</button><span class="gd-term-bubble" role="tooltip" id="gd-tt-erp">Sistema de Gestão Empresarial</span></span>. Enterprise conta com suporte dedicado e <span class="gd-term"><button type="button" class="gd-term-trigger" aria-describedby="gd-tt-sla">SLAs</button><span class="gd-term-bubble" role="tooltip" id="gd-tt-sla">Acordo de Nível de Serviço</span></span> customizados.</p>
           </div>
         </div>
 
