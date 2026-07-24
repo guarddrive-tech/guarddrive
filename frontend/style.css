@@ -1936,17 +1936,16 @@ textarea { resize: vertical; }
 
 /* Foundation — essencial, tons de cinza/azul claro */
 .pricing-card--foundation {
-  border: 1px solid rgba(148, 163, 184, 0.3);
+  border: 2px solid #00FF88;
+  box-shadow: 0 0 20px rgba(0, 255, 136, 0.3);
 }
 .pricing-card--foundation:hover {
-  border-color: rgba(148, 163, 184, 0.55);
-  box-shadow: 0 10px 30px rgba(148, 163, 184, 0.1);
+  box-shadow: 0 0 30px rgba(0, 255, 136, 0.45);
 }
-.pricing-card--foundation .pricing-card-eyebrow { color: #94A3B8; }
+.pricing-card--foundation .pricing-card-eyebrow { color: #00FF88; }
 .pricing-card--foundation .pricing-card-badge {
-  background: rgba(148, 163, 184, 0.1);
-  border: 1px solid rgba(148, 163, 184, 0.4);
-  color: #CBD5E1;
+  background: linear-gradient(135deg, #00FF88, #10B981);
+  color: #001a10;
 }
 
 /* Professional — mais popular, ciano vibrante com glow */
