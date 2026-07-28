@@ -1,13 +1,12 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>GuardDrive™ — Operational Trust for Mobility</title>
-  <meta name="description" content="GuardDrive™ é a Trust Layer da mobilidade conectada — infraestrutura de confiança operacional que transforma eventos físicos em evidências auditáveis para frotas, seguradoras, logística, transporte de cargas e passageiros, locadoras e operadores de infraestrutura, reduzindo fraude e acelerando sinistros." />
-  <meta name="keywords" content="operational trust for mobility, trust layer for connected mobility, confiança operacional, mobilidade conectada, frotas corporativas, seguradoras, logística, transporte de cargas, transporte de passageiros, locadoras, MaaS, veículos inteligentes, redução de fraude, evidências auditáveis, GuardDrive, GuardTag, LGPD" />
+  <meta name="description" content="Infraestrutura de confiança operacional para transformar eventos da mobilidade em evidências confiáveis, reduzir disputas e acelerar decisões." />
   <meta property="og:title" content="GuardDrive™ — Operational Trust for Mobility" />
-  <meta property="og:description" content="The Trust Layer for Connected Mobility — a infraestrutura por trás de cada movimento para frotas, seguradoras, logística e mobilidade conectada — evidência auditável, menos fraude, sinistros mais rápidos." />
+  <meta property="og:description" content="Todo veículo gera dados. Só a mobilidade confiável gera evidência." />
   <meta property="og:type" content="website" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -24,15 +23,14 @@
         <span class="brand-name">GuardDrive<sup class="brand-tm">™</sup></span>
       </a>
       <ul class="nav-links" id="nav-links">
-        <li><a href="#categoria" class="nav-link" id="nav-categoria">A Categoria</a></li>
-        <li><a href="#problema" class="nav-link" id="nav-problema">O Problema</a></li>
-        <li><a href="#como-funciona" class="nav-link" id="nav-como-funciona">Como Funciona</a></li>
-        <li><a href="#beneficios" class="nav-link" id="nav-beneficios">Benefícios</a></li>
-        <li><a href="#ecossistema" class="nav-link" id="nav-ecossistema">Ecossistema</a></li>
-        <li><a href="#programa-piloto" class="nav-link" id="nav-piloto">Piloto</a></li>
+        <li><a href="#problema" class="nav-link">O Problema</a></li>
+        <li><a href="#como-funciona" class="nav-link">Como Funciona</a></li>
+        <li><a href="#beneficios" class="nav-link">Resultados</a></li>
+        <li><a href="#casos" class="nav-link">Casos de Uso</a></li>
+        <li><a href="#piloto" class="nav-link">Programa Piloto</a></li>
       </ul>
-      <a href="#contato" class="btn btn-primary btn-sm" id="nav-cta" data-xp-trigger="true">Agendar Conversa</a>
-      <button class="nav-burger" id="nav-burger" aria-label="Menu">
+      <a href="/diagnostico" class="btn nav-cta" id="nav-cta">Solicitar Diagnóstico</a>
+      <button class="nav-burger" id="nav-burger" aria-label="Abrir menu" aria-expanded="false">
         <span></span><span></span><span></span>
       </button>
     </div>
@@ -43,125 +41,60 @@
     <div class="hero-inner">
       <div class="hero-badge" id="hero-badge">
         <span class="pulse-dot"></span>
-        Seguradoras · Frotas · Logística · Mobilidade Conectada
+        Operational Trust for Mobility
       </div>
       <h1 class="hero-title" id="hero-title">
         <span class="line" id="hl1">Todo veículo gera dados.</span>
-        <span class="line" id="hl2">Só a mobilidade confiável gera evidência.</span>
+        <span class="line" id="hl2"><em>Só a mobilidade confiável gera evidência.</em></span>
       </h1>
       <p class="hero-sub" id="hero-sub">
-        <strong>GuardDrive — The Trust Layer for Connected Mobility.</strong> Cada evento vira evidência: menos fraude, sinistros em dias.
+        <strong>GuardDrive — The Trust Layer for Connected Mobility.</strong> A GuardDrive transforma eventos operacionais em evidências confiáveis para reduzir disputas, acelerar análises e proteger decisões de alto impacto.
       </p>
       <div class="hero-actions" id="hero-actions">
-        <a href="#contato" class="btn btn-primary btn-large" id="hero-demo-btn" data-xp-trigger="true">
+        <a href="/diagnostico" class="btn btn-primary btn-large" id="hero-demo-btn">
           <span>Agendar Conversa Exploratória</span>
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
         </a>
         <a href="#como-funciona" class="btn btn-ghost" id="hero-how-btn">Ver Como Funciona ↓</a>
       </div>
-      <!-- Hero Animation: Intelligence Hub Live Panel -->
+      <div class="hero-trust" aria-label="Mercados atendidos">
+        <span>Seguradoras</span><span>Frotas</span><span>Logística</span><span>Mobilidade</span>
+      </div>
+
+      <!-- Hero visual: premium platform representation (no live KPIs/gauge/logs) -->
       <div class="hero-image-wrap" id="hero-image-wrap">
         <div class="ha-container" id="hero-anim">
-
-          <!-- Top bar -->
           <div class="ha-topbar">
             <div class="ha-topbar-brand">
               <span class="ha-topbar-logo">GD</span>
               <span>GuardDrive™ Intelligence Hub</span>
-              <span class="ha-topbar-ver">v1.2.4</span>
             </div>
             <div class="ha-topbar-right">
-              <span class="ha-live-badge" style="color: var(--clr-cyan);"><span class="ha-live-dot" style="background: var(--clr-cyan); box-shadow: 0 0 8px var(--clr-cyan);"></span>SANDBOX DE TESTES</span>
-              <span class="ha-topbar-time" id="ha-clock">--:--:--</span>
+              <span class="ha-live-badge"><span class="ha-live-dot"></span>OPERAÇÃO CONECTADA</span>
             </div>
           </div>
 
-          <!-- Main grid -->
-          <div class="ha-grid">
-
-            <!-- Col 1: Score + Stats -->
-            <div class="ha-col-stats">
-              <div class="ha-label">SCORE GERAL DE FROTA</div>
-              <div class="ha-score-wrap">
-                <svg class="ha-gauge" viewBox="0 0 100 100">
-                  <circle class="ha-gauge-bg" cx="50" cy="50" r="40" />
-                  <circle class="ha-gauge-fill" cx="50" cy="50" r="40"
-                    stroke-dasharray="234 251"
-                    stroke-dashoffset="62"
-                    id="ha-gauge-arc" />
+          <div class="ha-body-simple">
+            <div class="ha-nfc-scene">
+              <div class="ha-nfc-ring ha-ring-3"></div>
+              <div class="ha-nfc-ring ha-ring-2"></div>
+              <div class="ha-nfc-ring ha-ring-1"></div>
+              <div class="ha-nfc-core">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="26" height="26">
+                  <path d="M6 8.5A5.5 5.5 0 0 1 12 3v0a5.5 5.5 0 0 1 5.5 5.5v7a5.5 5.5 0 0 1-5.5 5.5v0A5.5 5.5 0 0 1 6 15.5v-7z"/>
+                  <path d="M10 8h4M10 12h4M10 16h4"/>
                 </svg>
-                <div class="ha-score-inner">
-                  <span class="ha-score-num" id="ha-score">98.4</span>
-                  <span class="ha-score-pct">%</span>
-                </div>
-              </div>
-
-              <div class="ha-kpis">
-                <div class="ha-kpi">
-                  <span class="ha-kpi-val cyan" id="ha-vehicles">0</span>
-                  <span class="ha-kpi-key">Veículos no Piloto</span>
-                </div>
-                <div class="ha-kpi">
-                  <span class="ha-kpi-val emerald" id="ha-attested">0</span>
-                  <span class="ha-kpi-key">Atestações Realizadas</span>
-                </div>
-                <div class="ha-kpi">
-                  <span class="ha-kpi-val amber" id="ha-alerts">0</span>
-                  <span class="ha-kpi-key">Alertas Detectados</span>
-                </div>
               </div>
             </div>
-
-            <!-- Col 2: NFC Signal Visualizer -->
-            <div class="ha-col-nfc">
-              <div class="ha-nfc-scene">
-                <div class="ha-nfc-ring ha-ring-3"></div>
-                <div class="ha-nfc-ring ha-ring-2"></div>
-                <div class="ha-nfc-ring ha-ring-1"></div>
-                <div class="ha-nfc-core">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="28" height="28">
-                    <path d="M6 8.5A5.5 5.5 0 0 1 12 3v0a5.5 5.5 0 0 1 5.5 5.5v7a5.5 5.5 0 0 1-5.5 5.5v0A5.5 5.5 0 0 1 6 15.5v-7z"/>
-                    <path d="M10 8h4M10 12h4M10 16h4"/>
-                  </svg>
-                </div>
-              </div>
-              <div class="ha-nfc-label">Identidade Física Verificada</div>
-              <div class="ha-nfc-chip">Verified Physical Identity · Tamper-resistant Authentication</div>
-
-              <!-- Attestation progress bar -->
-              <div class="ha-attest-wrap">
-                <div class="ha-attest-label">
-                  <span>Motor Forense de IA</span>
-                  <span class="cyan" id="ha-attest-pct">100%</span>
-                </div>
-                <div class="ha-attest-bar">
-                  <div class="ha-attest-fill" id="ha-attest-fill"></div>
-                </div>
-                <div class="ha-attest-status emerald" id="ha-attest-status">✓ Laudo Assinado · Ed25519</div>
-              </div>
-            </div>
-
-            <!-- Col 3: Event Log -->
-            <div class="ha-col-events">
-              <div class="ha-events-header">
-                <span class="ha-label">SIMULAÇÃO DE EVENTOS</span>
-                <span class="ha-events-count cyan" id="ha-events-count">0 atestações</span>
-              </div>
-              <div class="ha-events-list" id="ha-events-list">
-                <!-- JS injected -->
-              </div>
-            </div>
-
-          </div><!-- /ha-grid -->
-
-          <!-- Bottom status bar -->
-          <div class="ha-statusbar">
-            <span>🔐 LGPD · Privacy-by-Design</span>
-            <span>Protocolo GuardProof™ v1.2</span>
-            <span class="cyan">● Modo Sandbox (Homologação)</span>
+            <p class="ha-nfc-label">Confiança operacional verificada</p>
+            <p class="ha-nfc-chip">Evidência disponível em segundos</p>
           </div>
 
-        </div><!-- /ha-container -->
+          <div class="ha-statusbar">
+            <span>Visibilidade para decidir</span>
+            <span>Pronto para integrar</span>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -179,7 +112,6 @@
       <span>PILOTO 2026</span><span class="sep">·</span>
       <span>GOVERNANÇA DE FROTA</span><span class="sep">·</span>
       <span>LGPD COMPLIANT</span><span class="sep">·</span>
-      <span>GUARDPASS™ GOVERNANCE</span><span class="sep">·</span>
       <span>GUARDDRIVE™</span><span class="sep">·</span>
       <span>OPERATIONAL TRUST FOR MOBILITY</span><span class="sep">·</span>
       <span>THE TRUST LAYER FOR CONNECTED MOBILITY</span><span class="sep">·</span>
@@ -190,7 +122,6 @@
       <span>PILOTO 2026</span><span class="sep">·</span>
       <span>GOVERNANÇA DE FROTA</span><span class="sep">·</span>
       <span>LGPD COMPLIANT</span><span class="sep">·</span>
-      <span>GUARDPASS™ GOVERNANCE</span><span class="sep">·</span>
     </div>
   </div>
 
@@ -198,114 +129,88 @@
   <section class="section section-compact" id="categoria">
     <div class="section-inner">
       <div class="section-label reveal-on-scroll">A CATEGORIA</div>
-      <h2 class="section-title reveal-on-scroll" style="margin-bottom: var(--space-sm);">Por que a mobilidade precisa de confiança?</h2>
-      <p class="contact-sub reveal-on-scroll" style="margin-top: 0.5rem; margin-bottom: var(--space-md);">Bilhões de eventos físicos por dia — poucos confiáveis. GuardDrive transforma movimento em evidência verificável com validade jurídica.</p>
+      <h2 class="section-title reveal-on-scroll" style="margin-bottom: var(--space-sm);">Da identidade do ativo à decisão protegida.</h2>
+      <p class="contact-sub reveal-on-scroll" style="margin-bottom: var(--space-md);">Evidências protegidas contra adulteração. Complexidade tecnológica invisível para a operação.</p>
 
       <div class="flow-grid">
         <div class="flow-h-step reveal-on-scroll">
           <div class="flow-h-top">
             <div class="flow-h-number">1</div>
-            <div class="flow-h-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><path d="M9 2v2M15 2v2M9 20v2M15 20v2M2 9h2M2 15h2M20 9h2M20 15h2"/></svg>
-            </div>
+            <div class="flow-h-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/></svg></div>
           </div>
-          <h3>GuardTag™ Instalado</h3>
-          <p>Selo físico criptográfico colado no veículo em minutos — sem oficina, sem parar a operação.</p>
+          <h3>GuardTag</h3>
+          <p>Identifica o ativo em minutos, sem parar a operação.</p>
         </div>
         <div class="flow-h-arrow">→</div>
         <div class="flow-h-step reveal-on-scroll">
           <div class="flow-h-top">
             <div class="flow-h-number">2</div>
-            <div class="flow-h-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8V6a2 2 0 0 1 2-2h2"/><path d="M4 16v2a2 2 0 0 0 2 2h2"/><path d="M16 4h2a2 2 0 0 1 2 2v2"/><path d="M16 20h2a2 2 0 0 0 2-2v-2"/><circle cx="12" cy="11" r="3"/><path d="M8 16a4 4 0 0 1 8 0"/></svg>
-            </div>
+            <div class="flow-h-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 5v2M12 17v2M5 12h2M17 12h2"/></svg></div>
           </div>
-          <h3>Captura com Biometria</h3>
-          <p>Perito ou motorista autentica via app: FaceID + NFC + GPS + foto timestamped.</p>
+          <h3>Captura</h3>
+          <p>Registra o evento com validação de contexto e origem.</p>
         </div>
         <div class="flow-h-arrow">→</div>
         <div class="flow-h-step reveal-on-scroll">
           <div class="flow-h-top">
             <div class="flow-h-number">3</div>
-            <div class="flow-h-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>
-            </div>
+            <div class="flow-h-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v6c0 5-3.5 8-7 9-3.5-1-7-4-7-9V6l7-3z"/><path d="M9 12l2 2 4-4"/></svg></div>
           </div>
-          <h3>Atestação Criptográfica</h3>
-          <p>GuardProof™ Engine gera hash imutável e cadeia de custódia auditável em tempo real.</p>
+          <h3>Atestação</h3>
+          <p>Evidências protegidas contra adulteração.</p>
         </div>
         <div class="flow-h-arrow">→</div>
         <div class="flow-h-step reveal-on-scroll">
           <div class="flow-h-top">
             <div class="flow-h-number">4</div>
-            <div class="flow-h-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M9 13h6M9 17h6M9 9h1"/></svg>
-            </div>
+            <div class="flow-h-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h9l3 3v15H6z"/><path d="M9 12h6M9 16h6M9 8h3"/></svg></div>
           </div>
-          <h3>Prova Jurídica Pronta</h3>
-          <p>Evidência com validade técnica para liquidar sinistros em dias, não semanas.</p>
+          <h3>Prova</h3>
+          <p>Protege a decisão diante de auditoria ou contestação.</p>
         </div>
       </div>
-
-      <p class="ecosystem-description reveal-on-scroll" style="margin-top: var(--space-md);">Esse fluxo define uma categoria: <strong>Operational Trust for Mobility</strong>. GuardDrive não é uma funcionalidade dela — é a infraestrutura que a viabiliza.</p>
     </div>
   </section>
 
   <!-- ── SEÇÃO 02: O PROBLEMA ───────────────────────── -->
-  <section class="section" id="problema">
+  <section class="section problem-section" id="problema">
     <div class="section-inner">
-      <div class="section-label reveal-on-scroll">O PROBLEMA</div>
-      <h2 class="section-title reveal-on-scroll">Mais movimento, mais risco. Sem evidência, tudo vira prejuízo</h2>
-      <div class="pain-grid">
-
-        <div class="pain-card reveal-on-scroll">
-          <div class="pain-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
-          </div>
-          <h3>Fraudes sem prova</h3>
-          <p>Sinistro contestado sem evidência vira desgaste — e custo.</p>
+      <div class="split-heading reveal-on-scroll">
+        <div>
+          <div class="section-label">O CUSTO DA INCERTEZA</div>
+          <h2 class="section-title" style="margin-bottom: 0;">Quando o fato não é confiável, <em>toda decisão fica mais cara.</em></h2>
         </div>
+        <p>Operações de mobilidade ainda dependem de registros fragmentados, versões conflitantes e validações manuais. O resultado aparece em sinistros lentos, auditorias extensas, fraude e capital parado.</p>
+      </div>
 
-        <div class="pain-card reveal-on-scroll">
-          <div class="pain-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35M11 8v3M11 14h.01"/></svg>
+      <div class="market-grid">
+        <article class="market-card market-feature reveal-on-scroll">
+          <span class="market-index">01 / IMPACTO</span>
+          <strong>R$ 50 bi</strong>
+          <h3>em custos anuais estimados com acidentes de trânsito no Brasil.</h3>
+          <p>Cada ocorrência sem evidência clara amplia o custo de apuração, regulação e responsabilização.</p>
+          <a href="https://www.ba.gov.br/detran/noticias/2021-01/18/acidentes-de-transito-custam-50-bilhoes-para-a-sociedade-brasileira-aponta-estudo" target="_blank" rel="noreferrer">Fonte: Ipea / ANTP ↗</a>
+        </article>
+        <article class="market-card reveal-on-scroll">
+          <span class="market-index">02 / RISCO</span>
+          <strong>US$ 308,6 bi</strong>
+          <h3>é a estimativa anual do custo da fraude em seguros nos Estados Unidos.</h3>
+          <p>Um benchmark da pressão financeira criada por informações insuficientes ou manipuladas.</p>
+          <a href="https://insurancefraud.org/wp-content/uploads/The-Impact-of-Insurance-Fraud-on-the-U.S.-Economy-Report-2022-8.26.2022.pdf" target="_blank" rel="noreferrer">Fonte: Coalition Against Insurance Fraud, 2022 ↗</a>
+        </article>
+        <article class="market-card reveal-on-scroll">
+          <span class="market-index">03 / EFEITO OPERACIONAL</span>
+          <div class="cost-lines">
+            <p><b>Mais tempo</b><span>para reconstruir o que aconteceu</span></p>
+            <p><b>Mais exposição</b><span>a fraude, erro e contestação</span></p>
+            <p><b>Mais capital</b><span>preso em processos inconclusivos</span></p>
           </div>
-          <h3>Litígios prolongados</h3>
-          <p>Sem dados, a culpa vira disputa de meses.</p>
-        </div>
+        </article>
+      </div>
 
-        <div class="pain-card reveal-on-scroll">
-          <div class="pain-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-          </div>
-          <h3>Sinistros lentos</h3>
-          <p>Auditorias manuais paralisam veículos por semanas.</p>
-        </div>
-
-        <div class="pain-card reveal-on-scroll">
-          <div class="pain-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-          </div>
-          <h3>Brechas de rastreamento</h3>
-          <p>Sinal bloqueado, roubo sem prova.</p>
-        </div>
-
-        <div class="pain-card reveal-on-scroll">
-          <div class="pain-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0114.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0020.49 15"/></svg>
-          </div>
-          <h3>Atrito com a seguradora</h3>
-          <p>Versões divergentes travam a apólice.</p>
-        </div>
-
-        <div class="pain-card reveal-on-scroll">
-          <div class="pain-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
-          </div>
-          <h3>Ativos que perdem valor</h3>
-          <p>Sem histórico, a frota deprecia mais rápido.</p>
-        </div>
-
+      <div class="problem-close reveal-on-scroll">
+        <p>A GuardDrive reduz a distância entre <span>o evento físico</span> e <span>a decisão de negócio.</span></p>
+        <a class="text-link dark-link" href="/diagnostico">Mapear exposição operacional ↗</a>
       </div>
     </div>
   </section>
@@ -314,948 +219,189 @@
   <section class="section section-dark" id="como-funciona">
     <div class="section-inner">
       <div class="section-label reveal-on-scroll">COMO FUNCIONA</div>
-      <h2 class="section-title reveal-on-scroll">Da operação ao ativo de confiança</h2>
+      <h2 class="section-title reveal-on-scroll">Quatro etapas entre o movimento e <em>uma decisão confiável.</em></h2>
+      <p class="contact-sub reveal-on-scroll" style="margin-bottom: var(--space-lg);">Sem substituir a operação. Sem exigir que sua equipe aprenda uma nova arquitetura.</p>
 
-      <div class="flow-grid flow-grid-como">
-        <div class="flow-h-step reveal-on-scroll">
-          <div class="flow-h-top"><div class="flow-h-number">1</div></div>
-          <h3>Ativação em Minutos</h3>
-          <p>Identidade física no veículo — sem oficina, sem parar a operação.</p>
-        </div>
-        <div class="flow-h-arrow">→</div>
-        <div class="flow-h-step reveal-on-scroll">
-          <div class="flow-h-top"><div class="flow-h-number">2</div></div>
-          <h3>Captura Contínua</h3>
-          <p>Registrado com proteção, mesmo sob interferência de sinal.</p>
-        </div>
-        <div class="flow-h-arrow">→</div>
-        <div class="flow-h-step reveal-on-scroll">
-          <div class="flow-h-top"><div class="flow-h-number">3</div></div>
-          <h3>Registro Auditável</h3>
-          <p>Cada evento crítico vira evidência à prova de alteração.</p>
-        </div>
-        <div class="flow-h-arrow">→</div>
-        <div class="flow-h-step reveal-on-scroll">
-          <div class="flow-h-top"><div class="flow-h-number">4</div></div>
-          <h3>Liquidação de Sinistro</h3>
-          <p>Laudos prontos para a seguradora liquidar em dias, não semanas.</p>
-        </div>
-        <div class="flow-h-arrow">→</div>
-        <div class="flow-h-step reveal-on-scroll">
-          <div class="flow-h-top"><div class="flow-h-number">5</div></div>
-          <h3>Inteligência e ROI</h3>
-          <p>Menos sinistralidade, prêmios competitivos, visibilidade total do risco.</p>
-        </div>
-      </div>
-
-      <!-- Real Forensic Diagram Visual -->
-      <div class="section-visual reveal-on-scroll">
-        <img src="assets/forensic_fleet_insurance.png" alt="GuardDrive™ — Diagrama Forense de Frotas e Validação de Sinistros" class="section-img" loading="lazy" />
-        <p style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--clr-muted); text-align: center; margin-top: 0.8rem;">Diagrama 01. Do evento físico à evidência auditável</p>
+      <div class="flow-container reveal-on-scroll">
+        <div class="flow-step"><div class="flow-number">01</div><div class="flow-content"><h3>Identificação</h3><p>O ativo e o contexto operacional são reconhecidos no ponto de origem.</p></div></div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-step"><div class="flow-number">02</div><div class="flow-content"><h3>Validação</h3><p>O evento é verificado antes de entrar no fluxo decisório.</p></div></div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-step"><div class="flow-number">03</div><div class="flow-content"><h3>Evidência</h3><p>Um registro confiável fica disponível para análise, auditoria ou contestação.</p></div></div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-step"><div class="flow-number">04</div><div class="flow-content"><h3>Liquidação</h3><p>A organização decide com mais velocidade, consistência e segurança.</p></div></div>
       </div>
     </div>
   </section>
 
   <!-- ── SEÇÃO 04: BENEFÍCIOS ───────────────────────── -->
-  <section class="section" id="beneficios">
+  <section class="section benefits-section" id="beneficios">
     <div class="section-inner">
-      <div class="section-label reveal-on-scroll">BENEFÍCIOS</div>
-      <h2 class="section-title reveal-on-scroll">Por que operações confiam na GuardDrive™</h2>
-      <div class="benefits-grid">
+      <div class="split-heading reveal-on-scroll">
+        <div><div class="section-label">RESULTADOS</div><h2 class="section-title" style="margin-bottom: 0;">Confiança que aparece <em>na operação e no resultado.</em></h2></div>
+        <p>A tecnologia trabalha nos bastidores. Para a liderança, o que importa é reduzir exposição, recuperar tempo e melhorar a qualidade da decisão.</p>
+      </div>
 
-        <div class="benefit-card reveal-on-scroll">
-          <div class="benefit-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/><path d="M11 8v3M11 14h.01"/></svg>
-          </div>
-          <h3>Auditoria Automática</h3>
-          <p>Vistorias sem planilhas nem processos manuais.</p>
-        </div>
-
-        <div class="benefit-card reveal-on-scroll">
-          <div class="benefit-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-          </div>
-          <h3>Conformidade em Tempo Real</h3>
-          <p>Exigências de seguradoras atendidas sem retrabalho.</p>
-        </div>
-
-        <div class="benefit-card reveal-on-scroll">
-          <div class="benefit-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
-          </div>
-          <h3>Rastreabilidade Ponta a Ponta</h3>
-          <p>Cada rota acompanhada, sem comprometer a garantia de fábrica.</p>
-        </div>
-
-        <div class="benefit-card reveal-on-scroll">
-          <div class="benefit-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
-          </div>
-          <h3>Sinistros Liquidados Mais Rápido</h3>
-          <p>Laudos entregues instantaneamente, cortando semanas do processo.</p>
-        </div>
-
-        <div class="benefit-card reveal-on-scroll">
-          <div class="benefit-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
-          </div>
-          <h3>Menos Fraude e Roubo</h3>
-          <p>Evidência resiste mesmo a tentativas de burlar o sistema.</p>
-        </div>
-
-        <div class="benefit-card reveal-on-scroll">
-          <div class="benefit-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-          </div>
-          <h3>Apólices Mais Baratas</h3>
-          <p>Histórico de integridade vira moeda de negociação.</p>
-        </div>
-
-        <div class="benefit-card reveal-on-scroll">
-          <div class="benefit-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m16 10-4 4-2-2"/></svg>
-          </div>
-          <h3>Score de Confiança em Tempo Real</h3>
-          <p>Pontuação de 0 a 100% resume a confiabilidade de cada ativo.</p>
-        </div>
-
+      <div class="benefit-layout">
+        <article class="benefit-card benefit-large reveal-on-scroll">
+          <span class="icon-box">↙</span>
+          <p class="card-kicker">Menos conflito</p>
+          <h3>Redução de disputas</h3>
+          <p>Partes diferentes passam a trabalhar sobre uma evidência comum, confiável e pronta para verificação.</p>
+          <small>Menos retrabalho · Menos contestação</small>
+        </article>
+        <article class="benefit-card reveal-on-scroll">
+          <span class="icon-box">⌁</span>
+          <p class="card-kicker">Mais velocidade</p>
+          <h3>Decisões em menos tempo</h3>
+          <p>Reduza etapas manuais de conferência e acelere sinistros, auditorias e exceções operacionais.</p>
+        </article>
+        <article class="benefit-card reveal-on-scroll">
+          <span class="icon-box">◎</span>
+          <p class="card-kicker">Mais controle</p>
+          <h3>Evidências para auditorias</h3>
+          <p>Recupere o histórico relevante com contexto suficiente para sustentar decisões e responsabilidades.</p>
+        </article>
+        <article class="benefit-card reveal-on-scroll">
+          <span class="icon-box">⇄</span>
+          <p class="card-kicker">Adoção simples</p>
+          <h3>Integração com sistemas existentes</h3>
+          <p>Conecte a camada de confiança aos fluxos que sua operação já utiliza, sem reconstruir a jornada.</p>
+        </article>
+        <article class="benefit-card benefit-accent reveal-on-scroll">
+          <span class="icon-box">◇</span>
+          <p class="card-kicker">Valor mensurável</p>
+          <h3>Menor custo por ocorrência</h3>
+          <p>Transforme tempo de apuração, retrabalho e risco de fraude em indicadores concretos de eficiência.</p>
+          <a href="/diagnostico">Estimar oportunidade ↗</a>
+        </article>
       </div>
     </div>
   </section>
 
-  <!-- ── SEÇÃO 05: ECOSSISTEMA ──────────────────────── -->
-  <section class="section section-dark" id="ecossistema">
+  <!-- ── SEÇÃO 05: CASOS DE USO ─────────────────────── -->
+  <section class="section use-cases section-dark" id="casos">
     <div class="section-inner">
-      <div class="section-label reveal-on-scroll">A INFRAESTRUTURA</div>
-      <h2 class="section-title reveal-on-scroll">Uma infraestrutura de confiança para toda a mobilidade</h2>
+      <div class="section-label reveal-on-scroll">CASOS DE USO</div>
+      <h2 class="section-title reveal-on-scroll">Uma camada de confiança para <em>operações que não podem depender de versões.</em></h2>
 
-      <div class="ecosystem-flow">
-        <div class="eco-node reveal-on-scroll">
-          <div class="eco-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
-          </div>
-          <h3>GuardDrive™</h3>
-          <p style="color: var(--clr-cyan); font-weight: 700; margin-bottom: 0.3rem;">Camada de Validação</p>
-          <p>Consolida a frota em uma fonte de verdade, auditável por qualquer seguradora.</p>
-        </div>
-        <div class="eco-arrow">→</div>
-        <div class="eco-node reveal-on-scroll">
-          <div class="eco-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 01-2.83 0L2 12V2h10l8.59 8.59a2 2 0 010 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>
-          </div>
-          <h3>GuardTag™</h3>
-          <p style="color: var(--clr-cyan); font-weight: 700; margin-bottom: 0.3rem;">Identidade Física Verificável</p>
-          <p>Fixada ao veículo em minutos, à prova de remoção.</p>
-        </div>
-        <div class="eco-arrow">→</div>
-        <div class="eco-node reveal-on-scroll">
-          <div class="eco-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
-          </div>
-          <h3>GuardTag App</h3>
-          <p style="color: var(--clr-cyan); font-weight: 700; margin-bottom: 0.3rem;">Atestação de Borda</p>
-          <p>Confirma cada evento em campo e emite laudo pronto para uso jurídico.</p>
-        </div>
-        <div class="eco-arrow">→</div>
-        <div class="eco-node reveal-on-scroll">
-          <div class="eco-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
-          </div>
-          <h3>Intelligence Hub</h3>
-          <p style="color: var(--clr-cyan); font-weight: 700; margin-bottom: 0.3rem;">Decisão Executiva</p>
-          <p>Traduz a operação em risco e ROI — pronto para a diretoria.</p>
-        </div>
+      <div class="case-tabs reveal-on-scroll" role="tablist" aria-label="Casos de uso">
+        <button role="tab" aria-selected="true" data-case="seguradoras">Seguradoras</button>
+        <button role="tab" aria-selected="false" data-case="frotas">Frotas</button>
+        <button role="tab" aria-selected="false" data-case="logistica">Logística</button>
+        <button role="tab" aria-selected="false" data-case="mobilidade">Mobilidade</button>
       </div>
 
-      <p class="ecosystem-description reveal-on-scroll">
-        Identidade física, dados e conformidade operam como uma infraestrutura única — não produtos separados.
-      </p>
-      <p class="ecosystem-description reveal-on-scroll" style="margin-top: 0.75rem; font-size: 0.85rem; opacity: 0.75;">
-        GuardDrive™ — Operational Trust for Mobility.
-      </p>
-
-      <!-- Ecosystem architecture visual -->
-      <div class="section-visual reveal-on-scroll" style="margin-top: 3.5rem;">
-        <img src="assets/ecosystem_diagram.png" alt="GuardDrive™ — Arquitetura do Ecossistema de Confiança Operacional" class="section-img" loading="lazy" />
-        <p style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--clr-muted); text-align: center; margin-top: 0.8rem;">Arquitetura. Fluxo de dados e atestação entre GuardDrive™, GuardTag™ e Intelligence Hub</p>
-      </div>
-
-      <!-- Compatibility Badges -->
-      <div class="compatibility-badges reveal-on-scroll" style="margin-top: 2.5rem; display: flex; justify-content: center; gap: var(--space-sm); flex-wrap: wrap;">
-        <span class="badge" style="font-family: var(--font-mono); font-size: 0.75rem; font-weight: 700; color: var(--clr-cyan); border: 1px solid rgba(0,240,255,0.3); padding: 0.4rem 1rem; border-radius: var(--radius-pill); background: rgba(0,240,255,0.05); letter-spacing: 0.05em;">DREX COMPATIBLE</span>
-        <span class="badge" style="font-family: var(--font-mono); font-size: 0.75rem; font-weight: 700; color: #a855f7; border: 1px solid rgba(168,85,247,0.3); padding: 0.4rem 1rem; border-radius: var(--radius-pill); background: rgba(168,85,247,0.05); letter-spacing: 0.05em;">MOBI VID v2.0</span>
-        <span class="badge" style="font-family: var(--font-mono); font-size: 0.75rem; font-weight: 700; color: var(--clr-emerald); border: 1px solid rgba(0,255,136,0.3); padding: 0.4rem 1rem; border-radius: var(--radius-pill); background: rgba(0,255,136,0.05); letter-spacing: 0.05em;">LGPD COMPLIANT</span>
-        <span class="badge" style="font-family: var(--font-mono); font-size: 0.75rem; font-weight: 700; color: var(--clr-amber); border: 1px solid rgba(255,184,0,0.3); padding: 0.4rem 1rem; border-radius: var(--radius-pill); background: rgba(255,184,0,0.05); letter-spacing: 0.05em;">ISO 27001</span>
+      <div class="case-panel reveal-on-scroll">
+        <div>
+          <span class="case-number">01</span>
+          <p class="case-label" id="case-label">Seguradoras</p>
+          <h3 id="case-title">Regule sinistros com evidências melhores.</h3>
+        </div>
+        <div class="case-copy">
+          <p id="case-description">Apoie a análise de ocorrências com registros confiáveis desde a origem, reduzindo zonas cinzentas, retrabalho e tempo de decisão.</p>
+          <ul id="case-outcomes"><li>Triagem mais consistente</li><li>Menos disputas sobre o evento</li><li>Melhor experiência para o segurado</li></ul>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- ── SEÇÃO 05.5: NÍVEIS DE CONFIANÇA OPERACIONAL ─── -->
-  <section class="section section-dark" id="planos">
+  <!-- ── SEÇÃO 06: ECOSSISTEMA (simplificado) ───────── -->
+  <section class="section ecosystem-section" aria-label="Ecossistema GuardDrive">
+    <div class="section-inner" style="max-width: 1000px;">
+      <div class="split-heading centered reveal-on-scroll">
+        <div><div class="section-label">ECOSSISTEMA</div><h2 class="section-title" style="margin-bottom: 0;">Sofisticada por dentro.<br><em>Simples para adotar.</em></h2></div>
+      </div>
+
+      <div class="ecosystem-flow reveal-on-scroll">
+        <div class="eco-node"><div class="eco-icon">01</div><h3>GuardTag</h3><p>Ponto de confiança no ativo</p></div>
+        <span class="eco-arrow">→</span>
+        <div class="eco-node eco-node--core"><div class="eco-icon">02</div><h3>GuardDrive Platform</h3><p>Organiza e valida a jornada</p></div>
+        <span class="eco-arrow">→</span>
+        <div class="eco-node"><div class="eco-icon">03</div><h3>Intelligence Hub</h3><p>Entrega clareza para decidir</p></div>
+      </div>
+
+      <p class="ecosystem-description reveal-on-scroll">A arquitetura completa fica disponível durante a qualificação técnica, no momento certo da conversa.</p>
+    </div>
+  </section>
+
+  <!-- ── SEÇÃO 07: PROGRAMA PILOTO ──────────────────── -->
+  <section class="section pilot-section" id="piloto">
     <div class="section-inner">
-      <div class="section-label reveal-on-scroll">NÍVEIS DE CONFIANÇA OPERACIONAL</div>
-      <h2 class="section-title reveal-on-scroll">Três níveis. Uma decisão de risco, não de orçamento.</h2>
-      <p class="contact-sub reveal-on-scroll" style="margin-top: 0.5rem; margin-bottom: var(--space-lg);">A proposta comercial é definida no Diagnóstico Estratégico, conforme a exposição de risco da sua operação.</p>
-
-      <div class="pricing-grid reveal-on-scroll" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: var(--space-md); margin-top: var(--space-lg);">
-
-        <!-- Foundation -->
-        <div class="pricing-card pricing-card--foundation">
-          <span class="pricing-card-badge">ESSENCIAL</span>
-          <div>
-            <h3 style="font-size: 1.3rem; margin-bottom: 0.5rem; color: var(--clr-white);">Foundation</h3>
-            <p class="pricing-card-eyebrow">CONFIANÇA VERIFICADA</p>
-            <p class="pricing-card-desc">Identidade física verificável, auditoria contínua, sem infraestrutura adicional.</p>
-            <ul class="pricing-card-list">
-              <li>✓ Identidade Física Verificada por veículo</li>
-              <li>✓ Score de Confiança ~95%</li>
-              <li>✓ Atestação em campo via App GuardTag</li>
-            </ul>
-          </div>
-          <a href="#contato" class="btn btn-ghost" data-plan="foundation" style="width: 100%; justify-content: center; font-size: 0.85rem; padding: 0.6rem var(--space-md);">Avaliar no Diagnóstico</a>
+      <div class="pilot-shell reveal-on-scroll">
+        <div class="pilot-intro">
+          <div class="section-label">JORNADA DE IMPLANTAÇÃO</div>
+          <h2 class="section-title" style="margin-bottom: var(--space-sm);">Comece pequeno.<br><em>Comprove valor.</em><br><em>Escale com segurança.</em></h2>
+          <p class="contact-sub" style="margin-bottom: 0;">O programa piloto conecta uma dor operacional real a um resultado mensurável — antes de qualquer expansão.</p>
         </div>
-
-        <!-- Professional -->
-        <div class="pricing-card pricing-card--professional">
-          <span class="pricing-card-badge">MAIS POPULAR</span>
-          <div>
-            <h3 style="font-size: 1.3rem; margin-bottom: 0.5rem; color: var(--clr-white);">Professional</h3>
-            <p class="pricing-card-eyebrow">CONFIANÇA COM VALIDADE JURÍDICA</p>
-            <p class="pricing-card-desc">Evidência criptográfica à prova de violação, com laudo para qualquer disputa.</p>
-            <ul class="pricing-card-list">
-              <li>✓ Tamper-resistant Authentication criptográfica</li>
-              <li>✓ Score de Confiança 100%</li>
-              <li>✓ Laudo com validade técnico-jurídica</li>
-            </ul>
-          </div>
-          <a href="#contato" class="btn btn-primary" data-plan="professional" style="width: 100%; justify-content: center; font-size: 0.85rem; padding: 0.6rem var(--space-md); color: #000;">Avaliar no Diagnóstico</a>
+        <div class="journey-list">
+          <article><span>01</span><div><h3>Piloto</h3><p>Escopo controlado para validar aderência, operação e indicadores de sucesso.</p></div><small>Validar</small></article>
+          <article><span>02</span><div><h3>Operação</h3><p>Integração ao fluxo existente com governança, acompanhamento e evolução.</p></div><small>Operar</small></article>
+          <article><span>03</span><div><h3>Escala</h3><p>Expansão por frota, unidade, parceiro ou novo caso de uso com previsibilidade.</p></div><small>Expandir</small></article>
         </div>
-
-        <!-- Enterprise -->
-        <div class="pricing-card pricing-card--enterprise">
-          <span class="pricing-card-badge">ENTERPRISE</span>
-          <div>
-            <h3 style="font-size: 1.3rem; margin-bottom: 0.5rem; color: var(--clr-white);">Enterprise</h3>
-            <p class="pricing-card-eyebrow">CONFIANÇA EM TEMPO REAL</p>
-            <p class="pricing-card-desc">Inteligência contínua e decisões em milissegundos para frotas críticas.</p>
-            <ul class="pricing-card-list">
-              <li>✓ Decisões operacionais em tempo real (50ms)</li>
-              <li>✓ Detecção avançada de eventos críticos</li>
-              <li>✓ API dedicada de Insights de Risco</li>
-            </ul>
-          </div>
-          <a href="#contato" class="btn btn-ghost" data-plan="enterprise" style="width: 100%; justify-content: center; font-size: 0.85rem; padding: 0.6rem var(--space-md);">Sob Consulta (PJ)</a>
-        </div>
-
       </div>
     </div>
   </section>
 
-  <!-- ── SEÇÃO 06: CONTATO / NDA FLOW ──────────────── -->
-  <section class="section" id="contato">
-    <div class="section-inner contact-inner">
-      <div class="section-label reveal-on-scroll">ACESSO RESTRITO</div>
-      <h2 class="section-title reveal-on-scroll">Solicite seu Diagnóstico Estratégico</h2>
-      <p class="contact-sub reveal-on-scroll">
-        Análise de risco e ROI reservada a operações qualificadas.
-        Protegida por Acordo de Confidencialidade Operacional.
-      </p>
-
-      <!-- NDA Banner -->
-      <div class="nda-banner" id="nda-banner">
-        <div class="nda-lock">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="24" height="24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
-        </div>
-        <div style="flex: 1;">
-          <strong>Área de Acesso Restrito</strong>
-          <p>Os materiais técnicos e o diagnóstico de ROI personalizado são reservados a operações qualificadas. Aceite o NDA para prosseguir — o acesso é gratuito e imediato.</p>
-        </div>
-        <button class="btn btn-primary" id="nda-accept-btn">
-          <span>Solicitar Acesso</span>
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-        </button>
-      </div>
-
-      <!-- Contact Form (hidden until NDA accepted) -->
-      <form class="contact-form" id="contact-form" style="display: none;" novalidate>
-
-        <!-- Plan Selector -->
-        <div style="margin-bottom: var(--space-md);">
-          <label style="display: block; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.08em; color: var(--clr-muted); text-transform: uppercase; margin-bottom: 0.75rem;">Nível de Confiança de Interesse</label>
-          <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.5rem;">
-            <label class="plan-radio-label" for="plan-foundation">
-              <input type="radio" id="plan-foundation" name="plano" value="foundation" />
-              <span class="plan-radio-box">
-                <strong>Foundation</strong>
-                <small>Confiança verificada</small>
-              </span>
-            </label>
-            <label class="plan-radio-label" for="plan-professional">
-              <input type="radio" id="plan-professional" name="plano" value="professional" />
-              <span class="plan-radio-box">
-                <span style="position: absolute; top: -8px; right: 8px; background: var(--clr-cyan); color: #000; font-size: 0.55rem; font-weight: 800; padding: 0.1rem 0.5rem; border-radius: 99px;">POPULAR</span>
-                <strong>Professional</strong>
-                <small>Validade jurídica</small>
-              </span>
-            </label>
-            <label class="plan-radio-label" for="plan-enterprise">
-              <input type="radio" id="plan-enterprise" name="plano" value="enterprise" />
-              <span class="plan-radio-box">
-                <strong>Enterprise</strong>
-                <small>Tempo real</small>
-              </span>
-            </label>
-          </div>
-        </div>
-
-        <!-- Row 1: Name + Company -->
-        <div class="form-row">
-          <div class="form-group">
-            <label for="nome">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right:5px; opacity:0.6;"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-              Nome Completo <span style="color: var(--clr-cyan);">*</span>
-            </label>
-            <div class="input-wrapper">
-              <input type="text" id="nome" placeholder="Seu nome completo" required autocomplete="name" />
-              <span class="input-check" id="check-nome">✓</span>
-            </div>
-          </div>
-          <div class="form-group">
-            <label for="empresa">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right:5px; opacity:0.6;"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
-              Empresa / Organização <span style="color: var(--clr-muted); font-size: 0.75rem;">(opcional)</span>
-            </label>
-            <div class="input-wrapper">
-              <input type="text" id="empresa" placeholder="Nome da empresa / operação (opcional)" autocomplete="organization" />
-              <span class="input-check" id="check-empresa">✓</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Row 2: Email + Phone -->
-        <div class="form-row">
-          <div class="form-group">
-            <label for="email">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right:5px; opacity:0.6;"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-              E-mail Corporativo <span style="color: var(--clr-cyan);">*</span>
-            </label>
-            <div class="input-wrapper">
-              <input type="email" id="email" placeholder="seu@empresa.com.br" required autocomplete="email" />
-              <span class="input-check" id="check-email">✓</span>
-            </div>
-          </div>
-          <div class="form-group">
-            <label for="telefone">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right:5px; opacity:0.6;"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.65 3.5 2 2 0 0 1 3.62 1.5h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9a16 16 0 0 0 6 6l.86-.86a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.5 16.92z"/></svg>
-              WhatsApp / Telefone <span style="color: var(--clr-cyan);">*</span>
-            </label>
-            <div class="input-wrapper">
-              <input type="tel" id="telefone" placeholder="(11) 99999-9999" required autocomplete="tel" />
-              <span class="input-check" id="check-telefone">✓</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Row 3: Segment + Fleet size -->
-        <div class="form-row">
-          <div class="form-group">
-            <label for="segmento">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right:5px; opacity:0.6;"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
-              Segmento <span style="color: var(--clr-cyan);">*</span>
-            </label>
-            <div class="input-wrapper">
-              <select id="segmento" required>
-                <option value="">Selecione seu segmento</option>
-                <option value="frotista">Locadora / Frotista</option>
-                <option value="seguradora">Seguradora / Sinistros</option>
-                <option value="logistica">Logística / Transportadora</option>
-                <option value="municipio">Município / Governo</option>
-                <option value="pessoa_fisica">Pessoa Física / Consultoria</option>
-                <option value="outro">Outro</option>
-              </select>
-              <span class="input-check" id="check-segmento">✓</span>
-            </div>
-          </div>
-          <div class="form-group">
-            <label for="frota">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right:5px; opacity:0.6;"><rect x="1" y="3" width="15" height="13" rx="2"/><path d="M16 8h4l3 5v3h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
-              Tamanho da Frota
-            </label>
-            <div class="input-wrapper">
-              <select id="frota">
-                <option value="">Tamanho estimado</option>
-                <option value="1-20">1 – 20 veículos</option>
-                <option value="21-100">21 – 100 veículos</option>
-                <option value="101-500">101 – 500 veículos</option>
-                <option value="500+">Mais de 500 veículos</option>
-              </select>
-            </div>
-          </div>
-        </div>
-
-        <!-- Row 4: Main challenge -->
-        <div class="form-group" style="margin-bottom: var(--space-md);">
-          <label for="dor">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right:5px; opacity:0.6;"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-            Principal desafio operacional
-          </label>
-          <textarea id="dor" rows="2" placeholder="Ex: Fraudes em sinistros, jammers de rastreador, auditoria de condutores..." style="width: 100%; background: rgba(255,255,255,0.03); border: 1px solid var(--clr-border); border-radius: var(--radius-sm); padding: 0.75rem 1rem; color: var(--clr-white); font-size: 0.9rem; font-family: var(--font-sans); resize: vertical; transition: border-color 0.3s; outline: none; box-sizing: border-box;"></textarea>
-        </div>
-
-        <!-- LGPD Notice -->
-        <p style="font-size: 0.72rem; color: var(--clr-muted); text-align: center; margin-bottom: var(--space-sm); line-height: 1.5;">
-          🔒 Seus dados são tratados conforme a <strong>LGPD</strong> e utilizados exclusivamente para qualificação comercial.
-          Consulte nossa Política de Privacidade.
-        </p>
-
-        <p class="form-error-message" id="form-error" style="display: none; color: #ff6b6b; font-size: 0.85rem; text-align: center; margin-bottom: var(--space-sm);"></p>
-
-        <button type="submit" class="btn btn-primary btn-full" id="submit-btn">
-          <span>Solicitar Diagnóstico Estratégico</span>
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-        </button>
-      </form>
-
-      <!-- Success Screen -->
-      <div class="success-screen" id="success-screen" style="display: none;">
-        <div class="success-icon">✓</div>
-        <h3>Acesso Confirmado</h3>
-        <p>Nossa equipe entrará em contato em até 48h úteis com seu diagnóstico de ROI personalizado.</p>
-        <p id="success-reference" style="font-family: var(--font-mono); font-size: 0.78rem; color: var(--clr-muted); margin-top: 0.5rem;"></p>
-      </div>
-  <!-- ── SEÇÃO 06.5: FAQ ───────────────────────────── -->
-  <section class="section" id="faq">
+  <!-- ── SEÇÃO 08: FAQ (reduzido) ───────────────────── -->
+  <section class="section faq-section" id="faq">
     <div class="section-inner">
-      <div class="section-label reveal-on-scroll">DÚVIDAS ESTRATÉGICAS</div>
-      <h2 class="section-title reveal-on-scroll">Perguntas que todo gestor de frota faz</h2>
-      <p class="contact-sub reveal-on-scroll" style="margin-top: 0.5rem; margin-bottom: var(--space-lg);">Respostas diretas, sem jargão técnico.</p>
-
-      <div class="faq-accordion reveal-on-scroll" id="faq-accordion">
-
-        <div class="faq-acc-item">
-          <button class="faq-acc-btn" aria-expanded="false">
-            <span>Os dados gerados têm validade jurídica em caso de sinistro?</span>
-            <span class="faq-acc-icon">+</span>
-          </button>
-          <div class="faq-acc-panel">
-            <p>Sim. Cada evento gera laudo com assinatura digital e cadeia de custódia, aceito judicialmente sem perícia presencial.</p>
+      <div class="faq-grid">
+        <div class="reveal-on-scroll">
+          <div class="section-label">PERGUNTAS CRÍTICAS</div>
+          <h2 class="section-title" style="margin-bottom: 0.75rem;">O necessário para <em>dar o próximo passo.</em></h2>
+          <p class="contact-sub" style="margin-bottom: 0;">Detalhes técnicos são apresentados depois da compreensão do contexto operacional.</p>
+        </div>
+        <div class="faq-accordion reveal-on-scroll">
+          <div class="faq-acc-item open">
+            <button class="faq-acc-btn" aria-expanded="true"><span>Como a GuardDrive entra na operação atual?</span><span class="faq-acc-icon">+</span></button>
+            <div class="faq-acc-panel"><p>Por um escopo piloto conectado ao fluxo existente. O objetivo é provar valor sem exigir uma transformação ampla antes da hora.</p></div>
+          </div>
+          <div class="faq-acc-item">
+            <button class="faq-acc-btn" aria-expanded="false"><span>Quais resultados são medidos no piloto?</span><span class="faq-acc-icon">+</span></button>
+            <div class="faq-acc-panel"><p>Tempo de análise, retrabalho, volume de disputas, exposição a fraude e custo por ocorrência — ajustados ao caso de uso.</p></div>
+          </div>
+          <div class="faq-acc-item">
+            <button class="faq-acc-btn" aria-expanded="false"><span>A solução substitui sistemas existentes?</span><span class="faq-acc-icon">+</span></button>
+            <div class="faq-acc-panel"><p>Não. A GuardDrive adiciona uma camada de confiança aos processos e sistemas que já sustentam a operação.</p></div>
+          </div>
+          <div class="faq-acc-item">
+            <button class="faq-acc-btn" aria-expanded="false"><span>Quando a arquitetura técnica é apresentada?</span><span class="faq-acc-icon">+</span></button>
+            <div class="faq-acc-panel"><p>Após a qualificação do cenário. NDA e materiais técnicos entram somente quando fazem sentido para avançar a avaliação.</p></div>
           </div>
         </div>
-
-        <div class="faq-acc-item">
-          <button class="faq-acc-btn" aria-expanded="false">
-            <span>Em quanto tempo minha frota começa a operar com GuardDrive™?</span>
-            <span class="faq-acc-icon">+</span>
-          </button>
-          <div class="faq-acc-panel">
-            <p>Foundation e Professional operam em horas, sem hardware ou parada operacional. Enterprise tem cronograma definido no Diagnóstico Estratégico.</p>
-          </div>
-        </div>
-
-        <div class="faq-acc-item">
-          <button class="faq-acc-btn" aria-expanded="false">
-            <span>Como o GuardDrive™ impacta o custo das apólices de seguro?</span>
-            <span class="faq-acc-icon">+</span>
-          </button>
-          <div class="faq-acc-panel">
-            <p>Rastreabilidade forense reduz fraude e acelera liquidação. Seguradoras parceiras calibram prêmios pelo histórico real, reduzindo o custo da apólice.</p>
-          </div>
-        </div>
-
-        <div class="faq-acc-item">
-          <button class="faq-acc-btn" aria-expanded="false">
-            <span>O sistema se integra com ERPs e plataformas que já uso?</span>
-            <span class="faq-acc-icon">+</span>
-          </button>
-          <div class="faq-acc-panel">
-            <p>Sim, via <span class="gd-term"><button type="button" class="gd-term-trigger" aria-describedby="gd-tt-apirest">API REST</button><span class="gd-term-bubble" role="tooltip" id="gd-tt-apirest">Interface de Integração de Sistemas</span></span> para <span class="gd-term"><button type="button" class="gd-term-trigger" aria-describedby="gd-tt-tms">TMS</button><span class="gd-term-bubble" role="tooltip" id="gd-tt-tms">Sistema de Gestão de Transporte</span></span> e <span class="gd-term"><button type="button" class="gd-term-trigger" aria-describedby="gd-tt-erp">ERPs</button><span class="gd-term-bubble" role="tooltip" id="gd-tt-erp">Sistema de Gestão Empresarial</span></span>. Enterprise conta com suporte dedicado e <span class="gd-term"><button type="button" class="gd-term-trigger" aria-describedby="gd-tt-sla">SLAs</button><span class="gd-term-bubble" role="tooltip" id="gd-tt-sla">Acordo de Nível de Serviço</span></span> customizados.</p>
-          </div>
-        </div>
-
-        <div class="faq-acc-item">
-          <button class="faq-acc-btn" aria-expanded="false">
-            <span>Quem tem acesso aos dados da minha frota?</span>
-            <span class="faq-acc-icon">+</span>
-          </button>
-          <div class="faq-acc-panel">
-            <p>Só sua organização e perfis autorizados — dados isolados por tenant, sem compartilhamento entre clientes, conforme a LGPD.</p>
-          </div>
-        </div>
-
-        <div class="faq-acc-item">
-          <button class="faq-acc-btn" aria-expanded="false">
-            <span>Qual o ROI esperado para uma frota de médio porte?</span>
-            <span class="faq-acc-icon">+</span>
-          </button>
-          <div class="faq-acc-panel">
-            <p>Entre 50 e 300 veículos, o piloto registrou 30–60% menos tempo de liquidação e menor custo de vistoria. Análise personalizada gratuita no diagnóstico.</p>
-          </div>
-        </div>
-
-        <div class="faq-acc-item">
-          <button class="faq-acc-btn" aria-expanded="false">
-            <span>O Selo Soberano™ pode ser removido ou adulterado sem que eu saiba?</span>
-            <span class="faq-acc-icon">+</span>
-          </button>
-          <div class="faq-acc-panel">
-            <p>Não. A tinta tamper-evident se destrói ao ser removida — qualquer adulteração é detectada e registrada.</p>
-          </div>
-        </div>
-
-        <div class="faq-acc-item">
-          <button class="faq-acc-btn" aria-expanded="false">
-            <span>O GuardDrive™ continua funcionando se o veículo entrar em uma área com bloqueador de sinal (jammer)?</span>
-            <span class="faq-acc-icon">+</span>
-          </button>
-          <div class="faq-acc-panel">
-            <p>Sim. A captação ocorre localmente no GuardTag™, sem depender de rede. Ao recuperar sinal, a cadeia de evidências sincroniza — nada se perde.</p>
-          </div>
-        </div>
-
-        <div class="faq-acc-item">
-          <button class="faq-acc-btn" aria-expanded="false">
-            <span>A instalação do Selo Soberano™ anula a garantia de fábrica do veículo?</span>
-            <span class="faq-acc-icon">+</span>
-          </button>
-          <div class="faq-acc-panel">
-            <p>Não. Aplicado externamente, sem intervenção mecânica ou eletrônica — a garantia da montadora permanece integralmente preservada.</p>
-          </div>
-        </div>
-
-        <div class="faq-acc-item">
-          <button class="faq-acc-btn" aria-expanded="false">
-            <span>O sistema expõe a localização e a rotina pessoal dos motoristas?</span>
-            <span class="faq-acc-icon">+</span>
-          </button>
-          <div class="faq-acc-panel">
-            <p>Não além do necessário. Geolocalização é opcional, usada só para atestar eventos relevantes — sem expor a rotina pessoal do condutor.</p>
-          </div>
-        </div>
-
-        <div class="faq-acc-item">
-          <button class="faq-acc-btn" aria-expanded="false">
-            <span>Qual a diferença entre os níveis Foundation, Professional e Enterprise?</span>
-            <span class="faq-acc-icon">+</span>
-          </button>
-          <div class="faq-acc-panel">
-            <p>Cada nível reflete uma exposição de risco, não uma faixa de preço: Foundation entrega Identidade Física Verificada (~95% de confiança); Professional adiciona autenticação criptográfica e laudo com validade técnico-jurídica (100%); Enterprise entrega inteligência contínua com decisões em tempo real. A proposta comercial é definida no Diagnóstico Estratégico.</p>
-          </div>
-        </div>
-
-      </div><!-- /faq-accordion -->
-    </div>
-  </section>
-
-  <!-- ── SEÇÃO 07: PROGRAMA PILOTO ─────────────────── -->
-  <section class="section section-dark" id="programa-piloto">
-    <div class="section-inner">
-      <div class="section-label reveal-on-scroll">PROGRAMA PILOTO</div>
-      <h2 class="section-title reveal-on-scroll">Participe do Programa Piloto</h2>
-      <p class="contact-sub reveal-on-scroll">Valide essa infraestrutura de confiança em primeira mão — diagnóstico de ROI personalizado, sem capital antecipado.</p>
-
-      <form class="contact-form reveal-on-scroll" id="pilot-form" novalidate style="max-width: 720px; margin: 0 auto;">
-        <div class="form-row">
-          <div class="form-group">
-            <label for="pilot-nome">Nome</label>
-            <input type="text" id="pilot-nome" placeholder="Seu nome completo" required autocomplete="name" />
-          </div>
-          <div class="form-group">
-            <label for="pilot-empresa">Empresa / Organização <span style="color: var(--clr-muted); font-size: 0.75rem;">(opcional)</span></label>
-            <input type="text" id="pilot-empresa" placeholder="Nome da empresa / operação (opcional)" autocomplete="organization" />
-          </div>
-        </div>
-        <div class="form-row">
-          <div class="form-group">
-            <label for="pilot-cargo">Cargo</label>
-            <input type="text" id="pilot-cargo" placeholder="Seu cargo na empresa" required autocomplete="organization-title" />
-          </div>
-          <div class="form-group">
-            <label for="pilot-email">E-mail</label>
-            <input type="email" id="pilot-email" placeholder="seu@email.com" required autocomplete="email" />
-          </div>
-        </div>
-        <div class="form-group" style="margin-bottom: var(--space-sm);">
-          <label for="pilot-telefone">Telefone / WhatsApp</label>
-          <input type="tel" id="pilot-telefone" placeholder="(11) 99999-9999" required autocomplete="tel" />
-        </div>
-        <p class="form-error-message" id="pilot-form-error" style="display: none; color: #ff6b6b; font-size: 0.85rem; text-align: center; margin-bottom: var(--space-sm);"></p>
-        <button type="submit" class="btn btn-primary btn-full" id="pilot-submit-btn">
-          <span>Quero Participar do Piloto</span>
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-        </button>
-      </form>
-
-      <div class="success-screen" id="pilot-success-screen" style="display: none;">
-        <div class="success-icon">✓</div>
-        <h3>Inscrição Confirmada</h3>
-        <p>Nossa equipe entrará em contato em até 48h úteis com o próximo passo.</p>
       </div>
     </div>
   </section>
 
-  <!-- ── SEÇÃO 08: CTA FINAL ────────────────────────── -->
-  <section class="section" id="cta-final">
-    <div class="section-inner">
-      <div class="cta-content">
-        <h2 class="section-title reveal-on-scroll" style="max-width: 100%; text-align: center;">Construa a camada de confiança da sua mobilidade</h2>
-        <p class="cta-sub reveal-on-scroll">Cada movimento vira evidência. Cada evidência, uma decisão mais segura.</p>
-        <a href="#contato" class="btn btn-primary btn-large reveal-on-scroll" id="cta-final-btn" data-xp-trigger="true">
-          <span>Solicitar Diagnóstico</span>
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-        </a>
+  <!-- ── SEÇÃO 09: CTA FINAL ────────────────────────── -->
+  <section class="section section-dark" id="contato">
+    <div class="section-inner final-cta-grid reveal-on-scroll">
+      <div>
+        <div class="section-label">PRÓXIMO PASSO</div>
+        <h2 class="section-title" style="margin-bottom: 0;">Onde a falta de evidência <em>custa mais para sua operação?</em></h2>
+      </div>
+      <div>
+        <p>Em uma conversa exploratória, mapeamos o cenário, a exposição e o melhor ponto de entrada para um piloto.</p>
+        <a class="btn button-light btn-large" href="/diagnostico">Solicitar Diagnóstico Executivo ↗</a>
+        <small>Sem NDA nesta etapa. Sem compromisso de contratação.</small>
       </div>
     </div>
   </section>
 
   <!-- ── FOOTER ──────────────────────────────────────── -->
   <footer class="footer">
-    <div class="footer-inner">
-      <div class="brand">
-        <span class="brand-logo">GD</span>
-        <span class="brand-name">GuardDrive<sup class="brand-tm">™</sup></span>
-      </div>
-      <p class="footer-copy">© 2026 GuardDrive · Operational Trust for Mobility · Todos os direitos reservados · LGPD Compliant</p>
-      <p class="footer-mono">GUARDPROOF™ ATTESTATION STANDARD v1.2 · OPERATIONAL TRUST FOR MOBILITY</p>
+    <div class="footer-main">
+      <a class="brand" href="#hero"><span class="brand-logo">GD</span><span class="brand-name">GuardDrive<sup class="brand-tm">™</sup></span></a>
+      <p>Infraestrutura de confiança operacional para mobilidade crítica.</p>
+      <div class="footer-links"><a href="#problema">O Problema</a><a href="#piloto">Programa Piloto</a><a href="/diagnostico">Diagnóstico</a></div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 GuardDrive · Operational Trust for Mobility</span>
+      <span>Todos os direitos reservados · LGPD Compliant</span>
     </div>
   </footer>
 
-  <!-- ── NDA MODAL ───────────────────────────────────── -->
-  <div class="modal-overlay" id="nda-modal" style="display: none;">
-    <div class="modal-box">
-      <div class="modal-header">
-        <span class="modal-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="22" height="22"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
-        </span>
-        <h3>Acordo de Confidencialidade Operacional (NDA)</h3>
-        <button class="modal-close" id="modal-close" aria-label="Fechar">✕</button>
-      </div>
-      <div class="modal-body">
-        <p style="font-size: 0.85rem; color: var(--clr-cyan); margin-bottom: var(--space-sm); font-weight: 600;">Você está entrando em uma área de acesso restrito da GuardDrive™.</p>
-        <div class="nda-scroll">
-          <p><strong>ACORDO DE CONFIDENCIALIDADE — NDA OPERACIONAL</strong></p>
-          <p>Este instrumento regula as condições sob as quais o usuário ("Acessante") acessa os materiais técnicos, dados de validação de mercado e especificações do ecossistema da Iniciativa GuardDrive, permitindo a geração de insights estratégicos sobre a solução.</p>
-          <p><strong>1. INFORMAÇÕES CONFIDENCIAIS:</strong> Compreendem toda e qualquer informação técnica, de engenharia de hardware de borda (GuardTag™), modelos e arquiteturas de auditoria forense integrada, topologia do Protocolo GuardProof™ e dados comerciais apresentados.</p>
-          <p><strong>2. DEVER DE SIGILO E NÃO-USO:</strong> O Acessante compromete-se a não revelar, divulgar, publicar ou disponibilizar tais informações a terceiros, devendo usá-las unicamente para fins de avaliação técnica e potencial contratação.</p>
-          <p><strong>3. PRESERVAÇÃO DE DIREITOS:</strong> A disponibilização das informações confidenciais não transfere qualquer direito de propriedade intelectual ou comercial ao Acessante.</p>
-          <p><strong>4. TRATAMENTO DE DADOS (LGPD):</strong> A coleta de dados visa exclusivamente a elaboração de laudo de conformidade. Os dados são armazenados em ambiente seguro conforme a Lei Geral de Proteção de Dados.</p>
-          <p><strong>5. VIGÊNCIA E FORO:</strong> As obrigações de confidencialidade permanecerão vigentes pelo prazo de 5 (cinco) anos. Foro eleito: Comarca de Salvador-BA.</p>
-        </div>
-        <label class="nda-check-label">
-          <input type="checkbox" id="nda-checkbox" />
-          Li e aceito os termos do Acordo de Confidencialidade Operacional acima
-        </label>
-      </div>
-      <div class="modal-footer">
-        <button class="btn btn-ghost" id="modal-cancel">Cancelar</button>
-        <button class="btn btn-primary" id="modal-confirm" disabled>
-          <span>Confirmar e Acessar</span>
-        </button>
-      </div>
-    </div>
-  </div>
-
-  <!-- ── DYNAMIC DIAGNOSTIC PORTAL (?r=TOKEN) ─────── -->
-  <div id="dynamic-diagnostic-portal" style="display: none; padding: 6rem var(--space-md) var(--space-xl); max-width: 900px; margin: 0 auto;">
-    <div style="text-align: center; margin-bottom: var(--space-lg);">
-      <div class="hero-badge" style="display: inline-flex; opacity: 1; transform: none; margin-bottom: var(--space-md);">
-        <span class="pulse-dot"></span>
-        Diagnóstico Soberano · GuardDrive™
-      </div>
-      <h1 id="portal-title" style="font-size: clamp(1.8rem, 4vw, 3rem); font-weight: 900; letter-spacing: -0.02em; margin-bottom: var(--space-xs);"></h1>
-      <p id="portal-subtitle" style="color: var(--clr-muted); font-size: 1rem; max-width: 560px; margin: 0 auto;"></p>
-    </div>
-    <div class="wizard-progress" style="max-width: 700px; margin: 0 auto var(--space-lg);">
-      <div class="wizard-progress-bar" id="portal-progress"></div>
-    </div>
-    <!-- Phase 1: NDA Gate -->
-    <div id="portal-phase-nda" class="diagnostic-portal-wrapper" style="max-width: 700px; margin: 0 auto;">
-      <div style="text-align: center; margin-bottom: var(--space-md);">
-        <div style="margin-bottom: var(--space-sm); display: flex; justify-content: center;">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" width="56" height="56" style="color: var(--clr-cyan);"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
-        </div>
-        <h2 style="font-size: 1.5rem; font-weight: 800; margin-bottom: var(--space-xs);">Acordo de Confidencialidade</h2>
-        <p style="color: var(--clr-muted); font-size: 0.9rem;">Você está entrando em uma área de acesso restrito. Leia e aceite o NDA operacional para iniciar seu diagnóstico.</p>
-      </div>
-      <div class="nda-scroll" style="margin-bottom: var(--space-md);">
-        <p><strong>ACORDO DE CONFIDENCIALIDADE — NDA OPERACIONAL</strong></p>
-        <p>Este instrumento regula as condições sob as quais o usuário ("Acessante") acessa os materiais técnicos, dados de validação de mercado e especificações do ecossistema da Iniciativa GuardDrive.</p>
-        <p><strong>1. INFORMAÇÕES CONFIDENCIAIS:</strong> Toda informação técnica, de engenharia de hardware de borda (GuardTag™), modelos e arquiteturas de auditoria forense integrada, topologia do Protocolo GuardProof™ e dados comerciais.</p>
-        <p><strong>2. DEVER DE SIGILO:</strong> O Acessante compromete-se a não revelar as informações a terceiros, usando-as unicamente para avaliação técnica.</p>
-        <p><strong>3. LGPD:</strong> A coleta de dados opera em conformidade plena com a Lei Geral de Proteção de Dados.</p>
-        <p><strong>4. VIGÊNCIA:</strong> 5 (cinco) anos. Foro: Comarca de Salvador-BA.</p>
-      </div>
-      <label class="nda-check-label" style="margin-bottom: var(--space-md);">
-        <input type="checkbox" id="portal-nda-checkbox" />
-        Li e aceito integralmente os termos do Acordo de Confidencialidade Operacional
-      </label>
-      <button class="btn btn-primary btn-full" id="portal-nda-btn" disabled>
-        <span>Aceitar NDA e Iniciar Diagnóstico</span>
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-      </button>
-    </div>
-    <!-- Phase 2: Contact Info -->
-    <div id="portal-phase-contact" class="diagnostic-portal-wrapper" style="display: none; max-width: 700px; margin: 0 auto;">
-      <h2 style="font-size: 1.3rem; font-weight: 800; margin-bottom: var(--space-md);">Seus Dados de Contato</h2>
-      <div class="form-row" style="margin-bottom: var(--space-sm);">
-        <div class="form-group">
-          <label for="portal-nome">Nome Completo</label>
-          <input type="text" id="portal-nome" placeholder="Seu nome" />
-        </div>
-        <div class="form-group">
-          <label for="portal-empresa">Empresa / Organização <span style="color: var(--clr-muted); font-size: 0.75rem;">(opcional)</span></label>
-          <input type="text" id="portal-empresa" placeholder="Nome da empresa / operação (opcional)" />
-        </div>
-      </div>
-      <div class="form-group" style="margin-bottom: var(--space-sm);">
-        <label for="portal-email">E-mail Corporativo</label>
-        <input type="email" id="portal-email" placeholder="seu@empresa.com.br" />
-      </div>
-      <div class="form-row" style="margin-bottom: var(--space-md);">
-        <div class="form-group">
-          <label for="portal-phone-personal">WhatsApp Pessoal</label>
-          <input type="tel" id="portal-phone-personal" placeholder="(11) 99999-9999" />
-        </div>
-        <div class="form-group">
-          <label for="portal-phone-corporate">WhatsApp Corporativo</label>
-          <input type="tel" id="portal-phone-corporate" placeholder="(11) 3000-0000" />
-        </div>
-      </div>
-      <button class="btn btn-primary btn-full" id="portal-contact-btn">
-        <span>Confirmar e Iniciar Diagnóstico</span>
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-      </button>
-    </div>
-    <!-- Phase 3: Questions Wizard -->
-    <div id="portal-phase-questions" class="diagnostic-portal-wrapper" style="display: none; max-width: 700px; margin: 0 auto;">
-      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-md);">
-        <span style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--clr-muted);" id="portal-question-number">Pergunta 1 de N</span>
-        <span style="font-family: var(--font-mono); font-size: 0.7rem; color: var(--clr-cyan); background: rgba(0,240,255,0.08); border: 1px solid rgba(0,240,255,0.15); padding: 0.2rem 0.6rem; border-radius: var(--radius-pill);" id="portal-question-segment">SEGMENTO</span>
-      </div>
-      <h3 id="portal-question-title" style="font-size: 1.2rem; font-weight: 700; margin-bottom: var(--space-md); line-height: 1.4;"></h3>
-      <div id="portal-options-container"></div>
-      <div id="portal-text-input-container" style="display: none;">
-        <textarea id="portal-text-answer" rows="4" placeholder="Escreva sua resposta..." style="width: 100%; background: rgba(255,255,255,0.03); border: 1px solid var(--clr-border); border-radius: var(--radius-sm); padding: 0.85rem 1rem; color: var(--clr-white); font-size: 0.95rem; font-family: var(--font-sans); resize: vertical; transition: all 0.3s; outline: none;"></textarea>
-      </div>
-      <div style="display: flex; gap: var(--space-sm); margin-top: var(--space-md);">
-        <button class="btn btn-ghost" id="portal-prev-btn" style="flex: 1; visibility: hidden;">← Anterior</button>
-        <button class="btn btn-primary" id="portal-next-btn" style="flex: 2;">Avançar →</button>
-      </div>
-    </div>
-    <!-- Phase 4: Attesting -->
-    <div id="portal-phase-attesting" class="diagnostic-portal-wrapper" style="display: none; max-width: 700px; margin: 0 auto; text-align: center;">
-      <div style="display: flex; justify-content: center; margin-bottom: var(--space-sm);">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" width="52" height="52" style="color: var(--clr-cyan);"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 010 14.14M4.93 4.93a10 10 0 000 14.14"/><path d="M22.54 1.46a15 15 0 010 21.21M1.46 1.46a15 15 0 000 21.21"/></svg>
-      </div>
-      <h2 style="font-size: 1.3rem; font-weight: 800; margin-bottom: var(--space-xs);">Gerando Laudo de Conformidade</h2>
-      <p style="font-size: 0.75rem; color: var(--clr-muted); margin-bottom: var(--space-md); text-transform: uppercase; letter-spacing: 0.05em;">Ambiente de demonstração — nenhuma evidência operacional real é registrada nesta simulação</p>
-      <pre class="attestation-box" id="attesting-console" style="text-align: left; white-space: pre-wrap; font-size: 0.78rem; max-height: 280px; overflow-y: auto; color: var(--clr-emerald);">[SYS] Iniciando simulação do protocolo de atestação...</pre>
-    </div>
-    <!-- Phase 5: Success -->
-    <div id="portal-phase-success" class="diagnostic-portal-wrapper" style="display: none; max-width: 700px; margin: 0 auto; text-align: center;">
-      <div class="success-icon" style="margin: 0 auto var(--space-md);">✓</div>
-      <h2 style="font-size: 1.5rem; font-weight: 800; margin-bottom: var(--space-xs);">Diagnóstico Concluído</h2>
-      <p style="color: var(--clr-muted); margin-bottom: var(--space-md);">Seu laudo de conformidade foi gerado e registrado. Nossa equipe analisará e entrará em contato em até 48h úteis.</p>
-      <div class="attestation-box" style="margin-bottom: var(--space-md);">
-        <div class="attestation-label">REGISTRO DE DEMONSTRAÇÃO — GUARDPROOF™ (SIMULAÇÃO)</div>
-        <div class="attestation-hash" id="portal-res-hash">0x_processando...</div>
-        <div class="attestation-meta" id="portal-res-meta">Aguardando confirmação...</div>
-      </div>
-      <button class="btn btn-primary" id="portal-done-btn">
-        <span>Voltar à Página Inicial</span>
-      </button>
-    </div>
-    <!-- Phase 5b: Submission Error -->
-    <div id="portal-phase-error" class="diagnostic-portal-wrapper" style="display: none; max-width: 700px; margin: 0 auto; text-align: center;">
-      <div style="font-size: 2.5rem; margin-bottom: var(--space-sm);">⚠️</div>
-      <h2 style="font-size: 1.5rem; font-weight: 800; margin-bottom: var(--space-xs);">Não foi possível enviar seu diagnóstico</h2>
-      <p id="portal-error-message" style="color: var(--clr-muted); margin-bottom: var(--space-md);">Ocorreu uma falha de comunicação com o servidor. Suas respostas não foram perdidas — tente novamente.</p>
-      <button class="btn btn-primary" id="portal-retry-btn">
-        <span>Tentar Novamente</span>
-      </button>
-    </div>
-  </div>
-
-  <!-- ── EXPERIENCE PORTAL — Operational Trust Journey™ ───── -->
-  <div class="xp-overlay" id="xp-overlay" aria-hidden="true">
-    <div class="xp-backdrop"></div>
-    <button class="xp-close" id="xp-close-btn" aria-label="Fechar experiência">✕</button>
-
-    <div class="xp-shell">
-
-      <!-- Journey Stepper -->
-      <div class="xp-stepper" id="xp-stepper">
-        <span class="xp-step" data-step="identify">IDENTIFY</span>
-        <span class="xp-step-sep">›</span>
-        <span class="xp-step" data-step="understand">UNDERSTAND</span>
-        <span class="xp-step-sep">›</span>
-        <span class="xp-step" data-step="profile">PROFILE</span>
-        <span class="xp-step-sep">›</span>
-        <span class="xp-step" data-step="assess">ASSESS</span>
-        <span class="xp-step-sep">›</span>
-        <span class="xp-step" data-step="attest">ATTEST</span>
-        <span class="xp-step-sep">›</span>
-        <span class="xp-step" data-step="recommend">RECOMMEND</span>
-        <span class="xp-step-sep">›</span>
-        <span class="xp-step" data-step="trust">TRUST</span>
-      </div>
-
-      <!-- STAGE 1 — WELCOME -->
-      <section class="xp-stage xp-stage-center" id="xp-stage-welcome">
-        <div class="xp-welcome-badge"><span class="pulse-dot"></span>OPERATIONAL TRUST JOURNEY™</div>
-        <h2 class="xp-welcome-title">Bem-vindo ao GuardDrive.</h2>
-        <p class="xp-welcome-sub">Antes de gerar um diagnóstico operacional, precisamos compreender sua operação.</p>
-        <button class="btn btn-primary btn-large" id="xp-start-btn">
-          <span>Iniciar</span>
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-        </button>
-      </section>
-
-      <!-- STAGE 2 — IDENTIFY -->
-      <section class="xp-stage" id="xp-stage-identify">
-        <div class="xp-stage-label">IDENTIFY · 01</div>
-        <h2 class="xp-stage-title">Quem está do outro lado da operação?</h2>
-        <p class="xp-stage-sub">Quatro dados. Nada além disso.</p>
-        <div class="xp-identify-form">
-          <div class="form-group">
-            <label for="xp-nome">Nome</label>
-            <input type="text" id="xp-nome" placeholder="Seu nome completo" autocomplete="name" />
-          </div>
-          <div class="form-group">
-            <label for="xp-empresa">Empresa / Organização <span style="color: var(--clr-muted); font-size: 0.75rem;">(opcional)</span></label>
-            <input type="text" id="xp-empresa" placeholder="Nome da empresa / operação (opcional)" autocomplete="organization" />
-          </div>
-          <div class="form-group">
-            <label for="xp-cargo">Cargo</label>
-            <input type="text" id="xp-cargo" placeholder="Seu cargo" autocomplete="organization-title" />
-          </div>
-          <div class="form-group">
-            <label for="xp-segmento">Segmento</label>
-            <select id="xp-segmento">
-              <option value="">Selecione seu segmento</option>
-              <option value="seguradora">Seguradora</option>
-              <option value="frotista">Locadora / Frotista</option>
-              <option value="logistica">Logística / Transportadora</option>
-              <option value="municipio">Município / Governo</option>
-              <option value="outro">Outro</option>
-            </select>
-          </div>
-        </div>
-        <p class="xp-error" id="xp-identify-error">Preencha os quatro campos para continuar.</p>
-        <button class="btn btn-primary btn-full" id="xp-identify-btn">
-          <span>Continuar</span>
-        </button>
-      </section>
-
-      <!-- STAGE 3 — PROFILE REVEAL + CALIBRATION -->
-      <section class="xp-stage xp-stage-center" id="xp-stage-profile">
-        <div class="xp-profile-scan">
-          <div class="xp-profile-ring xp-ring-1"></div>
-          <div class="xp-profile-ring xp-ring-2"></div>
-          <div class="xp-profile-check" id="xp-profile-icon">✓</div>
-        </div>
-        <div class="xp-stage-label">PROFILE · IDENTIFICADO</div>
-        <h2 class="xp-stage-title" id="xp-profile-title">Perfil identificado.</h2>
-        <p class="xp-stage-sub" id="xp-profile-sub"></p>
-
-        <div class="xp-calibrate" id="xp-calibrate">
-          <div class="xp-calibrate-block">
-            <span class="xp-calibrate-label">Ativos sob gestão</span>
-            <div class="xp-chip-row" id="xp-chips-fleet" data-field="fleet">
-              <button type="button" class="xp-chip" data-value="1-20">1–20</button>
-              <button type="button" class="xp-chip" data-value="21-100">21–100</button>
-              <button type="button" class="xp-chip" data-value="101-500">101–500</button>
-              <button type="button" class="xp-chip" data-value="500+">500+</button>
-            </div>
-          </div>
-          <div class="xp-calibrate-block">
-            <span class="xp-calibrate-label">Maior desafio operacional agora</span>
-            <div class="xp-chip-row" id="xp-chips-problem" data-field="problem"></div>
-          </div>
-        </div>
-
-        <button class="btn btn-primary btn-large" id="xp-profile-btn">
-          <span>Iniciar Diagnóstico</span>
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-        </button>
-      </section>
-
-      <!-- STAGES 4–8 — INTELLIGENCE HUB (laboratory) -->
-      <section class="xp-stage" id="xp-stage-hub">
-        <div class="xp-hub-header">
-          <div class="xp-hub-brand">
-            <span class="ha-topbar-logo">GD</span>
-            <div>
-              <h2 class="xp-hub-title">GuardDrive Intelligence Hub</h2>
-              <p class="xp-hub-sub">Construindo seu Diagnóstico Operacional</p>
-            </div>
-          </div>
-          <div class="xp-hub-live"><span class="ha-live-dot" style="background:var(--clr-emerald); box-shadow:0 0 8px var(--clr-emerald);"></span>PROCESSANDO</div>
-        </div>
-
-        <div class="xp-engines" id="xp-engines"><!-- JS injected engine cards --></div>
-
-        <div class="xp-hub-grid">
-          <div class="xp-hub-col">
-            <div class="ha-label">LOG DE CONSTRUÇÃO</div>
-            <div class="xp-log" id="xp-log"></div>
-          </div>
-          <div class="xp-hub-col">
-            <div class="ha-label">MAPA DE RISCO OPERACIONAL</div>
-            <div class="xp-radar-wrap" id="xp-radar-wrap"><!-- JS injected radar svg --></div>
-            <div class="xp-heatmap" id="xp-heatmap"><!-- JS injected heatmap cells --></div>
-          </div>
-        </div>
-
-        <div class="xp-report-build">
-          <div class="ha-label">LAUDO EXECUTIVO</div>
-          <div class="xp-report-lines" id="xp-report-lines"></div>
-        </div>
-      </section>
-
-      <!-- STAGE 9 — GUARDPROOF FINAL -->
-      <section class="xp-stage xp-stage-center" id="xp-stage-final">
-        <div class="xp-final-badge"><span class="pulse-dot" style="background:var(--clr-emerald); box-shadow: 0 0 8px var(--clr-emerald);"></span>GUARDPROOF™</div>
-        <h2 class="xp-final-title">Operational Trust Report</h2>
-
-        <div class="xp-guardproof-card">
-          <div class="xp-gp-row">
-            <span class="xp-gp-key">STATUS</span>
-            <span class="xp-gp-val xp-gp-status">ATTESTED</span>
-          </div>
-          <div class="xp-gp-score-wrap">
-            <svg class="ha-gauge xp-gp-gauge" viewBox="0 0 100 100">
-              <circle class="ha-gauge-bg" cx="50" cy="50" r="40" />
-              <circle class="ha-gauge-fill" cx="50" cy="50" r="40" id="xp-gp-gauge-arc" stroke-dasharray="0 251" />
-            </svg>
-            <div class="xp-gp-score-inner">
-              <span><span class="xp-gp-score-num" id="xp-gp-score">0.0</span><span class="ha-score-pct">%</span></span>
-              <span class="xp-gp-score-label">Operational Trust Score</span>
-            </div>
-          </div>
-          <div class="xp-gp-meta-grid">
-            <div class="xp-gp-meta"><span class="xp-gp-meta-key">Risk Level</span><span class="xp-gp-meta-val" id="xp-gp-risk">—</span></div>
-            <div class="xp-gp-meta"><span class="xp-gp-meta-key">Expected ROI</span><span class="xp-gp-meta-val" id="xp-gp-roi">—</span></div>
-            <div class="xp-gp-meta"><span class="xp-gp-meta-key">Report ID</span><span class="xp-gp-meta-val xp-gp-mono" id="xp-gp-reportid">GD-------</span></div>
-          </div>
-        </div>
-
-        <div class="xp-final-actions">
-          <button class="btn btn-primary" id="xp-open-report-btn">Abrir Laudo Executivo</button>
-          <button class="btn btn-ghost" id="xp-demo-btn">Agendar Demonstração</button>
-          <button class="btn btn-ghost" id="xp-pilot-btn">Solicitar Programa Piloto</button>
-        </div>
-      </section>
-
-      <!-- Expanded Executive Report -->
-      <section class="xp-stage" id="xp-stage-report">
-        <button class="xp-report-back" id="xp-report-back-btn">← Voltar ao Diagnóstico</button>
-        <div class="xp-report-doc" id="xp-report-doc"><!-- JS injected --></div>
-      </section>
-
-    </div>
-  </div>
-
-  <script type="module" src="app.js"></script>
-  <script type="module" src="experience-portal.js"></script>
+  <script type="module" src="landing.js"></script>
 </body>
 </html>

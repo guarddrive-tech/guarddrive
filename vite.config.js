@@ -10,6 +10,7 @@ export default defineConfig({
       input: {
         main: resolve(__dirname, 'frontend/index.html'),
         interviewer: resolve(__dirname, 'frontend/index2.html'),
+        diagnostico: resolve(__dirname, 'frontend/diagnostico.html'),
       },
     },
   },
