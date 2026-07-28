@@ -3,6 +3,22 @@ const errorMessage = document.getElementById('diagnostic-error');
 const formWrap = document.getElementById('diagnostic-form-wrap');
 const successState = document.getElementById('diagnostic-success');
 
+const carriedParams = new URLSearchParams(window.location.search);
+const carriedDor = carriedParams.get('dor');
+const carriedSegmento = carriedParams.get('segmento');
+if (carriedDor || carriedSegmento) {
+  const dorSelect = document.getElementById('diag-dor');
+  const segmentoSelect = document.getElementById('diag-segmento');
+  if (carriedDor && dorSelect && [...dorSelect.options].some((opt) => opt.value === carriedDor)) {
+    dorSelect.value = carriedDor;
+  }
+  if (carriedSegmento && segmentoSelect && [...segmentoSelect.options].some((opt) => opt.value === carriedSegmento)) {
+    segmentoSelect.value = carriedSegmento;
+  }
+  const prefillNote = document.getElementById('diag-prefill-note');
+  if (prefillNote) prefillNote.hidden = false;
+}
+
 form?.addEventListener('submit', async (event) => {
   event.preventDefault();
   errorMessage.classList.remove('visible');
