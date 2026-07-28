@@ -456,7 +456,12 @@ textarea { resize: vertical; }
   display: flex; align-items: center; justify-content: center;
   gap: var(--space-md);
   flex-wrap: wrap;
-  max-width: 1000px; margin: 0 auto var(--space-md);
+  max-width: 1100px; margin: 0 auto var(--space-md);
+}
+@media (max-width: 900px) {
+  .ecosystem-flow { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-md); }
+  .eco-arrow { display: none; }
+  .eco-node { min-width: 0; }
 }
 .eco-node {
   background: var(--clr-surface);
