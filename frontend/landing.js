@@ -53,17 +53,133 @@ const caseContent = {
   }
 };
 
+function applyCase(key) {
+  const content = caseContent[key];
+  if (!content) return;
+  document.querySelectorAll('[data-case]').forEach((item) => item.setAttribute('aria-selected', String(item.dataset.case === key)));
+  document.querySelector('.case-number').textContent = content.number;
+  document.getElementById('case-label').textContent = content.label;
+  document.getElementById('case-title').textContent = content.title;
+  document.getElementById('case-description').textContent = content.description;
+  document.getElementById('case-outcomes').innerHTML = content.outcomes.map((outcome) => `<li>${outcome}</li>`).join('');
+}
+
 document.querySelectorAll('[data-case]').forEach((button) => {
-  button.addEventListener('click', () => {
-    document.querySelectorAll('[data-case]').forEach((item) => item.setAttribute('aria-selected', 'false'));
-    button.setAttribute('aria-selected', 'true');
-    const content = caseContent[button.dataset.case];
-    document.querySelector('.case-number').textContent = content.number;
-    document.getElementById('case-label').textContent = content.label;
-    document.getElementById('case-title').textContent = content.title;
-    document.getElementById('case-description').textContent = content.description;
-    document.getElementById('case-outcomes').innerHTML = content.outcomes.map((outcome) => `<li>${outcome}</li>`).join('');
+  button.addEventListener('click', () => applyCase(button.dataset.case));
+});
+
+// ── Diagnóstico rápido: a pergunta que personaliza o resto da página ──
+const painProfiles = {
+  fraude: {
+    label: 'Fraudes em Sinistros',
+    tag: 'SEGURADORAS · FRAUDE',
+    caseKey: 'seguradoras',
+    segmento: 'seguradora',
+    dor: 'fraude',
+    insight: 'Operações como a sua costumam perder tempo e credibilidade reconstruindo o que aconteceu depois do sinistro. A GuardDrive atua exatamente nesse ponto: evidência confiável desde a origem do evento, antes que a disputa comece.',
+    benefitTitle: 'Menor custo por sinistro contestado',
+    ctaLabel: 'PRÓXIMO PASSO · FRAUDE EM SINISTROS',
+    ctaTitle: 'Onde a fraude em sinistros custa mais para sua operação?',
+    ctaButton: 'Diagnosticar exposição a fraude ↗',
+  },
+  roubo: {
+    label: 'Roubo de veículos',
+    tag: 'FROTAS · PROTEÇÃO DE ATIVOS',
+    caseKey: 'frotas',
+    segmento: 'frota',
+    dor: 'operacao',
+    insight: 'Operações como a sua costumam decidir sobre um ativo com base em informação incompleta. A GuardDrive atua exatamente nesse ponto: identidade e histórico verificáveis do veículo, disponíveis no momento da ocorrência.',
+    benefitTitle: 'Menor custo por veículo exposto',
+    ctaLabel: 'PRÓXIMO PASSO · ROUBO DE VEÍCULOS',
+    ctaTitle: 'Onde o roubo de veículos custa mais para sua frota?',
+    ctaButton: 'Diagnosticar exposição da frota ↗',
+  },
+  rastreabilidade: {
+    label: 'Falta de rastreabilidade',
+    tag: 'LOGÍSTICA · CONTINUIDADE',
+    caseKey: 'logistica',
+    segmento: 'logistica',
+    dor: 'integracao',
+    insight: 'Operações como a sua costumam perder a evidência exatamente na transição entre parceiros. A GuardDrive atua exatamente nesse ponto: continuidade de evidência do início ao fim da jornada.',
+    benefitTitle: 'Menor custo por divergência entre parceiros',
+    ctaLabel: 'PRÓXIMO PASSO · RASTREABILIDADE',
+    ctaTitle: 'Onde a falta de rastreabilidade custa mais na sua operação?',
+    ctaButton: 'Diagnosticar zonas cegas ↗',
+  },
+  auditoria: {
+    label: 'Auditorias lentas',
+    tag: 'GOVERNANÇA · CONFORMIDADE',
+    caseKey: null,
+    segmento: '',
+    dor: 'auditoria',
+    insight: 'Operações como a sua costumam gastar mais tempo reunindo prova do que decidindo. A GuardDrive atua exatamente nesse ponto: histórico auditável, pronto para consulta, sem reconstrução manual.',
+    benefitTitle: 'Menor custo por ciclo de auditoria',
+    ctaLabel: 'PRÓXIMO PASSO · AUDITORIAS',
+    ctaTitle: 'Onde a lentidão de auditoria custa mais para sua operação?',
+    ctaButton: 'Diagnosticar ciclo de auditoria ↗',
+  },
+  outro: {
+    label: 'Outro',
+    tag: 'DIAGNÓSTICO PERSONALIZADO',
+    caseKey: null,
+    segmento: '',
+    dor: '',
+    insight: 'Cada operação tem um ponto de maior exposição. Conte esse contexto em uma conversa exploratória — sem NDA nesta etapa — e mapeamos juntos onde a GuardDrive gera mais valor.',
+    benefitTitle: 'Menor custo por ocorrência',
+    ctaLabel: 'PRÓXIMO PASSO',
+    ctaTitle: 'Onde a falta de evidência custa mais para sua operação?',
+    ctaButton: 'Solicitar Diagnóstico Executivo ↗',
+  },
+};
+
+const quizOptions = document.querySelectorAll('.quiz-option');
+const quizAnswer = document.getElementById('quiz-answer');
+
+function applyPain(key) {
+  const profile = painProfiles[key];
+  if (!profile) return;
+
+  quizOptions.forEach((option) => option.setAttribute('aria-checked', String(option.dataset.pain === key)));
+
+  document.getElementById('quiz-answer-tag').textContent = profile.tag;
+  document.getElementById('quiz-answer-insight').textContent = profile.insight;
+  const titleEl = document.getElementById('quiz-answer-title');
+  if (profile.caseKey && caseContent[profile.caseKey]) {
+    titleEl.textContent = caseContent[profile.caseKey].title;
+    applyCase(profile.caseKey);
+  } else {
+    titleEl.textContent = profile.label;
+  }
+  quizAnswer.hidden = false;
+  requestAnimationFrame(() => quizAnswer.classList.add('is-visible'));
+
+  const benefitTitle = document.getElementById('benefit-accent-title');
+  if (benefitTitle) benefitTitle.textContent = profile.benefitTitle;
+
+  const ctaLabel = document.getElementById('final-cta-label');
+  const ctaTitle = document.getElementById('final-cta-title');
+  const ctaButton = document.getElementById('final-cta-button');
+  if (ctaLabel) ctaLabel.textContent = profile.ctaLabel;
+  if (ctaTitle) ctaTitle.textContent = profile.ctaTitle;
+  if (ctaButton) ctaButton.textContent = profile.ctaButton;
+
+  const params = new URLSearchParams();
+  if (profile.dor) params.set('dor', profile.dor);
+  if (profile.segmento) params.set('segmento', profile.segmento);
+  const query = params.toString();
+  document.querySelectorAll('a[href="/diagnostico"]').forEach((link) => {
+    link.href = query ? `/diagnostico?${query}` : '/diagnostico';
   });
+
+  fetch('/api/telemetry/event', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ event: 'landing_pain_select', path: window.location.pathname, metadata: { pain: key } }),
+  }).catch(() => {});
+}
+
+quizOptions.forEach((option) => {
+  option.addEventListener('click', () => applyPain(option.dataset.pain));
 });
 
 document.querySelectorAll('.faq-acc-btn').forEach((button) => {

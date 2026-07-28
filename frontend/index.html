@@ -61,40 +61,9 @@
         <span>Seguradoras</span><span>Frotas</span><span>Logística</span><span>Mobilidade</span>
       </div>
 
-      <!-- Hero visual: premium platform representation (no live KPIs/gauge/logs) -->
+      <!-- Hero visual: cada veículo como fonte de dados operacionais -->
       <div class="hero-image-wrap" id="hero-image-wrap">
-        <div class="ha-container" id="hero-anim">
-          <div class="ha-topbar">
-            <div class="ha-topbar-brand">
-              <span class="ha-topbar-logo">GD</span>
-              <span>GuardDrive™ Intelligence Hub</span>
-            </div>
-            <div class="ha-topbar-right">
-              <span class="ha-live-badge"><span class="ha-live-dot"></span>OPERAÇÃO CONECTADA</span>
-            </div>
-          </div>
-
-          <div class="ha-body-simple">
-            <div class="ha-nfc-scene">
-              <div class="ha-nfc-ring ha-ring-3"></div>
-              <div class="ha-nfc-ring ha-ring-2"></div>
-              <div class="ha-nfc-ring ha-ring-1"></div>
-              <div class="ha-nfc-core">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="26" height="26">
-                  <path d="M6 8.5A5.5 5.5 0 0 1 12 3v0a5.5 5.5 0 0 1 5.5 5.5v7a5.5 5.5 0 0 1-5.5 5.5v0A5.5 5.5 0 0 1 6 15.5v-7z"/>
-                  <path d="M10 8h4M10 12h4M10 16h4"/>
-                </svg>
-              </div>
-            </div>
-            <p class="ha-nfc-label">Confiança operacional verificada</p>
-            <p class="ha-nfc-chip">Evidência disponível em segundos</p>
-          </div>
-
-          <div class="ha-statusbar">
-            <span>Visibilidade para decidir</span>
-            <span>Pronto para integrar</span>
-          </div>
-        </div>
+        <img src="assets/hero_vehicle_data.jpg" alt="Veículo conectado gerando dados operacionais em tempo real, validados pela plataforma GuardDrive" width="1400" height="788" loading="eager">
       </div>
     </div>
   </section>
@@ -125,48 +94,28 @@
     </div>
   </div>
 
-  <!-- ── SEÇÃO 01.5: A CATEGORIA ────────────────────── -->
-  <section class="section section-compact" id="categoria">
+  <!-- ── SEÇÃO 01.5: DIAGNÓSTICO RÁPIDO (pergunta que personaliza a página) ── -->
+  <section class="section section-compact quiz-section" id="categoria">
     <div class="section-inner">
-      <div class="section-label reveal-on-scroll">A CATEGORIA</div>
-      <h2 class="section-title reveal-on-scroll" style="margin-bottom: var(--space-sm);">Da identidade do ativo à decisão protegida.</h2>
-      <p class="contact-sub reveal-on-scroll" style="margin-bottom: var(--space-md);">Evidências protegidas contra adulteração. Complexidade tecnológica invisível para a operação.</p>
+      <div class="section-label reveal-on-scroll">ANTES DE CONTINUAR</div>
+      <h2 class="section-title reveal-on-scroll" style="margin-bottom: var(--space-sm);">O que mais ameaça sua operação hoje?</h2>
+      <p class="contact-sub reveal-on-scroll" style="margin-bottom: var(--space-md);">Escolha um ponto. O restante da página se ajusta ao seu cenário — sem formulário, sem reload.</p>
 
-      <div class="flow-grid">
-        <div class="flow-h-step reveal-on-scroll">
-          <div class="flow-h-top">
-            <div class="flow-h-number">1</div>
-            <div class="flow-h-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/></svg></div>
-          </div>
-          <h3>GuardTag</h3>
-          <p>Identifica o ativo em minutos, sem parar a operação.</p>
-        </div>
-        <div class="flow-h-arrow">→</div>
-        <div class="flow-h-step reveal-on-scroll">
-          <div class="flow-h-top">
-            <div class="flow-h-number">2</div>
-            <div class="flow-h-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 5v2M12 17v2M5 12h2M17 12h2"/></svg></div>
-          </div>
-          <h3>Captura</h3>
-          <p>Registra o evento com validação de contexto e origem.</p>
-        </div>
-        <div class="flow-h-arrow">→</div>
-        <div class="flow-h-step reveal-on-scroll">
-          <div class="flow-h-top">
-            <div class="flow-h-number">3</div>
-            <div class="flow-h-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v6c0 5-3.5 8-7 9-3.5-1-7-4-7-9V6l7-3z"/><path d="M9 12l2 2 4-4"/></svg></div>
-          </div>
-          <h3>Atestação</h3>
-          <p>Evidências protegidas contra adulteração.</p>
-        </div>
-        <div class="flow-h-arrow">→</div>
-        <div class="flow-h-step reveal-on-scroll">
-          <div class="flow-h-top">
-            <div class="flow-h-number">4</div>
-            <div class="flow-h-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h9l3 3v15H6z"/><path d="M9 12h6M9 16h6M9 8h3"/></svg></div>
-          </div>
-          <h3>Prova</h3>
-          <p>Protege a decisão diante de auditoria ou contestação.</p>
+      <div class="quiz-options reveal-on-scroll" id="quiz-options" role="radiogroup" aria-label="Principal ameaça operacional">
+        <button type="button" class="quiz-option" data-pain="fraude" role="radio" aria-checked="false">Fraudes em Sinistros</button>
+        <button type="button" class="quiz-option" data-pain="roubo" role="radio" aria-checked="false">Roubo de veículos</button>
+        <button type="button" class="quiz-option" data-pain="rastreabilidade" role="radio" aria-checked="false">Falta de rastreabilidade</button>
+        <button type="button" class="quiz-option" data-pain="auditoria" role="radio" aria-checked="false">Auditorias lentas</button>
+        <button type="button" class="quiz-option" data-pain="outro" role="radio" aria-checked="false">Outro</button>
+      </div>
+
+      <div class="quiz-answer" id="quiz-answer" hidden>
+        <div class="quiz-answer-inner">
+          <span class="quiz-answer-tag" id="quiz-answer-tag">SEGURADORAS</span>
+          <p class="quiz-answer-lead">Com base no que você indicou:</p>
+          <h3 id="quiz-answer-title">—</h3>
+          <p class="quiz-answer-insight" id="quiz-answer-insight">—</p>
+          <a href="#casos" class="text-link dark-link" id="quiz-answer-link">Ver como isso se aplica ao seu caso ↓</a>
         </div>
       </div>
     </div>
@@ -271,7 +220,7 @@
         <article class="benefit-card benefit-accent reveal-on-scroll">
           <span class="icon-box">◇</span>
           <p class="card-kicker">Valor mensurável</p>
-          <h3>Menor custo por ocorrência</h3>
+          <h3 id="benefit-accent-title">Menor custo por ocorrência</h3>
           <p>Transforme tempo de apuração, retrabalho e risco de fraude em indicadores concretos de eficiência.</p>
           <a href="/diagnostico">Estimar oportunidade ↗</a>
         </article>
@@ -311,6 +260,10 @@
     <div class="section-inner" style="max-width: 1000px;">
       <div class="split-heading centered reveal-on-scroll">
         <div><div class="section-label">ECOSSISTEMA</div><h2 class="section-title" style="margin-bottom: 0;">Sofisticada por dentro.<br><em>Simples para adotar.</em></h2></div>
+      </div>
+
+      <div class="ecosystem-image-wrap reveal-on-scroll">
+        <img src="assets/ecosystem_trust_core.jpg" alt="Sinais de diferentes fontes operacionais convergindo para um núcleo único de confiança validada pela GuardDrive" width="1400" height="788" loading="lazy">
       </div>
 
       <div class="ecosystem-flow reveal-on-scroll">
@@ -378,12 +331,12 @@
   <section class="section section-dark" id="contato">
     <div class="section-inner final-cta-grid reveal-on-scroll">
       <div>
-        <div class="section-label">PRÓXIMO PASSO</div>
-        <h2 class="section-title" style="margin-bottom: 0;">Onde a falta de evidência <em>custa mais para sua operação?</em></h2>
+        <div class="section-label" id="final-cta-label">PRÓXIMO PASSO</div>
+        <h2 class="section-title" style="margin-bottom: 0;" id="final-cta-title">Onde a falta de evidência <em>custa mais para sua operação?</em></h2>
       </div>
       <div>
-        <p>Em uma conversa exploratória, mapeamos o cenário, a exposição e o melhor ponto de entrada para um piloto.</p>
-        <a class="btn button-light btn-large" href="/diagnostico">Solicitar Diagnóstico Executivo ↗</a>
+        <p id="final-cta-sub">Em uma conversa exploratória, mapeamos o cenário, a exposição e o melhor ponto de entrada para um piloto.</p>
+        <a class="btn button-light btn-large" href="/diagnostico" id="final-cta-button">Solicitar Diagnóstico Executivo ↗</a>
         <small>Sem NDA nesta etapa. Sem compromisso de contratação.</small>
       </div>
     </div>
