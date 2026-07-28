@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Diagnóstico Executivo — GuardDrive™</title>
+  <meta name="description" content="Solicite um diagnóstico executivo da exposição operacional da sua operação de mobilidade.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <nav class="nav">
+    <div class="nav-inner">
+      <a class="brand" href="/"><span class="brand-logo">GD</span><span class="brand-name">GuardDrive<sup class="brand-tm">™</sup></span></a>
+      <a class="back-link" href="/">← Voltar para a landing</a>
+    </div>
+  </nav>
+  <main class="diagnostic-main">
+    <div class="diagnostic-grid">
+      <section class="diagnostic-copy">
+        <p class="eyebrow"><span></span> Diagnóstico executivo</p>
+        <h1>Descubra onde a falta de evidência <em>pressiona sua operação.</em></h1>
+        <p>Conte o contexto. A GuardDrive avalia o melhor ponto de entrada para reduzir risco, tempo de análise e custo por ocorrência.</p>
+        <div class="diagnostic-steps">
+          <div><span>01</span><p><strong>Contato</strong>Entendemos seu papel e operação.</p></div>
+          <div><span>02</span><p><strong>Qualificação</strong>Mapeamos a dor e o impacto.</p></div>
+          <div><span>03</span><p><strong>Próximo passo</strong>Definimos se um piloto faz sentido.</p></div>
+        </div>
+        <div class="nda-note"><span>i</span><p><strong>NDA não é exigido agora.</strong> Materiais técnicos entram apenas após interesse e qualificação mútua.</p></div>
+      </section>
+
+      <section class="diagnostic-form-shell" aria-labelledby="form-title">
+        <div class="form-progress"><span>Etapa inicial</span><span>≈ 3 minutos</span></div>
+        <div id="diagnostic-form-wrap">
+          <p class="micro-label">CONVERSA EXPLORATÓRIA</p>
+          <h2 id="form-title">Vamos entender o cenário.</h2>
+          <form id="diagnostic-form" class="contact-form" novalidate>
+            <div class="form-row">
+              <div class="form-group"><label for="diag-nome">Nome completo</label><input id="diag-nome" name="nome" autocomplete="name" required></div>
+              <div class="form-group"><label for="diag-cargo">Cargo</label><input id="diag-cargo" name="cargo" autocomplete="organization-title" required></div>
+            </div>
+            <div class="form-group"><label for="diag-empresa">Empresa</label><input id="diag-empresa" name="empresa" autocomplete="organization" required></div>
+            <div class="form-row">
+              <div class="form-group"><label for="diag-email">E-mail corporativo</label><input id="diag-email" name="email" type="email" autocomplete="email" required></div>
+              <div class="form-group"><label for="diag-telefone">Telefone (opcional)</label><input id="diag-telefone" name="telefone" type="tel" autocomplete="tel"></div>
+            </div>
+            <div class="form-group">
+              <label for="diag-segmento">Tipo de operação</label>
+              <select id="diag-segmento" name="segmento" required>
+                <option value="">Selecione</option>
+                <option value="seguradora">Seguradora</option>
+                <option value="frota">Frota corporativa</option>
+                <option value="logistica">Logística e transporte</option>
+                <option value="locadora">Locadora</option>
+                <option value="mobilidade">Plataforma de mobilidade</option>
+                <option value="outro">Outra operação</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="diag-dor">Onde a incerteza mais custa hoje?</label>
+              <select id="diag-dor" name="dor" required>
+                <option value="">Selecione o principal ponto</option>
+                <option value="sinistros">Análise ou regulação de sinistros</option>
+                <option value="fraude">Fraude e contestação</option>
+                <option value="auditoria">Auditoria e conformidade</option>
+                <option value="operacao">Exceções e incidentes operacionais</option>
+                <option value="integracao">Fragmentação entre sistemas e parceiros</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="diag-frota">Tamanho da operação</label>
+              <select id="diag-frota" name="frota" required>
+                <option value="">Selecione uma faixa</option>
+                <option value="ate-100">Até 100 ativos</option>
+                <option value="101-500">101 a 500 ativos</option>
+                <option value="501-2000">501 a 2.000 ativos</option>
+                <option value="2001-10000">2.001 a 10.000 ativos</option>
+                <option value="mais-10000">Mais de 10.000 ativos</option>
+                <option value="nao-aplica">Não se aplica</option>
+              </select>
+            </div>
+            <p class="form-error" id="diagnostic-error" role="alert"></p>
+            <button class="btn btn-primary btn-large" type="submit">Solicitar diagnóstico <span>↗</span></button>
+            <small class="privacy-copy">Ao enviar, você autoriza o contato da GuardDrive sobre esta solicitação. Nenhum material confidencial é necessário nesta etapa.</small>
+          </form>
+        </div>
+        <div class="success-screen" id="diagnostic-success" role="status" aria-live="polite" tabindex="-1" hidden>
+          <div class="success-icon">✓</div>
+          <p class="micro-label">SOLICITAÇÃO RECEBIDA</p>
+          <h3>Contexto registrado. Agora começa a qualificação.</h3>
+          <p>A equipe GuardDrive entra em contato para entender a operação e avaliar o melhor próximo passo.</p>
+          <a class="text-link" href="/">Voltar para a landing →</a>
+        </div>
+      </section>
+    </div>
+  </main>
+  <script type="module" src="diagnostico.js"></script>
+</body>
+</html>

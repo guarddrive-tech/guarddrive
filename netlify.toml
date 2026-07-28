@@ -7,3 +7,13 @@
   from = "/interviewer"
   to = "/index2.html"
   status = 200
+
+[[redirects]]
+  from = "/diagnostico"
+  to = "/diagnostico.html"
+  status = 200
+
+[[redirects]]
+  from = "/experience"
+  to = "/diagnostico.html"
+  status = 301
