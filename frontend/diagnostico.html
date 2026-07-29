@@ -42,45 +42,49 @@
               <div class="form-group"><label for="diag-nome">Nome completo</label><input id="diag-nome" name="nome" autocomplete="name" required></div>
               <div class="form-group"><label for="diag-cargo">Cargo</label><input id="diag-cargo" name="cargo" autocomplete="organization-title" required></div>
             </div>
-            <div class="form-group"><label for="diag-empresa">Empresa</label><input id="diag-empresa" name="empresa" autocomplete="organization" required></div>
             <div class="form-row">
+              <div class="form-group"><label for="diag-empresa">Empresa</label><input id="diag-empresa" name="empresa" autocomplete="organization" required></div>
               <div class="form-group"><label for="diag-email">E-mail corporativo</label><input id="diag-email" name="email" type="email" autocomplete="email" required></div>
+            </div>
+            <div class="form-row">
               <div class="form-group"><label for="diag-telefone">Telefone (opcional)</label><input id="diag-telefone" name="telefone" type="tel" autocomplete="tel"></div>
+              <div class="form-group">
+                <label for="diag-segmento">Tipo de operação</label>
+                <select id="diag-segmento" name="segmento" required>
+                  <option value="">Selecione</option>
+                  <option value="seguradora">Seguradora</option>
+                  <option value="frota">Frota corporativa</option>
+                  <option value="logistica">Logística e transporte</option>
+                  <option value="locadora">Locadora</option>
+                  <option value="mobilidade">Plataforma de mobilidade</option>
+                  <option value="outro">Outra operação</option>
+                </select>
+              </div>
             </div>
-            <div class="form-group">
-              <label for="diag-segmento">Tipo de operação</label>
-              <select id="diag-segmento" name="segmento" required>
-                <option value="">Selecione</option>
-                <option value="seguradora">Seguradora</option>
-                <option value="frota">Frota corporativa</option>
-                <option value="logistica">Logística e transporte</option>
-                <option value="locadora">Locadora</option>
-                <option value="mobilidade">Plataforma de mobilidade</option>
-                <option value="outro">Outra operação</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label for="diag-dor">Onde a incerteza mais custa hoje?</label>
-              <select id="diag-dor" name="dor" required>
-                <option value="">Selecione o principal ponto</option>
-                <option value="sinistros">Análise ou regulação de sinistros</option>
-                <option value="fraude">Fraude e contestação</option>
-                <option value="auditoria">Auditoria e conformidade</option>
-                <option value="operacao">Exceções e incidentes operacionais</option>
-                <option value="integracao">Fragmentação entre sistemas e parceiros</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label for="diag-frota">Tamanho da operação</label>
-              <select id="diag-frota" name="frota" required>
-                <option value="">Selecione uma faixa</option>
-                <option value="ate-100">Até 100 ativos</option>
-                <option value="101-500">101 a 500 ativos</option>
-                <option value="501-2000">501 a 2.000 ativos</option>
-                <option value="2001-10000">2.001 a 10.000 ativos</option>
-                <option value="mais-10000">Mais de 10.000 ativos</option>
-                <option value="nao-aplica">Não se aplica</option>
-              </select>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="diag-dor">Onde a incerteza mais custa hoje?</label>
+                <select id="diag-dor" name="dor" required>
+                  <option value="">Selecione o principal ponto</option>
+                  <option value="sinistros">Análise ou regulação de sinistros</option>
+                  <option value="fraude">Fraude e contestação</option>
+                  <option value="auditoria">Auditoria e conformidade</option>
+                  <option value="operacao">Exceções e incidentes operacionais</option>
+                  <option value="integracao">Fragmentação entre sistemas e parceiros</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="diag-frota">Tamanho da operação</label>
+                <select id="diag-frota" name="frota" required>
+                  <option value="">Selecione uma faixa</option>
+                  <option value="ate-100">Até 100 ativos</option>
+                  <option value="101-500">101 a 500 ativos</option>
+                  <option value="501-2000">501 a 2.000 ativos</option>
+                  <option value="2001-10000">2.001 a 10.000 ativos</option>
+                  <option value="mais-10000">Mais de 10.000 ativos</option>
+                  <option value="nao-aplica">Não se aplica</option>
+                </select>
+              </div>
             </div>
             <p class="form-error" id="diagnostic-error" role="alert"></p>
             <button class="btn btn-primary btn-large" type="submit">Solicitar diagnóstico <span>↗</span></button>
