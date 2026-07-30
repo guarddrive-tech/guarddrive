@@ -19,16 +19,42 @@ navLinks?.querySelectorAll('a').forEach((link) => link.addEventListener('click',
   navBurger?.setAttribute('aria-expanded', 'false');
 }));
 
-const revealObserver = new IntersectionObserver((entries) => {
-  entries.forEach((entry) => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('revealed');
-      revealObserver.unobserve(entry.target);
-    }
-  });
-}, { threshold: 0.12 });
+const revealElements = document.querySelectorAll('.reveal-on-scroll');
 
-document.querySelectorAll('.reveal-on-scroll').forEach((element) => revealObserver.observe(element));
+function revealElement(element) {
+  element.classList.add('revealed');
+  element.addEventListener('transitionend', () => { element.style.willChange = 'auto'; }, { once: true });
+}
+
+if ('IntersectionObserver' in window) {
+  // rootMargin antecipa o disparo antes do elemento tocar a borda inferior da tela;
+  // threshold baixo evita que blocos finos (labels, headings) dependam de uma fração
+  // de interseção difícil de atingir no Safari iOS.
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        revealElement(entry.target);
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.05, rootMargin: '0px 0px -5% 0px' });
+
+  revealElements.forEach((element) => {
+    revealObserver.observe(element);
+    // Rede de segurança: se o observer nunca disparar para este elemento
+    // (bug de engine, elemento fora do fluxo normal, timing do Safari Mobile etc.),
+    // o conteúdo é revelado de qualquer forma — nunca deve ficar invisível.
+    setTimeout(() => {
+      if (!element.classList.contains('revealed')) {
+        revealObserver.unobserve(element);
+        revealElement(element);
+      }
+    }, 1800);
+  });
+} else {
+  // Sem suporte a IntersectionObserver: mostra tudo de imediato.
+  revealElements.forEach(revealElement);
+}
 
 const caseContent = {
   seguradoras: {
