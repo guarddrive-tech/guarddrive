@@ -222,3 +222,102 @@ document.querySelectorAll('.faq-acc-btn').forEach((button) => {
     }
   });
 });
+
+// ── Rodapé: rede de pontos que se conectam, sugerindo dados sendo validados ──
+const footerCanvas = document.getElementById('footer-network');
+
+if (footerCanvas && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  const ctx = footerCanvas.getContext('2d');
+  const NODE_COUNT = 26;
+  const LINK_DISTANCE = 140;
+  const NODE_COLOR = 'rgba(0, 240, 255, 0.55)';
+  const LINK_COLOR = '0, 240, 255';
+
+  let nodes = [];
+  let width = 0;
+  let height = 0;
+  let dpr = Math.min(window.devicePixelRatio || 1, 2);
+  let running = false;
+  let frameId = null;
+
+  function seedNodes() {
+    nodes = Array.from({ length: NODE_COUNT }, () => ({
+      x: Math.random() * width,
+      y: Math.random() * height,
+      vx: (Math.random() - 0.5) * 0.15,
+      vy: (Math.random() - 0.5) * 0.15,
+    }));
+  }
+
+  function resize() {
+    const rect = footerCanvas.getBoundingClientRect();
+    width = rect.width;
+    height = rect.height;
+    footerCanvas.width = width * dpr;
+    footerCanvas.height = height * dpr;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    seedNodes();
+  }
+
+  function step() {
+    ctx.clearRect(0, 0, width, height);
+
+    nodes.forEach((node) => {
+      node.x += node.vx;
+      node.y += node.vy;
+      if (node.x < 0 || node.x > width) node.vx *= -1;
+      if (node.y < 0 || node.y > height) node.vy *= -1;
+    });
+
+    for (let i = 0; i < nodes.length; i += 1) {
+      for (let j = i + 1; j < nodes.length; j += 1) {
+        const a = nodes[i];
+        const b = nodes[j];
+        const dist = Math.hypot(a.x - b.x, a.y - b.y);
+        if (dist < LINK_DISTANCE) {
+          ctx.strokeStyle = `rgba(${LINK_COLOR}, ${0.22 * (1 - dist / LINK_DISTANCE)})`;
+          ctx.lineWidth = 1;
+          ctx.beginPath();
+          ctx.moveTo(a.x, a.y);
+          ctx.lineTo(b.x, b.y);
+          ctx.stroke();
+        }
+      }
+    }
+
+    ctx.fillStyle = NODE_COLOR;
+    nodes.forEach((node) => {
+      ctx.beginPath();
+      ctx.arc(node.x, node.y, 1.6, 0, Math.PI * 2);
+      ctx.fill();
+    });
+
+    if (running) frameId = requestAnimationFrame(step);
+  }
+
+  function start() {
+    if (running) return;
+    running = true;
+    frameId = requestAnimationFrame(step);
+  }
+
+  function stop() {
+    running = false;
+    if (frameId) cancelAnimationFrame(frameId);
+  }
+
+  resize();
+  window.addEventListener('resize', resize, { passive: true });
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) stop(); else if (visible) start();
+  });
+
+  let visible = false;
+  const footerObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      visible = entry.isIntersecting;
+      if (visible && !document.hidden) start(); else stop();
+    });
+  }, { threshold: 0 });
+  footerObserver.observe(footerCanvas);
+}

@@ -666,9 +666,21 @@ textarea { resize: vertical; }
 
 /* ── 15. FOOTER ────────────────────────────────────── */
 .footer {
+  position: relative;
+  overflow: hidden;
   border-top: 1px solid var(--clr-border);
   padding: var(--space-lg) var(--space-md);
   text-align: center;
+}
+.footer-network-bg {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  z-index: 0;
+  opacity: 0.5;
+  pointer-events: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .footer-network-bg { display: none; }
 }
 .footer-inner { max-width: 1200px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; gap: var(--space-sm); }
 .footer-copy { color: var(--clr-muted); font-size: 0.85rem; }
@@ -1945,6 +1957,7 @@ h1 em, h2 em { font-style: normal; color: var(--clr-cyan); }
 
 /* Footer extras (brand + links row above the copyright row) */
 .footer-main {
+  position: relative; z-index: 1;
   display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
   gap: var(--space-md); max-width: 1200px; margin: 0 auto; padding-bottom: var(--space-md);
 }
@@ -1953,6 +1966,7 @@ h1 em, h2 em { font-style: normal; color: var(--clr-cyan); }
 .footer-links a { color: var(--clr-muted); font-size: 0.85rem; }
 .footer-links a:hover { color: var(--clr-cyan); }
 .footer-bottom {
+  position: relative; z-index: 1;
   display: flex; flex-wrap: wrap; justify-content: space-between; gap: var(--space-sm);
   max-width: 1200px; margin: 0 auto; padding-top: var(--space-md);
   border-top: 1px solid var(--clr-border);
