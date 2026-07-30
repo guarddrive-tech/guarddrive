@@ -47,6 +47,15 @@
   --ease-in-out:   cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+/* ── 1b. MOBILE SPACING (ritmo mais compacto, desktop intacto) ── */
+@media (max-width: 768px) {
+  :root {
+    --space-md: 1.3rem;   /* gaps entre cards empilhados */
+    --space-lg: 1.85rem;  /* respiro entre heading, texto e imagem */
+    --space-xl: 3.25rem;  /* padding vertical das seções */
+  }
+}
+
 /* ── 2. RESET ──────────────────────────────────────── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; scroll-padding-top: 80px; }
@@ -120,13 +129,13 @@ textarea { resize: vertical; }
 .nav-burger { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; }
 .nav-burger span { display: block; width: 22px; height: 2px; background: var(--clr-white); border-radius: 2px; }
 @media (max-width: 768px) {
-  .nav-links { display: none; }
   .nav-burger { display: flex; }
 }
 
 /* ── 5. HERO ───────────────────────────────────────── */
 .hero {
-  min-height: 88vh;
+  min-height: 86vh;
+  min-height: 86svh; /* svh evita saltos quando a barra do navegador mobile some/aparece */
   display: flex; flex-direction: column;
   align-items: center; justify-content: center;
   text-align: center;
@@ -139,6 +148,16 @@ textarea { resize: vertical; }
   background-position: 0 0, 0 0, center 30%;
   background-repeat: no-repeat, no-repeat, no-repeat;
   position: relative;
+}
+@media (max-width: 1024px) {
+  .hero { min-height: 82vh; min-height: 82svh; }
+}
+@media (max-width: 768px) {
+  .hero {
+    min-height: 74vh;
+    min-height: 74svh;
+    padding: 5.5rem var(--space-md) var(--space-lg);
+  }
 }
 .hero-inner {
   position: relative;
@@ -296,6 +315,9 @@ textarea { resize: vertical; }
 
 /* ── 11b. FLOW GRID (A Categoria — horizontal no desktop) ──── */
 .section-compact { padding: 3.5rem var(--space-md) 4rem; }
+@media (max-width: 768px) {
+  .section-compact { padding: 2.5rem var(--space-md) 2.75rem; }
+}
 
 .flow-grid {
   display: flex; flex-direction: row; align-items: stretch; justify-content: center;
@@ -402,6 +424,15 @@ textarea { resize: vertical; }
   overflow: hidden;
   border: 1px solid var(--clr-border-h);
   box-shadow: 0 24px 80px rgba(0,0,0,0.45);
+}
+@media (max-width: 768px) {
+  .ecosystem-image-wrap {
+    max-width: 100%;
+    margin: 0 auto 1.25rem;
+    border-radius: var(--radius-md);
+    box-shadow: 0 12px 32px rgba(0,0,0,0.35);
+    border-color: rgba(0,240,255,0.14);
+  }
 }
 .ecosystem-image-wrap img {
   display: block;
@@ -793,12 +824,29 @@ textarea { resize: vertical; }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
   .marquee-track { animation: none; }
+  /* Conteúdo revelado-ao-rolar não deve depender de timing de transição para quem pede menos movimento */
+  .reveal-on-scroll { opacity: 1 !important; transform: none !important; }
 }
 
 /* ── 19. SCROLLBAR ─────────────────────────────────── */
 ::-webkit-scrollbar { width: 6px; }
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb { background: rgba(123,47,255,0.3); border-radius: 3px; }
+
+/* ── 19b. FOCUS & TOUCH FEEDBACK ────────────────────── */
+a, button {
+  -webkit-tap-highlight-color: transparent;
+}
+a:focus-visible, button:focus-visible {
+  outline: 2px solid var(--clr-cyan);
+  outline-offset: 3px;
+  border-radius: var(--radius-sm);
+}
+.btn:active { transform: scale(0.96); }
+.quiz-option:active,
+.case-tabs button:active,
+.nav-cta:active { transform: scale(0.97); }
+.faq-acc-btn:active span:first-child { color: var(--clr-cyan); }
 
 /* ── 20. DYNAMIC DIAGNOSTIC PORTAL ─────────────────── */
 .diagnostic-portal-wrapper {
@@ -1685,13 +1733,20 @@ h1 em, h2 em { font-style: normal; color: var(--clr-cyan); }
 
 /* Mobile nav dropdown (original nav-burger had no panel defined) */
 @media (max-width: 768px) {
-  .nav-links.open {
+  .nav-links {
     display: flex; flex-direction: column;
     position: absolute; top: 64px; left: 0; right: 0;
     background: rgba(3,3,5,0.97);
     padding: var(--space-md);
     gap: var(--space-sm);
     border-bottom: 1px solid var(--clr-border);
+    opacity: 0; visibility: hidden; transform: translateY(-8px);
+    pointer-events: none;
+    transition: opacity 0.22s var(--ease-out-expo), transform 0.22s var(--ease-out-expo), visibility 0.22s;
+  }
+  .nav-links.open {
+    opacity: 1; visibility: visible; transform: translateY(0);
+    pointer-events: auto;
   }
 }
 .nav-burger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
