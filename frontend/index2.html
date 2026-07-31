@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>GuardDrive™ — Portal do Entrevistador</title>
+  <title>GuardDrive™ — Operational Discovery</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
@@ -382,8 +382,8 @@
   <div class="dashboard-container">
     <div class="page-header">
       <div>
-        <h1 class="page-title">Portal do <span>Entrevistador</span></h1>
-        <p style="color: var(--clr-muted); font-size: 0.9rem;">Geração de questionários, captura de leads e telemetria auditável em tempo real.</p>
+        <h1 class="page-title">Operational <span>Discovery</span></h1>
+        <p style="color: var(--clr-muted); font-size: 0.9rem;">Qualificação de leads, mapeamento de evidências e telemetria auditável em tempo real.</p>
       </div>
       <div>
         <button class="btn btn-ghost" id="refresh-all-btn">⚡ Atualizar Dados</button>
@@ -416,9 +416,9 @@
           <div class="stat-card-sub">Visualizações vs Formulários preenchidos</div>
         </div>
         <div class="stat-card">
-          <div class="stat-card-title">Fosso de PI (Patentes)</div>
-          <div class="stat-card-value" style="color: var(--clr-amber);">TRL-5</div>
-          <div class="stat-card-sub">NDA de proteção ativa ativo</div>
+          <div class="stat-card-title">Confidencialidade Comercial</div>
+          <div class="stat-card-value" style="color: var(--clr-amber);">NDA</div>
+          <div class="stat-card-sub">Proteção ativa nas respostas qualificadas</div>
         </div>
       </div>
 
@@ -491,11 +491,11 @@
             <div class="form-row" style="display: flex; gap: var(--space-sm);">
               <div class="form-group" style="flex: 1;">
                 <label for="form-name">Nome do Formulário</label>
-                <input type="text" id="form-name" placeholder="Ex: Pesquisa de Riscos Locadoras SP" required />
+                <input type="text" id="form-name" placeholder="Ex: Diagnóstico de Risco Operacional" required />
               </div>
               <div class="form-group" style="flex: 1;">
                 <label for="form-target">Cliente / Alvo Comercial</label>
-                <input type="text" id="form-target" placeholder="Ex: Movida Aluguel de Carros" required />
+                <input type="text" id="form-target" placeholder="Ex: Nome da empresa a ser qualificada" required />
               </div>
             </div>
             <div class="form-row" style="display: flex; gap: var(--space-sm);">
@@ -512,11 +512,11 @@
             </div>
             <div class="form-group">
               <label for="form-desc">Descrição / Objetivo do Diagnóstico</label>
-              <textarea id="form-desc" rows="3" placeholder="Ex: Mapear o custo invisível de sinistros na frota Movida do Hub SP Leste."></textarea>
+              <textarea id="form-desc" rows="3" placeholder="Ex: Mapear o custo invisível de sinistros e fraude na operação."></textarea>
             </div>
 
             <button type="submit" class="btn btn-primary btn-full" style="margin-top: var(--space-sm);" id="save-form-btn">
-              <span>Gerar Link do Diagnóstico Soberano</span>
+              <span>Gerar Link do Diagnóstico</span>
             </button>
           </form>
 
@@ -618,7 +618,7 @@
         <div class="drawer-section">
           <p><strong>ACORDO DE CONFIDENCIALIDADE — NDA OPERACIONAL</strong></p>
           <p>Este instrumento regula as condições sob as quais o usuário ("Acessante") acessa os materiais técnicos, dados de validação de mercado e especificações do ecossistema da Iniciativa GuardDrive, permitindo a geração de insights estratégicos a partir desses leads.</p>
-          <p><strong>1. INFORMAÇÕES CONFIDENCIAIS:</strong> Compreendem toda e qualquer informação técnica, de engenharia de hardware de borda (GuardTag™), modelos e arquiteturas de auditoria de risco integrada, topologia do Protocolo GuardProof™ e dados comerciais apresentados.</p>
+          <p><strong>1. INFORMAÇÕES CONFIDENCIAIS:</strong> Compreendem toda e qualquer informação técnica de arquitetura, modelos de auditoria de risco integrada e dados comerciais apresentados.</p>
           <p><strong>2. DEVER DE SIGILO E NÃO‑USO:</strong> O Acessante compromete‑se a não revelar, divulgar, publicar ou de qualquer outra forma disponibilizar tais informações a terceiros, devendo us‑las unicamente para fins de avaliação técnica e potencial contratação.</p>
           <p><strong>3. PRESERVAÇÃO DE DIREITOS:</strong> Fica expressamente estabelecido que a disponibilização das informações confidenciais não transfere qualquer direito de propriedade intelectual ou comercial ao Acessante, mantendo‑se todos os direitos resguardados.</p>
           <p><strong>4. TRATAMENTO DE DADOS (LGPD):</strong> A coleta de dados operacionais visa exclusivamente a elaboração de atestado de conformidade e mitigação de gargalos de frotas, sendo armazenada em ambiente seguro e em conformidade com a Lei Geral de Proteção de Dados.</p>
@@ -673,7 +673,7 @@
   <footer class="footer">
     <div class="footer-inner">
       <p class="footer-copy">© 2026 Iniciativa GuardDrive · Projeto de P&D Interno · Painel de Controle de Pesquisa Comercial</p>
-      <p class="footer-mono">Conformidade e Telemetria Soberana · GuardProof™ Engine v1.2</p>
+      <p class="footer-mono">Conformidade e Telemetria Auditável · GuardDrive Operational Discovery</p>
     </div>
   </footer>
 
@@ -683,18 +683,18 @@
     let allLeads = [];
     let allForms = [];
 
-    // Unified questionnaire template (Adriano's directives)
+    // Unified operational-pain questionnaire template
     const adrianoPreset = [
-      { q: "Qual o nível de impacto financeiro e operacional que roubo, furto ou apropriação indébita causam no seu negócio?", type: "select", options: ["Muito alto: É um dos maiores gargalos financeiros", "Médio impacto: Ocorre eventualmente e gera prejuízos parciais", "Pouco impacto: Raramente temos incidentes na nossa escala"] },
-      { q: "Já sofreu com episódios onde o veículo desapareceu devido à suspeita ou confirmação do uso de jammers?", type: "select", options: ["Sim, já ocorreu mais de uma vez", "Sim, aconteceu uma única vez com prejuízo severo", "Não, nunca detectamos bloqueadores em nossos sinistros"] },
-      { q: "A instalação de rastreadores convencionais (corte de fiação) desvaloriza o veículo ou gera atrito com garantia?", type: "select", options: ["Gargalo Crítico: Reduz valor de revenda e atinge a garantia", "Impacto Moderado: Logística cara, mas contornamos a depreciação", "Sem Impacto: Não afeta garantia ou valor final"] },
-      { q: "Qual a importância de ativar um novo dispositivo de segurança na frota em menos de 30 segundos, sem veículo imobilizado?", type: "select", options: ["Indispensável: Veículo parado gera perdas invisíveis", "Desejável: Facilitaria muito a operação diária", "Baixa Relevância: Temos equipe técnica dedicada"] },
-      { q: "Como a operação avalia hoje os riscos de compliance de dados e privacidade (LGPD) em telemetria contínua?", type: "select", options: ["Risco Alto: Preocupação real com passivo de privacidade", "Risco Controlado: Possuímos barreiras contratuais padrão", "Sem Risco: A estrutura jurídica atual absorve exigências"] },
-      { q: "Se dispusesse de uma contraprova imutável de comportamento do ativo, quanto isso reduziria o seu passivo jurídico?", type: "select", options: ["Redução Drástica: Provas definitivas aceleram processos judiciais", "Redução Moderada: Auxilia em casos específicos isolados", "Pouca Relevância: Raramente temos litígios operacionais"] },
-      { q: "Qual desses modelos de contratação possui maior viabilidade e aderência estratégica para o seu negócio?", type: "select", options: ["Modelo HaaS: Mensalidade recorrente semCapex inicial", "Modelo SaaS Corporativo: Lotes de dispositivos + taxa mensal de software"] },
-      { q: "Um dispositivo capaz de gerar laudo de conformidade aceleraria a liberação de prêmio de sinistro de forma sem burocracia?", type: "select", options: ["Valor Altíssimo: Reduzir tempo de retenção de capital preserva a saúde financeira", "Valor Moderado: Ajudaria administrativamente", "Pouco Valor: Relacionamento direto já é ágil"] },
-      { q: "Qual a principal barreira ou objeção para contratar uma nova tecnologia corporativa de segurança?", type: "select", options: ["Custo mensal recorrente acumulado", "Complexidade de integração com sistemas internos/treinamento", "Falta de confiança no funcionamento offline/fixação rápida"] },
-      { q: "Qual o interesse estratégico em participar de um piloto regional Capex Zero (HaaS) com veículos selecionados?", type: "select", options: ["Alto Interesse: Testar robustez offline e imunidade imediatamente", "Médio Interesse: Avaliar proposta após relatórios de outros parceiros", "Nenhum Interesse: Momento atual ou diretrizes não permitem"] }
+      { q: "Qual o nível de impacto financeiro e operacional que fraude ou uso indevido de ativos causam no seu negócio?", type: "select", options: ["Muito alto: É um dos maiores gargalos financeiros", "Médio impacto: Ocorre eventualmente e gera prejuízos parciais", "Pouco impacto: Raramente temos incidentes na nossa escala"] },
+      { q: "Com que frequência a falta de evidência confiável atrasa ou complica a liquidação de um sinistro?", type: "select", options: ["Com frequência: gera atraso recorrente e custo de retrabalho", "Ocasionalmente: acontece em casos isolados", "Raramente: nosso processo já resolve isso bem"] },
+      { q: "Qual a maturidade atual do processo de auditoria de frota ou de ativos operacionais?", type: "select", options: ["Baixa: processo manual e sujeito a disputa", "Média: existe processo, mas com lacunas de rastreabilidade", "Alta: já temos rastreabilidade estruturada"] },
+      { q: "Qual a importância de reduzir o tempo entre a ocorrência de um evento e a geração de evidência utilizável?", type: "select", options: ["Indispensável: cada dia de atraso gera perdas", "Desejável: facilitaria a operação diária", "Baixa relevância: o processo atual já é rápido"] },
+      { q: "Como a operação avalia hoje os riscos de compliance de dados e privacidade (LGPD) na coleta de evidências?", type: "select", options: ["Risco alto: preocupação real com passivo de privacidade", "Risco controlado: já existem barreiras contratuais padrão", "Sem risco: a estrutura jurídica atual absorve exigências"] },
+      { q: "Se houvesse uma evidência confiável e auditável do evento, quanto isso reduziria o passivo jurídico da operação?", type: "select", options: ["Redução drástica: provas sólidas aceleram processos", "Redução moderada: auxilia em casos específicos", "Pouca relevância: raramente há litígios operacionais"] },
+      { q: "Qual modelo comercial possui maior viabilidade e aderência estratégica para o seu negócio?", type: "select", options: ["Assinatura recorrente sem investimento inicial", "Licenciamento corporativo com contrato anual"] },
+      { q: "Uma evidência de conformidade auditável aceleraria a liberação de prêmio de sinistro de forma menos burocrática?", type: "select", options: ["Valor altíssimo: reduzir tempo de retenção de capital preserva a saúde financeira", "Valor moderado: ajudaria administrativamente", "Pouco valor: relacionamento direto já é ágil"] },
+      { q: "Qual a principal barreira ou objeção para adotar uma nova solução de confiança operacional?", type: "select", options: ["Custo recorrente acumulado", "Complexidade de integração com sistemas internos", "Falta de histórico comprovado de funcionamento em campo"] },
+      { q: "Qual o interesse estratégico em participar de um piloto regional com escopo reduzido?", type: "select", options: ["Alto interesse: testar a solução imediatamente", "Médio interesse: avaliar proposta após relatórios de outros parceiros", "Nenhum interesse: momento atual não permite"] }
     ];
 
     document.addEventListener("DOMContentLoaded", () => {
