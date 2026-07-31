@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@netlify/database": "^1.1.0",
+    "@netlify/identity": "^1.2.0",
     "drizzle-orm": "^1.0.0-beta.22",
     "gsap": "^3.12.5"
   },

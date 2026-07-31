@@ -29,7 +29,8 @@ export const forms = pgTable('forms', {
   createdAt: timestamp('created_at').defaultNow().notNull(),
 });
 
-// Responses submitted through the dynamic diagnostic portal (?r={token}).
+// Responses submitted through the dynamic diagnostic portal (?r={token}) —
+// these are the "leads" managed in the admin backoffice.
 export const responses = pgTable('responses', {
   id: serial('id').primaryKey(),
   formToken: text('form_token').notNull(),
@@ -41,7 +42,11 @@ export const responses = pgTable('responses', {
   ndaAccepted: boolean('nda_accepted').default(false).notNull(),
   answers: jsonb('answers').notNull(),
   registrationHash: text('registration_hash'),
+  // Pipeline status, set by staff from the admin panel.
+  status: text('status').default('novo').notNull(),
+  notes: text('notes'),
   createdAt: timestamp('created_at').defaultNow().notNull(),
+  updatedAt: timestamp('updated_at').defaultNow().notNull(),
 });
 
 // Page/event telemetry.
@@ -50,5 +55,19 @@ export const telemetry = pgTable('telemetry', {
   eventType: text('event_type').notNull(),
   path: text('path').notNull(),
   metadata: jsonb('metadata'),
+  createdAt: timestamp('created_at').defaultNow().notNull(),
+});
+
+// LGPD-compliant audit trail for the admin backoffice: who accessed or
+// changed which lead, and when. Identity users live in Netlify Identity, so
+// staff are referenced by email/id from their JWT rather than a local table.
+export const auditLogs = pgTable('audit_logs', {
+  id: serial('id').primaryKey(),
+  userEmail: text('user_email').notNull(),
+  userId: text('user_id'),
+  action: text('action').notNull(), // login, view_lead, update_lead, delete_lead, export_csv, create_form
+  resourceType: text('resource_type'),
+  resourceId: text('resource_id'),
+  details: jsonb('details'),
   createdAt: timestamp('created_at').defaultNow().notNull(),
 });
