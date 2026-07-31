@@ -475,6 +475,8 @@ textarea { resize: vertical; }
   transition: background 0.3s, border-color 0.3s;
 }
 .eco-icon svg { width: 28px; height: 28px; }
+.eco-icon--photo { padding: 0; overflow: hidden; }
+.eco-icon--photo img { width: 100%; height: 100%; object-fit: cover; border-radius: calc(var(--radius-md) - 1px); }
 .eco-node:hover .eco-icon {
   background: rgba(0,240,255,0.12);
   border-color: rgba(0,240,255,0.35);
