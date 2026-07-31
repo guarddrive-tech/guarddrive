@@ -439,51 +439,85 @@ textarea { resize: vertical; }
 .benefit-card p { color: var(--clr-muted); font-size: 0.9rem; line-height: 1.6; }
 
 /* ── 13. ECOSYSTEM FLOW ────────────────────────────── */
-.ecosystem-flow {
-  display: flex; align-items: center; justify-content: center;
-  gap: var(--space-md);
-  flex-wrap: wrap;
-  max-width: 1000px; margin: 0 auto var(--space-md);
+#ecossistema { padding-top: var(--space-lg); padding-bottom: var(--space-lg); }
+
+.eco-grid {
+  display: grid;
+  grid-template-columns: minmax(0,1fr) auto minmax(0,1fr);
+  grid-template-areas:
+    "c1 a1 c2"
+    "aw aw aw"
+    "c3 a3 c4";
+  align-items: stretch;
+  gap: 1.25rem 1.5rem;
+  max-width: 900px; margin: 0 auto;
 }
+.eco-node--1 { grid-area: c1; }
+.eco-node--2 { grid-area: c2; }
+.eco-node--3 { grid-area: c3; }
+.eco-node--4 { grid-area: c4; }
+.eco-arrow--a1 { grid-area: a1; }
+.eco-arrow--a3 { grid-area: a3; }
+.eco-arrow--wrap { grid-area: aw; }
+
 .eco-node {
   background: var(--clr-surface);
   border: 1px solid var(--clr-border);
   border-radius: var(--radius-lg);
-  padding: 2rem;
+  padding: 1.5rem 1.25rem;
   text-align: center;
-  min-width: 200px;
+  max-height: 200px;
+  box-sizing: border-box;
   backdrop-filter: blur(16px);
-  transition: all 0.3s var(--ease-out-expo);
+  transition: border-color 0.3s var(--ease-out-expo), transform 0.3s var(--ease-out-expo);
 }
 .eco-node:hover {
-  border-color: var(--clr-border-h);
-  transform: scale(1.05);
+  border-color: var(--clr-cyan);
+  transform: scale(1.02);
 }
 .eco-icon {
-  width: 60px; height: 60px;
+  width: 40px; height: 40px;
   display: flex; align-items: center; justify-content: center;
   background: rgba(0,240,255,0.07);
   border: 1px solid rgba(0,240,255,0.18);
   border-radius: var(--radius-md);
-  margin: 0 auto var(--space-sm);
+  margin: 0 auto var(--space-xs);
   color: var(--clr-cyan);
   transition: background 0.3s, border-color 0.3s;
 }
-.eco-icon svg { width: 28px; height: 28px; }
+.eco-icon svg { width: 20px; height: 20px; }
 .eco-node:hover .eco-icon {
   background: rgba(0,240,255,0.12);
   border-color: rgba(0,240,255,0.35);
 }
-.eco-node h3 { font-size: 1.2rem; font-weight: 700; margin-bottom: var(--space-xs); }
-.eco-node p { color: var(--clr-muted); font-size: 0.85rem; line-height: 1.5; }
+.eco-node-eyebrow {
+  font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.1em;
+  text-transform: uppercase; font-weight: 700;
+  color: var(--clr-cyan); margin-bottom: 0.25rem;
+}
+.eco-node h3 { font-size: 1rem; font-weight: 900; line-height: 1.25; margin-bottom: 0.35rem; }
+.eco-node-desc {
+  color: var(--clr-muted); font-size: 0.9rem; line-height: 1.45;
+  display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2;
+  overflow: hidden;
+}
 .eco-arrow {
-  font-size: 2rem; color: var(--clr-cyan);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.6rem; color: var(--clr-cyan);
   opacity: 0.6;
 }
 .ecosystem-description {
   text-align: center; color: var(--clr-muted);
   font-size: 1rem; line-height: 1.6;
   max-width: 600px; margin: 0 auto;
+}
+
+@media (max-width: 768px) {
+  .eco-grid { grid-template-columns: 1fr; grid-template-areas: none; }
+  .eco-node--1, .eco-node--2, .eco-node--3, .eco-node--4,
+  .eco-arrow--a1, .eco-arrow--a3, .eco-arrow--wrap { grid-area: auto; }
+  .eco-node { max-height: none; }
+  .eco-arrow--a1, .eco-arrow--a3 { transform: rotate(90deg); }
 }
 
 /* ── 14. CTA CONTENT ───────────────────────────────── */
