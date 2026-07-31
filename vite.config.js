@@ -11,6 +11,7 @@ export default defineConfig({
         main: resolve(__dirname, 'frontend/index.html'),
         interviewer: resolve(__dirname, 'frontend/index2.html'),
         diagnostico: resolve(__dirname, 'frontend/diagnostico.html'),
+        adminLogin: resolve(__dirname, 'frontend/admin-login.html'),
       },
     },
   },

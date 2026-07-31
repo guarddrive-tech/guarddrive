@@ -2,26 +2,60 @@ import type { Config } from '@netlify/functions';
 import { eq } from 'drizzle-orm';
 import { db } from '../../db/index.js';
 import { leads, responses } from '../../db/schema.js';
+import { requireRole, unauthorized, logAudit } from '../../lib/admin-auth.js';
 
-// GET lists diagnostic-portal responses (used by the admin dashboard's Leads tab).
-// POST accepts a simple lead capture from the main contact form / pilot program form.
+// GET lists diagnostic-portal responses — staff-only, this is the data behind
+// the admin dashboard's Leads tab.
+// POST accepts a simple lead capture from the main contact form / pilot program
+// form and stays public, since prospects submit it before ever logging in.
 export default async (req: Request) => {
 
   if (req.method === 'GET') {
+    const auth = await requireRole(['admin', 'viewer', 'sdr']);
+    if (!auth.ok) return unauthorized(auth.status);
+
+    const url = new URL(req.url);
+    const isExport = url.searchParams.get('export') === 'csv';
+
+    // CSV export and full PII/qualification-answer visibility are admin-only;
+    // viewers get a redacted, aggregate-friendly shape meant only to validate
+    // that capture is working, not to reach or profile a lead.
+    if (isExport && !auth.user.roles.includes('admin')) return unauthorized(403);
+
+    const canSeeSensitive = auth.user.roles.includes('admin') || auth.user.roles.includes('sdr');
+
     const all = await db.select().from(responses).orderBy(responses.createdAt);
-    const shaped = all.reverse().map((r) => ({
-      id: r.id,
-      form_token: r.formToken,
-      company_name: r.companyName,
-      contact_name: r.contactName,
-      email: r.email,
-      phone_personal: r.phonePersonal,
-      phone_corporate: r.phoneCorporate,
-      nda_accepted: r.ndaAccepted,
-      answers: r.answers,
-      registration_id: r.registrationHash,
-      created_at: r.createdAt,
-    }));
+    const shaped = all.reverse().map((r) => {
+      const base = {
+        id: r.id,
+        form_token: r.formToken,
+        company_name: r.companyName,
+        contact_name: r.contactName,
+        nda_accepted: r.ndaAccepted,
+        status: r.status,
+        created_at: r.createdAt,
+        updated_at: r.updatedAt,
+      };
+      if (!canSeeSensitive) return base;
+      return {
+        ...base,
+        email: r.email,
+        phone_personal: r.phonePersonal,
+        phone_corporate: r.phoneCorporate,
+        answers: r.answers,
+        notes: r.notes,
+        registration_id: r.registrationHash,
+      };
+    });
+
+    await logAudit(
+      auth.user,
+      isExport ? 'export_csv' : 'list_leads',
+      'lead',
+      undefined,
+      { count: shaped.length },
+    );
+
     return Response.json(shaped);
   }
 

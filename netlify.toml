@@ -4,9 +4,36 @@
   functions = "netlify/functions"
 
 [[redirects]]
-  from = "/interviewer"
+  from = "/admin/login"
+  to = "/admin-login.html"
+  status = 200
+  force = true
+
+# Netlify Identity role-based redirects (edge-level gate): the request only
+# reaches /index2.html if the nf_jwt cookie carries one of these roles;
+# everyone else falls through to the login page. This backs up the
+# client-side auth guard in index2.html, which is session/UX-level only.
+[[redirects]]
+  from = "/admin/dashboard"
   to = "/index2.html"
   status = 200
+  force = true
+  conditions = {Role = ["admin", "viewer", "sdr"]}
+
+[[redirects]]
+  from = "/admin/dashboard"
+  to = "/admin/login"
+  status = 302
+
+[[redirects]]
+  from = "/admin"
+  to = "/admin/dashboard"
+  status = 302
+
+[[redirects]]
+  from = "/interviewer"
+  to = "/admin/dashboard"
+  status = 301
 
 [[redirects]]
   from = "/diagnostico"

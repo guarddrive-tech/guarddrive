@@ -3,15 +3,23 @@ import { createHash } from 'node:crypto';
 import { sql } from 'drizzle-orm';
 import { db } from '../../db/index.js';
 import { forms, responses } from '../../db/schema.js';
+import { requireRole, unauthorized, logAudit } from '../../lib/admin-auth.js';
 
 function makeToken(target: string, segment: string) {
   const base = `${target}-${segment}-${new Date().toISOString()}-${Math.random()}`;
   return createHash('md5').update(base).digest('hex').slice(0, 12).toUpperCase();
 }
 
+// Both listing and generating diagnostic-portal links are staff-only actions
+// performed from the admin panel's form builder.
 export default async (req: Request) => {
 
   if (req.method === 'GET') {
+    // Form tokens/links are internal capture logic, not capture-validation
+    // data — viewers don't get this; only staff who build/run campaigns do.
+    const auth = await requireRole(['admin', 'sdr']);
+    if (!auth.ok) return unauthorized(auth.status);
+
     const rows = await db
       .select({
         id: forms.id,
@@ -32,6 +40,9 @@ export default async (req: Request) => {
   }
 
   if (req.method === 'POST') {
+    const auth = await requireRole(['admin', 'sdr']);
+    if (!auth.ok) return unauthorized(auth.status);
+
     let body: Record<string, unknown>;
     try {
       body = await req.json();
@@ -64,6 +75,8 @@ export default async (req: Request) => {
         questions,
       })
       .returning();
+
+    await logAudit(auth.user, 'create_form', 'form', saved.id, { name, target, segment });
 
     return Response.json({
       status: 'success',

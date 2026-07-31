@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Acesso Restrito — Painel GuardDrive™</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .login-shell {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: var(--space-md);
+    }
+    .login-card {
+      width: 100%;
+      max-width: 400px;
+      background: var(--clr-surface);
+      border: 1px solid var(--clr-border);
+      border-radius: var(--radius-lg);
+      padding: var(--space-lg) var(--space-md);
+      backdrop-filter: blur(14px);
+      box-shadow: 0 30px 80px rgba(0,0,0,0.5);
+    }
+    .login-brand {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
+      margin-bottom: var(--space-md);
+    }
+    .login-title {
+      text-align: center;
+      font-size: 1.5rem;
+      font-weight: 800;
+      margin-bottom: 0.35rem;
+    }
+    .login-subtitle {
+      text-align: center;
+      color: var(--clr-muted);
+      font-size: 0.85rem;
+      margin-bottom: var(--space-md);
+    }
+    .login-field { margin-bottom: var(--space-sm); }
+    .login-field label {
+      display: block;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--clr-muted);
+      margin-bottom: 0.35rem;
+    }
+    .login-field input {
+      width: 100%;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--clr-border);
+      border-radius: var(--radius-sm);
+      padding: 0.7rem 0.9rem;
+      color: var(--clr-white);
+      font-size: 0.95rem;
+      transition: all 0.2s ease;
+    }
+    .login-field input:focus {
+      outline: none;
+      border-color: var(--clr-cyan);
+      box-shadow: 0 0 8px rgba(0, 240, 255, 0.18);
+    }
+    .login-error {
+      display: none;
+      background: rgba(239, 68, 68, 0.1);
+      border: 1px solid rgba(239, 68, 68, 0.35);
+      color: #ff9b9b;
+      font-size: 0.85rem;
+      border-radius: var(--radius-sm);
+      padding: 0.6rem 0.8rem;
+      margin-bottom: var(--space-sm);
+    }
+    .login-info {
+      display: none;
+      background: rgba(0, 240, 255, 0.08);
+      border: 1px solid rgba(0, 240, 255, 0.3);
+      color: var(--clr-cyan);
+      font-size: 0.85rem;
+      border-radius: var(--radius-sm);
+      padding: 0.6rem 0.8rem;
+      margin-bottom: var(--space-sm);
+    }
+    .login-forgot {
+      display: block;
+      text-align: center;
+      font-size: 0.82rem;
+      color: var(--clr-muted);
+      margin-top: var(--space-sm);
+      cursor: pointer;
+      text-decoration: underline;
+      background: none;
+      border: none;
+      width: 100%;
+    }
+    .login-forgot:hover { color: var(--clr-cyan); }
+    .login-footer {
+      text-align: center;
+      font-size: 0.7rem;
+      color: var(--clr-muted);
+      margin-top: var(--space-lg);
+      line-height: 1.6;
+      border-top: 1px solid var(--clr-border);
+      padding-top: var(--space-sm);
+    }
+    .login-submit[disabled] { opacity: 0.6; cursor: not-allowed; }
+  </style>
+</head>
+<body>
+  <div class="cyber-grid"></div>
+  <div class="glow-orb" id="orb-1"></div>
+  <div class="glow-orb" id="orb-2"></div>
+
+  <div class="login-shell">
+    <div class="login-card">
+      <div class="login-brand">
+        <span class="brand-logo">GD</span>
+        <span class="brand-name">GuardDrive<sup class="brand-tm">™</sup></span>
+      </div>
+      <h1 class="login-title">Painel <span style="background: var(--grad-brand); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Administrativo</span></h1>
+      <p class="login-subtitle">Acesso restrito à equipe autorizada.</p>
+
+      <div class="login-error" id="login-error"></div>
+      <div class="login-info" id="login-info"></div>
+
+      <form id="login-form">
+        <div class="login-field">
+          <label for="login-email">E-mail corporativo</label>
+          <input type="email" id="login-email" autocomplete="username" required />
+        </div>
+        <div class="login-field">
+          <label for="login-password">Senha</label>
+          <input type="password" id="login-password" autocomplete="current-password" required />
+        </div>
+        <button type="submit" class="btn btn-primary btn-full login-submit" id="login-submit">
+          <span>Entrar</span>
+        </button>
+        <button type="button" class="login-forgot" id="forgot-btn">Esqueci minha senha</button>
+      </form>
+
+      <form id="reset-form" style="display: none;">
+        <p class="login-subtitle" style="margin-bottom: var(--space-sm);">Defina uma nova senha para concluir a recuperação de acesso.</p>
+        <div class="login-field">
+          <label for="reset-password">Nova senha</label>
+          <input type="password" id="reset-password" autocomplete="new-password" minlength="8" required />
+        </div>
+        <button type="submit" class="btn btn-primary btn-full login-submit">
+          <span>Definir nova senha</span>
+        </button>
+      </form>
+
+      <div class="login-footer">
+        Acesso restrito. Todo login e acesso a dados de leads é registrado em log de auditoria, em conformidade com a LGPD.
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="admin-login.js"></script>
+</body>
+</html>

@@ -358,6 +358,88 @@
       background: rgba(0, 240, 255, 0.1);
       border-color: var(--clr-cyan);
     }
+
+    /* Charts */
+    .chart-row { display: flex; align-items: center; gap: var(--space-md); margin-top: var(--space-sm); flex-wrap: wrap; }
+    .chart-legend { display: flex; flex-direction: column; gap: 0.4rem; flex: 1; min-width: 160px; }
+    .chart-legend-item { display: flex; align-items: center; gap: 0.5rem; font-size: 0.82rem; }
+    .chart-legend-swatch { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+
+    /* Filters bar */
+    .filters-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-sm);
+      align-items: end;
+      margin-bottom: var(--space-md);
+    }
+    .filters-bar .form-group { margin-bottom: 0; min-width: 160px; }
+    .filters-bar .form-group input, .filters-bar .form-group select {
+      width: 100%;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--clr-border);
+      border-radius: var(--radius-sm);
+      padding: 0.5rem 0.7rem;
+      color: var(--clr-white);
+      font-size: 0.85rem;
+    }
+
+    /* Status select inline in table */
+    .status-select {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--clr-border);
+      border-radius: var(--radius-sm);
+      color: var(--clr-white);
+      font-size: 0.78rem;
+      padding: 0.3rem 0.4rem;
+    }
+    .status-select.st-novo { border-color: rgba(59,130,246,0.5); color: #3B82F6; }
+    .status-select.st-contatado { border-color: rgba(148,163,184,0.5); color: #94A3B8; }
+    .status-select.st-reuniao_agendada { border-color: rgba(245,158,11,0.5); color: #F59E0B; }
+    .status-select.st-piloto_fechado { border-color: rgba(16,185,129,0.5); color: #10B981; }
+    .status-select.st-descartado { border-color: rgba(239,68,68,0.5); color: #EF4444; }
+
+    /* Pagination */
+    .pagination-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: var(--space-sm);
+      font-size: 0.82rem;
+      color: var(--clr-muted);
+    }
+    .pagination-bar button {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--clr-border);
+      color: var(--clr-white);
+      padding: 0.3rem 0.7rem;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      font-size: 0.8rem;
+    }
+    .pagination-bar button:disabled { opacity: 0.4; cursor: not-allowed; }
+
+    /* Access denied / gate */
+    #access-gate {
+      display: none;
+      max-width: 480px;
+      margin: 100px auto;
+      text-align: center;
+      padding: var(--space-md);
+    }
+    .sortable-th { cursor: pointer; user-select: none; }
+    .sortable-th:hover { color: var(--clr-cyan); }
+    .role-badge {
+      display: inline-block;
+      font-size: 0.65rem;
+      padding: 0.1rem 0.5rem;
+      border-radius: 999px;
+      background: rgba(0,240,255,0.12);
+      color: var(--clr-cyan);
+      text-transform: uppercase;
+      margin-left: 0.4rem;
+    }
+    .rbac-hidden { display: none !important; }
   </style>
 </head>
 <body>
@@ -372,18 +454,24 @@
         <span class="brand-logo">GD</span>
         <span class="brand-name">GuardDrive<sup class="brand-tm">™</sup></span>
       </div>
-      <div class="nav-links">
-        <a href="/" class="nav-cta">Voltar à Landing Page</a>
+      <div class="nav-links" style="display: flex; align-items: center; gap: var(--space-sm);">
+        <span id="session-user" style="font-size: 0.82rem; color: var(--clr-muted); display: none;"></span>
+        <button class="btn btn-ghost" id="logout-btn" style="padding: 0.4rem 1rem; font-size: 0.82rem;">Sair</button>
       </div>
     </div>
   </nav>
 
+  <!-- ACCESS GATE (loading / denied states) -->
+  <div id="access-gate">
+    <p id="access-gate-message" style="color: var(--clr-muted);">Verificando sessão…</p>
+  </div>
+
   <!-- CONTAINER -->
-  <div class="dashboard-container">
+  <div class="dashboard-container" id="admin-app" style="display: none;">
     <div class="page-header">
       <div>
-        <h1 class="page-title">Portal do <span>Entrevistador</span></h1>
-        <p style="color: var(--clr-muted); font-size: 0.9rem;">Geração de questionários, captura de leads e telemetria auditável em tempo real.</p>
+        <h1 class="page-title">Painel <span>Administrativo</span></h1>
+        <p style="color: var(--clr-muted); font-size: 0.9rem;">Diagnósticos de leads, telemetria auditável e conformidade LGPD em tempo real.</p>
       </div>
       <div>
         <button class="btn btn-ghost" id="refresh-all-btn">⚡ Atualizar Dados</button>
@@ -393,36 +481,62 @@
     <!-- TAB NAV -->
     <div class="tab-nav">
       <button class="tab-btn active" data-tab="dashboard">Dashboard Analítico</button>
-      <button class="tab-btn" data-tab="builder">Gerador de Formulários</button>
       <button class="tab-btn" data-tab="leads">Leads e Respostas</button>
+      <button class="tab-btn rbac-hidden" data-tab="builder" id="tab-btn-builder" data-requires-edit>Gerador de Formulários</button>
+      <button class="tab-btn rbac-hidden" data-tab="settings" id="tab-btn-settings" data-requires-admin>Configurações</button>
     </div>
 
     <!-- TAB 1: DASHBOARD -->
     <div class="tab-content active" id="tab-dashboard">
       <div class="stats-grid">
         <div class="stat-card cyan">
-          <div class="stat-card-title">Formulários Ativos</div>
-          <div class="stat-card-value" id="stats-active-forms">0</div>
-          <div class="stat-card-sub">Links de qualificação em tráfego</div>
-        </div>
-        <div class="stat-card purple">
-          <div class="stat-card-title">Total de Respostas</div>
+          <div class="stat-card-title">Total de Leads</div>
           <div class="stat-card-value" id="stats-total-responses">0</div>
-          <div class="stat-card-sub">Leads com perfil de dor traçado</div>
+          <div class="stat-card-sub">Respostas de diagnóstico capturadas</div>
         </div>
-        <div class="stat-card emerald">
-          <div class="stat-card-title">Taxa de Conversão</div>
-          <div class="stat-card-value" id="stats-conversion">0%</div>
-          <div class="stat-card-sub">Visualizações vs Formulários preenchidos</div>
+        <div class="stat-card" style="--tw:0;">
+          <div class="stat-card-title">Novos / Não Contatados</div>
+          <div class="stat-card-value" id="stats-status-novo" style="color: var(--clr-cyan);">0</div>
+          <div class="stat-card-sub">Aguardando primeiro contato</div>
         </div>
         <div class="stat-card">
-          <div class="stat-card-title">Fosso de PI (Patentes)</div>
-          <div class="stat-card-value" style="color: var(--clr-amber);">TRL-5</div>
-          <div class="stat-card-sub">NDA de proteção ativa ativo</div>
+          <div class="stat-card-title">Reunião Agendada</div>
+          <div class="stat-card-value" id="stats-status-reuniao" style="color: var(--clr-amber);">0</div>
+          <div class="stat-card-sub">Em qualificação avançada</div>
+        </div>
+        <div class="stat-card emerald">
+          <div class="stat-card-title">Pilotos Fechados</div>
+          <div class="stat-card-value" id="stats-status-piloto" style="color: var(--clr-emerald);">0</div>
+          <div class="stat-card-sub">Convertidos em piloto comercial</div>
         </div>
       </div>
 
       <div class="comparison-grid" style="margin-top: 0; margin-bottom: var(--space-md);">
+        <!-- Sector Distribution (pie) -->
+        <div class="panel">
+          <div class="panel-title">📊 Distribuição por Segmento</div>
+          <div class="chart-row">
+            <svg id="segment-pie" viewBox="0 0 100 100" style="width: 140px; height: 140px; flex-shrink: 0;"></svg>
+            <div id="segment-legend" class="chart-legend"></div>
+          </div>
+        </div>
+
+        <!-- Status distribution (bars) -->
+        <div class="panel">
+          <div class="panel-title">🧭 Leads por Status</div>
+          <div style="display: flex; flex-direction: column; gap: var(--space-sm); margin-top: var(--space-sm);" id="status-bars">
+            <p style="color: var(--clr-muted); font-size: 0.9rem;">Nenhum lead registrado.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="comparison-grid" style="margin-bottom: var(--space-md);">
+        <!-- Weekly trend line -->
+        <div class="panel">
+          <div class="panel-title">📈 Leads por Semana (últimas 8 semanas)</div>
+          <svg id="trend-line" viewBox="0 0 300 120" style="width: 100%; height: 140px;"></svg>
+        </div>
+
         <!-- Live telemetry feed -->
         <div class="panel">
           <div class="panel-title">
@@ -434,19 +548,31 @@
             [SYS] Aguardando interações do usuário...
           </div>
         </div>
+      </div>
 
-        <!-- Sector Distribution -->
-        <div class="panel">
-          <div class="panel-title">📊 Leads Qualificados por Segmento</div>
-          <div style="display: flex; flex-direction: column; gap: var(--space-sm); margin-top: var(--space-sm);" id="segment-bars">
-            <!-- Rendered dynamically -->
-            <p style="color: var(--clr-muted); font-size: 0.9rem;">Nenhum lead registrado.</p>
-          </div>
+      <!-- Recent leads summary -->
+      <div class="panel">
+        <div class="panel-title">🕒 Últimos Leads</div>
+        <div class="data-table-wrapper">
+          <table class="data-table" id="recent-leads-table">
+            <thead>
+              <tr>
+                <th>Contato</th>
+                <th>Empresa</th>
+                <th>Status</th>
+                <th>Data de Criação</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td colspan="4" style="text-align: center; color: var(--clr-muted);">Carregando…</td></tr>
+            </tbody>
+          </table>
         </div>
+        <button class="preset-btn" style="margin-top: var(--space-sm);" data-goto-tab="leads">Ver todos os leads →</button>
       </div>
 
       <!-- Recent forms table in dashboard -->
-      <div class="panel">
+      <div class="panel rbac-hidden" data-requires-edit style="margin-top: var(--space-md);">
         <div class="panel-title">🔗 Links de Qualificação Ativos</div>
         <div class="data-table-wrapper">
           <table class="data-table" id="dashboard-forms-table">
@@ -470,6 +596,7 @@
         </div>
       </div>
     </div>
+
 
     <!-- TAB 2: FORM BUILDER -->
     <div class="tab-content" id="tab-builder">
@@ -575,7 +702,47 @@
         <div class="panel-title" style="display: flex; justify-content: space-between; align-items: center;">
           <span>📋 Leads e Diagnósticos Qualificados</span>
           <div>
-            <button class="preset-btn" id="export-csv-btn">📤 Exportar Leads (CSV)</button>
+            <button class="preset-btn rbac-hidden" id="export-csv-btn" data-requires-admin>📤 Exportar Leads (CSV)</button>
+          </div>
+        </div>
+
+        <div class="filters-bar">
+          <div class="form-group">
+            <label for="filter-search">Buscar</label>
+            <input type="text" id="filter-search" placeholder="Nome, empresa ou e-mail..." />
+          </div>
+          <div class="form-group">
+            <label for="filter-status">Status</label>
+            <select id="filter-status">
+              <option value="">Todos</option>
+              <option value="novo">Novo</option>
+              <option value="contatado">Contatado</option>
+              <option value="reuniao_agendada">Reunião Agendada</option>
+              <option value="piloto_fechado">Piloto Fechado</option>
+              <option value="descartado">Descartado</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="filter-date-from">De</label>
+            <input type="date" id="filter-date-from" />
+          </div>
+          <div class="form-group">
+            <label for="filter-date-to">Até</label>
+            <input type="date" id="filter-date-to" />
+          </div>
+          <div class="form-group rbac-hidden" data-requires-edit>
+            <label for="bulk-status-select">Mudar status em massa (<span id="bulk-count">0</span> selecionados)</label>
+            <div style="display: flex; gap: 0.4rem;">
+              <select id="bulk-status-select">
+                <option value="">Selecione...</option>
+                <option value="novo">Novo</option>
+                <option value="contatado">Contatado</option>
+                <option value="reuniao_agendada">Reunião Agendada</option>
+                <option value="piloto_fechado">Piloto Fechado</option>
+                <option value="descartado">Descartado</option>
+              </select>
+              <button class="preset-btn" id="bulk-apply-btn">Aplicar</button>
+            </div>
           </div>
         </div>
 
@@ -583,20 +750,91 @@
           <table class="data-table" id="leads-table">
             <thead>
               <tr>
-                <th>Empresa</th>
-                <th>Contato</th>
-                <th>E-mail</th>
-                <th>WhatsApp Pessoal</th>
-                <th>WhatsApp Corp.</th>
-                <th>Data / Hora</th>
+                <th style="width: 2rem;"><input type="checkbox" id="leads-select-all" class="rbac-hidden" data-requires-edit /></th>
+                <th class="sortable-th" data-sort="company_name">Empresa</th>
+                <th class="sortable-th" data-sort="contact_name">Contato</th>
+                <th class="rbac-hidden" data-requires-edit>E-mail</th>
+                <th class="sortable-th" data-sort="status">Status</th>
+                <th class="sortable-th" data-sort="created_at">Data / Hora</th>
                 <th>NDA</th>
                 <th>Ações</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td colspan="8" style="text-align: center; color: var(--clr-muted);">Nenhum lead qualificado encontrado. Envie o formulário para os alvos comerciais.</td>
+                <td colspan="8" style="text-align: center; color: var(--clr-muted);">Carregando…</td>
               </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="pagination-bar">
+          <span id="leads-pagination-info">0 leads</span>
+          <div>
+            <button id="leads-prev-page">← Anterior</button>
+            <button id="leads-next-page">Próxima →</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 4: SETTINGS -->
+    <div class="tab-content" id="tab-settings">
+      <div class="panel">
+        <div class="panel-title">👥 Gestão de Usuários e Permissões</div>
+        <p style="color: var(--clr-muted); font-size: 0.9rem; line-height: 1.6;">
+          Usuários, papéis (admin / viewer / sdr) e convites da equipe são administrados diretamente no painel de <strong>Identity</strong> deste site no Netlify — não existe uma tela paralela aqui para evitar divergência entre duas fontes de verdade.
+        </p>
+        <a class="btn btn-ghost" style="margin-top: var(--space-sm); display: inline-block;" href="https://app.netlify.com" target="_blank" rel="noopener noreferrer">Abrir painel de Identity no Netlify →</a>
+      </div>
+
+      <div class="panel" style="margin-top: var(--space-md);">
+        <div class="panel-title">🛡️ Logs de Auditoria (LGPD)</div>
+        <div class="filters-bar">
+          <div class="form-group">
+            <label for="audit-filter-user">Usuário</label>
+            <input type="text" id="audit-filter-user" placeholder="email@empresa.com" />
+          </div>
+          <div class="form-group">
+            <label for="audit-filter-action">Ação</label>
+            <select id="audit-filter-action">
+              <option value="">Todas</option>
+              <option value="login">login</option>
+              <option value="list_leads">list_leads</option>
+              <option value="view_lead">view_lead</option>
+              <option value="update_lead">update_lead</option>
+              <option value="delete_lead">delete_lead</option>
+              <option value="anonymize_lead">anonymize_lead</option>
+              <option value="export_csv">export_csv</option>
+              <option value="create_form">create_form</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="audit-filter-from">De</label>
+            <input type="date" id="audit-filter-from" />
+          </div>
+          <div class="form-group">
+            <label for="audit-filter-to">Até</label>
+            <input type="date" id="audit-filter-to" />
+          </div>
+          <div class="form-group">
+            <label>&nbsp;</label>
+            <button class="preset-btn" id="audit-filter-apply">Filtrar</button>
+          </div>
+        </div>
+        <div class="data-table-wrapper">
+          <table class="data-table" id="audit-logs-table">
+            <thead>
+              <tr>
+                <th>Data / Hora</th>
+                <th>Usuário</th>
+                <th>Ação</th>
+                <th>Recurso</th>
+                <th>Detalhes</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td colspan="5" style="text-align: center; color: var(--clr-muted);">Carregando…</td></tr>
             </tbody>
           </table>
         </div>
@@ -615,6 +853,25 @@
         <button class="modal-close" id="drawer-close" style="font-size: 1.5rem; line-height: 1;">✕</button>
       </div>
       <div class="drawer-body">
+        <div class="drawer-section rbac-hidden" data-requires-edit>
+          <div class="drawer-section-title">Gestão do Lead</div>
+          <div class="form-group">
+            <label for="drawer-status-select">Status</label>
+            <select id="drawer-status-select" style="width: 100%;">
+              <option value="novo">Novo</option>
+              <option value="contatado">Contatado</option>
+              <option value="reuniao_agendada">Reunião Agendada</option>
+              <option value="piloto_fechado">Piloto Fechado</option>
+              <option value="descartado">Descartado</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="drawer-notes">Notas Internas</label>
+            <textarea id="drawer-notes" rows="3" placeholder="Anotações da equipe sobre este lead..."></textarea>
+          </div>
+          <button class="btn btn-primary btn-full" id="drawer-save-btn" style="padding: 0.5rem;">Salvar Alterações</button>
+        </div>
+
         <div class="drawer-section">
           <p><strong>ACORDO DE CONFIDENCIALIDADE — NDA OPERACIONAL</strong></p>
           <p>Este instrumento regula as condições sob as quais o usuário ("Acessante") acessa os materiais técnicos, dados de validação de mercado e especificações do ecossistema da Iniciativa GuardDrive, permitindo a geração de insights estratégicos a partir desses leads.</p>
@@ -624,7 +881,7 @@
           <p><strong>4. TRATAMENTO DE DADOS (LGPD):</strong> A coleta de dados operacionais visa exclusivamente a elaboração de atestado de conformidade e mitigação de gargalos de frotas, sendo armazenada em ambiente seguro e em conformidade com a Lei Geral de Proteção de Dados.</p>
           <p><strong>5. VIGÊNCIA E FORO:</strong> As obrigações de confidencialidade acordadas neste instrumento permanecerão vigentes pelo prazo de 5 (cinco) anos, elegendo‑se o foro da Comarca de Salvador‑BA para dirimir eventuais dúvidas.</p>
         </div>
-        <div class="drawer-section">
+        <div class="drawer-section rbac-hidden" data-requires-edit>
           <div class="drawer-section-title">Informações de Contato</div>
           <div class="detail-item">
             <span class="detail-label">Contato</span>
@@ -648,10 +905,17 @@
           </div>
         </div>
 
-        <div class="drawer-section">
+        <div class="drawer-section rbac-hidden" data-requires-edit>
           <div class="drawer-section-title">Respostas do Diagnóstico</div>
           <div id="drawer-answers-list">
             <!-- Dynamic QA -->
+          </div>
+        </div>
+
+        <div class="drawer-section rbac-hidden" data-requires-admin>
+          <div class="drawer-section-title">Histórico de Status (Auditoria)</div>
+          <div id="drawer-timeline-list">
+            <p style="color: var(--clr-muted); font-size: 0.85rem;">Carregando histórico…</p>
           </div>
         </div>
 
@@ -666,6 +930,13 @@
             <span class="detail-value" id="drawer-timestamp">-</span>
           </div>
         </div>
+
+        <div class="drawer-section" style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
+          <button class="btn btn-ghost rbac-hidden" id="drawer-mailto-btn" data-requires-edit style="flex: 1 1 45%;">✉️ Enviar E-mail</button>
+          <button class="btn btn-ghost rbac-hidden" id="drawer-export-btn" data-requires-edit style="flex: 1 1 45%;">⬇️ Exportar Dados (JSON)</button>
+          <button class="btn btn-ghost rbac-hidden" id="drawer-anonymize-btn" data-requires-admin style="flex: 1 1 45%; color: var(--clr-amber); border-color: rgba(255,184,0,0.4);">🕶️ Anonimizar (LGPD)</button>
+          <button class="btn btn-ghost rbac-hidden" id="drawer-delete-btn" data-requires-admin style="flex: 1 1 45%; color: #ff4a4a; border-color: rgba(255,74,74,0.4);">🗑️ Deletar Lead</button>
+        </div>
       </div>
     </div>
   </div>
@@ -677,11 +948,32 @@
     </div>
   </footer>
 
-  <script>
+  <script type="module">
+    import { getUser, logout } from '@netlify/identity';
+
+    const STAFF_ROLES = ['admin', 'viewer', 'sdr'];
+    const STATUS_LABELS = { novo: 'Novo', contatado: 'Contatado', reuniao_agendada: 'Reunião Agendada', piloto_fechado: 'Piloto Fechado', descartado: 'Descartado' };
+    const STATUS_COLORS = { novo: '#3B82F6', contatado: '#94A3B8', reuniao_agendada: '#F59E0B', piloto_fechado: '#10B981', descartado: '#EF4444' };
+    const CHART_COLORS = ['#00F0FF', '#8B5CF6', '#00FF88', '#FFB800', '#FF4A4A', '#3B82F6'];
+
     // Global State
     let activeQuestions = [];
     let allLeads = [];
     let allForms = [];
+    let currentRole = null;
+    let currentDrawerLeadId = null;
+
+    const leadsState = {
+      search: '',
+      status: '',
+      dateFrom: '',
+      dateTo: '',
+      sortBy: 'created_at',
+      sortDir: 'desc',
+      page: 1,
+      pageSize: 20,
+      selected: new Set(),
+    };
 
     // Unified questionnaire template (Adriano's directives)
     const adrianoPreset = [
@@ -697,18 +989,86 @@
       { q: "Qual o interesse estratégico em participar de um piloto regional Capex Zero (HaaS) com veículos selecionados?", type: "select", options: ["Alto Interesse: Testar robustez offline e imunidade imediatamente", "Médio Interesse: Avaliar proposta após relatórios de outros parceiros", "Nenhum Interesse: Momento atual ou diretrizes não permitem"] }
     ];
 
-    document.addEventListener("DOMContentLoaded", () => {
+    document.addEventListener("DOMContentLoaded", async () => {
+      const authed = await initAuthGuard();
+      if (!authed) return;
+
+      wireUpUI();
+
+      // Initial Fetch
+      fetchDashboardStats();
+      fetchLeads();
+      fetchForms();
+
+      // Auto-load Adriano's preset as default helper
+      activeQuestions = [...adrianoPreset];
+      renderQuestionList();
+    });
+
+    async function initAuthGuard() {
+      const gate = document.getElementById("access-gate");
+      const gateMsg = document.getElementById("access-gate-message");
+      const app = document.getElementById("admin-app");
+      const sessionUserEl = document.getElementById("session-user");
+
+      const user = await getUser();
+      if (!user) {
+        window.location.href = "/admin/login";
+        return false;
+      }
+
+      const staffRoles = (user.roles ?? []).filter((r) => STAFF_ROLES.includes(r));
+      if (!staffRoles.length) {
+        gateMsg.textContent = "Sua conta não possui permissão para acessar o painel administrativo. Contate um administrador.";
+        gate.style.display = "block";
+        return false;
+      }
+
+      currentRole = staffRoles.includes("admin") ? "admin" : staffRoles.includes("sdr") ? "sdr" : "viewer";
+      sessionUserEl.textContent = `${user.email} · ${currentRole}`;
+      sessionUserEl.style.display = "inline";
+
+      const canEdit = currentRole === "admin" || currentRole === "sdr";
+      document.querySelectorAll("[data-requires-admin]").forEach((el) => {
+        el.classList.toggle("rbac-hidden", currentRole !== "admin");
+      });
+      document.querySelectorAll("[data-requires-edit]").forEach((el) => {
+        el.classList.toggle("rbac-hidden", !canEdit);
+      });
+
+      gate.style.display = "none";
+      app.style.display = "block";
+      return true;
+    }
+
+    document.getElementById("logout-btn").addEventListener("click", async () => {
+      await logout().catch(() => {});
+      window.location.href = "/admin/login";
+    });
+
+    function wireUpUI() {
       // Tab switching
       document.querySelectorAll(".tab-btn").forEach(btn => {
         btn.addEventListener("click", () => {
           document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
           document.querySelectorAll(".tab-content").forEach(tc => tc.classList.remove("active"));
-          
+
           btn.classList.add("active");
           document.getElementById(`tab-${btn.dataset.tab}`).classList.add("active");
-          
+
+          if (btn.dataset.tab === "settings") {
+            fetchAuditLogs();
+          }
+
           // Trigger logs
           logConsole(`[TAB] Navegou para a aba: ${btn.dataset.tab}`);
+        });
+      });
+
+      // "Ver todos os leads" shortcut buttons
+      document.querySelectorAll("[data-goto-tab]").forEach(btn => {
+        btn.addEventListener("click", () => {
+          document.querySelector(`.tab-btn[data-tab="${btn.dataset.gotoTab}"]`)?.click();
         });
       });
 
@@ -844,15 +1204,171 @@
         exportLeadsCSV();
       });
 
-      // Initial Fetch
-      fetchDashboardStats();
-      fetchLeads();
-      fetchForms();
-      
-      // Auto-load Adriano's preset as default helper
-      activeQuestions = [...adrianoPreset];
-      renderQuestionList();
-    });
+      // Leads filters
+      document.getElementById("filter-search").addEventListener("input", (e) => {
+        leadsState.search = e.target.value.trim().toLowerCase();
+        leadsState.page = 1;
+        renderLeadsTable();
+      });
+      document.getElementById("filter-status").addEventListener("change", (e) => {
+        leadsState.status = e.target.value;
+        leadsState.page = 1;
+        renderLeadsTable();
+      });
+      document.getElementById("filter-date-from").addEventListener("change", (e) => {
+        leadsState.dateFrom = e.target.value;
+        leadsState.page = 1;
+        renderLeadsTable();
+      });
+      document.getElementById("filter-date-to").addEventListener("change", (e) => {
+        leadsState.dateTo = e.target.value;
+        leadsState.page = 1;
+        renderLeadsTable();
+      });
+
+      // Sortable columns
+      document.querySelectorAll("#leads-table .sortable-th").forEach((th) => {
+        th.addEventListener("click", () => {
+          const field = th.dataset.sort;
+          if (leadsState.sortBy === field) {
+            leadsState.sortDir = leadsState.sortDir === "asc" ? "desc" : "asc";
+          } else {
+            leadsState.sortBy = field;
+            leadsState.sortDir = "asc";
+          }
+          renderLeadsTable();
+        });
+      });
+
+      // Pagination
+      document.getElementById("leads-prev-page").addEventListener("click", () => {
+        if (leadsState.page > 1) {
+          leadsState.page -= 1;
+          renderLeadsTable();
+        }
+      });
+      document.getElementById("leads-next-page").addEventListener("click", () => {
+        leadsState.page += 1;
+        renderLeadsTable();
+      });
+
+      // Select-all checkbox
+      document.getElementById("leads-select-all").addEventListener("change", (e) => {
+        const checkboxes = document.querySelectorAll("#leads-table tbody input[type=checkbox]");
+        checkboxes.forEach((cb) => {
+          const id = Number(cb.dataset.leadId);
+          if (e.target.checked) leadsState.selected.add(id);
+          else leadsState.selected.delete(id);
+          cb.checked = e.target.checked;
+        });
+        updateBulkCount();
+      });
+
+      // Bulk status change
+      document.getElementById("bulk-apply-btn").addEventListener("click", async () => {
+        const newStatus = document.getElementById("bulk-status-select").value;
+        if (!newStatus) {
+          alert("Selecione um status para aplicar em massa.");
+          return;
+        }
+        if (leadsState.selected.size === 0) {
+          alert("Selecione ao menos um lead.");
+          return;
+        }
+        const ids = Array.from(leadsState.selected);
+        for (const id of ids) {
+          await updateLeadStatus(id, newStatus, { silent: true });
+        }
+        leadsState.selected.clear();
+        logConsole(`[LEADS] Status alterado em massa para ${ids.length} lead(s).`);
+        await fetchLeads();
+        await fetchDashboardStats();
+      });
+
+      // Drawer: save status/notes
+      document.getElementById("drawer-save-btn").addEventListener("click", async () => {
+        if (!currentDrawerLeadId) return;
+        const status = document.getElementById("drawer-status-select").value;
+        const notes = document.getElementById("drawer-notes").value;
+        try {
+          const res = await fetch(`/api/leads/${currentDrawerLeadId}`, {
+            method: "PATCH",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ status, notes }),
+          });
+          if (!res.ok) throw new Error("Erro na rede ao salvar lead");
+          logConsole(`[LEADS] Lead #${currentDrawerLeadId} atualizado (status: ${status}).`);
+          await fetchLeads();
+          await fetchDashboardStats();
+          if (currentRole === "admin") fetchLeadTimeline(currentDrawerLeadId);
+        } catch (err) {
+          logConsole(`[ERRO] Falha ao salvar lead: ${err.message}`, true);
+          alert("Não foi possível salvar as alterações.");
+        }
+      });
+
+      // Drawer: mailto
+      document.getElementById("drawer-mailto-btn").addEventListener("click", () => {
+        const lead = allLeads.find((l) => l.id === currentDrawerLeadId);
+        if (lead) window.location.href = `mailto:${lead.email}`;
+      });
+
+      // Drawer: export JSON
+      document.getElementById("drawer-export-btn").addEventListener("click", () => {
+        const lead = allLeads.find((l) => l.id === currentDrawerLeadId);
+        if (!lead) return;
+        const blob = new Blob([JSON.stringify(lead, null, 2)], { type: "application/json" });
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement("a");
+        link.href = url;
+        link.download = `lead_${lead.id}.json`;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        URL.revokeObjectURL(url);
+        logConsole(`[LEADS] Dados do lead #${lead.id} exportados em JSON.`);
+      });
+
+      // Drawer: delete
+      document.getElementById("drawer-delete-btn").addEventListener("click", async () => {
+        if (!currentDrawerLeadId) return;
+        if (!confirm("Deletar permanentemente este lead? Esta ação não pode ser desfeita.")) return;
+        try {
+          const res = await fetch(`/api/leads/${currentDrawerLeadId}`, { method: "DELETE" });
+          if (!res.ok) throw new Error("Erro na rede ao deletar lead");
+          document.getElementById("lead-drawer").style.display = "none";
+          logConsole(`[LEADS] Lead #${currentDrawerLeadId} deletado.`);
+          await fetchLeads();
+          await fetchDashboardStats();
+        } catch (err) {
+          logConsole(`[ERRO] Falha ao deletar lead: ${err.message}`, true);
+          alert("Não foi possível deletar o lead.");
+        }
+      });
+
+      // Drawer: anonymize (LGPD right to be forgotten)
+      document.getElementById("drawer-anonymize-btn").addEventListener("click", async () => {
+        if (!currentDrawerLeadId) return;
+        if (!confirm("Anonimizar este lead? Os dados pessoais serão removidos permanentemente, mantendo o registro para fins estatísticos.")) return;
+        try {
+          const res = await fetch(`/api/leads/${currentDrawerLeadId}?mode=anonymize`, { method: "DELETE" });
+          if (!res.ok) throw new Error("Erro na rede ao anonimizar lead");
+          document.getElementById("lead-drawer").style.display = "none";
+          logConsole(`[LEADS] Lead #${currentDrawerLeadId} anonimizado.`);
+          await fetchLeads();
+          await fetchDashboardStats();
+        } catch (err) {
+          logConsole(`[ERRO] Falha ao anonimizar lead: ${err.message}`, true);
+          alert("Não foi possível anonimizar o lead.");
+        }
+      });
+
+      // Audit log filters
+      document.getElementById("audit-filter-apply").addEventListener("click", (e) => {
+        e.preventDefault();
+        fetchAuditLogs();
+      });
+    }
 
     // Logging helper
     function logConsole(message, isError = false) {
@@ -903,42 +1419,126 @@
         const res = await fetch("/api/dashboard/stats");
         if (!res.ok) throw new Error("Erro na rede");
         const stats = await res.json();
-        
-        document.getElementById("stats-active-forms").innerText = stats.active_forms || 0;
-        document.getElementById("stats-total-responses").innerText = stats.total_responses || 0;
-        
-        // Mock conversion rate
-        const totalVisits = (stats.total_responses * 2) + 5;
-        const rate = totalVisits > 0 ? Math.round((stats.total_responses / totalVisits) * 100) : 0;
-        document.getElementById("stats-conversion").innerText = `${rate}%`;
 
-        // Render segment chart/bars
-        const segContainer = document.getElementById("segment-bars");
-        segContainer.innerHTML = "";
-        if (stats.segment_counts && Object.keys(stats.segment_counts).length > 0) {
-          Object.entries(stats.segment_counts).forEach(([segment, count]) => {
-            const barWrap = document.createElement("div");
-            barWrap.style.display = "flex";
-            barWrap.style.alignItems = "center";
-            barWrap.style.justifyContent = "space-between";
-            
-            const segmentLabel = segment.toUpperCase();
-            barWrap.innerHTML = `
-              <span style="font-size: 0.85rem; font-weight: 600; width: 140px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${segmentLabel}</span>
-              <div style="flex: 1; height: 8px; background: rgba(255,255,255,0.05); margin: 0 10px; border-radius: 4px; overflow: hidden;">
-                <div style="width: ${Math.min(count * 20, 100)}%; height: 100%; background: var(--clr-cyan); box-shadow: 0 0 8px var(--clr-cyan);"></div>
-              </div>
-              <span style="font-family: var(--font-mono); font-size: 0.85rem; font-weight: bold; color: var(--clr-cyan);">${count}</span>
-            `;
-            segContainer.appendChild(barWrap);
-          });
-        } else {
-          segContainer.innerHTML = `<p style="color: var(--clr-muted); font-size: 0.9rem;">Nenhum lead registrado.</p>`;
-        }
-        
+        document.getElementById("stats-total-responses").innerText = stats.total_responses || 0;
+        document.getElementById("stats-status-novo").innerText = (stats.status_counts && stats.status_counts.novo) || 0;
+        document.getElementById("stats-status-reuniao").innerText = (stats.status_counts && stats.status_counts.reuniao_agendada) || 0;
+        document.getElementById("stats-status-piloto").innerText = (stats.status_counts && stats.status_counts.piloto_fechado) || 0;
+
+        renderPieChart(
+          document.getElementById("segment-pie"),
+          document.getElementById("segment-legend"),
+          stats.segment_counts || {},
+        );
+        renderStatusBars(document.getElementById("status-bars"), stats.status_counts || {});
+        renderTrendLine(document.getElementById("trend-line"), stats.weekly_trend || []);
       } catch (err) {
         logConsole(`[ERRO] Falha ao ler stats: ${err.message}`, true);
       }
+    }
+
+    function renderPieChart(svgEl, legendEl, dataObj) {
+      const entries = Object.entries(dataObj).filter(([, v]) => v > 0);
+      svgEl.innerHTML = "";
+      legendEl.innerHTML = "";
+      if (!entries.length) {
+        legendEl.innerHTML = `<p style="color: var(--clr-muted); font-size: 0.85rem;">Sem dados.</p>`;
+        return;
+      }
+      const total = entries.reduce((sum, [, v]) => sum + v, 0);
+      const r = 40, cx = 50, cy = 50;
+      const circumference = 2 * Math.PI * r;
+      let offset = 0;
+
+      entries.forEach(([label, value], i) => {
+        const color = CHART_COLORS[i % CHART_COLORS.length];
+        const dash = (value / total) * circumference;
+        const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+        circle.setAttribute("cx", cx);
+        circle.setAttribute("cy", cy);
+        circle.setAttribute("r", r);
+        circle.setAttribute("fill", "none");
+        circle.setAttribute("stroke", color);
+        circle.setAttribute("stroke-width", "18");
+        circle.setAttribute("stroke-dasharray", `${dash} ${circumference - dash}`);
+        circle.setAttribute("stroke-dashoffset", `${-offset}`);
+        circle.setAttribute("transform", `rotate(-90 ${cx} ${cy})`);
+        svgEl.appendChild(circle);
+        offset += dash;
+
+        const item = document.createElement("div");
+        item.className = "chart-legend-item";
+        item.innerHTML = `<span class="chart-legend-swatch" style="background:${color};"></span><span>${label.toUpperCase()} — ${value}</span>`;
+        legendEl.appendChild(item);
+      });
+    }
+
+    function renderStatusBars(container, statusCounts) {
+      container.innerHTML = "";
+      const total = Object.values(statusCounts).reduce((sum, v) => sum + v, 0);
+      if (!total) {
+        container.innerHTML = `<p style="color: var(--clr-muted); font-size: 0.9rem;">Nenhum lead registrado.</p>`;
+        return;
+      }
+      Object.keys(STATUS_LABELS).forEach((key) => {
+        const count = statusCounts[key] || 0;
+        const pct = total ? Math.round((count / total) * 100) : 0;
+        const row = document.createElement("div");
+        row.style.display = "flex";
+        row.style.alignItems = "center";
+        row.style.justifyContent = "space-between";
+        row.innerHTML = `
+          <span style="font-size: 0.85rem; font-weight: 600; width: 150px;">${STATUS_LABELS[key]}</span>
+          <div style="flex: 1; height: 8px; background: rgba(255,255,255,0.05); margin: 0 10px; border-radius: 4px; overflow: hidden;">
+            <div style="width: ${pct}%; height: 100%; background: ${STATUS_COLORS[key]};"></div>
+          </div>
+          <span style="font-family: var(--font-mono); font-size: 0.85rem; font-weight: bold; color: ${STATUS_COLORS[key]};">${count}</span>
+        `;
+        container.appendChild(row);
+      });
+    }
+
+    function renderTrendLine(svgEl, weeklyTrend) {
+      svgEl.innerHTML = "";
+      if (!weeklyTrend.length) {
+        svgEl.innerHTML = `<text x="150" y="60" text-anchor="middle" fill="#6B7280" font-size="10">Sem dados suficientes.</text>`;
+        return;
+      }
+      const max = Math.max(1, ...weeklyTrend.map((w) => w.count));
+      const padding = 12;
+      const w = 300, h = 120;
+      const stepX = weeklyTrend.length > 1 ? (w - padding * 2) / (weeklyTrend.length - 1) : 0;
+      const points = weeklyTrend.map((wk, i) => {
+        const x = padding + i * stepX;
+        const y = h - padding - (wk.count / max) * (h - padding * 2);
+        return [x, y];
+      });
+
+      const polyline = document.createElementNS("http://www.w3.org/2000/svg", "polyline");
+      polyline.setAttribute("points", points.map((p) => p.join(",")).join(" "));
+      polyline.setAttribute("fill", "none");
+      polyline.setAttribute("stroke", "#00F0FF");
+      polyline.setAttribute("stroke-width", "2");
+      svgEl.appendChild(polyline);
+
+      weeklyTrend.forEach((wk, i) => {
+        const [x, y] = points[i];
+        const dot = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+        dot.setAttribute("cx", x);
+        dot.setAttribute("cy", y);
+        dot.setAttribute("r", "3");
+        dot.setAttribute("fill", "#00F0FF");
+        svgEl.appendChild(dot);
+
+        const label = document.createElementNS("http://www.w3.org/2000/svg", "text");
+        label.setAttribute("x", x);
+        label.setAttribute("y", h - 1);
+        label.setAttribute("text-anchor", "middle");
+        label.setAttribute("font-size", "7");
+        label.setAttribute("fill", "#6B7280");
+        label.textContent = wk.count;
+        svgEl.appendChild(label);
+      });
     }
 
     async function fetchLeads() {
@@ -946,39 +1546,213 @@
         const res = await fetch("/api/leads");
         if (!res.ok) throw new Error("Erro na rede ao buscar leads");
         allLeads = await res.json();
-        
-        const tbody = document.querySelector("#leads-table tbody");
-        tbody.innerHTML = "";
-        
-        if (allLeads.length === 0) {
-          tbody.innerHTML = `<tr><td colspan="8" style="text-align: center; color: var(--clr-muted);">Nenhum lead qualificado encontrado.</td></tr>`;
-          return;
-        }
+        renderLeadsTable();
+        renderRecentLeadsTable();
+      } catch (err) {
+        logConsole(`[ERRO] Falha ao ler leads: ${err.message}`, true);
+      }
+    }
 
-        allLeads.forEach(lead => {
+    function getFilteredLeads() {
+      const filtered = allLeads.filter((l) => {
+        if (leadsState.status && (l.status || "novo") !== leadsState.status) return false;
+        if (leadsState.search) {
+          const haystack = `${l.company_name} ${l.contact_name} ${l.email}`.toLowerCase();
+          if (!haystack.includes(leadsState.search)) return false;
+        }
+        if (leadsState.dateFrom && new Date(l.created_at) < new Date(leadsState.dateFrom)) return false;
+        if (leadsState.dateTo && new Date(l.created_at) > new Date(`${leadsState.dateTo}T23:59:59`)) return false;
+        return true;
+      });
+
+      const dir = leadsState.sortDir === "asc" ? 1 : -1;
+      filtered.sort((a, b) => {
+        const field = leadsState.sortBy;
+        if (field === "created_at") return (new Date(a[field]) - new Date(b[field])) * dir;
+        return String(a[field] ?? "").localeCompare(String(b[field] ?? "")) * dir;
+      });
+
+      return filtered;
+    }
+
+    function renderLeadsTable() {
+      const tbody = document.querySelector("#leads-table tbody");
+      const filtered = getFilteredLeads();
+      const totalPages = Math.max(1, Math.ceil(filtered.length / leadsState.pageSize));
+      if (leadsState.page > totalPages) leadsState.page = totalPages;
+      const start = (leadsState.page - 1) * leadsState.pageSize;
+      const pageItems = filtered.slice(start, start + leadsState.pageSize);
+      const canEdit = currentRole === "admin" || currentRole === "sdr";
+
+      tbody.innerHTML = "";
+      if (pageItems.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="8" style="text-align: center; color: var(--clr-muted);">Nenhum lead encontrado com os filtros atuais.</td></tr>`;
+      } else {
+        pageItems.forEach((lead) => {
           const tr = document.createElement("tr");
-          
-          const dtStr = new Date(lead.created_at).toLocaleString('pt-BR');
-          const ndaTag = lead.nda_accepted 
-            ? `<span class="tag-status active">✓ Aceito</span>` 
+          const dtStr = new Date(lead.created_at).toLocaleString("pt-BR");
+          const ndaTag = lead.nda_accepted
+            ? `<span class="tag-status active">✓ Aceito</span>`
             : `<span class="tag-status draft">✕ Ausente</span>`;
+          const status = lead.status || "novo";
+          const checked = leadsState.selected.has(lead.id) ? "checked" : "";
 
           tr.innerHTML = `
+            <td><input type="checkbox" class="${canEdit ? "" : "rbac-hidden"}" data-lead-id="${lead.id}" ${checked} /></td>
             <td><strong>${lead.company_name}</strong></td>
             <td>${lead.contact_name}</td>
-            <td>${lead.email}</td>
-            <td>${lead.phone_personal || '-'}</td>
-            <td>${lead.phone_corporate || '-'}</td>
+            <td class="${canEdit ? "" : "rbac-hidden"}">${lead.email || ""}</td>
+            <td>
+              <select class="status-select st-${status}" data-lead-id="${lead.id}" ${canEdit ? "" : "disabled"}>
+                ${Object.keys(STATUS_LABELS).map((s) => `<option value="${s}" ${s === status ? "selected" : ""}>${STATUS_LABELS[s]}</option>`).join("")}
+              </select>
+            </td>
             <td>${dtStr}</td>
             <td>${ndaTag}</td>
-            <td>
-              <button class="preset-btn" style="padding: 0.2rem 0.5rem; font-size: 0.75rem;" onclick="viewLeadDetails(${lead.id})">🔍 Analisar</button>
-            </td>
+            <td><button class="preset-btn" style="padding: 0.2rem 0.5rem; font-size: 0.75rem;" data-view-lead="${lead.id}">🔍 Analisar</button></td>
+          `;
+          tbody.appendChild(tr);
+        });
+      }
+
+      tbody.querySelectorAll("input[type=checkbox]").forEach((cb) => {
+        cb.addEventListener("change", (e) => {
+          const id = Number(e.target.dataset.leadId);
+          if (e.target.checked) leadsState.selected.add(id);
+          else leadsState.selected.delete(id);
+          updateBulkCount();
+        });
+      });
+      tbody.querySelectorAll(".status-select").forEach((sel) => {
+        sel.addEventListener("change", async (e) => {
+          const id = Number(e.target.dataset.leadId);
+          const newStatus = e.target.value;
+          await updateLeadStatus(id, newStatus);
+          e.target.className = `status-select st-${newStatus}`;
+        });
+      });
+      tbody.querySelectorAll("[data-view-lead]").forEach((btn) => {
+        btn.addEventListener("click", () => viewLeadDetails(Number(btn.dataset.viewLead)));
+      });
+
+      document.getElementById("leads-pagination-info").textContent = `${filtered.length} lead(s) · página ${leadsState.page} de ${totalPages}`;
+      document.getElementById("leads-prev-page").disabled = leadsState.page <= 1;
+      document.getElementById("leads-next-page").disabled = leadsState.page >= totalPages;
+      updateBulkCount();
+    }
+
+    function renderRecentLeadsTable() {
+      const tbody = document.querySelector("#recent-leads-table tbody");
+      tbody.innerHTML = "";
+      const recent = allLeads.slice(0, 5);
+      if (recent.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="4" style="text-align: center; color: var(--clr-muted);">Nenhum lead ainda.</td></tr>`;
+        return;
+      }
+      recent.forEach((lead) => {
+        const status = lead.status || "novo";
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
+          <td>${lead.contact_name}</td>
+          <td>${lead.company_name}</td>
+          <td><span style="color: ${STATUS_COLORS[status]}; font-weight: 600; font-size: 0.85rem;">${STATUS_LABELS[status] || status}</span></td>
+          <td>${new Date(lead.created_at).toLocaleString("pt-BR")}</td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    function updateBulkCount() {
+      const countEl = document.getElementById("bulk-count");
+      if (countEl) countEl.textContent = leadsState.selected.size;
+    }
+
+    async function updateLeadStatus(id, status, opts = {}) {
+      try {
+        const res = await fetch(`/api/leads/${id}`, {
+          method: "PATCH",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ status }),
+        });
+        if (!res.ok) throw new Error("Erro na rede ao atualizar status");
+        const lead = allLeads.find((l) => l.id === id);
+        if (lead) lead.status = status;
+        if (!opts.silent) {
+          logConsole(`[LEADS] Status do lead #${id} alterado para ${status}.`);
+          renderRecentLeadsTable();
+          await fetchDashboardStats();
+        }
+      } catch (err) {
+        logConsole(`[ERRO] Falha ao atualizar status do lead #${id}: ${err.message}`, true);
+        alert("Não foi possível atualizar o status.");
+      }
+    }
+
+    async function fetchLeadTimeline(leadId) {
+      const container = document.getElementById("drawer-timeline-list");
+      container.innerHTML = `<p style="color: var(--clr-muted); font-size: 0.85rem;">Carregando histórico…</p>`;
+      try {
+        const res = await fetch(`/api/audit-logs?resource_id=${leadId}`);
+        if (!res.ok) throw new Error("Erro na rede");
+        const rows = await res.json();
+        if (!rows.length) {
+          container.innerHTML = `<p style="color: var(--clr-muted); font-size: 0.85rem;">Nenhum evento registrado para este lead.</p>`;
+          return;
+        }
+        container.innerHTML = "";
+        rows.forEach((row) => {
+          const item = document.createElement("div");
+          item.style.borderLeft = "2px solid var(--clr-border)";
+          item.style.paddingLeft = "0.6rem";
+          item.style.marginBottom = "0.6rem";
+          item.innerHTML = `
+            <div style="font-size: 0.8rem; font-weight: 600;">${row.action}</div>
+            <div style="font-size: 0.75rem; color: var(--clr-muted);">${row.userEmail} · ${new Date(row.createdAt).toLocaleString("pt-BR")}</div>
+          `;
+          container.appendChild(item);
+        });
+      } catch (err) {
+        container.innerHTML = `<p style="color: #ff9b9b; font-size: 0.85rem;">Falha ao carregar histórico.</p>`;
+      }
+    }
+
+    async function fetchAuditLogs() {
+      const tbody = document.querySelector("#audit-logs-table tbody");
+      if (!tbody) return;
+      tbody.innerHTML = `<tr><td colspan="5" style="text-align: center; color: var(--clr-muted);">Carregando…</td></tr>`;
+
+      const params = new URLSearchParams();
+      const user = document.getElementById("audit-filter-user").value.trim();
+      const action = document.getElementById("audit-filter-action").value;
+      const from = document.getElementById("audit-filter-from").value;
+      const to = document.getElementById("audit-filter-to").value;
+      if (user) params.set("user", user);
+      if (action) params.set("action", action);
+      if (from) params.set("from", from);
+      if (to) params.set("to", to);
+
+      try {
+        const res = await fetch(`/api/audit-logs?${params.toString()}`);
+        if (!res.ok) throw new Error("Erro na rede");
+        const rows = await res.json();
+        tbody.innerHTML = "";
+        if (!rows.length) {
+          tbody.innerHTML = `<tr><td colspan="5" style="text-align: center; color: var(--clr-muted);">Nenhum registro encontrado.</td></tr>`;
+          return;
+        }
+        rows.forEach((row) => {
+          const tr = document.createElement("tr");
+          tr.innerHTML = `
+            <td>${new Date(row.createdAt).toLocaleString("pt-BR")}</td>
+            <td>${row.userEmail}</td>
+            <td><code style="font-family: var(--font-mono); font-size: 0.8rem;">${row.action}</code></td>
+            <td>${row.resourceType ? `${row.resourceType}${row.resourceId ? " #" + row.resourceId : ""}` : "-"}</td>
+            <td style="font-size: 0.8rem; color: var(--clr-muted);">${row.details ? JSON.stringify(row.details) : "-"}</td>
           `;
           tbody.appendChild(tr);
         });
       } catch (err) {
-        logConsole(`[ERRO] Falha ao ler leads: ${err.message}`, true);
+        tbody.innerHTML = `<tr><td colspan="5" style="text-align: center; color: #ff9b9b;">Falha ao carregar logs de auditoria.</td></tr>`;
       }
     }
 
@@ -1026,9 +1800,21 @@
       });
     };
 
-    window.viewLeadDetails = function(leadId) {
-      const lead = allLeads.find(l => l.id === leadId);
+    window.viewLeadDetails = async function (leadId) {
+      let lead = allLeads.find((l) => l.id === leadId);
       if (!lead) return;
+
+      try {
+        const res = await fetch(`/api/leads/${leadId}`);
+        if (res.ok) {
+          const fresh = await res.json();
+          lead = { ...lead, status: fresh.status, notes: fresh.notes, updated_at: fresh.updatedAt };
+        }
+      } catch {
+        // Best-effort refresh only — fall back to the locally cached copy.
+      }
+
+      currentDrawerLeadId = leadId;
 
       document.getElementById("drawer-company-name").innerText = lead.company_name;
       document.getElementById("drawer-lead-id").innerText = `ID do Lead: #${lead.id}`;
@@ -1036,7 +1822,9 @@
       document.getElementById("drawer-email").innerText = lead.email;
       document.getElementById("drawer-phone-personal").innerText = lead.phone_personal || '-';
       document.getElementById("drawer-phone-corporate").innerText = lead.phone_corporate || '-';
-      
+      document.getElementById("drawer-status-select").value = lead.status || "novo";
+      document.getElementById("drawer-notes").value = lead.notes || "";
+
       const ndaVal = document.getElementById("drawer-nda");
       if (lead.nda_accepted) {
         ndaVal.innerText = "✓ Aceito";
@@ -1071,17 +1859,27 @@
 
       document.getElementById("lead-drawer").style.display = "flex";
       logConsole(`[GUI] Abriu detalhes do Lead: ${lead.company_name}`);
+
+      if (currentRole === "admin") fetchLeadTimeline(leadId);
     };
 
-    // Client-side CSV generator fallback
-    function exportLeadsCSV() {
+    // Client-side CSV generator; the export is built from data already in
+    // memory, but we still ping the API with ?export=csv so the audit trail
+    // records an export_csv event distinct from a plain list_leads view.
+    async function exportLeadsCSV() {
       if (allLeads.length === 0) {
         alert("Nenhum lead disponível para exportação.");
         return;
       }
-      
+
+      try {
+        await fetch("/api/leads?export=csv");
+      } catch {
+        // Audit logging is best-effort; the export itself still proceeds.
+      }
+
       let csvContent = "data:text/csv;charset=utf-8,\uFEFF";
-      csvContent += "ID,Empresa,Nome Contato,Email,WhatsApp Pessoal,WhatsApp Corporativo,NDA Aceito,ID de Registro (Demo),Data\n";
+      csvContent += "ID,Empresa,Nome Contato,Email,WhatsApp Pessoal,WhatsApp Corporativo,Status,NDA Aceito,ID de Registro (Demo),Data\n";
 
       allLeads.forEach(l => {
         const row = [
@@ -1091,6 +1889,7 @@
           `"${l.email.replace(/"/g, '""')}"`,
           `"${(l.phone_personal || '').replace(/"/g, '""')}"`,
           `"${(l.phone_corporate || '').replace(/"/g, '""')}"`,
+          l.status || 'novo',
           l.nda_accepted ? "SIM" : "NAO",
           l.registration_id || '',
           l.created_at
