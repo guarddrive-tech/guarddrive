@@ -71,3 +71,18 @@ export const auditLogs = pgTable('audit_logs', {
   details: jsonb('details'),
   createdAt: timestamp('created_at').defaultNow().notNull(),
 });
+
+// GuardDrive's own operational record of a physical GuardTag (NFC seal),
+// keyed by its public GTID. This is a GuardDrive-local table, not a cache or
+// projection of any UEAP on-chain registry — no such registry is deployed or
+// reachable today. Kept intentionally minimal (see ADR-0001): no asset/vehicle
+// data, no OFP/RF/trust-score columns until those capabilities actually exist.
+export const guardTags = pgTable('guard_tags', {
+  id: serial('id').primaryKey(),
+  gtid: text('gtid').notNull().unique(),
+  status: text('status').default('active').notNull(), // active | revoked | replaced
+  activatedAt: timestamp('activated_at').defaultNow().notNull(),
+  replacedByGtid: text('replaced_by_gtid'),
+  createdAt: timestamp('created_at').defaultNow().notNull(),
+  updatedAt: timestamp('updated_at').defaultNow().notNull(),
+});
