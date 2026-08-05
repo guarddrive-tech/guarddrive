@@ -1966,6 +1966,18 @@ h1 em, h2 em { font-style: normal; color: var(--clr-cyan); }
 .eco-icon { font-family: var(--font-mono); font-weight: 800; font-size: 1.05rem; }
 .eco-node--core { border-color: rgba(0,240,255,0.35); background: rgba(0,240,255,0.04); }
 .eco-node--core .eco-icon { background: rgba(0,240,255,0.12); border-color: rgba(0,240,255,0.35); }
+.eco-icon--photo { position: relative; }
+.eco-icon-badge {
+  position: absolute; top: -8px; left: -8px;
+  min-width: 22px; height: 22px; padding: 0 4px;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(0,240,255,0.12);
+  border: 1px solid rgba(0,240,255,0.35);
+  border-radius: var(--radius-pill);
+  font-family: var(--font-mono); font-weight: 800; font-size: 0.65rem;
+  color: var(--clr-cyan);
+  line-height: 1;
+}
 
 /* Pilot journey (Piloto / Operação / Escala — no SaaS badges) */
 .pilot-shell {
