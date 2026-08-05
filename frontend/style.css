@@ -440,16 +440,32 @@ textarea { resize: vertical; }
   height: auto;
 }
 .ecosystem-flow {
-  display: flex; align-items: center; justify-content: center;
+  display: flex; flex-direction: column; align-items: center;
   gap: var(--space-md);
-  flex-wrap: wrap;
   max-width: 1100px; margin: 0 auto var(--space-md);
 }
-@media (max-width: 900px) {
-  .ecosystem-flow { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-md); }
-  .eco-arrow { display: none; }
-  .eco-node { min-width: 0; }
+.eco-track {
+  display: flex; align-items: stretch; justify-content: center;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+  width: 100%;
 }
+@media (max-width: 900px) {
+  .eco-track { flex-direction: column; align-items: center; }
+  .eco-arrow { transform: rotate(90deg); font-size: 1.4rem; }
+  .eco-node { width: 100%; max-width: 380px; min-width: 0; }
+}
+.eco-endpoint {
+  display: flex; align-items: center;
+  font-family: var(--font-mono); font-size: 0.68rem; letter-spacing: 0.16em;
+  text-transform: uppercase; color: var(--clr-muted);
+  border: 1px dashed var(--clr-border);
+  border-radius: var(--radius-pill);
+  padding: 0.55rem 1rem;
+  white-space: nowrap;
+}
+.eco-endpoint--start { color: var(--clr-cyan); border-color: rgba(0,240,255,0.25); }
+.eco-endpoint--end { color: var(--clr-purple); border-color: rgba(123,47,255,0.3); }
 .eco-node {
   background: var(--clr-surface);
   border: 1px solid var(--clr-border);
@@ -457,6 +473,8 @@ textarea { resize: vertical; }
   padding: 1.5rem;
   text-align: center;
   min-width: 200px;
+  max-width: 260px;
+  flex: 1 1 220px;
   backdrop-filter: blur(16px);
   transition: all 0.3s var(--ease-out-expo);
 }
@@ -481,12 +499,42 @@ textarea { resize: vertical; }
   background: rgba(0,240,255,0.12);
   border-color: rgba(0,240,255,0.35);
 }
+.eco-kicker {
+  font-family: var(--font-mono); font-size: 0.65rem; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--clr-cyan); margin-bottom: 0.4rem; opacity: 0.85;
+}
 .eco-node h3 { font-size: 1.2rem; font-weight: 700; margin-bottom: var(--space-xs); }
 .eco-node p { color: var(--clr-muted); font-size: 0.85rem; line-height: 1.5; }
+.eco-role { color: var(--clr-white) !important; font-weight: 600; opacity: 0.92; }
+.eco-detail { font-size: 0.8rem !important; margin-top: 0.3rem; }
 .eco-arrow {
   font-size: 2rem; color: var(--clr-cyan);
   opacity: 0.6;
 }
+.eco-interfaces {
+  display: flex; flex-direction: column; align-items: center;
+}
+.eco-interfaces-connector {
+  width: 1px; height: 20px;
+  background: linear-gradient(to bottom, rgba(0,240,255,0.35), transparent);
+  margin-bottom: 0.5rem;
+}
+.eco-interfaces-box {
+  display: inline-flex; flex-wrap: wrap; align-items: center; justify-content: center;
+  gap: 0.6rem;
+  border: 1px dashed var(--clr-border);
+  border-radius: var(--radius-pill);
+  padding: 0.5rem 1.1rem;
+  background: rgba(255,255,255,0.02);
+}
+.eco-interfaces-label {
+  font-family: var(--font-mono); font-size: 0.62rem; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--clr-muted);
+}
+.eco-interfaces-items {
+  font-size: 0.82rem; color: var(--clr-white); opacity: 0.75;
+}
+.eco-interfaces-items span { color: var(--clr-muted); margin: 0 0.15rem; }
 .ecosystem-description {
   text-align: center; color: var(--clr-muted);
   font-size: 1rem; line-height: 1.6;
